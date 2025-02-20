@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="mattStyle.css">
+        <script src="jquery-3.7.1.min.js"></script>
+        <script src="mattQuery.js"></script>
+        <style>
+            
+        </style>
+    </head>
+    <body>
+        <div class="masterDiv">
+            <div class="topDiv">
+                <h2>Merkmalliste - Auflistung</h2>
+            </div>
+            <div class="splitDiv_Two">
+                <div class="leftCol">
+                    <textarea id="taInput"></textarea>
+
+                    <button class="pushable" id="convertMe">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">Convert</span>
+                    </button>
+
+                </div>    
+                <div class="rightCol" id="outPut">
+
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        // Convert data from excel into useable pieces
+        function convertData(){
+            var splitData = prevData.trim().split('\n');
+            $(splitData).each(function(id,val){
+                var splitEntry = val.trim().split('\t');
+                splitData[id] = splitEntry;
+            })
+            console.log(splitData);
+        }
+        // Check if stored data from previous session exists 
+        // If yes --> apply stored data and execute data conversion
+        var prevData = localStorage.getItem('mmlListe');
+        if(prevData !== null){
+            $('#taInput').val(prevData);
+            convertData();
+        }
+        // Button press sets new local storage and executes conversion
+        $('#convertMe').on('click', function(){
+            prevData = $('#taInput').val();
+            localStorage.setItem('mmlListe', prevData);
+            convertData();
+        })
+    </script>
+</html>
