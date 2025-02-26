@@ -1,5 +1,6 @@
 <html>
     <head>
+        <title>Merkmallisten Helfer</title>
         <link rel="stylesheet" href="mattStyle.css">
         <script src="jquery-3.7.1.min.js"></script>
         <script src="mattQuery.js"></script>
@@ -45,7 +46,7 @@
     <body>
         <div class="masterDiv">
             <div class="topDiv">
-                <h2>Merkmalliste Helfer</h2>
+                <h2>Merkmallisten Helfer</h2>
             </div>
             <div class="splitDiv_Two">
                 <div class="leftCol">
@@ -68,31 +69,35 @@
         // Convert data from excel into useable pieces
         function convertData(){
             $('#outPut').html('');
-            var splitDataString = prevData.trim().split('\n');
-            var splitDataArray = [], tempName = '', html = '';
-            $(splitDataString).each(function(id,val){
-                var splitEntry = val.trim().split('\t');
-                var tempObj = {
-                    'name': splitEntry[0],
-                    'number': splitEntry[1],
-                    'color': splitEntry[2]
-                }
-                splitDataArray.push(tempObj);
-                if(tempName === '' || tempName != tempObj.name){
-                    tempName = tempObj.name;
-                    if(id!=0){
-                        html += '<tr><th colspan="4" class="bottomBorder"></th></tr>'
+            if(prevData!=''){
+                var splitDataString = prevData.trim().split('\n');
+                var splitDataArray = [], tempName = '', html = '';
+                $(splitDataString).each(function(id,val){
+                    var splitEntry = val.trim().split('\t');
+                    if(splitEntry!=''){
+                        var tempObj = {
+                            'name': splitEntry[0],
+                            'number': splitEntry[1],
+                            'color': splitEntry[2]
+                        }
+                        splitDataArray.push(tempObj);
+                        if(tempName === '' || tempName != tempObj.name){
+                            tempName = tempObj.name;
+                            if(id!=0){
+                                html += '<tr><th colspan="4" class="bottomBorder"></th></tr>'
+                            }
+                            html += '<tr><th colspan="4"><h4>'+tempObj.name+'</h4></th></tr>';
+                        }
+                        // Missing: format strings for each entry and highlight
+                        var tempNumb = tempObj.number.replace(/\_/g, ' ').replace(/\-/g, ' ');
+                        tempNumb = tempNumb.replace(' ', '_');
+                        tempNumb = tempNumb.replace(' ', '-');
+                        var tempCol = tempObj.color.replace(/\  /g, ' ');
+                        html += '<tr><td>'+tempNumb.split(' ')[0]+'</td><td>'+tempNumb.split(' ')[1]+'</td><td>'+tempCol.split(' ')[0]+'</td><td class="cap">'+tempCol.split(' ')[1]+'</td></tr>';
                     }
-                    html += '<tr><th colspan="4"><h4>'+tempObj.name+'</h4></th></tr>';
-                }
-                // Missing: format strings for each entry and highlight
-                var tempNumb = tempObj.number.replace(/\_/g, ' ').replace(/\-/g, ' ');
-                tempNumb = tempNumb.replace(' ', '_');
-                tempNumb = tempNumb.replace(' ', '-');
-                var tempCol = tempObj.color.replace(/\  /g, ' ');
-                html += '<tr><td>'+tempNumb.split(' ')[0]+'</td><td>'+tempNumb.split(' ')[1]+'</td><td>'+tempCol.split(' ')[0]+'</td><td class="cap">'+tempCol.split(' ')[1]+'</td></tr>';
-            })
-            $('#outPut').append('<table class="innerOutput" cellspacing="0" cellpadding="0" border="0">'+html+'</table>');
+                })
+                $('#outPut').append('<table class="innerOutput" cellspacing="0" cellpadding="0" border="0">'+html+'</table>');
+            }
         }
         // Check if stored data from previous session exists 
         // If yes --> apply stored data and execute data conversion
