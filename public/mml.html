@@ -66,15 +66,18 @@
         </div>
     </body>
     <script>
-        // Convert data from excel into useable pieces
+        // Convert data from excel into useable pieces and print in table
+        // Split texts and make ID's conform
+        // Capitalize colors
         function convertData(){
             $('#outPut').html('');
             if(prevData!=''){
                 var splitDataString = prevData.trim().split('\n');
                 var splitDataArray = [], tempName = '', html = '';
                 $(splitDataString).each(function(id,val){
+                    var numbSplit = '', colSplit = '';
                     var splitEntry = val.trim().split('\t');
-                    if(splitEntry!='' && splitEntry[1]!='' && splitEntry[2]!=''){
+                    if(splitEntry!=''){
                         var tempObj = {
                             'name': splitEntry[0],
                             'number': splitEntry[1],
@@ -88,12 +91,17 @@
                             }
                             html += '<tr><th colspan="4"><h4>'+tempObj.name+'</h4></th></tr>';
                         }
-                        // Missing: format strings for each entry and highlight
-                        var tempNumb = tempObj.number.replace(/\_/g, ' ').replace(/\-/g, ' ');
-                        tempNumb = tempNumb.replace(' ', '_');
-                        tempNumb = tempNumb.replace(' ', '-');
-                        var tempCol = tempObj.color.replace(/\  /g, ' ');
-                        html += '<tr><td>'+tempNumb.split(' ')[0]+'</td><td>'+tempNumb.split(' ')[1]+'</td><td>'+tempCol.split(' ')[0]+'</td><td class="cap">'+tempCol.split(' ')[1]+'</td></tr>';
+                        if(tempObj.number!=null){
+                            var tempNumb = tempObj.number.replace(/\_/g, ' ').replace(/\-/g, ' ');
+                            tempNumb = tempNumb.replace(' ', '_');
+                            tempNumb = tempNumb.replace(' ', '-');
+                            numbSplit = '<td>'+tempNumb.split(' ')[0]+'</td><td>'+tempNumb.split(' ')[1]+'</td>';
+                        }
+                        if(tempObj.color!=null){
+                            var tempCol = tempObj.color.replace(/\  /g, ' ');
+                            colSplit = '<td>'+tempCol.split(' ')[0]+'</td><td class="cap">'+tempCol.split(' ')[1]+'</td>';
+                        }
+                        html += '<tr>'+numbSplit+colSplit+'</tr>';
                     }
                 })
                 $('#outPut').append('<table class="innerOutput" cellspacing="0" cellpadding="0" border="0">'+html+'</table>');
