@@ -29,6 +29,7 @@
             }
             .rightCol .innerOutput tr.active{
                 box-shadow: 0px 0px 1px 2px greenyellow;
+                background-color: #222;
             }
             .rightCol .innerOutput td:hover{
                 background-color: aquamarine;
@@ -92,14 +93,15 @@
                             html += '<tr><th colspan="4"><h4>'+tempObj.name+'</h4></th></tr>';
                         }
                         if(tempObj.number!=null){
-                            var tempNumb = tempObj.number.replace(/\_/g, ' ').replace(/\-/g, ' ');
+                            var tempNumb = tempObj.number.replace(/\ -/g, ' ').replace(/\ _/g, ' ').replace(/\_/g, ' ').replace(/\-/g, ' ');
                             tempNumb = tempNumb.replace(' ', '_');
                             tempNumb = tempNumb.replace(' ', '-');
                             numbSplit = '<td>'+tempNumb.split(' ')[0]+'</td><td>'+tempNumb.split(' ')[1]+'</td>';
                         }
                         if(tempObj.color!=null){
-                            var tempCol = tempObj.color.replace(/\  /g, ' ');
-                            colSplit = '<td>'+tempCol.split(' ')[0]+'</td><td class="cap">'+tempCol.split(' ')[1]+'</td>';
+                            var tempCol = tempObj.color.replace(/\  /g, ' ').replace(/\. /g, '.');
+                            var lastCol = tempCol.split(' ');
+                            colSplit = '<td>'+tempCol+'</td><td class="cap">'+ lastCol[lastCol.length-1] +'</td>';
                         }
                         html += '<tr>'+numbSplit+colSplit+'</tr>';
                     }
