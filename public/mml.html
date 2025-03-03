@@ -123,7 +123,8 @@
             convertData();
         })
         // Highlight active Row for readability
-        $('tr').on('click', function(){
+        $('#outPut').on('click','tr', function(){
+            console.log('click');
             if($(this.children[0]).is('td')){
                 $('tr').removeClass('active');
                 $(this).addClass('active');
