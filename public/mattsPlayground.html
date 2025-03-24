@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <title>Matt's Playground</title>
+        <link rel="stylesheet" href="mattStyle.css">
+        <script src="jquery-3.7.1.min.js"></script>
+        <script src="mattQuery.js"></script>
+        <style>
+            .leftCol{
+                max-width: 600px;
+            }
+            .rightCol{
+                padding-left: 21px;
+            }
+            .rightCol div{
+                padding-right: 21px;
+            }
+            .rightCol .innerOutput{
+                color: white;
+                
+            }
+            .rightCol .innerOutput th{
+                padding-top: 21px;
+            }
+            .rightCol .innerOutput th, .rightCol .innerOutput td{
+                text-align: left;
+                padding-right: 14px;
+                padding-left: 14px;
+                cursor: pointer;
+            }
+            .rightCol .innerOutput tr.active{
+                box-shadow: 0px 0px 1px 2px greenyellow;
+                background-color: #222;
+            }
+            .rightCol .innerOutput td:hover{
+                background-color: aquamarine;
+                color: black;
+            }
+            .rightCol .innerOutput td.cap{
+                text-transform: capitalize;
+            }
+            .rightCol .innerOutput .bottomBorder{
+                padding-top: 14px;
+                border-bottom: 1px solid white;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="masterDiv">
+            <div class="topDiv">
+                <h2>Merkmallisten Helfer</h2>
+            </div>
+            <div class="splitDiv_Two">
+                <div class="leftCol">
+                    <textarea id="taInput"></textarea>
+
+                    <button class="pushable" id="convertMe">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">Moch wos</span>
+                    </button>
+
+                </div>    
+                <div class="rightCol" id="outPut">
+
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        var dimensonObj = {};
+        function assignValues(obj, keys, value){
+            // console.log(keys);
+            // console.log(value);
+            keys.forEach(key => {
+                obj[key] = value;
+            });
+        }
+        const height45 = {
+            "629|7854": {  "height": 45 }, 
+            "629|8097": {  "height": 45 }, 
+            "629|7853": {  "height": 45 }, 
+            "629|8096": {  "height": 45 } 
+        }
+        function convertData(){
+            dimensonObj = {
+                'Komforthöhe': {
+                    "629|3002": { "width": 218, "height": 86 },
+                    // "629|1002": { "width": 98, "height": 86 }, 
+                    // "629|1003": { "width": 98, "height": 86 }, 
+                    // "629|1004": { "width": 98, "height": 86 }
+                }
+            }
+            // dimensonObj.Komforthöhe["629|1002"] = dimensonObj.Komforthöhe["629|1003"] = dimensonObj.Komforthöhe["629|1004"] = { "width": 98, "height": 86 };
+            assignValues(dimensonObj.Komforthöhe, ["629|1002", "629|1004", "629|1014"], { "width": 98, "height": 86 });
+            Object.assign(dimensonObj.Komforthöhe, height45);
+            console.log(dimensonObj);
+        }
+        $('#convertMe').on('click', function(){
+            convertData();
+        })
+    </script>
+</html>
