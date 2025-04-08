@@ -158,17 +158,19 @@
     </body>
     <script>
 /* test IDs
-1877100001
-1877100026
-1877100028
-1877100060
-1877100061
+2133009701
+2133009702
+2133009706
+2133009710
+2133009705
+2133009709
 */
-        var idList = [];
+        var idList = [], zeros = '00';
+        // add contition to check if number = 10 digits long and has 2 leading zeros or not
         function checkIDs(url){
             idList = $('#taInput').val().split('\n');
             $.each(idList, function(id, val){
-                window.open('https://'+url+'/p?s='+val.trim(), id);
+                window.open('https://'+url+'/p/'+zeros+val.trim(), id);
             })
         }
         $('button').on('click', function(){
