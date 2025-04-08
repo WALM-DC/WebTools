@@ -5,42 +5,26 @@
         <script src="jquery-3.7.1.min.js"></script>
         <script src="mattQuery.js"></script>
         <style>
+            .splitDiv_Multi{
+                display: flex;
+            }
             .leftCol{
                 max-width: 200px;
+                min-width: 200px;
             }
             .rightCol{
                 padding-left: 21px;
+                max-width: 300px;
             }
             .rightCol div{
                 padding-right: 21px;
             }
-            .rightCol .innerOutput{
+            .rightCol{
                 color: white;
                 
             }
-            .rightCol .innerOutput th{
-                padding-top: 21px;
-            }
-            .rightCol .innerOutput th, .rightCol .innerOutput td{
-                text-align: left;
-                padding-right: 14px;
-                padding-left: 14px;
-                cursor: pointer;
-            }
-            .rightCol .innerOutput tr.active{
-                box-shadow: 0px 0px 1px 2px greenyellow;
-                background-color: #222;
-            }
-            .rightCol .innerOutput td:hover{
-                background-color: aquamarine;
-                color: black;
-            }
-            .rightCol .innerOutput td.cap{
-                text-transform: capitalize;
-            }
-            .rightCol .innerOutput .bottomBorder{
-                padding-top: 14px;
-                border-bottom: 1px solid white;
+            .rightCol button{
+                margin-bottom: 7px;
             }
         </style>
     </head>
@@ -49,41 +33,149 @@
             <div class="topDiv">
                 <h2>ID Checker</h2>
             </div>
-            <div class="splitDiv_Two">
+            <div class="splitDiv_Multi">
                 <div class="leftCol">
                     <textarea id="taInput"></textarea>
-
-                    <button class="pushable" id="checkIDs">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
-                        <span class="front">Moch wos</span>
-                    </button>
-
                 </div>    
                 <div class="rightCol" id="outPut">
-
+                    <button class="pushable" id="checkIDsxxxlat" value="xxxlutz.at">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">xxxlutz.at</span>
+                    </button>
+                    <button class="pushable" id="checkIDsxxxlde" value="xxxlutz.de">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">xxxlutz.de</span>
+                    </button>
+                    <button class="pushable" id="checkIDsxxxlch" value="xxxlutz.ch">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">xxxlutz.ch</span>
+                    </button>
+                    <button class="pushable" id="checkIDsxxxlcz" value="xxxlutz.cz">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">xxxlutz.cz</span>
+                    </button>
+                    <button class="pushable" id="checkIDsxxxlsk" value="xxxlutz.sk">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">xxxlutz.sk</span>
+                    </button>
+                    <button class="pushable" id="checkIDsxxxlhu" value="xxxlutz.hu">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">xxxlutz.hu</span>
+                    </button>
+                    <button class="pushable" id="checkIDsxxxlro" value="xxxlutz.ro">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">xxxlutz.ro</span>
+                    </button>
+                    <button class="pushable" id="checkIDsxxxlse" value="xxxlutz.se">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">xxxlutz.se</span>
+                    </button>
+                </div>
+                <div class="rightCol">
+                    <button class="pushable" id="checkIDsmmxat" value="moemax.at">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">moemax.at</span>
+                    </button>
+                    <button class="pushable" id="checkIDsmmxde" value="moemax.de">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">moemax.de</span>
+                    </button>
+                    <button class="pushable" id="checkIDsmmxsi" value="moemax.si">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">moemax.si</span>
+                    </button>
+                    <button class="pushable" id="checkIDsmmxhu" value="moemax.hu">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">moemax.hu</span>
+                    </button>
+                    <button class="pushable" id="checkIDsmmxbg" value="moemax.bg">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">moemax.bg</span>
+                    </button>
+                    <button class="pushable" id="checkIDsmmxro" value="moemax.ro">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">moemax.ro</span>
+                    </button>
+                    <button class="pushable" id="checkIDsmmxhr" value="moemax.hr">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">moemax.hr</span>
+                    </button>
+                    <button class="pushable" id="checkIDsmmxch" value="moemax.ch">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">moemax.ch</span>
+                    </button>
+                    <button class="pushable" id="checkIDsmmxpl" value="moemax.pl">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">moemax.pl</span>
+                    </button>
+                    <button class="pushable" id="checkIDsmmxrs" value="moemax.rs">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">moemax.rs</span>
+                    </button>
+                </div>
+                <div class="rightCol">
+                    <button class="pushable" id="checkIDsmbxat" value="moebelix.at">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">moebelix.at</span>
+                    </button>
+                    <button class="pushable" id="checkIDsmbxcz" value="moebelix.cz">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">moebelix.cz</span>
+                    </button>
+                    <button class="pushable" id="checkIDsmbxsk" value="moebelix.sk">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">moebelix.sk</span>
+                    </button>
+                    <button class="pushable" id="checkIDsmbxhu" value="moebelix.hu">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">moebelix.hu</span>
+                    </button>
                 </div>
             </div>
         </div>
     </body>
     <script>
-        /* test IDs
-            1877100001
-            1877100026
-            1877100028
-            1877100060
-            1877100061
-        */
+/* test IDs
+1877100001
+1877100026
+1877100028
+1877100060
+1877100061
+*/
         var idList = [];
-        function checkIDs(){
+        function checkIDs(url){
             idList = $('#taInput').val().split('\n');
-            console.log(idList);
             $.each(idList, function(id, val){
-                $('#outPut').append('<iframe src="https://xxxlutz.at/p?s="'+val+'"></iframe>');
+                window.open('https://'+url+'/p?s='+val.trim(), id);
             })
         }
-        $('#checkIDs').on('click', function(){
-            checkIDs();
+        $('button').on('click', function(){
+            console.log()
+            if($('#taInput').val()!='' && $('#taInput').val()!=null){
+                checkIDs($(this).val());
+            }
         })
     </script>
 </html>
