@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <title>ID Checker</title>
+        <link rel="stylesheet" href="mattStyle.css">
+        <script src="jquery-3.7.1.min.js"></script>
+        <script src="mattQuery.js"></script>
+        <style>
+            .leftCol{
+                max-width: 200px;
+            }
+            .rightCol{
+                padding-left: 21px;
+            }
+            .rightCol div{
+                padding-right: 21px;
+            }
+            .rightCol .innerOutput{
+                color: white;
+                
+            }
+            .rightCol .innerOutput th{
+                padding-top: 21px;
+            }
+            .rightCol .innerOutput th, .rightCol .innerOutput td{
+                text-align: left;
+                padding-right: 14px;
+                padding-left: 14px;
+                cursor: pointer;
+            }
+            .rightCol .innerOutput tr.active{
+                box-shadow: 0px 0px 1px 2px greenyellow;
+                background-color: #222;
+            }
+            .rightCol .innerOutput td:hover{
+                background-color: aquamarine;
+                color: black;
+            }
+            .rightCol .innerOutput td.cap{
+                text-transform: capitalize;
+            }
+            .rightCol .innerOutput .bottomBorder{
+                padding-top: 14px;
+                border-bottom: 1px solid white;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="masterDiv">
+            <div class="topDiv">
+                <h2>ID Checker</h2>
+            </div>
+            <div class="splitDiv_Two">
+                <div class="leftCol">
+                    <textarea id="taInput"></textarea>
+
+                    <button class="pushable" id="checkIDs">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">Moch wos</span>
+                    </button>
+
+                </div>    
+                <div class="rightCol" id="outPut">
+
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        /* test IDs
+            1877100001
+            1877100026
+            1877100028
+            1877100060
+            1877100061
+        */
+        var idList = [];
+        function checkIDs(){
+            idList = $('#taInput').val().split('\n');
+            console.log(idList);
+            $.each(idList, function(id, val){
+                $('#outPut').append('<iframe src="https://xxxlutz.at/p?s="'+val+'"></iframe>');
+            })
+        }
+        $('#checkIDs').on('click', function(){
+            checkIDs();
+        })
+    </script>
+</html>
