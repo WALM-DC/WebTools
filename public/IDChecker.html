@@ -5,6 +5,14 @@
         <script src="jquery-3.7.1.min.js"></script>
         <script src="mattQuery.js"></script>
         <style>
+            h4{
+                color: white;
+            }
+            p{
+                color: white;
+                font-size: 12px;
+                margin-left: 14px;
+            }
             .splitDiv_Multi{
                 display: flex;
             }
@@ -154,6 +162,7 @@
                     </button>
                 </div>
             </div>
+            <div id="errorMsg"><h4>Log:</h4></div>
         </div>
     </body>
     <script>
@@ -165,16 +174,16 @@
 2133009705
 2133009709
 */
-        var idList = [], zeros = '00';
+        var idList = [], zeros = '00', numbReg = new RegExp('/^\d+$/');
         // add contition to check if number = 10 digits long and has 2 leading zeros or not
         function checkIDs(url){
             idList = $('#taInput').val().split('\n');
             $.each(idList, function(id, val){
-                if(val.length>=10&&$.isNumeric(val)){
+                if(val.length>=10&&val.match(/^\d+$/)){
                     val.length===12?zeros='':val.length===11?zeros='0':zeros='00';
                     window.open('https://'+url+'/p/'+zeros+val.trim(), id);
                 } else {
-                    // show error message
+                    $('#errorMsg').append('<p>Fehlerhafte ID: '+val+'</p>');
                 }
             })
         }
