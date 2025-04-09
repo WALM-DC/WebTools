@@ -174,16 +174,19 @@
 2133009705
 2133009709
 */
-        var idList = [], zeros = '00', numbReg = new RegExp('/^\d+$/');
-        // add contition to check if number = 10 digits long and has 2 leading zeros or not
+        var idList = [], zeros = '00';
         function checkIDs(url){
             idList = $('#taInput').val().split('\n');
             $.each(idList, function(id, val){
-                if(val.length>=10&&val.match(/^\d+$/)){
-                    val.length===12?zeros='':val.length===11?zeros='0':zeros='00';
-                    window.open('https://'+url+'/p/'+zeros+val.trim(), id);
+                // clean val string from anything other then a number
+                var cleanVal = val.replace(/[^0-9 ]/g, '');
+                // check if ID is 10 digits or longer and contains anything apart from a number (double-check)
+                if(cleanVal.length>=10&&cleanVal.match(/^\d+$/)){
+                    // add leading zero(s) depending on ID length
+                    cleanVal.length===12?zeros='':cleanVal.length===11?zeros='0':zeros='00';
+                    window.open('https://'+url+'/p/'+zeros+cleanVal.trim(), id);
                 } else {
-                    $('#errorMsg').append('<p>Fehlerhafte ID: '+val+'</p>');
+                    $('#errorMsg').append('<p>Fehlerhafte ID: '+cleanVal+'</p>');
                 }
             })
         }
