@@ -162,7 +162,7 @@
                     </button>
                 </div>
             </div>
-            <div id="errorMsg"><h4>Log:</h4></div>
+            <div><h4>Log:</h4><p id="errorMsg"></p></div>
         </div>
     </body>
     <script>
@@ -176,7 +176,8 @@
 */
         var idList = [], zeros = '00';
         function checkIDs(url){
-            idList = $('#taInput').val().split('\n');
+            $('#errorMsg').html('');
+            idList = $('#taInput').val().trim().split('\n');
             $.each(idList, function(id, val){
                 // clean val string from anything other then a number
                 var cleanVal = val.replace(/[^0-9 ]/g, '');
@@ -191,7 +192,6 @@
             })
         }
         $('button').on('click', function(){
-            console.log()
             if($('#taInput').val()!='' && $('#taInput').val()!=null){
                 checkIDs($(this).val());
             }
