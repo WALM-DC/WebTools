@@ -180,9 +180,9 @@
             idList = $('#taInput').val().trim().split('\n');
             $.each(idList, function(id, val){
                 // clean val string from anything other then a number
-                var cleanVal = val.replace(/[^0-9 ]/g, '');
+                var cleanVal = val; // val.replace(/[^0-9 ]/g, '');
                 // check if ID is 10 digits or longer and contains anything apart from a number (double-check)
-                if(cleanVal.length>=10&&cleanVal.match(/^\d+$/)){
+                if(cleanVal.length>=10){
                     // add leading zero(s) depending on ID length
                     cleanVal.length===12?zeros='':cleanVal.length===11?zeros='0':zeros='00';
                     window.open('https://'+url+'/p/'+zeros+cleanVal.trim(), id);
