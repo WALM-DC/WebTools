@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <title>3D-Modellübersicht</title>
+        <link rel="stylesheet" href="mattStyle.css">
+        <script src="jquery-3.7.1.min.js"></script>
+        <script src="mattQuery.js"></script>
+        <style>
+            .leftCol{
+                max-width: 600px;
+            }
+            .rightCol{
+                padding-left: 21px;
+            }
+            .rightCol div{
+                padding-right: 21px;
+            }
+            .rightCol .innerOutput{
+                color: white;
+                
+            }
+            .rightCol .innerOutput th{
+                padding-top: 21px;
+            }
+            .rightCol .innerOutput th, .rightCol .innerOutput td{
+                text-align: left;
+                padding-right: 14px;
+                padding-left: 14px;
+                cursor: pointer;
+            }
+            .rightCol .innerOutput tr.active{
+                box-shadow: 0px 0px 1px 2px greenyellow;
+                background-color: #222;
+            }
+            .rightCol .innerOutput td:hover{
+                background-color: aquamarine;
+                color: black;
+            }
+            .rightCol .innerOutput td.cap{
+                text-transform: capitalize;
+            }
+            .rightCol .innerOutput .bottomBorder{
+                padding-top: 14px;
+                border-bottom: 1px solid white;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="masterDiv">
+            <div class="topDiv">
+                <h2>3D-Modellübersicht</h2>
+            </div>
+            <div>
+                <div id="showMyList">
+
+                </div>    
+            </div>
+        </div>
+    </body>
+    <script>
+        function readAndShowJSON(){
+            $.ajax({
+                type : 'GET',
+                dataType: "json",
+                url: 'list.json',
+                headers: {
+                    "Access-Control-Request-Headers": "*",
+                    "Access-Control-Request-Method": "*",
+                    'Content-Type':'application/json'
+                },
+                success: function(data){
+                    console.log(data);
+                }
+            });
+            $.getJSON( "list.json", function( data ) {
+                $('@showMyList').append(data);
+            });
+        }
+        readAndShowJSON();
+    </script>
+</html>
