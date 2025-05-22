@@ -1,0 +1,15 @@
+{
+    "Rabatt": {
+        "Prozent": "33",
+        "Schiene": "LU",
+        "Land": "at"
+    },
+    "Aktionen": {
+        "warenGruppen": ["01","02","08","09"],
+        "lieferanten": []
+    },
+    "Ausnahmen":{
+        "warenGruppen": [],
+        "lieferanten": []
+    }
+}
