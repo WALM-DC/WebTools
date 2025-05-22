@@ -5,42 +5,37 @@
         <script src="jquery-3.7.1.min.js"></script>
         <script src="mattQuery.js"></script>
         <style>
-            .leftCol{
-                max-width: 600px;
+            .resultDiv{
+                width: 100%;
+                /* display: flex; */
+                align-items: center;
+                justify-content: center;
             }
-            .rightCol{
-                padding-left: 21px;
+            h3{
+                color: whitesmoke;
             }
-            .rightCol div{
-                padding-right: 21px;
+            table{
+                border-collapse: collapse;
+                width: 100%;
+                background-color: white;
             }
-            .rightCol .innerOutput{
-                color: white;
-                
-            }
-            .rightCol .innerOutput th{
-                padding-top: 21px;
-            }
-            .rightCol .innerOutput th, .rightCol .innerOutput td{
+            table td, table th{
+                border: 1px solid #dddddd;
+                padding: 8px;
                 text-align: left;
-                padding-right: 14px;
-                padding-left: 14px;
-                cursor: pointer;
+                padding: 5px;
             }
-            .rightCol .innerOutput tr.active{
-                box-shadow: 0px 0px 1px 2px greenyellow;
-                background-color: #222;
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
             }
-            .rightCol .innerOutput td:hover{
-                background-color: aquamarine;
-                color: black;
-            }
-            .rightCol .innerOutput td.cap{
-                text-transform: capitalize;
-            }
-            .rightCol .innerOutput .bottomBorder{
-                padding-top: 14px;
-                border-bottom: 1px solid white;
+            input[type=text] {
+                width: 100%;
+                padding: 8px;
+                margin-top: 6px;
+                margin-bottom: 16px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
             }
         </style>
     </head>
@@ -50,28 +45,80 @@
                 <h2>3D-Modell&uuml;bersicht</h2>
             </div>
             <div>
-                <div id="showMyList">
-
+                <div class="resultDib">
+                    <h3>Anzahl in der aktuellen Auflistung: <span id="myCounter"></span></h3>
+                    <input type="text" id="myInput" onkeyup="filterTable()" placeholder="Suche nach Hersteller, Modellname, ...">
+                    <table id="myTable" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th>Hersteller</th>
+                            <th>Katalog</th>
+                            <th>Modellname</th>
+                            <th>Nummer</th>
+                            <th>Varianten</th>
+                            <th>Schine</th>
+                            <th>Land</th>
+                            <th>W&auml;hrung</th>
+                            <th>kaa1</th>
+                            <th>entlastung</th>
+                            <th>aktion</th>
+                            <th>Beschreibung</th>
+                            <th>Warengruppe</th>
+                        </tr>
+                    </table>
                 </div>    
             </div>
         </div>
     </body>
     <script>
-        function readAndShowJSON(){
-            $.ajax({
-                type : 'GET',
-                dataType: "json",
-                url: 'https://pages.github.xxxlgroup.com/WALM/walm.github.io/public/list.json',
-                headers: {
-                    'Content-Type':'application/json'
-                },
-                success: function(data){
-                    console.log(data);
+        var counter = 0;
+        var testJSON = {"XXXL2330.madeira@at":{"fileName":"madeira@at","productNumber":"0023300028","productVariants":"01 / 02 / 03 / 98 / ","modelName":"madeira","locale":"at","currency":"EUR","catalog":"XXXL2330.Madeira","brand":"MM","brandName":"","productGroup":"02","description":"Boxspringbett Madeira","settings":{"preis":470,"entlasgung":45,"aktion":0,"pricing":"linear"}},"XXXL2330.madeira@ch":{"fileName":"madeira@ch","productNumber":"0023300028","productVariants":"01 / 02 / 03 / 98 / ","modelName":"madeira","locale":"ch","currency":"CHF","catalog":"XXXL2330.Madeira","brand":"MM","brandName":"","productGroup":"02","description":"Boxspringbett Madeira","settings":{"preis":480,"entlasgung":42,"aktion":0,"pricing":"linear"}},"XXXL2330.madeira@de":{"fileName":"madeira@de","productNumber":"0023300028","productVariants":"01 / 02 / 03 / 98 / ","modelName":"madeira","locale":"de","currency":"EUR","catalog":"XXXL2330.Madeira","brand":"MM","brandName":"","productGroup":"02","description":"Boxspringbett Madeira","settings":{"preis":470,"entlasgung":45,"aktion":0,"pricing":"linear"}}};
+
+        function filterTable() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td");
+                for (var j = 0; j < td.length; j++) {
+                txtValue = td[j].textContent || td[j].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                    counter++;
+                    break;
+                } else {
+                    tr[i].style.display = "none";
                 }
-            });
+                }
+            }
+            $('#myCounter').html(counter);
+            counter=0;
+        }
+
+        function readAndShowJSON(){
             $.getJSON( "https://pages.github.xxxlgroup.com/WALM/walm.github.io/public/list.json", function( data ) {
-                console.log(data);
+                // console.log(data);
+                $.each(data, function(id, val){
+                    $('#myTable').append(
+                        '<tr><td>'+val.brandName+'</td>'+
+                        '<td>'+val.catalog+'</td>'+
+                        '<td>'+val.modelName+'</td>'+
+                        '<td>'+val.productNumber+'</td>'+
+                        '<td>'+val.productVariants+'</td>'+
+                        '<td>'+val.brand+'</td>'+
+                        '<td>'+val.locale+'</td>'+
+                        '<td>'+val.currency+'</td>'+
+                        '<td>'+val.settings.preis+'</td>'+
+                        '<td>'+val.settings.entlasgung+'</td>'+
+                        '<td>'+val.settings.aktion+'</td>'+
+                        '<td>'+val.description+'</td>'+
+                        '<td>'+val.productGroup+'</td></tr>'
+                    )
+                })
             });
+            filterTable();
         }
         readAndShowJSON();
     </script>
