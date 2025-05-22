@@ -9,6 +9,8 @@ def save_json_file(data):
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
+    data['settings']['aktion'] = 20
+
 def find_json_with_values(root_path, filter_path):
     """
     Walk through all folders starting from root_path, parse JSON files,
