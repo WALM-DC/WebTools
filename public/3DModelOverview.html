@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>3D-Modellübersicht</title>
+        <title>3D-Modell&uuml;bersicht</title>
         <link rel="stylesheet" href="mattStyle.css">
         <script src="jquery-3.7.1.min.js"></script>
         <script src="mattQuery.js"></script>
@@ -47,7 +47,7 @@
     <body>
         <div class="masterDiv">
             <div class="topDiv">
-                <h2>3D-Modellübersicht</h2>
+                <h2>3D-Modell&uuml;bersicht</h2>
             </div>
             <div>
                 <div id="showMyList">
@@ -61,7 +61,7 @@
             $.ajax({
                 type : 'GET',
                 dataType: "json",
-                url: 'list.json',
+                url: 'https://pages.github.xxxlgroup.com/WALM/walm.github.io/public/list.json',
                 headers: {
                     "Access-Control-Request-Headers": "*",
                     "Access-Control-Request-Method": "*",
@@ -71,7 +71,7 @@
                     console.log(data);
                 }
             });
-            $.getJSON( "list.json", function( data ) {
+            $.getJSON( "https://pages.github.xxxlgroup.com/WALM/walm.github.io/public/list.json", function( data ) {
                 $('@showMyList').append(data);
             });
         }
