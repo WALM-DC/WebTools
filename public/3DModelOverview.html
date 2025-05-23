@@ -70,7 +70,7 @@
                         <table id="myTable" cellspacing="0" cellpadding="0">
                             <tr>
                                 <th>Hersteller</th>
-                                <th>Katalog</th>
+                                <th>Lieferant</th>
                                 <th>Modellname</th>
                                 <th>Nummer</th>
                                 <th>Varianten</th>
@@ -124,8 +124,8 @@
                 $.each(data, function(id, val){
                     $('#myTable').append(
                         '<tr><td>'+val.brandName+'</td>'+
+                        '<td>'+val.modelName.split('.')[0]+'</td>'+
                         '<td>'+val.catalog+'</td>'+
-                        '<td>'+val.modelName+'</td>'+
                         '<td>'+val.productNumber+'</td>'+
                         '<td>'+val.productVariants.trim().slice(0, -1)+'</td>'+
                         '<td>'+val.brand+'</td>'+
