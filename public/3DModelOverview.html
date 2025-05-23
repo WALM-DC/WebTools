@@ -122,10 +122,10 @@
                 // console.log(data);
                 $.each(data, function(id, val){
                     $('#myTable').append(
-                        '<tr><td>'+val.brandName+'</td>'+
-                        '<td>'+val.modelName.split('.')[0]+'</td>'+
-                        '<td>'+val.catalog+'</td>'+
-                        '<td>'+val.productNumber+'</td>'+
+                        '<tr><td>'+val.catalog.split('.')[0]+'</td>'+
+                        '<td>'+val.brandName+'</td>'+
+                        '<td>'+val.modelName+'</td>'+
+fix                        '<td>'+val.productNumber+'</td>'+
                         '<td>'+val.productVariants.trim().slice(0, -1)+'</td>'+
                         '<td>'+val.brand+'</td>'+
                         '<td>'+val.locale+'</td>'+
