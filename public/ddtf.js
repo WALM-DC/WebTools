@@ -117,7 +117,7 @@ $.fn.ddTableFilter.defaultOptions = {
     options: []
   },
   emptyText:'--Empty--',
-  sortOpt:true,
+  sortOpt:false,
   debug:false,
   minOptions:2
 }
