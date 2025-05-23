@@ -1,15 +1,16 @@
 {
-    "Rabatt": {
+    "Vorschau": true,
+    "Aktion": {
         "Prozent": "33",
         "Schiene": "LU",
         "Land": "at"
     },
-    "Aktionen": {
-        "warenGruppen": ["01","02","08","09"],
-        "lieferanten": []
+    "AnwendenBei": {
+        "warenGruppen": "01,02,08",
+        "lieferanten": "2330,2638"
     },
     "Ausnahmen":{
-        "warenGruppen": [],
-        "lieferanten": []
+        "warenGruppen": "",
+        "lieferanten": ""
     }
 }

@@ -39,17 +39,13 @@ def find_json_with_values(root_path, filter_path):
                         if contains_target_keys(data, {'catalog'}):
                             model_object = {
                                 data['catalog'].split('.')[0] +'.'+ filename.split('.')[0]: {
+                                    'filePath': file_path,
                                     'fileName': filename.split('.')[0],
                                     'productNumber': '',
-                                    'productVariants': '',
-                                    'modelName': filename.split('@')[0],
                                     'locale': filename.split('@')[1].split('.')[0],
-                                    'currency': data.get('currency', ''),  
-                                    'catalog': data.get('catalog', ''), 
                                     'brand': data.get('brand', ''),
                                     'brandName': data.get('brandName', ''),
                                     'productGroup': data.get('productGroup', ''),
-                                    'description': data.get('description', ''),
                                     'settings': {
                                         'preis': data.get('settings',{}).get('kaa1', ''),
                                         'entlasgung': data.get('settings',{}).get('entlastung', ''),
@@ -74,9 +70,7 @@ def find_json_with_values(root_path, filter_path):
             if fullConditionsList[modesIdShort] != '':
                 for innerId, conditionEntry in fullConditionsList[modesIdShort].items():
                     fullModelList[modelId]['productNumber'] = conditionEntry.get('productNo')
-                    fullModelList[modelId]['productVariants'] += innerId + ' / '
-                    if fullModelList[modelId]['description'] == '':
-                        fullModelList[modelId]['description'] = conditionEntry.get('description')
+                
         except KeyError as e:
             print(f'KeyError: {e} not found in conditions!')
 
