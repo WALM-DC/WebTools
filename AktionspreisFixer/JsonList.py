@@ -65,7 +65,7 @@ def find_all_json(root_path):
                     if fullModelList[modelId]['description'] == '':
                         fullModelList[modelId]['description'] = conditionEntry.get('description')
         except KeyError as e:
-            print(f'KeyError: {e} not found in conditions!')
+            print(f'KeyError: {e} not found in conditions.json')
 
     save_json_file(fullModelList)
 

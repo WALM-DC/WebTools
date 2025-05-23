@@ -1570,7 +1570,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Asti",
     "settings": {
-      "preis": 540,
+      "preis": 450,
       "entlasgung": 0,
       "aktion": 44.75,
       "pricing": "linear"
@@ -1608,7 +1608,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Bono",
     "settings": {
-      "preis": 540,
+      "preis": 450,
       "entlasgung": 0,
       "aktion": 44.75,
       "pricing": "linear"
@@ -1703,7 +1703,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Fabio",
     "settings": {
-      "preis": 540,
+      "preis": 450,
       "entlasgung": 0,
       "aktion": 44.75,
       "pricing": "linear"
@@ -1779,7 +1779,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Figaro",
     "settings": {
-      "preis": 540,
+      "preis": 450,
       "entlasgung": 0,
       "aktion": 44.75,
       "pricing": "linear"
@@ -1893,7 +1893,7 @@
     "productGroup": "01",
     "description": "Bigsofa Mevi",
     "settings": {
-      "preis": 540,
+      "preis": 450,
       "entlasgung": 0,
       "aktion": 44.75,
       "pricing": "linear"
@@ -1931,7 +1931,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Rosalie",
     "settings": {
-      "preis": 540,
+      "preis": 450,
       "entlasgung": 7,
       "aktion": 44.75,
       "pricing": "linear"
@@ -2064,7 +2064,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Vigo",
     "settings": {
-      "preis": 540,
+      "preis": 450,
       "entlasgung": 0,
       "aktion": 44.75,
       "pricing": "linear"
@@ -5313,7 +5313,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Santana",
     "settings": {
-      "preis": 540,
+      "preis": 460,
       "entlasgung": 0,
       "aktion": 44.75,
       "pricing": "linear"
@@ -5351,7 +5351,7 @@
     "productGroup": "14",
     "description": "Schlafsofa Santana",
     "settings": {
-      "preis": 540,
+      "preis": 460,
       "entlasgung": 0,
       "aktion": 44.75,
       "pricing": "linear"
@@ -5392,25 +5392,6 @@
       "preis": 225,
       "entlasgung": 41,
       "aktion": 0,
-      "pricing": "linear"
-    }
-  },
-  "XXXLEuromebel.tenabo@de": {
-    "fileName": "tenabo@de",
-    "productNumber": "0008120026",
-    "productVariants": "01 / 02 / YY / ",
-    "modelName": "tenabo",
-    "locale": "de",
-    "currency": "",
-    "catalog": "XXXLEuromebel.Tenabo",
-    "brand": "LU",
-    "brandName": "Carryhome",
-    "productGroup": "01",
-    "description": "Wohnlandschaft Tenabo",
-    "settings": {
-      "preis": 540,
-      "entlasgung": 0,
-      "aktion": 44.75,
       "pricing": "linear"
     }
   },
@@ -5845,7 +5826,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Burgas",
     "settings": {
-      "preis": 540,
+      "preis": 440,
       "entlasgung": 0,
       "aktion": 44.75,
       "pricing": "linear"
@@ -5921,7 +5902,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Fenix",
     "settings": {
-      "preis": 550,
+      "preis": 510,
       "entlasgung": 0,
       "aktion": 44.75,
       "pricing": "linear"
@@ -5997,7 +5978,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Inferno",
     "settings": {
-      "preis": 540,
+      "preis": 440,
       "entlasgung": 0,
       "aktion": 44.75,
       "pricing": "linear"
@@ -7469,7 +7450,7 @@
   "XXXLLibro.mezzo@at": {
     "fileName": "mezzo@at",
     "productNumber": "0002150008",
-    "productVariants": "03 / 04 / 05 / 06 / 10 / 13 / YY / ",
+    "productVariants": "05 / 06 / 03 / 04 / 10 / 13 / YY / ",
     "modelName": "mezzo",
     "locale": "at",
     "currency": "",
@@ -7488,7 +7469,7 @@
   "XXXLLibro.mezzo@de": {
     "fileName": "mezzo@de",
     "productNumber": "0002150008",
-    "productVariants": "03 / 04 / 05 / 06 / 10 / 13 / YY / ",
+    "productVariants": "05 / 06 / 03 / 04 / 10 / 13 / YY / ",
     "modelName": "mezzo",
     "locale": "de",
     "currency": "",
@@ -8551,7 +8532,7 @@
   },
   "XXXLMeiseMoebel.palma@at": {
     "fileName": "palma@at",
-    "productNumber": "0019330001",
+    "productNumber": "0001010253",
     "productVariants": "01 / 02 / 03 / 04 / 05 / 06 / 98 / ",
     "modelName": "palma",
     "locale": "at",
@@ -8570,7 +8551,7 @@
   },
   "XXXLMeiseMoebel.palma@de": {
     "fileName": "palma@de",
-    "productNumber": "0019330001",
+    "productNumber": "0001010253",
     "productVariants": "01 / 02 / 03 / 04 / 05 / 06 / 98 / ",
     "modelName": "palma",
     "locale": "de",
@@ -8754,6 +8735,44 @@
     "settings": {
       "preis": 500,
       "entlasgung": 47,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXL1933.primo@at": {
+    "fileName": "primo@at",
+    "productNumber": "0019330050",
+    "productVariants": "01 / 02 / 03 / 04 / 98 / ",
+    "modelName": "primo",
+    "locale": "at",
+    "currency": "EUR",
+    "catalog": "XXXL1933.Primo",
+    "brand": "MM",
+    "brandName": "",
+    "productGroup": "02",
+    "description": "Boxspringbett Primo",
+    "settings": {
+      "preis": 520,
+      "entlasgung": 51,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXL1933.primo@de": {
+    "fileName": "primo@de",
+    "productNumber": "0019330050",
+    "productVariants": "01 / 02 / 03 / 04 / 98 / ",
+    "modelName": "primo",
+    "locale": "de",
+    "currency": "EUR",
+    "catalog": "XXXL1933.Primo",
+    "brand": "MM",
+    "brandName": "",
+    "productGroup": "02",
+    "description": "Boxspringbett Primo",
+    "settings": {
+      "preis": 520,
+      "entlasgung": 51,
       "aktion": 0,
       "pricing": "linear"
     }
@@ -11089,7 +11108,7 @@
     "productGroup": "02",
     "description": "Bett Terra",
     "settings": {
-      "preis": 510,
+      "preis": 520,
       "entlasgung": 0,
       "aktion": 44.75,
       "pricing": "linear"
@@ -12248,8 +12267,8 @@
     "productGroup": "02",
     "description": "Boxspringbett Emily",
     "settings": {
-      "preis": 450,
-      "entlasgung": 46,
+      "preis": 500,
+      "entlasgung": 51,
       "aktion": 0,
       "pricing": "linear"
     }
@@ -12305,8 +12324,8 @@
     "productGroup": "02",
     "description": "Polsterbett Emily",
     "settings": {
-      "preis": 450,
-      "entlasgung": 46,
+      "preis": 500,
+      "entlasgung": 51,
       "aktion": 0,
       "pricing": "linear"
     }
@@ -12324,8 +12343,8 @@
     "productGroup": "02",
     "description": "Boxspringbett Marissa",
     "settings": {
-      "preis": 450,
-      "entlasgung": 45,
+      "preis": 500,
+      "entlasgung": 50,
       "aktion": 0,
       "pricing": "linear"
     }
@@ -12362,8 +12381,8 @@
     "productGroup": "",
     "description": "Boxspringbett Marissa",
     "settings": {
-      "preis": 450,
-      "entlasgung": 45,
+      "preis": 500,
+      "entlasgung": 50,
       "aktion": 0,
       "pricing": "linear"
     }
@@ -13375,6 +13394,63 @@
       "pricing": "linear"
     }
   },
+  "XXXLWerSal.minola@at": {
+    "fileName": "minola@at",
+    "productNumber": "0023070312",
+    "productVariants": "01 / 02 / 98 / ",
+    "modelName": "minola",
+    "locale": "at",
+    "currency": "EUR",
+    "catalog": "XXXLWerSal.Minola",
+    "brand": "MM",
+    "brandName": "",
+    "productGroup": "02",
+    "description": "Boxspringbett Minola",
+    "settings": {
+      "preis": 500,
+      "entlasgung": 54,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLWerSal.minola@ch": {
+    "fileName": "minola@ch",
+    "productNumber": "0023070312",
+    "productVariants": "01 / 02 / 98 / ",
+    "modelName": "minola",
+    "locale": "ch",
+    "currency": "EUR",
+    "catalog": "XXXLWerSal.Minola",
+    "brand": "MM",
+    "brandName": "",
+    "productGroup": "02",
+    "description": "Boxspringbett Minola",
+    "settings": {
+      "preis": 480,
+      "entlasgung": 49,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLWerSal.minola@de": {
+    "fileName": "minola@de",
+    "productNumber": "0023070312",
+    "productVariants": "01 / 02 / 98 / ",
+    "modelName": "minola",
+    "locale": "de",
+    "currency": "EUR",
+    "catalog": "XXXLWerSal.Minola",
+    "brand": "MM",
+    "brandName": "",
+    "productGroup": "02",
+    "description": "Boxspringbett Minola",
+    "settings": {
+      "preis": 500,
+      "entlasgung": 54,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
   "XXXLWerSal.molina@at": {
     "fileName": "molina@at",
     "productNumber": "0023070110",
@@ -13676,25 +13752,6 @@
       "preis": 360,
       "entlasgung": 25,
       "aktion": 0,
-      "pricing": "linear"
-    }
-  },
-  "XXXLWerSal.braven@de": {
-    "fileName": "braven@de",
-    "productNumber": "0023070134",
-    "productVariants": "01 / 02 / YY / ",
-    "modelName": "braven",
-    "locale": "de",
-    "currency": "",
-    "catalog": "XXXLWerSal.Braven",
-    "brand": "LU",
-    "brandName": "Carryhome",
-    "productGroup": "01",
-    "description": "Wohnlandschaft Braven",
-    "settings": {
-      "preis": 490,
-      "entlasgung": 0,
-      "aktion": 44.75,
       "pricing": "linear"
     }
   },
@@ -14054,6 +14111,25 @@
     "description": "Wohnlandschaft Selva",
     "settings": {
       "preis": 480,
+      "entlasgung": 0,
+      "aktion": 44.75,
+      "pricing": "linear"
+    }
+  },
+  "XXXLWerSal.braven@de": {
+    "fileName": "braven@de",
+    "productNumber": "",
+    "productVariants": "",
+    "modelName": "braven",
+    "locale": "de",
+    "currency": "",
+    "catalog": "XXXLWerSal.Braven",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Braven",
+    "settings": {
+      "preis": 490,
       "entlasgung": 0,
       "aktion": 44.75,
       "pricing": "linear"
