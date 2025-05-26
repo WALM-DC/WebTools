@@ -35,16 +35,14 @@ $.fn.ddTableFilter = function(options) {
       if(opts.length < options.minOptions){
         return;
       }
-      // if(options.sortOpt) {
-      //   console.log(opts);
-      //   opts.sort(options.sortOptCallback);  
-      //   console.log(opts);
-      // }
       function sortFilterLists(a, b) {
-        return a.text.toLowerCase() > b.text.toLowerCase();
+        let x = a.text.toLowerCase();
+        let y = b.text.toLowerCase();
+        if (x < y) {return -1;}
+        if (x > y) {return 1;}
+        return 0;
       }
       opts.sort(sortFilterLists);
-      console.log(opts);
       $.each(opts, function() {
         $(selectbox).append('<option value="' + this.val + '">' + this.text + '</option>')
       });
