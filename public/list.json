@@ -2412,6 +2412,63 @@
       "pricing": "linear"
     }
   },
+  "XXXLBlackRedWhite.myrdal@at": {
+    "fileName": "myrdal@at",
+    "productNumber": "0024270534",
+    "productVariants": "1C / 6Q / 06 / 5Z / 45 / YY / ",
+    "modelName": "myrdal",
+    "locale": "at",
+    "currency": "EUR",
+    "catalog": "XXXLBlackRedWhite.Myrdal",
+    "brand": "LU",
+    "brandName": "Esposa",
+    "productGroup": "02",
+    "description": "Boxspringbett Myrdal",
+    "settings": {
+      "preis": 470,
+      "entlasgung": 35,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLBlackRedWhite.myrdal@ch": {
+    "fileName": "myrdal@ch",
+    "productNumber": "0024270534",
+    "productVariants": "1C / 6Q / 06 / 5Z / 45 / YY / ",
+    "modelName": "myrdal",
+    "locale": "ch",
+    "currency": "CHF",
+    "catalog": "XXXLBlackRedWhite.Myrdal",
+    "brand": "LU",
+    "brandName": "Esposa",
+    "productGroup": "02",
+    "description": "Boxspringbett Myrdal",
+    "settings": {
+      "preis": 500,
+      "entlasgung": 35,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLBlackRedWhite.myrdal@de": {
+    "fileName": "myrdal@de",
+    "productNumber": "0024270534",
+    "productVariants": "1C / 6Q / 06 / 5Z / 45 / YY / ",
+    "modelName": "myrdal",
+    "locale": "de",
+    "currency": "EUR",
+    "catalog": "XXXLBlackRedWhite.Myrdal",
+    "brand": "LU",
+    "brandName": "Esposa",
+    "productGroup": "02",
+    "description": "Boxspringbett Myrdal",
+    "settings": {
+      "preis": 470,
+      "entlasgung": 7,
+      "aktion": 44.75,
+      "pricing": "linear"
+    }
+  },
   "XXXLBlackRedWhite.raul@de": {
     "fileName": "raul@de",
     "productNumber": "0024270006",
