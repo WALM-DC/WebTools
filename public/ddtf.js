@@ -40,7 +40,10 @@ $.fn.ddTableFilter = function(options) {
         opts.sort(options.sortOptCallback);  
         console.log(opts);
       }
-      opts.sort(options.sortOptCallback);
+      function sortFilterLists(a, b) {
+        return a.text.toLowerCase() > b.text.toLowerCase();
+      }
+      opts.sort(sortFilterLists);
       $.each(opts, function() {
         $(selectbox).append('<option value="' + this.val + '">' + this.text + '</option>')
       });
