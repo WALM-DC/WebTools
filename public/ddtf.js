@@ -38,9 +38,7 @@ $.fn.ddTableFilter = function(options) {
       function sortFilterLists(a, b) {
         let x = a.text.toLowerCase();
         let y = b.text.toLowerCase();
-        if (x < y) {return -1;}
-        if (x > y) {return 1;}
-        return 0;
+        return x < y ? -1 : x > y ? 1 : 0;
       }
       opts.sort(sortFilterLists);
       $.each(opts, function() {
