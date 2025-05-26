@@ -3,7 +3,7 @@ import json
 
 def save_json_file(data):
     # Output file path
-    output_path = "F:\WebTools\AktionspreisFixer\list.json"
+    output_path = "F:\WebTools\public\list.json"
 
     # Write JSON object to file
     with open(output_path, 'w', encoding='utf-8') as f:

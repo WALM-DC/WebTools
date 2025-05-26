@@ -2,8 +2,9 @@ import os
 import json
 
 def save_json_file(data):
-    # Output file path
-    output_path = "F:\WebTools\AktionspreisFixer\list.json"
+    # Output file path for log
+    # requires datestamp
+    output_path = "F:\WebTools\AktionspreisFixer\log.text"
 
     # Write JSON object to file
     with open(output_path, 'w', encoding='utf-8') as f:
