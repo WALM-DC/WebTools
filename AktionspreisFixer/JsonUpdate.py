@@ -36,7 +36,9 @@ def find_json_with_values(root_path, filter_path):
                 try:
                     with open(file_path, 'r', encoding='utf-8') as f:
                         data = json.load(f)
-                        # if contains_target_values(data, target_values):
+                        
+                        # if model.entlastung < submitted aktion & if model.criteria fit:
+
                         if contains_target_keys(data, {'catalog'}):
                             model_object = {
                                 data['catalog'].split('.')[0] +'.'+ filename.split('.')[0]: {
