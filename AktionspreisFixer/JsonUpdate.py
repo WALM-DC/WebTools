@@ -1,5 +1,21 @@
 import os
 import json
+import datetime
+import csv
+
+# Get todays date
+today = datetime.datetime.now()
+
+dateToday = today.strftime('%d.%m.%Y')
+
+checkDate = datetime.datetime(2025, 6, 3).strftime('%d.%m.%Y')
+
+if dateToday >= checkDate:
+    print('Today is >=')
+    print(dateToday)
+else:
+    print('CheckDate is <')
+    print(checkDate)
 
 def save_json_file(data):
     # Output file path for log
@@ -12,6 +28,9 @@ def save_json_file(data):
 
     data['settings']['aktion'] = 20
 
+# Read MKSAKT file and convert to object
+
+# Collect 3D model data
 def find_json_with_values(root_path, filter_path):
     """
     Walk through all folders starting from root_path, parse JSON files,
@@ -76,8 +95,13 @@ def find_json_with_values(root_path, filter_path):
                 
         except KeyError as e:
             print(f'KeyError: {e} not found in conditions!')
+    
+    print(fullModelList)
 
     # save_json_file(fullModelList)
+
+# Loop through 3D models, check against MKSAKT object and date
+# Overwrite fitting 3D models
 
 def contains_target_values(data, target_values):
     """
@@ -118,4 +142,4 @@ if __name__ == "__main__":
     search_path = (r"F:\WebTools\walm.github.io\AktionspreisFixer\XML-Test")
     filter_path = (r"F:\WebTools\AktionspreisFixer\filter.json")
 
-    find_json_with_values(search_path, filter_path)
+    # find_json_with_values(search_path, filter_path)
