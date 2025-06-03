@@ -1856,7 +1856,7 @@
     "description": "Wohnlandschaft Marola",
     "settings": {
       "preis": 380,
-      "entlasgung": 24,
+      "entlasgung": 36,
       "aktion": 0,
       "pricing": "linear"
     }
@@ -1932,7 +1932,7 @@
     "description": "Wohnlandschaft Rosalie",
     "settings": {
       "preis": 450,
-      "entlasgung": 7,
+      "entlasgung": 0,
       "aktion": 44.75,
       "pricing": "linear"
     }
@@ -1951,7 +1951,7 @@
     "description": "Wohnlandschaft Rubio",
     "settings": {
       "preis": 380,
-      "entlasgung": 26,
+      "entlasgung": 29,
       "aktion": 0,
       "pricing": "linear"
     }
@@ -1970,7 +1970,7 @@
     "description": "Wohnlandschaft Rubio",
     "settings": {
       "preis": 390,
-      "entlasgung": 14,
+      "entlasgung": 21,
       "aktion": 0,
       "pricing": "linear"
     }
@@ -2045,8 +2045,8 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Vigo",
     "settings": {
-      "preis": 350,
-      "entlasgung": 24,
+      "preis": 510,
+      "entlasgung": 45,
       "aktion": 0,
       "pricing": "linear"
     }
@@ -4673,6 +4673,63 @@
       "pricing": "linear"
     }
   },
+  "XXXL1726.plura@at": {
+    "fileName": "plura@at",
+    "productNumber": "0017260001",
+    "productVariants": "01 / 02 / 03 / 04 / 05 / 06 / 98 / ",
+    "modelName": "plura",
+    "locale": "at",
+    "currency": "EUR",
+    "catalog": "XXXL1726.Plura",
+    "brand": "MM",
+    "brandName": "",
+    "productGroup": "02",
+    "description": "Boxspringbett Plura",
+    "settings": {
+      "preis": 550,
+      "entlasgung": 52,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXL1726.plura@ch": {
+    "fileName": "plura@ch",
+    "productNumber": "0017260001",
+    "productVariants": "01 / 02 / 03 / 04 / 05 / 06 / 98 / ",
+    "modelName": "plura",
+    "locale": "ch",
+    "currency": "CHF",
+    "catalog": "XXXL1726.Plura",
+    "brand": "MM",
+    "brandName": "",
+    "productGroup": "02",
+    "description": "Boxspringbett Plura",
+    "settings": {
+      "preis": 540,
+      "entlasgung": 38,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXL1726.plura@de": {
+    "fileName": "plura@de",
+    "productNumber": "0017260001",
+    "productVariants": "01 / 02 / 03 / 04 / 05 / 06 / 98 / ",
+    "modelName": "plura",
+    "locale": "de",
+    "currency": "EUR",
+    "catalog": "XXXL1726.Plura",
+    "brand": "MM",
+    "brandName": "",
+    "productGroup": "02",
+    "description": "Boxspringbett Plura",
+    "settings": {
+      "preis": 550,
+      "entlasgung": 52,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
   "XXXLEuromebel.sevilla@at": {
     "fileName": "sevilla@at",
     "productNumber": "0008120104",
@@ -5123,7 +5180,7 @@
     "productGroup": "",
     "description": "Wohnlandschaft Monson",
     "settings": {
-      "preis": 540,
+      "preis": 460,
       "entlasgung": 0,
       "aktion": 44.75,
       "pricing": "linear"
@@ -5448,44 +5505,6 @@
     "settings": {
       "preis": 225,
       "entlasgung": 41,
-      "aktion": 0,
-      "pricing": "linear"
-    }
-  },
-  "XXXLEuromebel.time@at": {
-    "fileName": "time@at",
-    "productNumber": "0004240011",
-    "productVariants": "03 / 04 / 99 / ",
-    "modelName": "time",
-    "locale": "at",
-    "currency": "",
-    "catalog": "XXXLEuromebel.Time",
-    "brand": "LU",
-    "brandName": "Ti'me",
-    "productGroup": "01",
-    "description": "Wohnlandschaft Time",
-    "settings": {
-      "preis": 420,
-      "entlasgung": 34,
-      "aktion": 0,
-      "pricing": "linear"
-    }
-  },
-  "XXXLEuromebel.time@ch": {
-    "fileName": "time@ch",
-    "productNumber": "0008120032",
-    "productVariants": "01 / YY / ",
-    "modelName": "time",
-    "locale": "ch",
-    "currency": "CHF",
-    "catalog": "XXXLEuromebel.Time",
-    "brand": "LU",
-    "brandName": "Ti'me",
-    "productGroup": "01",
-    "description": "Wohnlandschaft Time",
-    "settings": {
-      "preis": 225,
-      "entlasgung": 33,
       "aktion": 0,
       "pricing": "linear"
     }
@@ -7821,7 +7840,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Sierra",
     "settings": {
-      "preis": 9331,
+      "preis": 9387,
       "entlasgung": 40,
       "aktion": 0,
       "pricing": "linear"
@@ -7840,7 +7859,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Sierra",
     "settings": {
-      "preis": 390,
+      "preis": 396,
       "entlasgung": 40,
       "aktion": 0,
       "pricing": "linear"
@@ -9189,7 +9208,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Brooklyn",
     "settings": {
-      "preis": 490,
+      "preis": 380,
       "entlasgung": 0,
       "aktion": 44.75,
       "pricing": "linear"
@@ -9265,7 +9284,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Casablanca",
     "settings": {
-      "preis": 490,
+      "preis": 380,
       "entlasgung": 0,
       "aktion": 44.75,
       "pricing": "linear"
@@ -9303,8 +9322,8 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Coolio",
     "settings": {
-      "preis": 490,
-      "entlasgung": 7,
+      "preis": 380,
+      "entlasgung": 0,
       "aktion": 49.57,
       "pricing": "linear"
     }
@@ -9360,7 +9379,7 @@
     "productGroup": "01",
     "description": "Megasofa Fellini II",
     "settings": {
-      "preis": 490,
+      "preis": 380,
       "entlasgung": 0,
       "aktion": 44.75,
       "pricing": "linear"
@@ -9398,8 +9417,8 @@
     "productGroup": "01",
     "description": "Wohnlandschaft GoodnightDeLuxe",
     "settings": {
-      "preis": 490,
-      "entlasgung": 7,
+      "preis": 380,
+      "entlasgung": 0,
       "aktion": 44.75,
       "pricing": "linear"
     }
@@ -9455,7 +9474,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Tanika",
     "settings": {
-      "preis": 490,
+      "preis": 380,
       "entlasgung": 0,
       "aktion": 44.75,
       "pricing": "linear"
@@ -13470,25 +13489,6 @@
       "pricing": "linear"
     }
   },
-  "XXXLWerSal.minola@ch": {
-    "fileName": "minola@ch",
-    "productNumber": "0023070312",
-    "productVariants": "01 / 02 / 98 / ",
-    "modelName": "minola",
-    "locale": "ch",
-    "currency": "EUR",
-    "catalog": "XXXLWerSal.Minola",
-    "brand": "MM",
-    "brandName": "",
-    "productGroup": "02",
-    "description": "Boxspringbett Minola",
-    "settings": {
-      "preis": 480,
-      "entlasgung": 49,
-      "aktion": 0,
-      "pricing": "linear"
-    }
-  },
   "XXXLWerSal.minola@de": {
     "fileName": "minola@de",
     "productNumber": "0023070312",
@@ -14034,7 +14034,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Nubo",
     "settings": {
-      "preis": 540,
+      "preis": 440,
       "entlasgung": 0,
       "aktion": 44.75,
       "pricing": "linear"
@@ -14493,82 +14493,6 @@
       "preis": 395,
       "entlasgung": 0,
       "aktion": 44.75,
-      "pricing": "linear"
-    }
-  },
-  "XXXLRauch.mavi@de_mit_preis": {
-    "fileName": "mavi@de_mit_preis",
-    "productNumber": "",
-    "productVariants": "",
-    "modelName": "mavi",
-    "locale": "de_mit_preis",
-    "currency": "",
-    "catalog": "XXXLRauch.Mavi",
-    "brand": "LU",
-    "brandName": "Carryhome",
-    "productGroup": "02",
-    "description": "Bett Mavi",
-    "settings": {
-      "preis": 390,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
-  },
-  "XXXLRauch.mavi@de_mit_variants": {
-    "fileName": "mavi@de_mit_variants",
-    "productNumber": "",
-    "productVariants": "",
-    "modelName": "mavi",
-    "locale": "de_mit_variants",
-    "currency": "",
-    "catalog": "XXXLRauch.Mavi",
-    "brand": "LU",
-    "brandName": "Carryhome",
-    "productGroup": "02",
-    "description": "Bett Mavi",
-    "settings": {
-      "preis": 390,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
-  },
-  "XXXLRauch.mavi@de_ohne_preis": {
-    "fileName": "mavi@de_ohne_preis",
-    "productNumber": "",
-    "productVariants": "",
-    "modelName": "mavi",
-    "locale": "de_ohne_preis",
-    "currency": "",
-    "catalog": "XXXLRauch.Mavi",
-    "brand": "LU",
-    "brandName": "Carryhome",
-    "productGroup": "02",
-    "description": "Bett Mavi",
-    "settings": {
-      "preis": 390,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
-  },
-  "XXXLRauch.mavi@de_ohne_variants": {
-    "fileName": "mavi@de_ohne_variants",
-    "productNumber": "",
-    "productVariants": "",
-    "modelName": "mavi",
-    "locale": "de_ohne_variants",
-    "currency": "",
-    "catalog": "XXXLRauch.Mavi",
-    "brand": "LU",
-    "brandName": "Carryhome",
-    "productGroup": "02",
-    "description": "Bett Mavi",
-    "settings": {
-      "preis": 390,
-      "entlasgung": 0,
-      "aktion": 0,
       "pricing": "linear"
     }
   },

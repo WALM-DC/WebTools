@@ -67,6 +67,11 @@
         </div>
     </body>
     <script>
+
+        $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index.json", function( data ) {
+            console.log(data);
+        })
+
         var dimensonObj = {};
         function assignValues(obj, keys, value){
             // console.log(keys);
