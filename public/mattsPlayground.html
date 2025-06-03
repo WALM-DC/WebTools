@@ -68,40 +68,40 @@
     </body>
     <script>
 
-        $.get( "https://ig-creator.xxxlgroup.com/idm/index.json", function( data ) {
+        $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index.json", function( data ) {
             console.log(data);
         })
 
-        var dimensonObj = {};
-        function assignValues(obj, keys, value){
-            // console.log(keys);
-            // console.log(value);
-            keys.forEach(key => {
-                obj[key] = value;
-            });
-        }
-        const height45 = {
-            "629|7854": {  "height": 45 }, 
-            "629|8097": {  "height": 45 }, 
-            "629|7853": {  "height": 45 }, 
-            "629|8096": {  "height": 45 } 
-        }
-        function convertData(){
-            dimensonObj = {
-                'Komforthöhe': {
-                    "629|3002": { "width": 218, "height": 86 },
-                    // "629|1002": { "width": 98, "height": 86 }, 
-                    // "629|1003": { "width": 98, "height": 86 }, 
-                    // "629|1004": { "width": 98, "height": 86 }
-                }
-            }
-            // dimensonObj.Komforthöhe["629|1002"] = dimensonObj.Komforthöhe["629|1003"] = dimensonObj.Komforthöhe["629|1004"] = { "width": 98, "height": 86 };
-            assignValues(dimensonObj.Komforthöhe, ["629|1002", "629|1004", "629|1014"], { "width": 98, "height": 86 });
-            Object.assign(dimensonObj.Komforthöhe, height45);
-            console.log(dimensonObj);
-        }
-        $('#convertMe').on('click', function(){
-            convertData();
-        })
+        // var dimensonObj = {};
+        // function assignValues(obj, keys, value){
+        //     // console.log(keys);
+        //     // console.log(value);
+        //     keys.forEach(key => {
+        //         obj[key] = value;
+        //     });
+        // }
+        // const height45 = {
+        //     "629|7854": {  "height": 45 }, 
+        //     "629|8097": {  "height": 45 }, 
+        //     "629|7853": {  "height": 45 }, 
+        //     "629|8096": {  "height": 45 } 
+        // }
+        // function convertData(){
+        //     dimensonObj = {
+        //         'Komforthöhe': {
+        //             "629|3002": { "width": 218, "height": 86 },
+        //             // "629|1002": { "width": 98, "height": 86 }, 
+        //             // "629|1003": { "width": 98, "height": 86 }, 
+        //             // "629|1004": { "width": 98, "height": 86 }
+        //         }
+        //     }
+        //     // dimensonObj.Komforthöhe["629|1002"] = dimensonObj.Komforthöhe["629|1003"] = dimensonObj.Komforthöhe["629|1004"] = { "width": 98, "height": 86 };
+        //     assignValues(dimensonObj.Komforthöhe, ["629|1002", "629|1004", "629|1014"], { "width": 98, "height": 86 });
+        //     Object.assign(dimensonObj.Komforthöhe, height45);
+        //     console.log(dimensonObj);
+        // }
+        // $('#convertMe').on('click', function(){
+        //     convertData();
+        // })
     </script>
 </html>
