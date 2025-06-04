@@ -18,16 +18,20 @@ headerList = ["Aktion", "vonDatum", "bisDatum", "NachlassinProzent", "Warengrupp
 #     print('CheckDate is <')
 #     print(checkDate)
 
+# Reads MKSAKT file and convert to object
 def read_csv_file():
     headerIndex = []
     MKSAKTobject = {}
 
     with open(r'F:\WebTools\AktionspreisFixer\MKSAKT_1_test.csv', 'r') as csvfile:
         reader = csv.reader(csvfile)
+        i = 0
         for row in reader:
             for index, column in enumerate(f"{row}".split(';')):
                 if index in headerIndex:
-                    MKSAKTobject.get(f"{headerList[headerIndex.index(index)]}").append(column)
+                    if "1/4/" in f"{row}":
+                        MKSAKTobject.get(f"{headerList[headerIndex.index(index)]}").append(column)
+                        i+=1
                 if column in headerList:
                     if index not in headerIndex:
                         headerIndex.append(index)
@@ -36,8 +40,14 @@ def read_csv_file():
                         }
                     MKSAKTobject.update(tempObject)
 
-        print(headerIndex)
-        print(MKSAKTobject)
+        print (MKSAKTobject)
+        print(f"{i}"+" entries imported.")
+
+# Build logic to find models to update - loop through object line by line
+#   - Check valid date ragen
+#   - Check valid product groups
+#       - Check against excluded product groups, brand & deliverers
+#   - Produce preview output list
 
 def save_json_file(data):
     # Output file path for log
@@ -50,9 +60,7 @@ def save_json_file(data):
 
     data['settings']['aktion'] = 20
 
-# Read MKSAKT file and convert to object
-
-# Collect 3D model data
+# Collects 3D model data
 def find_json_with_values(root_path, filter_path):
     """
     Walk through all folders starting from root_path, parse JSON files,
