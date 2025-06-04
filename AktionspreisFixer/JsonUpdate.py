@@ -5,22 +5,44 @@ import csv
 
 # Get todays date
 today = datetime.datetime.now()
-
 dateToday = today.strftime('%d.%m.%Y')
-
 checkDate = datetime.datetime(2025, 6, 3).strftime('%d.%m.%Y')
 
-if dateToday >= checkDate:
-    print('Today is >=')
-    print(dateToday)
-else:
-    print('CheckDate is <')
-    print(checkDate)
+# List of column headers we need to extract
+headerList = ["Aktion", "vonDatum", "bisDatum", "NachlassinProzent", "Warengruppe_Kombi", "AusnahmeWarengruppe", "StatKZ_Kombi", "Marken", "ausmark", "AusnahmeLieferant"]
+
+# if dateToday >= checkDate:
+#     print('Today is >=')
+#     print(dateToday)
+# else:
+#     print('CheckDate is <')
+#     print(checkDate)
+
+def read_csv_file():
+    headerIndex = []
+    MKSAKTobject = {}
+
+    with open(r'F:\WebTools\AktionspreisFixer\MKSAKT_1_test.csv', 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            for index, column in enumerate(f"{row}".split(';')):
+                if index in headerIndex:
+                    MKSAKTobject.get(f"{headerList[headerIndex.index(index)]}").append(column)
+                if column in headerList:
+                    if index not in headerIndex:
+                        headerIndex.append(index)
+                        tempObject = {
+                            column:[]
+                        }
+                    MKSAKTobject.update(tempObject)
+
+        print(headerIndex)
+        print(MKSAKTobject)
 
 def save_json_file(data):
     # Output file path for log
     # requires datestamp
-    output_path = "F:\WebTools\AktionspreisFixer\log.text"
+    output_path = (r"F:\WebTools\AktionspreisFixer\log.text")
 
     # Write JSON object to file
     with open(output_path, 'w', encoding='utf-8') as f:
@@ -142,4 +164,5 @@ if __name__ == "__main__":
     search_path = (r"F:\WebTools\walm.github.io\AktionspreisFixer\XML-Test")
     filter_path = (r"F:\WebTools\AktionspreisFixer\filter.json")
 
+    read_csv_file()
     # find_json_with_values(search_path, filter_path)
