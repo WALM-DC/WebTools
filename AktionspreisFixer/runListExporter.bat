@@ -15,5 +15,5 @@ echo Push new List.Json to git.
 PAUSE
 f:
 cd "F:\WebTools"
-git commit -m "Daily 3D Model-List update" git push
+git push
 PAUSE
