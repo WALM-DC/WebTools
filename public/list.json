@@ -8454,6 +8454,25 @@
       "pricing": "linear"
     }
   },
+  "Polipol.so3400@de": {
+    "fileName": "so3400@de",
+    "productNumber": "0007110062",
+    "productVariants": "01 / 03 / 05 / 08 / YY / ",
+    "modelName": "so3400",
+    "locale": "de",
+    "currency": "",
+    "catalog": "Polipol.IN19151_SO3400_5219",
+    "brand": "LU",
+    "brandName": "Set One by Mustering",
+    "productGroup": "01",
+    "description": "Wohnlandschaft SO3400",
+    "settings": {
+      "preis": 190,
+      "entlasgung": 0,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
   "Polipol.spliffs@at": {
     "fileName": "spliffs@at",
     "productNumber": "0007110053",
@@ -12294,19 +12313,19 @@
   },
   "XXXLSinkro.emily_box@at": {
     "fileName": "emily_box@at",
-    "productNumber": "0008400220",
-    "productVariants": "01 / 98 / ",
+    "productNumber": "0008400216",
+    "productVariants": "04 / 05 / 98 / ",
     "modelName": "emily_box",
     "locale": "at",
     "currency": "EUR",
-    "catalog": "XXXLSinkro.EmilyBoxspringbettMX",
-    "brand": "MX",
-    "brandName": "Luca Bessoni",
+    "catalog": "XXXLSinkro.EmilyBoxspringbett",
+    "brand": "MM",
+    "brandName": "Premium Living",
     "productGroup": "02",
     "description": "Boxspringbett Emily",
     "settings": {
-      "preis": 332,
-      "entlasgung": 34,
+      "preis": 500,
+      "entlasgung": 51,
       "aktion": 0,
       "pricing": "linear"
     }
