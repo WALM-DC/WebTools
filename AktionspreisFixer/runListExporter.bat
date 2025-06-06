@@ -14,6 +14,8 @@ python JsonList.py
 echo Push new List.Json to git.
 PAUSE
 f:
-cd "F:\WebTools"
-git push
+cd "F:\WebTools\public"
+git add .
+git commit -m "3D Modellist Update"
+git push origin
 PAUSE
