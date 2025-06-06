@@ -4217,6 +4217,63 @@
       "pricing": "linear"
     }
   },
+  "XXXLCotta.levi@at": {
+    "fileName": "levi@at",
+    "productNumber": "0005520021",
+    "productVariants": "01 / 98 / ",
+    "modelName": "levi",
+    "locale": "at",
+    "currency": "EUR",
+    "catalog": "XXXLCotta.LeviMM",
+    "brand": "MM",
+    "brandName": "Premium Living",
+    "productGroup": "14",
+    "description": "Megasofa Levi",
+    "settings": {
+      "preis": 450,
+      "entlasgung": 45,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLCotta.levi@ch": {
+    "fileName": "levi@ch",
+    "productNumber": "0005520021",
+    "productVariants": "01 / 98 / ",
+    "modelName": "levi",
+    "locale": "ch",
+    "currency": "CHF",
+    "catalog": "XXXLCotta.LeviMM",
+    "brand": "MM",
+    "brandName": "Premium Living",
+    "productGroup": "14",
+    "description": "Megasofa Levi",
+    "settings": {
+      "preis": 530,
+      "entlasgung": 45,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLCotta.levi@de": {
+    "fileName": "levi@de",
+    "productNumber": "0005520021",
+    "productVariants": "01 / 98 / ",
+    "modelName": "levi",
+    "locale": "de",
+    "currency": "EUR",
+    "catalog": "XXXLCotta.LeviMM",
+    "brand": "MM",
+    "brandName": "Premium Living",
+    "productGroup": "14",
+    "description": "Megasofa Levi",
+    "settings": {
+      "preis": 450,
+      "entlasgung": 45,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
   "XXXLCotta.speedway@at": {
     "fileName": "speedway@at",
     "productNumber": "0005520603",
@@ -5911,7 +5968,7 @@
   "XXXLGabiPpuh.cancun@de": {
     "fileName": "cancun@de",
     "productNumber": "0023000158",
-    "productVariants": "89 / 90 / YY / ",
+    "productVariants": "87 / 88 / 89 / 90 / YY / ",
     "modelName": "cancun",
     "locale": "de",
     "currency": "",
@@ -12048,7 +12105,7 @@
   "XXXLRuf.milano@de": {
     "fileName": "milano@de",
     "productNumber": "0002230010",
-    "productVariants": "01 / 4C / YY / ",
+    "productVariants": "02 / 4C / YY / ",
     "modelName": "milano",
     "locale": "de",
     "currency": "",
