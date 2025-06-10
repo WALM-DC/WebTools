@@ -1686,7 +1686,7 @@
     "settings": {
       "preis": 2769,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 8,
       "pricing": "linear"
     }
   },
@@ -1819,7 +1819,7 @@
     "settings": {
       "preis": 2316,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 8,
       "pricing": "linear"
     }
   },
@@ -2009,7 +2009,7 @@
     "settings": {
       "preis": 2244,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 8,
       "pricing": "linear"
     }
   },
@@ -2085,7 +2085,7 @@
     "settings": {
       "preis": 2899,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 8,
       "pricing": "linear"
     }
   },
@@ -4141,6 +4141,63 @@
       "pricing": "linear"
     }
   },
+  "XXXLMebleMarzeni.pedro@at": {
+    "fileName": "pedro@at",
+    "productNumber": "0011360046",
+    "productVariants": "01 / 98 / ",
+    "modelName": "pedro",
+    "locale": "at",
+    "currency": "",
+    "catalog": "XXXLMebleMarzeni.Pedro",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "02",
+    "description": "Boxspringbett Pedro",
+    "settings": {
+      "preis": 460,
+      "entlasgung": 30,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLMebleMarzeni.pedro@ch": {
+    "fileName": "pedro@ch",
+    "productNumber": "0002980149",
+    "productVariants": "01 / 13 / 25 / 37 / 11 / 03 / 10 / YY / ",
+    "modelName": "pedro",
+    "locale": "ch",
+    "currency": "CHF",
+    "catalog": "XXXLMebleMarzeni.Pedro",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "02",
+    "description": "Boxspringbett Pedro",
+    "settings": {
+      "preis": 500,
+      "entlasgung": 25,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLMebleMarzeni.pedro@de": {
+    "fileName": "pedro@de",
+    "productNumber": "0011360046",
+    "productVariants": "01 / 98 / ",
+    "modelName": "pedro",
+    "locale": "de",
+    "currency": "",
+    "catalog": "XXXLMebleMarzeni.Pedro",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "02",
+    "description": "Boxspringbett Pedro",
+    "settings": {
+      "preis": 550,
+      "entlasgung": 0,
+      "aktion": 44.75,
+      "pricing": "linear"
+    }
+  },
   "XXXLMebleMarzeni.rice@at": {
     "fileName": "rice@at",
     "productNumber": "0002980047",
@@ -5182,7 +5239,7 @@
     "settings": {
       "preis": 2218,
       "entlasgung": 0,
-      "aktion": 25,
+      "aktion": 8,
       "pricing": "linear"
     }
   },
@@ -6133,6 +6190,63 @@
       "preis": 404,
       "entlasgung": 28,
       "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLGabiPpuh.swing@at": {
+    "fileName": "swing@at",
+    "productNumber": "0023000237",
+    "productVariants": "01 / 02 / 04 / 06 / 10 / 12 / YY / ",
+    "modelName": "swing",
+    "locale": "at",
+    "currency": "EUR",
+    "catalog": "XXXLGabiPpuh.Swing",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "01",
+    "description": "Ecksofa Swing",
+    "settings": {
+      "preis": 400,
+      "entlasgung": 47,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLGabiPpuh.swing@ch": {
+    "fileName": "swing@ch",
+    "productNumber": "0023000237",
+    "productVariants": "01 / 02 / 04 / 06 / 10 / 12 / YY / ",
+    "modelName": "swing",
+    "locale": "ch",
+    "currency": "CHF",
+    "catalog": "XXXLGabiPpuh.Swing",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "01",
+    "description": "Ecksofa Swing",
+    "settings": {
+      "preis": 450,
+      "entlasgung": 44,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLGabiPpuh.swing@de": {
+    "fileName": "swing@de",
+    "productNumber": "0023000237",
+    "productVariants": "01 / 02 / 04 / 06 / 10 / 12 / YY / ",
+    "modelName": "swing",
+    "locale": "de",
+    "currency": "EUR",
+    "catalog": "XXXLGabiPpuh.Swing",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "01",
+    "description": "Ecksofa Swing",
+    "settings": {
+      "preis": 440,
+      "entlasgung": 0,
+      "aktion": 44.75,
       "pricing": "linear"
     }
   },
@@ -14131,7 +14245,7 @@
     "settings": {
       "preis": 2505,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 8,
       "pricing": "linear"
     }
   },
