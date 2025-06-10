@@ -158,7 +158,7 @@
                 filterTable();
                 jQuery('#myTable').ddTableFilter();
             } else {
-                $.getJSON( "https://pages.github.xxxlgroup.com/WALM/walm.github.io/public/list.json", function( data ) {
+                $.getJSON( "https://walm-dc.github.io/WebTools/public/list.json", function( data ) {
                     var sortArray = $.map(data, function(value, index) {return [value]});
                     sortArray.sort(sortList);
                     $.each(sortArray, function(id, val){
