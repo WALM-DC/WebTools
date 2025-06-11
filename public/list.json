@@ -166,7 +166,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -223,7 +223,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -280,7 +280,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -584,7 +584,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -641,7 +641,7 @@
     "settings": {
       "preis": 402,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -660,7 +660,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -717,7 +717,7 @@
     "settings": {
       "preis": 360,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -774,7 +774,7 @@
     "settings": {
       "preis": 472,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -831,7 +831,7 @@
     "settings": {
       "preis": 430,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -907,7 +907,7 @@
     "settings": {
       "preis": 375,
       "entlasgung": 5,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -983,7 +983,7 @@
     "settings": {
       "preis": 425,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -1040,7 +1040,7 @@
     "settings": {
       "preis": 425,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -1078,7 +1078,7 @@
     "settings": {
       "preis": 425,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -1154,7 +1154,7 @@
     "settings": {
       "preis": 425,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -1211,7 +1211,7 @@
     "settings": {
       "preis": 425,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -1306,7 +1306,7 @@
     "settings": {
       "preis": 425,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -1325,7 +1325,7 @@
     "settings": {
       "preis": 425,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -1344,7 +1344,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -1363,7 +1363,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -1382,7 +1382,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -1401,7 +1401,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -1458,7 +1458,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -1477,7 +1477,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -1572,7 +1572,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -1610,7 +1610,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -1667,7 +1667,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -1705,7 +1705,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -1781,7 +1781,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -1876,7 +1876,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -1895,7 +1895,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -1933,7 +1933,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -1990,7 +1990,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -2066,7 +2066,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -2389,7 +2389,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -2408,7 +2408,7 @@
     "settings": {
       "preis": 544,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -2465,7 +2465,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 7,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -2484,7 +2484,7 @@
     "settings": {
       "preis": 560,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -2754,6 +2754,44 @@
       "pricing": "linear"
     }
   },
+  "XXXLCandy.ubalda@at": {
+    "fileName": "ubalda@at",
+    "productNumber": "0015810057",
+    "productVariants": "01 / 05 / 98 / ",
+    "modelName": "ubalda",
+    "locale": "at",
+    "currency": "",
+    "catalog": "XXXLCandy.Ubalda",
+    "brand": "MM",
+    "brandName": "",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Ubalda",
+    "settings": {
+      "preis": 415,
+      "entlasgung": 40,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLCandy.ubalda@de": {
+    "fileName": "ubalda@de",
+    "productNumber": "0015810057",
+    "productVariants": "01 / 05 / 98 / ",
+    "modelName": "ubalda",
+    "locale": "de",
+    "currency": "",
+    "catalog": "XXXLCandy.Ubalda",
+    "brand": "MM",
+    "brandName": "",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Ubalda",
+    "settings": {
+      "preis": 415,
+      "entlasgung": 45,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
   "Candy.badia@at": {
     "fileName": "badia@at",
     "productNumber": "0015810293",
@@ -2807,7 +2845,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -2845,7 +2883,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -2864,7 +2902,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -2921,7 +2959,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -2959,7 +2997,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -3054,7 +3092,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -3111,7 +3149,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -3168,7 +3206,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -3206,7 +3244,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -3263,7 +3301,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -3282,7 +3320,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -3396,7 +3434,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -3453,7 +3491,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -3510,7 +3548,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -3567,7 +3605,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -3624,7 +3662,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -3643,7 +3681,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -3700,7 +3738,26 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "Candy.tori@de": {
+    "fileName": "tori@de",
+    "productNumber": "0015810324",
+    "productVariants": "02 / 03 / YY / ",
+    "modelName": "tori",
+    "locale": "de",
+    "currency": "EUR",
+    "catalog": "Candy.Twister",
+    "brand": "LU",
+    "brandName": "Hom'in",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Tori",
+    "settings": {
+      "preis": 440,
+      "entlasgung": 0,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -3757,7 +3814,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -3833,7 +3890,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -4004,7 +4061,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -4061,7 +4118,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -4137,7 +4194,64 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLMebleMarzeni.pedro@at": {
+    "fileName": "pedro@at",
+    "productNumber": "0011360046",
+    "productVariants": "01 / 98 / ",
+    "modelName": "pedro",
+    "locale": "at",
+    "currency": "",
+    "catalog": "XXXLMebleMarzeni.Pedro",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "02",
+    "description": "Boxspringbett Pedro",
+    "settings": {
+      "preis": 460,
+      "entlasgung": 30,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLMebleMarzeni.pedro@ch": {
+    "fileName": "pedro@ch",
+    "productNumber": "0002980149",
+    "productVariants": "01 / 13 / 25 / 37 / 11 / 03 / 10 / YY / ",
+    "modelName": "pedro",
+    "locale": "ch",
+    "currency": "CHF",
+    "catalog": "XXXLMebleMarzeni.Pedro",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "02",
+    "description": "Boxspringbett Pedro",
+    "settings": {
+      "preis": 500,
+      "entlasgung": 25,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLMebleMarzeni.pedro@de": {
+    "fileName": "pedro@de",
+    "productNumber": "0011360046",
+    "productVariants": "01 / 98 / ",
+    "modelName": "pedro",
+    "locale": "de",
+    "currency": "",
+    "catalog": "XXXLMebleMarzeni.Pedro",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "02",
+    "description": "Boxspringbett Pedro",
+    "settings": {
+      "preis": 550,
+      "entlasgung": 0,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -4175,7 +4289,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -4536,7 +4650,7 @@
     "settings": {
       "preis": 520,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -4612,7 +4726,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -4707,7 +4821,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -4726,7 +4840,7 @@
     "settings": {
       "preis": 520,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -5106,7 +5220,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -5125,7 +5239,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -5163,7 +5277,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -5182,7 +5296,7 @@
     "settings": {
       "preis": 2218,
       "entlasgung": 0,
-      "aktion": 25,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -5239,7 +5353,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -5258,7 +5372,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -5315,7 +5429,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -5429,7 +5543,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -5486,7 +5600,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -5524,7 +5638,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -5638,7 +5752,7 @@
     "settings": {
       "preis": 465,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -5771,7 +5885,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -5961,7 +6075,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -5980,7 +6094,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -6037,7 +6151,7 @@
     "settings": {
       "preis": 510,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -6113,7 +6227,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -6132,6 +6246,63 @@
     "settings": {
       "preis": 404,
       "entlasgung": 28,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLGabiPpuh.swing@at": {
+    "fileName": "swing@at",
+    "productNumber": "0023000237",
+    "productVariants": "01 / 02 / 04 / 06 / 10 / 12 / YY / ",
+    "modelName": "swing",
+    "locale": "at",
+    "currency": "EUR",
+    "catalog": "XXXLGabiPpuh.Swing",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "01",
+    "description": "Ecksofa Swing",
+    "settings": {
+      "preis": 400,
+      "entlasgung": 47,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLGabiPpuh.swing@ch": {
+    "fileName": "swing@ch",
+    "productNumber": "0023000237",
+    "productVariants": "01 / 02 / 04 / 06 / 10 / 12 / YY / ",
+    "modelName": "swing",
+    "locale": "ch",
+    "currency": "CHF",
+    "catalog": "XXXLGabiPpuh.Swing",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "01",
+    "description": "Ecksofa Swing",
+    "settings": {
+      "preis": 450,
+      "entlasgung": 44,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLGabiPpuh.swing@de": {
+    "fileName": "swing@de",
+    "productNumber": "0023000237",
+    "productVariants": "01 / 02 / 04 / 06 / 10 / 12 / YY / ",
+    "modelName": "swing",
+    "locale": "de",
+    "currency": "EUR",
+    "catalog": "XXXLGabiPpuh.Swing",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "01",
+    "description": "Ecksofa Swing",
+    "settings": {
+      "preis": 440,
+      "entlasgung": 0,
       "aktion": 0,
       "pricing": "linear"
     }
@@ -6189,7 +6360,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -6303,7 +6474,7 @@
     "settings": {
       "preis": 530,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -6398,7 +6569,7 @@
     "settings": {
       "preis": 365,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -6417,7 +6588,7 @@
     "settings": {
       "preis": 310,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -6474,7 +6645,7 @@
     "settings": {
       "preis": 310,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -6531,7 +6702,7 @@
     "settings": {
       "preis": 310,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -6550,7 +6721,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -6569,7 +6740,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -6645,7 +6816,7 @@
     "settings": {
       "preis": 400,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -6683,7 +6854,7 @@
     "settings": {
       "preis": 400,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -6972,6 +7143,44 @@
       "pricing": "linear"
     }
   },
+  "XXXLHomeGroup.sunny@at": {
+    "fileName": "sunny@at",
+    "productNumber": "0011360020",
+    "productVariants": "01 / 98 / ",
+    "modelName": "sunny",
+    "locale": "at",
+    "currency": "EUR",
+    "catalog": "XXXLHomeGroup.Sunny",
+    "brand": "MM",
+    "brandName": "",
+    "productGroup": "01",
+    "description": "Ecksofa Sunny",
+    "settings": {
+      "preis": 400,
+      "entlasgung": 35,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLHomeGroup.sunny@de": {
+    "fileName": "sunny@de",
+    "productNumber": "0011360020",
+    "productVariants": "01 / 98 / ",
+    "modelName": "sunny",
+    "locale": "de",
+    "currency": "EUR",
+    "catalog": "XXXLHomeGroup.Sunny",
+    "brand": "MM",
+    "brandName": "",
+    "productGroup": "01",
+    "description": "Ecksofa Sunny",
+    "settings": {
+      "preis": 400,
+      "entlasgung": 35,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
   "XXXLHomeGroup.enrico@cz": {
     "fileName": "enrico@cz",
     "productNumber": "0011360001",
@@ -7177,7 +7386,7 @@
     "settings": {
       "preis": 420,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -7234,7 +7443,7 @@
     "settings": {
       "preis": 420,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -7291,7 +7500,7 @@
     "settings": {
       "preis": 420,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -7348,7 +7557,7 @@
     "settings": {
       "preis": 420,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -7405,7 +7614,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -7481,7 +7690,7 @@
     "settings": {
       "preis": 520,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -7519,7 +7728,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -7538,7 +7747,7 @@
     "settings": {
       "preis": 520,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -7576,7 +7785,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -7614,7 +7823,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 7,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -7633,7 +7842,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -7671,7 +7880,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -7690,7 +7899,7 @@
     "settings": {
       "preis": 420,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -7747,7 +7956,7 @@
     "settings": {
       "preis": 405,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -8131,6 +8340,63 @@
       "pricing": "linear"
     }
   },
+  "XXXLMebleBugajski.royce@at": {
+    "fileName": "royce@at",
+    "productNumber": "0004570028",
+    "productVariants": "01 / 02 / 98 / ",
+    "modelName": "royce",
+    "locale": "at",
+    "currency": "EUR",
+    "catalog": "XXXLMebleBugajski.Royce",
+    "brand": "MM",
+    "brandName": "Premium Living",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Royce",
+    "settings": {
+      "preis": 470,
+      "entlasgung": 40,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLMebleBugajski.royce@ch": {
+    "fileName": "royce@ch",
+    "productNumber": "0004570028",
+    "productVariants": "01 / 02 / 98 / ",
+    "modelName": "royce",
+    "locale": "ch",
+    "currency": "CHF",
+    "catalog": "XXXLMebleBugajski.Royce",
+    "brand": "MM",
+    "brandName": "Premium Living",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Royce",
+    "settings": {
+      "preis": 470,
+      "entlasgung": 40,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLMebleBugajski.royce@de": {
+    "fileName": "royce@de",
+    "productNumber": "0004570028",
+    "productVariants": "01 / 02 / 98 / ",
+    "modelName": "royce",
+    "locale": "de",
+    "currency": "EUR",
+    "catalog": "XXXLMebleBugajski.Royce",
+    "brand": "MM",
+    "brandName": "Premium Living",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Royce",
+    "settings": {
+      "preis": 470,
+      "entlasgung": 45,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
   "XXXLMebleBugajski.amanda@at": {
     "fileName": "amanda@at",
     "productNumber": "0004570010",
@@ -8203,7 +8469,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -8336,7 +8602,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -8393,7 +8659,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -8450,7 +8716,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -8507,7 +8773,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -8602,7 +8868,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -8678,7 +8944,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -8735,7 +9001,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -8773,7 +9039,7 @@
     "settings": {
       "preis": 519,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -8982,7 +9248,7 @@
     "settings": {
       "preis": 510,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -9039,7 +9305,7 @@
     "settings": {
       "preis": 475,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -9286,7 +9552,7 @@
     "settings": {
       "preis": 380,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -9362,7 +9628,7 @@
     "settings": {
       "preis": 380,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -9457,7 +9723,7 @@
     "settings": {
       "preis": 380,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -9495,7 +9761,7 @@
     "settings": {
       "preis": 380,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -9552,7 +9818,7 @@
     "settings": {
       "preis": 380,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -9609,7 +9875,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -9647,7 +9913,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -9723,7 +9989,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -9818,7 +10084,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -9894,7 +10160,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -10046,7 +10312,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -10103,7 +10369,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -10274,7 +10540,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -10388,7 +10654,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -10483,7 +10749,7 @@
     "settings": {
       "preis": 435,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -10559,7 +10825,7 @@
     "settings": {
       "preis": 435,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -10654,7 +10920,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -10749,7 +11015,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -10806,7 +11072,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -10863,7 +11129,7 @@
     "settings": {
       "preis": 385,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -11148,7 +11414,7 @@
     "settings": {
       "preis": 520,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -11186,7 +11452,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -11224,7 +11490,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -11262,7 +11528,7 @@
     "settings": {
       "preis": 520,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -11357,7 +11623,7 @@
     "settings": {
       "preis": 390,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -11376,7 +11642,7 @@
     "settings": {
       "preis": 390,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -11433,7 +11699,7 @@
     "settings": {
       "preis": 500,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -11490,7 +11756,7 @@
     "settings": {
       "preis": 500,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -11547,7 +11813,7 @@
     "settings": {
       "preis": 500,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -11756,7 +12022,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 7,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -11832,7 +12098,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 7,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -11908,7 +12174,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 7,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -11984,7 +12250,7 @@
     "settings": {
       "preis": 408,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -12022,7 +12288,7 @@
     "settings": {
       "preis": 408,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -12060,7 +12326,7 @@
     "settings": {
       "preis": 240,
       "entlasgung": 25,
-      "aktion": 15,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -12117,7 +12383,7 @@
     "settings": {
       "preis": 240,
       "entlasgung": 25,
-      "aktion": 15,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -12174,7 +12440,7 @@
     "settings": {
       "preis": 240,
       "entlasgung": 25,
-      "aktion": 15,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -12231,7 +12497,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -12288,7 +12554,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -12326,7 +12592,7 @@
     "settings": {
       "preis": 350,
       "entlasgung": 5,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -12364,7 +12630,7 @@
     "settings": {
       "preis": 350,
       "entlasgung": 5,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -13143,7 +13409,7 @@
     "settings": {
       "preis": 420,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -13200,7 +13466,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -13257,7 +13523,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -13352,7 +13618,7 @@
     "settings": {
       "preis": 468,
       "entlasgung": 7,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -13941,7 +14207,26 @@
     "settings": {
       "preis": 500,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLWerSal.donna@de": {
+    "fileName": "donna@de",
+    "productNumber": "0023070123",
+    "productVariants": "74 / 75 / 76 / 77 / 78 / 79 / 80 / 81 / 82 / YY / ",
+    "modelName": "donna",
+    "locale": "de",
+    "currency": "",
+    "catalog": "XXXLWerSal.Donna",
+    "brand": "LU",
+    "brandName": "Valnatura",
+    "productGroup": "02",
+    "description": "Boxspringbett Donna",
+    "settings": {
+      "preis": 500,
+      "entlasgung": 0,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -14112,7 +14397,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -14245,7 +14530,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -14303,25 +14588,6 @@
       "preis": 460,
       "entlasgung": 15,
       "aktion": 0,
-      "pricing": "linear"
-    }
-  },
-  "XXXLWerSal.donna@de": {
-    "fileName": "donna@de",
-    "productNumber": "",
-    "productVariants": "",
-    "modelName": "donna",
-    "locale": "de",
-    "currency": "",
-    "catalog": "XXXLWerSal.Donna",
-    "brand": "LU",
-    "brandName": "Valnatura",
-    "productGroup": "02",
-    "description": "Boxspringbett Donna",
-    "settings": {
-      "preis": 500,
-      "entlasgung": 0,
-      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -14492,7 +14758,7 @@
     "settings": {
       "preis": 430,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -14511,7 +14777,7 @@
     "settings": {
       "preis": 430,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -14568,7 +14834,7 @@
     "settings": {
       "preis": 395,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -14625,7 +14891,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -14682,7 +14948,7 @@
     "settings": {
       "preis": 435,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -14701,7 +14967,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -14777,7 +15043,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -14853,7 +15119,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -14929,7 +15195,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 0,
       "pricing": "linear"
     }
   }
