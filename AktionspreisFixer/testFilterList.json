@@ -1,0 +1,77 @@
+{
+  "XXXLAda.emma@cz": {
+    "filePath": "F:\\WebTools\\AktionspreisFixer\\XML-Test\\emma@cz.json",
+    "fileName": "emma@cz",
+    "productNumber": "0025270392",
+    "locale": "cz",
+    "brand": "MX",
+    "brandName": "",
+    "productGroup": "01",
+    "settings": {
+      "preis": 7755,
+      "entlasgung": 45,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLAda.emma@sk": {
+    "filePath": "F:\\WebTools\\AktionspreisFixer\\XML-Test\\emma@sk.json",
+    "fileName": "emma@sk",
+    "productNumber": "0025270392",
+    "locale": "sk",
+    "brand": "MX",
+    "brandName": "",
+    "productGroup": "01",
+    "settings": {
+      "preis": 310,
+      "entlasgung": 45,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLAda.tarragona@cz": {
+    "filePath": "F:\\WebTools\\AktionspreisFixer\\XML-Test\\tarragona@cz.json",
+    "fileName": "tarragona@cz",
+    "productNumber": "0025270310",
+    "locale": "cz",
+    "brand": "MX",
+    "brandName": "",
+    "productGroup": "01",
+    "settings": {
+      "preis": 8011,
+      "entlasgung": 40,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLAda.tarragona@sk": {
+    "filePath": "F:\\WebTools\\AktionspreisFixer\\XML-Test\\tarragona@sk.json",
+    "fileName": "tarragona@sk",
+    "productNumber": "0025270310",
+    "locale": "sk",
+    "brand": "MX",
+    "brandName": "",
+    "productGroup": "01",
+    "settings": {
+      "preis": 313,
+      "entlasgung": 40,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "Ada.testXML@at": {
+    "filePath": "F:\\WebTools\\AktionspreisFixer\\XML-Test\\testXML@at.json",
+    "fileName": "testXML@at",
+    "productNumber": "",
+    "locale": "at",
+    "brand": "LU",
+    "brandName": "Dieter Knoll",
+    "productGroup": "08",
+    "settings": {
+      "preis": 340,
+      "entlasgung": 26,
+      "aktion": 20,
+      "pricing": "linear"
+    }
+  }
+}
