@@ -8682,25 +8682,6 @@
       "pricing": "linear"
     }
   },
-  "Polipol.enviro@ch": {
-    "fileName": "enviro@ch",
-    "productNumber": "0007110123",
-    "productVariants": "32 / 33 / YY / ",
-    "modelName": "enviro",
-    "locale": "ch",
-    "currency": "CHF",
-    "catalog": "Polipol.Enviro5183",
-    "brand": "LU",
-    "brandName": "Beldomo Style",
-    "productGroup": "01",
-    "description": "Wohnlandschaft Enviro",
-    "settings": {
-      "preis": 350,
-      "entlasgung": 15,
-      "aktion": 0,
-      "pricing": "linear"
-    }
-  },
   "Polipol.enviro@de": {
     "fileName": "enviro@de",
     "productNumber": "0007110123",
