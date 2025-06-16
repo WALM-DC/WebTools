@@ -73,7 +73,7 @@
                         <table id="myTable" cellspacing="0" cellpadding="0">
                             <tr>
                                 <th>Hersteller</th>
-                                <th>Lieferant</th>
+                                <th>Marke</th>
                                 <th>Modellname</th>
                                 <th>Nummer</th>
                                 <th>Varianten</th>
@@ -95,6 +95,12 @@
     <script>
         var runLocalTest = false;
         var testJSON = {"XXXL2330.madeira@at":{"fileName":"madeira@at","productNumber":"0023300028","productVariants":"01 / 02 / 03 / 98 / ","modelName":"xmadeira","locale":"at","currency":"EUR","catalog":"XXXL2330.Madeira","brand":"MM","brandName":"Adale","productGroup":"02","description":"Boxspringbett Madeira","settings":{"preis":470,"entlasgung":45,"aktion":0,"pricing":"linear"}},"XXXL2330.madeira@ch":{"fileName":"madeira@ch","productNumber":"0023300028","productVariants":"01 / 02 / 03 / 98 / ","modelName":"madeira","locale":"ch","currency":"CHF","catalog":"XXXL2330.Madeira","brand":"MM","brandName":"Adale","productGroup":"02","description":"Boxspringbett Madeira","settings":{"preis":480,"entlasgung":42,"aktion":0,"pricing":"linear"}},"XXXL2330.madeira@de":{"fileName":"madeira@de","productNumber":"0023300028","productVariants":"01 / 02 / 03 / 98 / ","modelName":"madeira","locale":"de","currency":"EUR","catalog":"XXXL2330.Madeira","brand":"MM","brandName":"Yulu","productGroup":"02","description":"Boxspringbett Madeira","settings":{"preis":470,"entlasgung":45,"aktion":0,"pricing":"linear"}},"XXXL2330.nova@at":{"fileName":"nova@at","productNumber":"0023300027","productVariants":"01 / 98 / ","modelName":"bnova","locale":"at","currency":"EUR","catalog":"XXXL2330.Nova","brand":"MM","brandName":"","productGroup":"14","description":"Liege Nova","settings":{"preis":410,"entlasgung":35,"aktion":0,"pricing":"linear"}},"XXXL2330.nova@ch":{"fileName":"nova@ch","productNumber":"0023300027","productVariants":"01 / 98 / ","modelName":"nova","locale":"ch","currency":"CHF","catalog":"XXXL2330.Nova","brand":"MM","brandName":"","productGroup":"14","description":"Liege Nova","settings":{"preis":480,"entlasgung":0,"aktion":0,"pricing":"linear"}},"XXXL2330.nova@de":{"fileName":"nova@de","productNumber":"0023300027","productVariants":"01 / 98 / ","modelName":"nova","locale":"de","currency":"EUR","catalog":"XXXL2330.Nova","brand":"MM","brandName":"Langu","productGroup":"14","description":"Liege Nova","settings":{"preis":410,"entlasgung":35,"aktion":0,"pricing":"linear"}},"XXXLAda.fabala@at":{"fileName":"fabala@at","productNumber":"0026380328","productVariants":"01 / 02 / 03 / 04 / YY / ","modelName":"fabala","locale":"at","currency":"EUR","catalog":"XXXLAda.Fabala","brand":"LU","brandName":"Esposa","productGroup":"02","description":"Boxspringbett Fabala","settings":{"preis":370,"entlasgung":30,"aktion":0,"pricing":"linear"}},"XXXLAda.fabala@ch":{"fileName":"fabala@ch","productNumber":"0026380328","productVariants":"01 / 21 / 23 / 24 / 25 / 26 / 27 / 29 / 87 / 93 / 95 / YY / ","modelName":"fabala","locale":"ch","currency":"CHF","catalog":"XXXLAda.Fabala","brand":"LU","brandName":"Esposa","productGroup":"02","description":"Boxspringbett Fabala","settings":{"preis":380,"entlasgung":20,"aktion":0,"pricing":"linear"}},"XXXLAda.fabala@de":{"fileName":"fabala@de","productNumber":"0026380328","productVariants":"01 / 21 / 23 / 24 / 25 / 26 / 27 / 29 / 87 / 93 / 95 / YY / ","modelName":"fabala","locale":"de","currency":"EUR","catalog":"XXXLAda.Fabala","brand":"LU","brandName":"Esposa","productGroup":"02","description":"Boxspringbett Fabala","settings":{"preis":470,"entlasgung":0,"aktion":44.75,"pricing":"linear"}},"XXXLAda.famelia@at":{"fileName":"famelia@at","productNumber":"0026380161","productVariants":"01 / 03 / 04 / 05 / YY / ","modelName":"famelia","locale":"at","currency":"EUR","catalog":"XXXLAda.Famelia","brand":"LU","brandName":"Esposa","productGroup":"02","description":"Boxspringbett Famelia","settings":{"preis":370,"entlasgung":30,"aktion":0,"pricing":"linear"}},"XXXLAda.famelia@ch":{"fileName":"famelia@ch","productNumber":"0026380161","productVariants":"01 / 03 / 04 / YY / ","modelName":"famelia","locale":"ch","currency":"CHF","catalog":"XXXLAda.Famelia","brand":"LU","brandName":"Esposa","productGroup":"02","description":"Boxspringbett Famelia","settings":{"preis":380,"entlasgung":20,"aktion":0,"pricing":"linear"}}};
+
+        var countryShorts = {
+            "LU": "xxxlutz",
+            "MM": "moemax",
+            "MX": "moebelix"
+        }
 
         function sortList(a, b) {
             let ca = a.catalog.split('.')[0].toLowerCase();
@@ -143,7 +149,7 @@
                         '<tr><td>'+val.catalog.split('.')[0]+'</td>'+
                         '<td>'+val.brandName+'</td>'+
                         '<td>'+val.modelName+'</td>'+
-                        '<td>'+val.productNumber+'</td>'+
+                        '<td><a href="https://'+countryShorts[val.brand]+'.'+val.locale+'/s/?s='+val.productNumber+'" target="_blank">'+val.productNumber+'</a></td>'+
                         '<td>'+val.productVariants.trim().slice(0, -1)+'</td>'+
                         '<td>'+val.brand+'</td>'+
                         '<td>'+val.locale+'</td>'+
@@ -166,7 +172,7 @@
                             '<tr><td>'+val.catalog.split('.')[0]+'</td>'+
                             '<td>'+val.brandName+'</td>'+
                             '<td>'+val.modelName+'</td>'+
-                            '<td>'+val.productNumber+'</td>'+
+                            '<td><a href="https://'+countryShorts[val.brand]+'.'+val.locale+'/s/?s='+val.productNumber+'" target="_blank">'+val.productNumber+'</a></td>'+
                             '<td>'+val.productVariants.trim().slice(0, -1)+'</td>'+
                             '<td>'+val.brand+'</td>'+
                             '<td>'+val.locale+'</td>'+

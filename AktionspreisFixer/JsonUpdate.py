@@ -114,35 +114,15 @@ def filter_models_byProdGroup(root_path, prodGroups):
 def read_csv_file(root_path, prodGroups):
     headerIndex = []
     csvRead = {}
-    with open(r'F:\WebTools\AktionspreisFixer\MKSAKT_1_test.csv', 'r') as csvfile:
-        reader = csv.reader(csvfile)
-        i = 1
-        for row in reader:
-            for index, column in enumerate(f"{row}".split(';')):
-                if index in headerIndex:
-                    if "1/4/" in f"{row}":
-                        csvRead.get(f"{headerList[headerIndex.index(index)]}").append(column)
-                        i+=1
-                if column in headerList:
-                    if index not in headerIndex:
-                        headerIndex.append(index)
-                        tempObject = {column:[]}
-                    csvRead.update(tempObject)
+    with open(r'F:\WebTools\AktionspreisFixer\MKSAKT_1_test.csv', mode='r') as csvfile:
+        reader = csv.DictReader(csvfile, delimiter=";")
+        for idx, row in enumerate(reader, start=1):
+            if "1/4/" in f"{row}":
+                filtered_row = {header: row.get(header, '') for header in headerList}
+                MKSAKTobject[idx] = filtered_row
 
-        # print (csvRead)
-        print(f"{i}"+" entries imported.")
-
-    j = 1
-    for entry in csvRead:
-        for value in entry:
-            tempObject = {
-                j: {
-                    entry: value
-                }
-        }
-        j += 1
-        MKSAKTobject.update(tempObject)
-    print(MKSAKTobject)
+    from pprint import pprint
+    pprint(dict(list(MKSAKTobject.items())[:3]))
     # filter_models_byProdGroup(root_path, prodGroups)
 
 
