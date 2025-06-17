@@ -10240,6 +10240,25 @@
       "pricing": "linear"
     }
   },
+  "XXXLPJSCProgress.florenz@se": {
+    "fileName": "florenz@se",
+    "productNumber": "0007250024",
+    "productVariants": "01 / YY / ",
+    "modelName": "florenz",
+    "locale": "se",
+    "currency": "SEK",
+    "catalog": "XXXLPJSCProgress.Florenz",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "02",
+    "description": "Boxspringbett Florenz",
+    "settings": {
+      "preis": 6094,
+      "entlasgung": 0,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
   "XXXLPJSCProgress.innsbruck@at": {
     "fileName": "innsbruck@at",
     "productNumber": "0007250025",
@@ -10349,6 +10368,25 @@
     "description": "Boxspringbett Space",
     "settings": {
       "preis": 540,
+      "entlasgung": 0,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLPJSCProgress.space@se": {
+    "fileName": "space@se",
+    "productNumber": "0007250006",
+    "productVariants": "05 / YY / ",
+    "modelName": "space",
+    "locale": "se",
+    "currency": "SEK",
+    "catalog": "XXXLPJSCProgress.Space",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "02",
+    "description": "Boxspringbett Space",
+    "settings": {
+      "preis": 5951,
       "entlasgung": 0,
       "aktion": 0,
       "pricing": "linear"
