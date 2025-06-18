@@ -167,16 +167,17 @@
     </body>
     <script>
 /* test IDs
-2133009701
-2133009702
-2133009706
-2133009710
-2133009705
-2133009709
+21330097/01
+21330097/02
+21330097/06
+21330097/10
+21330097/05
+21330097/09
 */
         var idList = [], zeros = '00';
         function checkIDs(url){
             $('#errorMsg').html('');
+            $('#taInput').val($('#taInput').val().trim().replace(/[^\d\n-]/g, '').replace(/^\s*$(?:\r\n?|\n)/gm, ''));
             idList = $('#taInput').val().trim().split('\n');
             $.each(idList, function(id, val){
                 // clean val string from anything other then a number
@@ -195,6 +196,9 @@
             if($('#taInput').val()!='' && $('#taInput').val()!=null){
                 checkIDs($(this).val());
             }
+        })
+        $('#taInput').on('keyup, change', function(){
+            $('#taInput').val($('#taInput').val().trim().replace(/[^\d\n-]/g, '').replace(/^\s*$(?:\r\n?|\n)/gm, ''));
         })
     </script>
 </html>

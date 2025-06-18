@@ -166,7 +166,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -223,7 +223,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -280,7 +280,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -584,7 +584,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -641,7 +641,7 @@
     "settings": {
       "preis": 402,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -660,7 +660,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -717,7 +717,7 @@
     "settings": {
       "preis": 360,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -774,7 +774,7 @@
     "settings": {
       "preis": 472,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -831,7 +831,7 @@
     "settings": {
       "preis": 430,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -907,7 +907,7 @@
     "settings": {
       "preis": 375,
       "entlasgung": 5,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -983,7 +983,7 @@
     "settings": {
       "preis": 425,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1040,7 +1040,7 @@
     "settings": {
       "preis": 425,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1078,7 +1078,7 @@
     "settings": {
       "preis": 425,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1154,7 +1154,7 @@
     "settings": {
       "preis": 425,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1211,7 +1211,7 @@
     "settings": {
       "preis": 425,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1306,7 +1306,7 @@
     "settings": {
       "preis": 425,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1325,7 +1325,7 @@
     "settings": {
       "preis": 425,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1344,7 +1344,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1363,7 +1363,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1382,7 +1382,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1401,7 +1401,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1458,7 +1458,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1477,7 +1477,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1490,7 +1490,7 @@
     "currency": "EUR",
     "catalog": "XXXLBenformato.Parole",
     "brand": "LU",
-    "brandName": "",
+    "brandName": "Livetastic",
     "productGroup": "A1",
     "description": "Wohnlandschaft Parole",
     "settings": {
@@ -1509,7 +1509,7 @@
     "currency": "CHF",
     "catalog": "XXXLBenformato.Parole",
     "brand": "LU",
-    "brandName": "",
+    "brandName": "Livetastic",
     "productGroup": "A1",
     "description": "Wohnlandschaft Parole",
     "settings": {
@@ -1528,7 +1528,7 @@
     "currency": "EUR",
     "catalog": "XXXLBenformato.Parole",
     "brand": "LU",
-    "brandName": "",
+    "brandName": "Livetastic",
     "productGroup": "A1",
     "description": "Wohnlandschaft Parole",
     "settings": {
@@ -1572,7 +1572,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1610,7 +1610,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1667,7 +1667,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1705,7 +1705,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1781,7 +1781,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1876,7 +1876,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1895,7 +1895,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1933,7 +1933,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1990,7 +1990,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -2066,7 +2066,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -2389,7 +2389,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -2408,7 +2408,7 @@
     "settings": {
       "preis": 544,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -2465,7 +2465,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 7,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -2484,7 +2484,7 @@
     "settings": {
       "preis": 560,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -2845,7 +2845,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -2883,7 +2883,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -2902,7 +2902,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -2959,7 +2959,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -2997,7 +2997,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3092,7 +3092,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3149,7 +3149,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3206,7 +3206,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3244,7 +3244,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3301,7 +3301,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3320,7 +3320,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3434,7 +3434,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3491,7 +3491,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3548,7 +3548,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3605,7 +3605,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3662,7 +3662,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3681,7 +3681,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3738,7 +3738,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3757,7 +3757,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3789,7 +3789,7 @@
     "currency": "",
     "catalog": "Candy.MR370",
     "brand": "LU",
-    "brandName": "Musterring",
+    "brandName": "",
     "productGroup": "01",
     "description": "Wohnlandschaft MR 370",
     "settings": {
@@ -3814,7 +3814,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3890,7 +3890,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -4061,7 +4061,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -4118,7 +4118,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -4194,7 +4194,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -4251,7 +4251,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -4289,7 +4289,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -4650,7 +4650,7 @@
     "settings": {
       "preis": 520,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -4726,7 +4726,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -4821,7 +4821,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -4840,7 +4840,7 @@
     "settings": {
       "preis": 520,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -5220,7 +5220,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -5239,7 +5239,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -5277,7 +5277,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -5353,7 +5353,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -5372,7 +5372,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -5429,7 +5429,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -5543,7 +5543,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -5600,7 +5600,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -5638,7 +5638,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -5752,7 +5752,7 @@
     "settings": {
       "preis": 465,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -5885,7 +5885,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6075,7 +6075,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6094,7 +6094,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6151,7 +6151,7 @@
     "settings": {
       "preis": 510,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6227,7 +6227,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6303,7 +6303,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6360,7 +6360,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6474,7 +6474,7 @@
     "settings": {
       "preis": 530,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6569,7 +6569,7 @@
     "settings": {
       "preis": 365,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6588,7 +6588,7 @@
     "settings": {
       "preis": 310,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6645,7 +6645,7 @@
     "settings": {
       "preis": 310,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6702,7 +6702,7 @@
     "settings": {
       "preis": 310,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6721,7 +6721,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6740,7 +6740,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6816,7 +6816,7 @@
     "settings": {
       "preis": 400,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6854,7 +6854,7 @@
     "settings": {
       "preis": 400,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7386,7 +7386,7 @@
     "settings": {
       "preis": 420,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7443,7 +7443,7 @@
     "settings": {
       "preis": 420,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7500,7 +7500,7 @@
     "settings": {
       "preis": 420,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7557,7 +7557,7 @@
     "settings": {
       "preis": 420,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7614,7 +7614,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7690,7 +7690,7 @@
     "settings": {
       "preis": 520,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7728,7 +7728,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7747,7 +7747,7 @@
     "settings": {
       "preis": 520,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7785,7 +7785,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7823,7 +7823,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 7,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7842,7 +7842,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7880,7 +7880,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7899,7 +7899,7 @@
     "settings": {
       "preis": 420,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7956,7 +7956,7 @@
     "settings": {
       "preis": 405,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -8469,7 +8469,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -8602,7 +8602,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -8659,7 +8659,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -8697,7 +8697,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -8754,7 +8754,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -8767,7 +8767,7 @@
     "currency": "",
     "catalog": "Polipol.IN19151_SO3400_5219",
     "brand": "LU",
-    "brandName": "Set One by Mustering",
+    "brandName": "Set One by Musterring",
     "productGroup": "01",
     "description": "Wohnlandschaft SO3400",
     "settings": {
@@ -8849,7 +8849,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -8925,7 +8925,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -8982,7 +8982,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -9020,7 +9020,7 @@
     "settings": {
       "preis": 519,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -9229,7 +9229,7 @@
     "settings": {
       "preis": 510,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -9286,7 +9286,7 @@
     "settings": {
       "preis": 475,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -9533,7 +9533,7 @@
     "settings": {
       "preis": 380,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -9609,7 +9609,7 @@
     "settings": {
       "preis": 380,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -9704,7 +9704,7 @@
     "settings": {
       "preis": 380,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -9742,7 +9742,7 @@
     "settings": {
       "preis": 380,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -9799,7 +9799,7 @@
     "settings": {
       "preis": 380,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -9856,7 +9856,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -9894,7 +9894,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -9970,7 +9970,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -10065,7 +10065,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -10141,7 +10141,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -10312,7 +10312,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -10369,7 +10369,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -10559,7 +10559,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -10673,7 +10673,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -10768,7 +10768,7 @@
     "settings": {
       "preis": 435,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -10844,7 +10844,7 @@
     "settings": {
       "preis": 435,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -10939,7 +10939,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11034,7 +11034,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11091,7 +11091,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11148,7 +11148,7 @@
     "settings": {
       "preis": 385,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11433,7 +11433,7 @@
     "settings": {
       "preis": 520,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11471,7 +11471,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11509,7 +11509,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11547,7 +11547,7 @@
     "settings": {
       "preis": 520,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11642,7 +11642,7 @@
     "settings": {
       "preis": 390,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11661,7 +11661,7 @@
     "settings": {
       "preis": 390,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11718,7 +11718,7 @@
     "settings": {
       "preis": 500,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11775,7 +11775,7 @@
     "settings": {
       "preis": 500,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11832,7 +11832,7 @@
     "settings": {
       "preis": 500,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -12041,7 +12041,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 7,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -12117,7 +12117,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 7,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -12193,7 +12193,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 7,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -12269,7 +12269,7 @@
     "settings": {
       "preis": 408,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -12307,7 +12307,7 @@
     "settings": {
       "preis": 408,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -12345,7 +12345,7 @@
     "settings": {
       "preis": 240,
       "entlasgung": 25,
-      "aktion": 0,
+      "aktion": 15.96,
       "pricing": "linear"
     }
   },
@@ -12402,7 +12402,7 @@
     "settings": {
       "preis": 240,
       "entlasgung": 25,
-      "aktion": 0,
+      "aktion": 15.96,
       "pricing": "linear"
     }
   },
@@ -12459,7 +12459,7 @@
     "settings": {
       "preis": 240,
       "entlasgung": 25,
-      "aktion": 0,
+      "aktion": 15.96,
       "pricing": "linear"
     }
   },
@@ -12516,7 +12516,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -12573,7 +12573,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -12611,7 +12611,7 @@
     "settings": {
       "preis": 350,
       "entlasgung": 5,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -12649,7 +12649,7 @@
     "settings": {
       "preis": 350,
       "entlasgung": 5,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -13428,7 +13428,7 @@
     "settings": {
       "preis": 420,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -13485,7 +13485,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -13542,7 +13542,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -13637,7 +13637,7 @@
     "settings": {
       "preis": 468,
       "entlasgung": 7,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -14226,7 +14226,7 @@
     "settings": {
       "preis": 500,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -14245,7 +14245,7 @@
     "settings": {
       "preis": 500,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -14321,7 +14321,7 @@
     "settings": {
       "preis": 250,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -14416,7 +14416,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -14549,7 +14549,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -14777,7 +14777,7 @@
     "settings": {
       "preis": 430,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -14796,7 +14796,7 @@
     "settings": {
       "preis": 430,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -14853,7 +14853,7 @@
     "settings": {
       "preis": 395,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -14910,7 +14910,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -14967,7 +14967,7 @@
     "settings": {
       "preis": 435,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -14986,7 +14986,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -15062,7 +15062,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -15138,7 +15138,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -15214,7 +15214,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   }
