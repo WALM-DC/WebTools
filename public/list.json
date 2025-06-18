@@ -166,7 +166,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -223,7 +223,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -280,7 +280,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -584,7 +584,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -641,7 +641,7 @@
     "settings": {
       "preis": 402,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -660,7 +660,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -717,7 +717,7 @@
     "settings": {
       "preis": 360,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -774,7 +774,7 @@
     "settings": {
       "preis": 472,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -831,7 +831,7 @@
     "settings": {
       "preis": 430,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -907,7 +907,7 @@
     "settings": {
       "preis": 375,
       "entlasgung": 5,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -983,7 +983,7 @@
     "settings": {
       "preis": 425,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1040,7 +1040,7 @@
     "settings": {
       "preis": 425,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1078,7 +1078,7 @@
     "settings": {
       "preis": 425,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1154,7 +1154,7 @@
     "settings": {
       "preis": 425,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1211,7 +1211,7 @@
     "settings": {
       "preis": 425,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1306,7 +1306,7 @@
     "settings": {
       "preis": 425,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1325,7 +1325,7 @@
     "settings": {
       "preis": 425,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1344,7 +1344,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1363,7 +1363,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1382,7 +1382,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1401,7 +1401,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1458,7 +1458,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1477,7 +1477,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1490,7 +1490,7 @@
     "currency": "EUR",
     "catalog": "XXXLBenformato.Parole",
     "brand": "LU",
-    "brandName": "",
+    "brandName": "Livetastic",
     "productGroup": "A1",
     "description": "Wohnlandschaft Parole",
     "settings": {
@@ -1509,7 +1509,7 @@
     "currency": "CHF",
     "catalog": "XXXLBenformato.Parole",
     "brand": "LU",
-    "brandName": "",
+    "brandName": "Livetastic",
     "productGroup": "A1",
     "description": "Wohnlandschaft Parole",
     "settings": {
@@ -1528,7 +1528,7 @@
     "currency": "EUR",
     "catalog": "XXXLBenformato.Parole",
     "brand": "LU",
-    "brandName": "",
+    "brandName": "Livetastic",
     "productGroup": "A1",
     "description": "Wohnlandschaft Parole",
     "settings": {
@@ -1572,7 +1572,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1610,7 +1610,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1667,7 +1667,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1705,7 +1705,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1781,7 +1781,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1856,7 +1856,7 @@
     "description": "Wohnlandschaft Marola",
     "settings": {
       "preis": 380,
-      "entlasgung": 24,
+      "entlasgung": 36,
       "aktion": 0,
       "pricing": "linear"
     }
@@ -1876,7 +1876,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1895,7 +1895,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1932,8 +1932,8 @@
     "description": "Wohnlandschaft Rosalie",
     "settings": {
       "preis": 450,
-      "entlasgung": 7,
-      "aktion": 44.75,
+      "entlasgung": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -1951,7 +1951,7 @@
     "description": "Wohnlandschaft Rubio",
     "settings": {
       "preis": 380,
-      "entlasgung": 26,
+      "entlasgung": 29,
       "aktion": 0,
       "pricing": "linear"
     }
@@ -1970,7 +1970,7 @@
     "description": "Wohnlandschaft Rubio",
     "settings": {
       "preis": 390,
-      "entlasgung": 14,
+      "entlasgung": 21,
       "aktion": 0,
       "pricing": "linear"
     }
@@ -1990,7 +1990,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -2045,8 +2045,8 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Vigo",
     "settings": {
-      "preis": 350,
-      "entlasgung": 24,
+      "preis": 510,
+      "entlasgung": 45,
       "aktion": 0,
       "pricing": "linear"
     }
@@ -2066,7 +2066,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -2389,7 +2389,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -2408,7 +2408,64 @@
     "settings": {
       "preis": 544,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
+      "pricing": "linear"
+    }
+  },
+  "XXXLBlackRedWhite.myrdal@at": {
+    "fileName": "myrdal@at",
+    "productNumber": "0024270534",
+    "productVariants": "1C / 6Q / 06 / 5Z / 45 / YY / ",
+    "modelName": "myrdal",
+    "locale": "at",
+    "currency": "EUR",
+    "catalog": "XXXLBlackRedWhite.Myrdal",
+    "brand": "LU",
+    "brandName": "Esposa",
+    "productGroup": "02",
+    "description": "Boxspringbett Myrdal",
+    "settings": {
+      "preis": 470,
+      "entlasgung": 35,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLBlackRedWhite.myrdal@ch": {
+    "fileName": "myrdal@ch",
+    "productNumber": "0024270534",
+    "productVariants": "1C / 6Q / 06 / 5Z / 45 / YY / ",
+    "modelName": "myrdal",
+    "locale": "ch",
+    "currency": "CHF",
+    "catalog": "XXXLBlackRedWhite.Myrdal",
+    "brand": "LU",
+    "brandName": "Esposa",
+    "productGroup": "02",
+    "description": "Boxspringbett Myrdal",
+    "settings": {
+      "preis": 500,
+      "entlasgung": 35,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLBlackRedWhite.myrdal@de": {
+    "fileName": "myrdal@de",
+    "productNumber": "0024270534",
+    "productVariants": "1C / 6Q / 06 / 5Z / 45 / YY / ",
+    "modelName": "myrdal",
+    "locale": "de",
+    "currency": "EUR",
+    "catalog": "XXXLBlackRedWhite.Myrdal",
+    "brand": "LU",
+    "brandName": "Esposa",
+    "productGroup": "02",
+    "description": "Boxspringbett Myrdal",
+    "settings": {
+      "preis": 470,
+      "entlasgung": 7,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -2427,7 +2484,7 @@
     "settings": {
       "preis": 560,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -2697,6 +2754,44 @@
       "pricing": "linear"
     }
   },
+  "XXXLCandy.ubalda@at": {
+    "fileName": "ubalda@at",
+    "productNumber": "0015810057",
+    "productVariants": "01 / 05 / 98 / ",
+    "modelName": "ubalda",
+    "locale": "at",
+    "currency": "",
+    "catalog": "XXXLCandy.Ubalda",
+    "brand": "MM",
+    "brandName": "",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Ubalda",
+    "settings": {
+      "preis": 415,
+      "entlasgung": 40,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLCandy.ubalda@de": {
+    "fileName": "ubalda@de",
+    "productNumber": "0015810057",
+    "productVariants": "01 / 05 / 98 / ",
+    "modelName": "ubalda",
+    "locale": "de",
+    "currency": "",
+    "catalog": "XXXLCandy.Ubalda",
+    "brand": "MM",
+    "brandName": "",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Ubalda",
+    "settings": {
+      "preis": 415,
+      "entlasgung": 45,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
   "Candy.badia@at": {
     "fileName": "badia@at",
     "productNumber": "0015810293",
@@ -2750,7 +2845,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -2788,7 +2883,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -2807,7 +2902,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -2864,7 +2959,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -2902,7 +2997,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -2997,7 +3092,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3054,7 +3149,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3111,7 +3206,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3149,7 +3244,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3206,7 +3301,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3225,7 +3320,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3339,7 +3434,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3396,7 +3491,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3453,7 +3548,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3510,7 +3605,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3567,7 +3662,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3586,7 +3681,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3643,7 +3738,26 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
+      "pricing": "linear"
+    }
+  },
+  "Candy.tori@de": {
+    "fileName": "tori@de",
+    "productNumber": "0015810324",
+    "productVariants": "02 / 03 / YY / ",
+    "modelName": "tori",
+    "locale": "de",
+    "currency": "EUR",
+    "catalog": "Candy.Twister",
+    "brand": "LU",
+    "brandName": "Hom'in",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Tori",
+    "settings": {
+      "preis": 440,
+      "entlasgung": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3675,7 +3789,7 @@
     "currency": "",
     "catalog": "Candy.MR370",
     "brand": "LU",
-    "brandName": "Musterring",
+    "brandName": "",
     "productGroup": "01",
     "description": "Wohnlandschaft MR 370",
     "settings": {
@@ -3700,7 +3814,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3776,7 +3890,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -3947,7 +4061,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -4004,7 +4118,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -4080,7 +4194,64 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
+      "pricing": "linear"
+    }
+  },
+  "XXXLMebleMarzeni.pedro@at": {
+    "fileName": "pedro@at",
+    "productNumber": "0011360046",
+    "productVariants": "01 / 98 / ",
+    "modelName": "pedro",
+    "locale": "at",
+    "currency": "",
+    "catalog": "XXXLMebleMarzeni.Pedro",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "02",
+    "description": "Boxspringbett Pedro",
+    "settings": {
+      "preis": 460,
+      "entlasgung": 30,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLMebleMarzeni.pedro@ch": {
+    "fileName": "pedro@ch",
+    "productNumber": "0002980149",
+    "productVariants": "01 / 13 / 25 / 37 / 11 / 03 / 10 / YY / ",
+    "modelName": "pedro",
+    "locale": "ch",
+    "currency": "CHF",
+    "catalog": "XXXLMebleMarzeni.Pedro",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "02",
+    "description": "Boxspringbett Pedro",
+    "settings": {
+      "preis": 500,
+      "entlasgung": 25,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLMebleMarzeni.pedro@de": {
+    "fileName": "pedro@de",
+    "productNumber": "0011360046",
+    "productVariants": "01 / 98 / ",
+    "modelName": "pedro",
+    "locale": "de",
+    "currency": "",
+    "catalog": "XXXLMebleMarzeni.Pedro",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "02",
+    "description": "Boxspringbett Pedro",
+    "settings": {
+      "preis": 550,
+      "entlasgung": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -4118,7 +4289,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -4153,6 +4324,63 @@
     "brandName": "",
     "productGroup": "01",
     "description": "Wohnlandschaft Alberto",
+    "settings": {
+      "preis": 450,
+      "entlasgung": 45,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLCotta.levi@at": {
+    "fileName": "levi@at",
+    "productNumber": "0005520021",
+    "productVariants": "01 / 98 / ",
+    "modelName": "levi",
+    "locale": "at",
+    "currency": "EUR",
+    "catalog": "XXXLCotta.LeviMM",
+    "brand": "MM",
+    "brandName": "Premium Living",
+    "productGroup": "14",
+    "description": "Megasofa Levi",
+    "settings": {
+      "preis": 450,
+      "entlasgung": 45,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLCotta.levi@ch": {
+    "fileName": "levi@ch",
+    "productNumber": "0005520021",
+    "productVariants": "01 / 98 / ",
+    "modelName": "levi",
+    "locale": "ch",
+    "currency": "CHF",
+    "catalog": "XXXLCotta.LeviMM",
+    "brand": "MM",
+    "brandName": "Premium Living",
+    "productGroup": "14",
+    "description": "Megasofa Levi",
+    "settings": {
+      "preis": 530,
+      "entlasgung": 45,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLCotta.levi@de": {
+    "fileName": "levi@de",
+    "productNumber": "0005520021",
+    "productVariants": "01 / 98 / ",
+    "modelName": "levi",
+    "locale": "de",
+    "currency": "EUR",
+    "catalog": "XXXLCotta.LeviMM",
+    "brand": "MM",
+    "brandName": "Premium Living",
+    "productGroup": "14",
+    "description": "Megasofa Levi",
     "settings": {
       "preis": 450,
       "entlasgung": 45,
@@ -4422,7 +4650,7 @@
     "settings": {
       "preis": 520,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -4498,7 +4726,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -4593,7 +4821,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -4612,7 +4840,64 @@
     "settings": {
       "preis": 520,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
+      "pricing": "linear"
+    }
+  },
+  "XXXL1726.plura@at": {
+    "fileName": "plura@at",
+    "productNumber": "0017260001",
+    "productVariants": "01 / 02 / 03 / 04 / 05 / 06 / 98 / ",
+    "modelName": "plura",
+    "locale": "at",
+    "currency": "EUR",
+    "catalog": "XXXL1726.Plura",
+    "brand": "MM",
+    "brandName": "",
+    "productGroup": "02",
+    "description": "Boxspringbett Plura",
+    "settings": {
+      "preis": 550,
+      "entlasgung": 52,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXL1726.plura@ch": {
+    "fileName": "plura@ch",
+    "productNumber": "0017260001",
+    "productVariants": "01 / 02 / 03 / 04 / 05 / 06 / 98 / ",
+    "modelName": "plura",
+    "locale": "ch",
+    "currency": "CHF",
+    "catalog": "XXXL1726.Plura",
+    "brand": "MM",
+    "brandName": "",
+    "productGroup": "02",
+    "description": "Boxspringbett Plura",
+    "settings": {
+      "preis": 540,
+      "entlasgung": 38,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXL1726.plura@de": {
+    "fileName": "plura@de",
+    "productNumber": "0017260001",
+    "productVariants": "01 / 02 / 03 / 04 / 05 / 06 / 98 / ",
+    "modelName": "plura",
+    "locale": "de",
+    "currency": "EUR",
+    "catalog": "XXXL1726.Plura",
+    "brand": "MM",
+    "brandName": "",
+    "productGroup": "02",
+    "description": "Boxspringbett Plura",
+    "settings": {
+      "preis": 550,
+      "entlasgung": 52,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -4935,7 +5220,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -4954,7 +5239,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -4992,7 +5277,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -5011,7 +5296,7 @@
     "settings": {
       "preis": 2218,
       "entlasgung": 0,
-      "aktion": 25,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -5066,9 +5351,9 @@
     "productGroup": "",
     "description": "Wohnlandschaft Monson",
     "settings": {
-      "preis": 540,
+      "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -5087,7 +5372,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -5144,7 +5429,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -5258,7 +5543,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -5315,7 +5600,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -5353,7 +5638,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -5391,44 +5676,6 @@
     "settings": {
       "preis": 225,
       "entlasgung": 41,
-      "aktion": 0,
-      "pricing": "linear"
-    }
-  },
-  "XXXLEuromebel.time@at": {
-    "fileName": "time@at",
-    "productNumber": "0004240011",
-    "productVariants": "03 / 04 / 99 / ",
-    "modelName": "time",
-    "locale": "at",
-    "currency": "",
-    "catalog": "XXXLEuromebel.Time",
-    "brand": "LU",
-    "brandName": "Ti'me",
-    "productGroup": "01",
-    "description": "Wohnlandschaft Time",
-    "settings": {
-      "preis": 420,
-      "entlasgung": 34,
-      "aktion": 0,
-      "pricing": "linear"
-    }
-  },
-  "XXXLEuromebel.time@ch": {
-    "fileName": "time@ch",
-    "productNumber": "0008120032",
-    "productVariants": "01 / YY / ",
-    "modelName": "time",
-    "locale": "ch",
-    "currency": "CHF",
-    "catalog": "XXXLEuromebel.Time",
-    "brand": "LU",
-    "brandName": "Ti'me",
-    "productGroup": "01",
-    "description": "Wohnlandschaft Time",
-    "settings": {
-      "preis": 225,
-      "entlasgung": 33,
       "aktion": 0,
       "pricing": "linear"
     }
@@ -5505,7 +5752,7 @@
     "settings": {
       "preis": 465,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -5638,7 +5885,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -5828,14 +6075,14 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
   "XXXLGabiPpuh.cancun@de": {
     "fileName": "cancun@de",
     "productNumber": "0023000158",
-    "productVariants": "89 / 90 / YY / ",
+    "productVariants": "87 / 88 / 89 / 90 / YY / ",
     "modelName": "cancun",
     "locale": "de",
     "currency": "",
@@ -5847,7 +6094,7 @@
     "settings": {
       "preis": 550,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -5904,7 +6151,7 @@
     "settings": {
       "preis": 510,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -5980,7 +6227,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6000,6 +6247,63 @@
       "preis": 404,
       "entlasgung": 28,
       "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLGabiPpuh.swing@at": {
+    "fileName": "swing@at",
+    "productNumber": "0023000237",
+    "productVariants": "01 / 02 / 04 / 06 / 10 / 12 / YY / ",
+    "modelName": "swing",
+    "locale": "at",
+    "currency": "EUR",
+    "catalog": "XXXLGabiPpuh.Swing",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "01",
+    "description": "Ecksofa Swing",
+    "settings": {
+      "preis": 400,
+      "entlasgung": 47,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLGabiPpuh.swing@ch": {
+    "fileName": "swing@ch",
+    "productNumber": "0023000237",
+    "productVariants": "01 / 02 / 04 / 06 / 10 / 12 / YY / ",
+    "modelName": "swing",
+    "locale": "ch",
+    "currency": "CHF",
+    "catalog": "XXXLGabiPpuh.Swing",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "01",
+    "description": "Ecksofa Swing",
+    "settings": {
+      "preis": 450,
+      "entlasgung": 44,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLGabiPpuh.swing@de": {
+    "fileName": "swing@de",
+    "productNumber": "0023000237",
+    "productVariants": "01 / 02 / 04 / 06 / 10 / 12 / YY / ",
+    "modelName": "swing",
+    "locale": "de",
+    "currency": "EUR",
+    "catalog": "XXXLGabiPpuh.Swing",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "01",
+    "description": "Ecksofa Swing",
+    "settings": {
+      "preis": 440,
+      "entlasgung": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6056,7 +6360,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6170,7 +6474,7 @@
     "settings": {
       "preis": 530,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6265,7 +6569,7 @@
     "settings": {
       "preis": 365,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6284,7 +6588,7 @@
     "settings": {
       "preis": 310,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6341,7 +6645,7 @@
     "settings": {
       "preis": 310,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6398,7 +6702,7 @@
     "settings": {
       "preis": 310,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6417,7 +6721,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6436,7 +6740,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6512,7 +6816,7 @@
     "settings": {
       "preis": 400,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6550,7 +6854,7 @@
     "settings": {
       "preis": 400,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -6839,6 +7143,44 @@
       "pricing": "linear"
     }
   },
+  "XXXLHomeGroup.sunny@at": {
+    "fileName": "sunny@at",
+    "productNumber": "0011360020",
+    "productVariants": "01 / 98 / ",
+    "modelName": "sunny",
+    "locale": "at",
+    "currency": "EUR",
+    "catalog": "XXXLHomeGroup.Sunny",
+    "brand": "MM",
+    "brandName": "",
+    "productGroup": "01",
+    "description": "Ecksofa Sunny",
+    "settings": {
+      "preis": 400,
+      "entlasgung": 35,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLHomeGroup.sunny@de": {
+    "fileName": "sunny@de",
+    "productNumber": "0011360020",
+    "productVariants": "01 / 98 / ",
+    "modelName": "sunny",
+    "locale": "de",
+    "currency": "EUR",
+    "catalog": "XXXLHomeGroup.Sunny",
+    "brand": "MM",
+    "brandName": "",
+    "productGroup": "01",
+    "description": "Ecksofa Sunny",
+    "settings": {
+      "preis": 400,
+      "entlasgung": 35,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
   "XXXLHomeGroup.enrico@cz": {
     "fileName": "enrico@cz",
     "productNumber": "0011360001",
@@ -7044,7 +7386,7 @@
     "settings": {
       "preis": 420,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7101,7 +7443,7 @@
     "settings": {
       "preis": 420,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7158,7 +7500,7 @@
     "settings": {
       "preis": 420,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7215,7 +7557,7 @@
     "settings": {
       "preis": 420,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7272,7 +7614,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7348,7 +7690,7 @@
     "settings": {
       "preis": 520,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7386,7 +7728,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7405,7 +7747,7 @@
     "settings": {
       "preis": 520,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7443,7 +7785,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7481,7 +7823,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 7,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7500,7 +7842,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7538,7 +7880,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7557,7 +7899,7 @@
     "settings": {
       "preis": 420,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7614,7 +7956,7 @@
     "settings": {
       "preis": 405,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -7764,7 +8106,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Sierra",
     "settings": {
-      "preis": 9331,
+      "preis": 9387,
       "entlasgung": 40,
       "aktion": 0,
       "pricing": "linear"
@@ -7783,7 +8125,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Sierra",
     "settings": {
-      "preis": 390,
+      "preis": 396,
       "entlasgung": 40,
       "aktion": 0,
       "pricing": "linear"
@@ -7998,6 +8340,63 @@
       "pricing": "linear"
     }
   },
+  "XXXLMebleBugajski.royce@at": {
+    "fileName": "royce@at",
+    "productNumber": "0004570028",
+    "productVariants": "01 / 02 / 98 / ",
+    "modelName": "royce",
+    "locale": "at",
+    "currency": "EUR",
+    "catalog": "XXXLMebleBugajski.Royce",
+    "brand": "MM",
+    "brandName": "Premium Living",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Royce",
+    "settings": {
+      "preis": 470,
+      "entlasgung": 40,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLMebleBugajski.royce@ch": {
+    "fileName": "royce@ch",
+    "productNumber": "0004570028",
+    "productVariants": "01 / 02 / 98 / ",
+    "modelName": "royce",
+    "locale": "ch",
+    "currency": "CHF",
+    "catalog": "XXXLMebleBugajski.Royce",
+    "brand": "MM",
+    "brandName": "Premium Living",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Royce",
+    "settings": {
+      "preis": 470,
+      "entlasgung": 40,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLMebleBugajski.royce@de": {
+    "fileName": "royce@de",
+    "productNumber": "0004570028",
+    "productVariants": "01 / 02 / 98 / ",
+    "modelName": "royce",
+    "locale": "de",
+    "currency": "EUR",
+    "catalog": "XXXLMebleBugajski.Royce",
+    "brand": "MM",
+    "brandName": "Premium Living",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Royce",
+    "settings": {
+      "preis": 470,
+      "entlasgung": 45,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
   "XXXLMebleBugajski.amanda@at": {
     "fileName": "amanda@at",
     "productNumber": "0004570010",
@@ -8070,7 +8469,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -8203,7 +8602,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -8260,7 +8659,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -8283,25 +8682,6 @@
       "pricing": "linear"
     }
   },
-  "Polipol.enviro@ch": {
-    "fileName": "enviro@ch",
-    "productNumber": "0007110123",
-    "productVariants": "32 / 33 / YY / ",
-    "modelName": "enviro",
-    "locale": "ch",
-    "currency": "CHF",
-    "catalog": "Polipol.Enviro5183",
-    "brand": "LU",
-    "brandName": "Beldomo Style",
-    "productGroup": "01",
-    "description": "Wohnlandschaft Enviro",
-    "settings": {
-      "preis": 350,
-      "entlasgung": 15,
-      "aktion": 0,
-      "pricing": "linear"
-    }
-  },
   "Polipol.enviro@de": {
     "fileName": "enviro@de",
     "productNumber": "0007110123",
@@ -8317,7 +8697,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -8374,7 +8754,26 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
+      "pricing": "linear"
+    }
+  },
+  "Polipol.so3400@de": {
+    "fileName": "so3400@de",
+    "productNumber": "0007110062",
+    "productVariants": "01 / 03 / 05 / 08 / YY / ",
+    "modelName": "so3400",
+    "locale": "de",
+    "currency": "",
+    "catalog": "Polipol.IN19151_SO3400_5219",
+    "brand": "LU",
+    "brandName": "Set One by Musterring",
+    "productGroup": "01",
+    "description": "Wohnlandschaft SO3400",
+    "settings": {
+      "preis": 190,
+      "entlasgung": 0,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -8450,7 +8849,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -8526,7 +8925,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -8583,7 +8982,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -8621,7 +9020,7 @@
     "settings": {
       "preis": 519,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -8830,7 +9229,7 @@
     "settings": {
       "preis": 510,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -8887,7 +9286,7 @@
     "settings": {
       "preis": 475,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -9132,9 +9531,9 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Brooklyn",
     "settings": {
-      "preis": 490,
+      "preis": 380,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -9208,9 +9607,9 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Casablanca",
     "settings": {
-      "preis": 490,
+      "preis": 380,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -9246,8 +9645,8 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Coolio",
     "settings": {
-      "preis": 490,
-      "entlasgung": 7,
+      "preis": 380,
+      "entlasgung": 0,
       "aktion": 49.57,
       "pricing": "linear"
     }
@@ -9303,9 +9702,9 @@
     "productGroup": "01",
     "description": "Megasofa Fellini II",
     "settings": {
-      "preis": 490,
+      "preis": 380,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -9341,9 +9740,9 @@
     "productGroup": "01",
     "description": "Wohnlandschaft GoodnightDeLuxe",
     "settings": {
-      "preis": 490,
-      "entlasgung": 7,
-      "aktion": 44.75,
+      "preis": 380,
+      "entlasgung": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -9398,9 +9797,9 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Tanika",
     "settings": {
-      "preis": 490,
+      "preis": 380,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -9457,7 +9856,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -9495,7 +9894,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -9571,7 +9970,7 @@
     "settings": {
       "preis": 470,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -9666,7 +10065,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -9742,7 +10141,7 @@
     "settings": {
       "preis": 490,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -9841,6 +10240,25 @@
       "pricing": "linear"
     }
   },
+  "XXXLPJSCProgress.florenz@se": {
+    "fileName": "florenz@se",
+    "productNumber": "0007250024",
+    "productVariants": "01 / YY / ",
+    "modelName": "florenz",
+    "locale": "se",
+    "currency": "SEK",
+    "catalog": "XXXLPJSCProgress.Florenz",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "02",
+    "description": "Boxspringbett Florenz",
+    "settings": {
+      "preis": 6094,
+      "entlasgung": 0,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
   "XXXLPJSCProgress.innsbruck@at": {
     "fileName": "innsbruck@at",
     "productNumber": "0007250025",
@@ -9894,7 +10312,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -9951,7 +10369,26 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
+      "pricing": "linear"
+    }
+  },
+  "XXXLPJSCProgress.space@se": {
+    "fileName": "space@se",
+    "productNumber": "0007250006",
+    "productVariants": "05 / YY / ",
+    "modelName": "space",
+    "locale": "se",
+    "currency": "SEK",
+    "catalog": "XXXLPJSCProgress.Space",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "02",
+    "description": "Boxspringbett Space",
+    "settings": {
+      "preis": 5951,
+      "entlasgung": 0,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -10122,7 +10559,7 @@
     "settings": {
       "preis": 540,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -10236,7 +10673,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -10331,7 +10768,7 @@
     "settings": {
       "preis": 435,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -10407,7 +10844,7 @@
     "settings": {
       "preis": 435,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -10502,7 +10939,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -10597,7 +11034,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -10654,7 +11091,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -10711,7 +11148,7 @@
     "settings": {
       "preis": 385,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -10994,9 +11431,9 @@
     "productGroup": "02",
     "description": "Bett Fina",
     "settings": {
-      "preis": 510,
+      "preis": 520,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11034,7 +11471,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11072,7 +11509,7 @@
     "settings": {
       "preis": 450,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11110,7 +11547,7 @@
     "settings": {
       "preis": 520,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11205,7 +11642,7 @@
     "settings": {
       "preis": 390,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11224,7 +11661,7 @@
     "settings": {
       "preis": 390,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11281,7 +11718,7 @@
     "settings": {
       "preis": 500,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11338,7 +11775,7 @@
     "settings": {
       "preis": 500,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11395,7 +11832,7 @@
     "settings": {
       "preis": 500,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11604,7 +12041,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 7,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11680,7 +12117,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 7,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11756,7 +12193,7 @@
     "settings": {
       "preis": 440,
       "entlasgung": 7,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11832,7 +12269,7 @@
     "settings": {
       "preis": 408,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11870,7 +12307,7 @@
     "settings": {
       "preis": 408,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -11908,7 +12345,7 @@
     "settings": {
       "preis": 240,
       "entlasgung": 25,
-      "aktion": 15,
+      "aktion": 15.96,
       "pricing": "linear"
     }
   },
@@ -11953,7 +12390,7 @@
   "XXXLRuf.milano@de": {
     "fileName": "milano@de",
     "productNumber": "0002230010",
-    "productVariants": "01 / 4C / YY / ",
+    "productVariants": "02 / 4C / YY / ",
     "modelName": "milano",
     "locale": "de",
     "currency": "",
@@ -11965,7 +12402,7 @@
     "settings": {
       "preis": 240,
       "entlasgung": 25,
-      "aktion": 15,
+      "aktion": 15.96,
       "pricing": "linear"
     }
   },
@@ -12022,7 +12459,7 @@
     "settings": {
       "preis": 240,
       "entlasgung": 25,
-      "aktion": 15,
+      "aktion": 15.96,
       "pricing": "linear"
     }
   },
@@ -12079,7 +12516,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -12136,7 +12573,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -12174,7 +12611,7 @@
     "settings": {
       "preis": 350,
       "entlasgung": 5,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -12212,25 +12649,25 @@
     "settings": {
       "preis": 350,
       "entlasgung": 5,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
   "XXXLSinkro.emily_box@at": {
     "fileName": "emily_box@at",
-    "productNumber": "0008400220",
-    "productVariants": "01 / 98 / ",
+    "productNumber": "0008400216",
+    "productVariants": "04 / 05 / 98 / ",
     "modelName": "emily_box",
     "locale": "at",
     "currency": "EUR",
-    "catalog": "XXXLSinkro.EmilyBoxspringbettMX",
-    "brand": "MX",
-    "brandName": "Luca Bessoni",
+    "catalog": "XXXLSinkro.EmilyBoxspringbett",
+    "brand": "MM",
+    "brandName": "Premium Living",
     "productGroup": "02",
     "description": "Boxspringbett Emily",
     "settings": {
-      "preis": 332,
-      "entlasgung": 34,
+      "preis": 500,
+      "entlasgung": 51,
       "aktion": 0,
       "pricing": "linear"
     }
@@ -12991,7 +13428,7 @@
     "settings": {
       "preis": 420,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -13048,7 +13485,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -13105,7 +13542,7 @@
     "settings": {
       "preis": 460,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -13200,7 +13637,7 @@
     "settings": {
       "preis": 468,
       "entlasgung": 7,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -13409,25 +13846,6 @@
     "settings": {
       "preis": 500,
       "entlasgung": 54,
-      "aktion": 0,
-      "pricing": "linear"
-    }
-  },
-  "XXXLWerSal.minola@ch": {
-    "fileName": "minola@ch",
-    "productNumber": "0023070312",
-    "productVariants": "01 / 02 / 98 / ",
-    "modelName": "minola",
-    "locale": "ch",
-    "currency": "EUR",
-    "catalog": "XXXLWerSal.Minola",
-    "brand": "MM",
-    "brandName": "",
-    "productGroup": "02",
-    "description": "Boxspringbett Minola",
-    "settings": {
-      "preis": 480,
-      "entlasgung": 49,
       "aktion": 0,
       "pricing": "linear"
     }
@@ -13808,7 +14226,26 @@
     "settings": {
       "preis": 500,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
+      "pricing": "linear"
+    }
+  },
+  "XXXLWerSal.donna@de": {
+    "fileName": "donna@de",
+    "productNumber": "0023070123",
+    "productVariants": "74 / 75 / 76 / 77 / 78 / 79 / 80 / 81 / 82 / YY / ",
+    "modelName": "donna",
+    "locale": "de",
+    "currency": "",
+    "catalog": "XXXLWerSal.Donna",
+    "brand": "LU",
+    "brandName": "Valnatura",
+    "productGroup": "02",
+    "description": "Boxspringbett Donna",
+    "settings": {
+      "preis": 500,
+      "entlasgung": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -13884,7 +14321,7 @@
     "settings": {
       "preis": 250,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -13977,9 +14414,9 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Nubo",
     "settings": {
-      "preis": 540,
+      "preis": 440,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -14112,7 +14549,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -14170,25 +14607,6 @@
       "preis": 460,
       "entlasgung": 15,
       "aktion": 0,
-      "pricing": "linear"
-    }
-  },
-  "XXXLWerSal.donna@de": {
-    "fileName": "donna@de",
-    "productNumber": "",
-    "productVariants": "",
-    "modelName": "donna",
-    "locale": "de",
-    "currency": "",
-    "catalog": "XXXLWerSal.Donna",
-    "brand": "LU",
-    "brandName": "Valnatura",
-    "productGroup": "02",
-    "description": "Boxspringbett Donna",
-    "settings": {
-      "preis": 500,
-      "entlasgung": 0,
-      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -14359,7 +14777,7 @@
     "settings": {
       "preis": 430,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -14378,7 +14796,7 @@
     "settings": {
       "preis": 430,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -14435,83 +14853,7 @@
     "settings": {
       "preis": 395,
       "entlasgung": 0,
-      "aktion": 44.75,
-      "pricing": "linear"
-    }
-  },
-  "XXXLRauch.mavi@de_mit_preis": {
-    "fileName": "mavi@de_mit_preis",
-    "productNumber": "",
-    "productVariants": "",
-    "modelName": "mavi",
-    "locale": "de_mit_preis",
-    "currency": "",
-    "catalog": "XXXLRauch.Mavi",
-    "brand": "LU",
-    "brandName": "Carryhome",
-    "productGroup": "02",
-    "description": "Bett Mavi",
-    "settings": {
-      "preis": 390,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
-  },
-  "XXXLRauch.mavi@de_mit_variants": {
-    "fileName": "mavi@de_mit_variants",
-    "productNumber": "",
-    "productVariants": "",
-    "modelName": "mavi",
-    "locale": "de_mit_variants",
-    "currency": "",
-    "catalog": "XXXLRauch.Mavi",
-    "brand": "LU",
-    "brandName": "Carryhome",
-    "productGroup": "02",
-    "description": "Bett Mavi",
-    "settings": {
-      "preis": 390,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
-  },
-  "XXXLRauch.mavi@de_ohne_preis": {
-    "fileName": "mavi@de_ohne_preis",
-    "productNumber": "",
-    "productVariants": "",
-    "modelName": "mavi",
-    "locale": "de_ohne_preis",
-    "currency": "",
-    "catalog": "XXXLRauch.Mavi",
-    "brand": "LU",
-    "brandName": "Carryhome",
-    "productGroup": "02",
-    "description": "Bett Mavi",
-    "settings": {
-      "preis": 390,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
-  },
-  "XXXLRauch.mavi@de_ohne_variants": {
-    "fileName": "mavi@de_ohne_variants",
-    "productNumber": "",
-    "productVariants": "",
-    "modelName": "mavi",
-    "locale": "de_ohne_variants",
-    "currency": "",
-    "catalog": "XXXLRauch.Mavi",
-    "brand": "LU",
-    "brandName": "Carryhome",
-    "productGroup": "02",
-    "description": "Bett Mavi",
-    "settings": {
-      "preis": 390,
-      "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -14568,7 +14910,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -14625,7 +14967,7 @@
     "settings": {
       "preis": 435,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -14644,7 +14986,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -14720,7 +15062,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -14796,7 +15138,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
@@ -14872,7 +15214,7 @@
     "settings": {
       "preis": 480,
       "entlasgung": 0,
-      "aktion": 44.75,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   }
