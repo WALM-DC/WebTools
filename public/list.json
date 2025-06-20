@@ -2963,6 +2963,25 @@
       "pricing": "linear"
     }
   },
+  "Candy.flamebench@at": {
+    "fileName": "flamebench@at",
+    "productNumber": "",
+    "productVariants": "",
+    "modelName": "flamebench",
+    "locale": "at",
+    "currency": "EUR",
+    "catalog": "Candy.Flame_Bench",
+    "brand": "LU",
+    "brandName": "",
+    "productGroup": "08",
+    "description": "Eckbank Flame",
+    "settings": {
+      "preis": 360,
+      "entlasgung": 32,
+      "aktion": 0,
+      "pricing": "linear"
+    }
+  },
   "Candy.havanna@at": {
     "fileName": "havanna@at",
     "productNumber": "0015810343",
@@ -14170,6 +14189,25 @@
       "preis": 360,
       "entlasgung": 25,
       "aktion": 0,
+      "pricing": "linear"
+    }
+  },
+  "XXXLWerSal.candy@de": {
+    "fileName": "candy@de",
+    "productNumber": "0023070301",
+    "productVariants": "01 / 02 / 07 / 08 / YY / ",
+    "modelName": "candy",
+    "locale": "de",
+    "currency": "",
+    "catalog": "XXXLWerSal.Candy",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "14",
+    "description": "Schlafsofa Candy",
+    "settings": {
+      "preis": 440,
+      "entlasgung": 0,
+      "aktion": 45.37,
       "pricing": "linear"
     }
   },
