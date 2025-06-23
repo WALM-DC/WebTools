@@ -1686,7 +1686,7 @@
     "settings": {
       "preis": 2769,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 10,
       "pricing": "linear"
     }
   },
@@ -1819,7 +1819,7 @@
     "settings": {
       "preis": 2316,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 10,
       "pricing": "linear"
     }
   },
@@ -2009,7 +2009,7 @@
     "settings": {
       "preis": 2244,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 10,
       "pricing": "linear"
     }
   },
@@ -2085,7 +2085,7 @@
     "settings": {
       "preis": 2899,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 10,
       "pricing": "linear"
     }
   },
@@ -5315,7 +5315,7 @@
     "settings": {
       "preis": 2218,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 10,
       "pricing": "linear"
     }
   },
@@ -6665,6 +6665,25 @@
       "preis": 310,
       "entlasgung": 0,
       "aktion": 45.37,
+      "pricing": "linear"
+    }
+  },
+  "XXXLGutmann.mocca@se": {
+    "fileName": "mocca@se",
+    "productNumber": "0018770660",
+    "productVariants": "21 / 22 / 23 / 24 / YY / ",
+    "modelName": "mocca",
+    "locale": "se",
+    "currency": "SEK",
+    "catalog": "XXXLGutmann.Mocca",
+    "brand": "LU",
+    "brandName": "MID.YOU",
+    "productGroup": "A1",
+    "description": "Wohnlandschaft Mocca",
+    "settings": {
+      "preis": 1724,
+      "entlasgung": 0,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -14473,7 +14492,7 @@
     "settings": {
       "preis": 2505,
       "entlasgung": 0,
-      "aktion": 0,
+      "aktion": 10,
       "pricing": "linear"
     }
   },
