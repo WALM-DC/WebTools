@@ -58,6 +58,12 @@
                 box-sizing: border-box;
                 text-align: right;
             }
+            .trueCol{
+                background-color: aquamarine;
+            }
+            .falseCol{
+                background-color: lightsalmon;
+            }
         </style>
     </head>
     <body>
@@ -76,6 +82,8 @@
                                 <th>Marke</th>
                                 <th>Modellname</th>
                                 <th>Nummer</th>
+                                <th>Online</th>
+                                <th>Konfig.</th>
                                 <th>Varianten</th>
                                 <th>Schiene</th>
                                 <th>Land</th>
@@ -145,18 +153,24 @@
                 var sortArray = $.map(testJSON, function(value, index) {return [value]});
                 sortArray.sort(sortList);
                 $.each(sortArray, function(id, val){
+                    var online = '<td class="trueCol">'+val.online+'</td>';
+                    if(val.online==='false'){'<td class="falseCol">'+val.online+'</td>'}
+                    var konfig = '<td class="trueCol">'+val.konfig+'</td>';
+                    if(val.konfig==='false'){'<td class="falseCol">'+val.konfig+'</td>'}
                     $('#myTable').append(
                         '<tr><td>'+val.catalog.split('.')[0]+'</td>'+
                         '<td>'+val.brandName+'</td>'+
                         '<td>'+val.modelName+'</td>'+
                         '<td><a href="https://'+countryShorts[val.brand]+'.'+val.locale+'/s/?s='+val.productNumber+'" target="_blank">'+val.productNumber+'</a></td>'+
+                        online+
+                        konfig+
                         '<td>'+val.productVariants.trim().slice(0, -1)+'</td>'+
                         '<td>'+val.brand+'</td>'+
                         '<td>'+val.locale+'</td>'+
                         '<td>'+val.currency+'</td>'+
-                        '<td>'+val.settings.preis+'</td>'+
-                        '<td>'+val.settings.entlasgung+'</td>'+
-                        '<td>'+val.settings.aktion+'</td>'+
+                        '<td>'+val.preis+'</td>'+
+                        '<td>'+val.entlasgung+'</td>'+
+                        '<td>'+val.aktion+'</td>'+
                         '<td>'+val.description+'</td>'+
                         '<td>'+val.productGroup+'</td></tr>'
                     )
@@ -168,18 +182,27 @@
                     var sortArray = $.map(data, function(value, index) {return [value]});
                     sortArray.sort(sortList);
                     $.each(sortArray, function(id, val){
+                        var online = '<td class="trueCol">'+val.online+'</td>';
+                        if(val.online=='false'){online = '<td class="falseCol">'+val.online+'</td>'}
+                        if(val.online==''){online = '<td>'+val.online+'</td>'}
+                        var konfig = '<td class="trueCol">'+val.konfig+'</td>';
+                        if(val.konfig=='false'){konfig = '<td class="falseCol">'+val.konfig+'</td>'}
+                        if(val.konfig==''){konfig = '<td>'+val.konfig+'</td>'}
+                        console.log(val)
                         $('#myTable').append(
                             '<tr><td>'+val.catalog.split('.')[0]+'</td>'+
                             '<td>'+val.brandName+'</td>'+
                             '<td>'+val.modelName+'</td>'+
                             '<td><a href="https://'+countryShorts[val.brand]+'.'+val.locale+'/s/?s='+val.productNumber+'" target="_blank">'+val.productNumber+'</a></td>'+
+                            online+
+                            konfig+
                             '<td>'+val.productVariants.trim().slice(0, -1)+'</td>'+
                             '<td>'+val.brand+'</td>'+
                             '<td>'+val.locale+'</td>'+
                             '<td>'+val.currency+'</td>'+
-                            '<td>'+val.settings.preis+'</td>'+
-                            '<td>'+val.settings.entlasgung+'</td>'+
-                            '<td>'+val.settings.aktion+'</td>'+
+                            '<td>'+val.preis+'</td>'+
+                            '<td>'+val.entlasgung+'</td>'+
+                            '<td>'+val.aktion+'</td>'+
                             '<td>'+val.description+'</td>'+
                             '<td>'+val.productGroup+'</td></tr>'
                         )
