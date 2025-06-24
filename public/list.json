@@ -1686,7 +1686,7 @@
     "settings": {
       "preis": 2769,
       "entlasgung": 0,
-      "aktion": 10,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -1819,7 +1819,7 @@
     "settings": {
       "preis": 2316,
       "entlasgung": 0,
-      "aktion": 10,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -2009,7 +2009,7 @@
     "settings": {
       "preis": 2244,
       "entlasgung": 0,
-      "aktion": 10,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -2085,7 +2085,7 @@
     "settings": {
       "preis": 2899,
       "entlasgung": 0,
-      "aktion": 10,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -5315,7 +5315,7 @@
     "settings": {
       "preis": 2218,
       "entlasgung": 0,
-      "aktion": 10,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
@@ -14492,7 +14492,7 @@
     "settings": {
       "preis": 2505,
       "entlasgung": 0,
-      "aktion": 10,
+      "aktion": 0,
       "pricing": "linear"
     }
   },
