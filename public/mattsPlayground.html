@@ -68,9 +68,17 @@
     </body>
     <script>
 
-        $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index.json", function( data ) {
-            console.log(data);
-        })
+        $.ajax({
+            url: 'https://www.xxxlutz.de/s/?s=0000210006',
+            type: 'GET',
+            success: function(res) {
+                var data = $.parseHTML(res);  //<----try with $.parseHTML().
+                $(data).find('div.content').each(function(){
+                    $('#here').append($(this).html());
+                });
+
+            }
+            });
 
         // var dimensonObj = {};
         // function assignValues(obj, keys, value){
