@@ -2844,7 +2844,7 @@
     "brandName": "Dieter Knoll",
     "productGroup": "01",
     "description": "Wohnlandschaft Badia",
-    "preis": 440,
+    "preis": 456,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -2958,7 +2958,7 @@
     "brandName": "Dieter Knoll",
     "productGroup": "01",
     "description": "Wohnlandschaft Cosio",
-    "preis": 440,
+    "preis": 456,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -3034,7 +3034,7 @@
     "brandName": "Musterring",
     "productGroup": "01",
     "description": "Wohnlandschaft MR 4580",
-    "preis": 230,
+    "preis": 219,
     "entlasgung": 0,
     "aktion": 0,
     "pricing": "linear"
@@ -3053,7 +3053,7 @@
     "brandName": "Musterring",
     "productGroup": "01",
     "description": "Wohnlandschaft MR 4930",
-    "preis": 225,
+    "preis": 219,
     "entlasgung": 0,
     "aktion": 0,
     "pricing": "linear"
@@ -3110,7 +3110,7 @@
     "brandName": "Hom'in",
     "productGroup": "01",
     "description": "Hocker Noppa",
-    "preis": 460,
+    "preis": 470,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -3224,7 +3224,7 @@
     "brandName": "Pure Home",
     "productGroup": "01",
     "description": "Wohnlandschaft Pure 902 2.0",
-    "preis": 460,
+    "preis": 470,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -3262,7 +3262,7 @@
     "brandName": "Pure Home",
     "productGroup": "01",
     "description": "Wohnlandschaft Pure 906",
-    "preis": 460,
+    "preis": 470,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -3319,7 +3319,7 @@
     "brandName": "Pure Home",
     "productGroup": "01",
     "description": "Wohnlandschaft Pure 9125",
-    "preis": 460,
+    "preis": 470,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -3338,7 +3338,7 @@
     "brandName": "Pure Home",
     "productGroup": "01",
     "description": "Bigsofa Pure 9127",
-    "preis": 460,
+    "preis": 470,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -3452,7 +3452,7 @@
     "brandName": "Pure Home",
     "productGroup": "01",
     "description": "Wohnlandschaft Pure 963",
-    "preis": 460,
+    "preis": 470,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -3509,7 +3509,7 @@
     "brandName": "Pure Home",
     "productGroup": "01",
     "description": "Wohnlandschaft Pure 979",
-    "preis": 460,
+    "preis": 470,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -3566,7 +3566,7 @@
     "brandName": "Pure Home",
     "productGroup": "01",
     "description": "Wohnlandschaft Pure System Basic",
-    "preis": 460,
+    "preis": 470,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -3623,7 +3623,7 @@
     "brandName": "Pure Home",
     "productGroup": "01",
     "description": "Wohnlandschaft Pure System Lounge",
-    "preis": 460,
+    "preis": 470,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -3680,7 +3680,7 @@
     "brandName": "Pure Home",
     "productGroup": "01",
     "description": "Wohnlandschaft Pure System Relax",
-    "preis": 460,
+    "preis": 470,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -3753,7 +3753,7 @@
     "currency": "EUR",
     "catalog": "Candy.Seventies",
     "brand": "LU",
-    "brandName": "",
+    "brandName": "Hom'in",
     "productGroup": "01",
     "description": "Wohnlandschaft Sambia",
     "preis": 440,
@@ -3794,7 +3794,7 @@
     "brandName": "Musterring",
     "productGroup": "01",
     "description": "Wohnlandschaft MR 365",
-    "preis": 249,
+    "preis": 230,
     "entlasgung": 0,
     "aktion": 0,
     "pricing": "linear"
@@ -3813,7 +3813,7 @@
     "brandName": "",
     "productGroup": "01",
     "description": "Wohnlandschaft MR 370",
-    "preis": 232,
+    "preis": 230,
     "entlasgung": 0,
     "aktion": 0,
     "pricing": "linear"
@@ -3832,7 +3832,7 @@
     "brandName": "Pure Home",
     "productGroup": "01",
     "description": "Wohnlandschaft Pure Comfort 820",
-    "preis": 470,
+    "preis": 495,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -3908,7 +3908,7 @@
     "brandName": "Pure Home",
     "productGroup": "01",
     "description": "Wohnlandschaft Pure Comfort 821",
-    "preis": 470,
+    "preis": 495,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -7347,7 +7347,7 @@
     "brandName": "Musterring",
     "productGroup": "01",
     "description": "Ecksofa MR 270",
-    "preis": 196,
+    "preis": 200,
     "entlasgung": 0,
     "aktion": 0,
     "pricing": "linear"
@@ -8696,7 +8696,7 @@
     "brandName": "Beldomo Style",
     "productGroup": "01",
     "description": "Wohnlandschaft Austin",
-    "preis": 480,
+    "preis": 490,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -8734,7 +8734,7 @@
     "brandName": "Beldomo Style",
     "productGroup": "01",
     "description": "Wohnlandschaft Enviro",
-    "preis": 480,
+    "preis": 490,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -8791,7 +8791,7 @@
     "brandName": "Beldomo Style",
     "productGroup": "01",
     "description": "Wohnlandschaft Frankie",
-    "preis": 480,
+    "preis": 490,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -8886,7 +8886,7 @@
     "brandName": "Beldomo Speed",
     "productGroup": "01",
     "description": "Wohnlandschaft Spliff-S Express",
-    "preis": 480,
+    "preis": 490,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -8962,7 +8962,7 @@
     "brandName": "Beldomo Style",
     "productGroup": "01",
     "description": "Wohnlandschaft Vegas-S",
-    "preis": 480,
+    "preis": 490,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -10805,7 +10805,7 @@
     "brandName": "Dieter Knoll",
     "productGroup": "01",
     "description": "Wohnlandschaft Latina-L",
-    "preis": 435,
+    "preis": 450,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -10881,7 +10881,7 @@
     "brandName": "Dieter Knoll",
     "productGroup": "01",
     "description": "Wohnlandschaft Latina-L Plus",
-    "preis": 435,
+    "preis": 450,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -11071,7 +11071,7 @@
     "brandName": "Beldomo Comfort",
     "productGroup": "01",
     "description": "Wohnlandschaft Erfurt",
-    "preis": 480,
+    "preis": 490,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -11128,7 +11128,7 @@
     "brandName": "Voleo",
     "productGroup": "01",
     "description": "Wohnlandschaft Rhone",
-    "preis": 480,
+    "preis": 490,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -11188,6 +11188,63 @@
     "preis": 385,
     "entlasgung": 0,
     "aktion": 45.37,
+    "pricing": "linear"
+  },
+  "XXXLPrimaNamjestaj.alba@at": {
+    "fileName": "alba@at",
+    "productNumber": "0027680174",
+    "productVariants": "01 / 02 / 03 / 04 / 98 / ",
+    "online": "",
+    "konfig": "",
+    "modelName": "alba",
+    "locale": "at",
+    "currency": "EUR",
+    "catalog": "XXXLPrimaNamjestaj.Alba",
+    "brand": "MM",
+    "brandName": "",
+    "productGroup": "08",
+    "description": "Eckbank Alba",
+    "preis": 510,
+    "entlasgung": 45,
+    "aktion": 0,
+    "pricing": "linear"
+  },
+  "XXXLPrimaNamjestaj.alba@ch": {
+    "fileName": "alba@ch",
+    "productNumber": "0027680174",
+    "productVariants": "01 / 02 / 03 / 04 / 98 / ",
+    "online": "",
+    "konfig": "",
+    "modelName": "alba",
+    "locale": "ch",
+    "currency": "CHF",
+    "catalog": "XXXLPrimaNamjestaj.Alba",
+    "brand": "MM",
+    "brandName": "",
+    "productGroup": "08",
+    "description": "Eckbank Alba",
+    "preis": 510,
+    "entlasgung": 0,
+    "aktion": 0,
+    "pricing": "linear"
+  },
+  "XXXLPrimaNamjestaj.alba@de": {
+    "fileName": "alba@de",
+    "productNumber": "0027680174",
+    "productVariants": "01 / 02 / 03 / 04 / 98 / ",
+    "online": "",
+    "konfig": "",
+    "modelName": "alba",
+    "locale": "de",
+    "currency": "EUR",
+    "catalog": "XXXLPrimaNamjestaj.Alba",
+    "brand": "MM",
+    "brandName": "",
+    "productGroup": "08",
+    "description": "Eckbank Alba",
+    "preis": 510,
+    "entlasgung": 45,
+    "aktion": 0,
     "pricing": "linear"
   },
   "XXXLPrimaNamjestaj.canon@at": {
@@ -14605,7 +14662,7 @@
     "brandName": "Welnova",
     "productGroup": "01",
     "description": "Wohnlandschaft Selva",
-    "preis": 480,
+    "preis": 486,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -14966,7 +15023,7 @@
     "brandName": "Beldomo System",
     "productGroup": "01",
     "description": "Wohnlandschaft Biel",
-    "preis": 480,
+    "preis": 490,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -15023,7 +15080,7 @@
     "brandName": "Dieter Knoll",
     "productGroup": "01",
     "description": "Wohnlandschaft Latina-S",
-    "preis": 435,
+    "preis": 450,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -15042,7 +15099,7 @@
     "brandName": "Beldomo System",
     "productGroup": "01",
     "description": "Wohnlandschaft Odin-S",
-    "preis": 480,
+    "preis": 490,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -15118,7 +15175,7 @@
     "brandName": "Beldomo System",
     "productGroup": "01",
     "description": "Wohnlandschaft Sambia-S",
-    "preis": 480,
+    "preis": 490,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -15194,7 +15251,7 @@
     "brandName": "Beldomo System",
     "productGroup": "01",
     "description": "Wohnlandschaft Tyron",
-    "preis": 480,
+    "preis": 490,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
@@ -15270,7 +15327,7 @@
     "brandName": "Beldomo System",
     "productGroup": "01",
     "description": "Wohnlandschaft Wiesbaden",
-    "preis": 480,
+    "preis": 490,
     "entlasgung": 0,
     "aktion": 45.37,
     "pricing": "linear"
