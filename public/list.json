@@ -3039,25 +3039,6 @@
     "aktion": 0,
     "pricing": "linear"
   },
-  "Candy.mr4930@de": {
-    "fileName": "mr4930@de",
-    "productNumber": "0015810169",
-    "productVariants": "01 / YY / ",
-    "online": "true",
-    "konfig": "true",
-    "modelName": "mr4930",
-    "locale": "de",
-    "currency": "EUR",
-    "catalog": "Candy.MR4930",
-    "brand": "LU",
-    "brandName": "Musterring",
-    "productGroup": "01",
-    "description": "Wohnlandschaft MR 4930",
-    "preis": 219,
-    "entlasgung": 0,
-    "aktion": 0,
-    "pricing": "linear"
-  },
   "Candy.noppa@at": {
     "fileName": "noppa@at",
     "productNumber": "0015810262",
@@ -7925,7 +7906,7 @@
   "XXXLLohrmeier.enny@de": {
     "fileName": "enny@de",
     "productNumber": "0000210006",
-    "productVariants": "09 / 28 / 29 / 30 / 38 / 44 / 46 / YY / ",
+    "productVariants": "28 / 29 / 30 / 38 / 44 / 46 / YY / ",
     "online": "true",
     "konfig": "true",
     "modelName": "enny",
