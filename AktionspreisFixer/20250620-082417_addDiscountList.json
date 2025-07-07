@@ -7,12 +7,23 @@
     "brand": "MM",
     "brandName": "",
     "productGroup": "14",
-    "settings": {
-      "kaa1": 480,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
+    "kaa1": 480,
+    "entlastung": 0,
+    "aktion": 0,
+    "pricing": "linear"
+  },
+  "XXXLAda.emma@ch": {
+    "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\AdaMM\\emma@ch.json",
+    "fileName": "emma@ch",
+    "productNumber": "0025270392",
+    "locale": "ch",
+    "brand": "",
+    "brandName": "",
+    "productGroup": "",
+    "kaa1": 350,
+    "entlastung": 0,
+    "aktion": 0,
+    "pricing": "linear"
   },
   "XXXLBenformato.parole@at": {
     "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\BenformatoXL\\parole@at.json",
@@ -22,12 +33,10 @@
     "brand": "LU",
     "brandName": "Livetastic",
     "productGroup": "A1",
-    "settings": {
-      "kaa1": 220,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
+    "kaa1": 220,
+    "entlastung": 0,
+    "aktion": 0,
+    "pricing": "linear"
   },
   "XXXLBenformato.parole@ch": {
     "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\BenformatoXL\\parole@ch.json",
@@ -37,12 +46,10 @@
     "brand": "LU",
     "brandName": "Livetastic",
     "productGroup": "A1",
-    "settings": {
-      "kaa1": 240,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
+    "kaa1": 240,
+    "entlastung": 0,
+    "aktion": 0,
+    "pricing": "linear"
   },
   "XXXLBenformato.parole@de": {
     "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\BenformatoXL\\parole@de.json",
@@ -52,12 +59,10 @@
     "brand": "LU",
     "brandName": "Livetastic",
     "productGroup": "A1",
-    "settings": {
-      "kaa1": 220,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
+    "kaa1": 220,
+    "entlastung": 0,
+    "aktion": 0,
+    "pricing": "linear"
   },
   "XXXLBenix.calabria@se": {
     "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\BenixXL\\calabria@se.json",
@@ -67,12 +72,10 @@
     "brand": "LU",
     "brandName": "MID.YOU",
     "productGroup": "A1",
-    "settings": {
-      "kaa1": 2769,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
+    "kaa1": 2769,
+    "entlastung": 0,
+    "aktion": 0,
+    "pricing": "linear"
   },
   "XXXLBenix.figaro@hu": {
     "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\BenixXL\\figaro@hu.json",
@@ -82,12 +85,10 @@
     "brand": "LU",
     "brandName": "Carryhome",
     "productGroup": "01",
-    "settings": {
-      "kaa1": 92000,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
+    "kaa1": 92000,
+    "entlastung": 0,
+    "aktion": 0,
+    "pricing": "linear"
   },
   "XXXLBenix.figaro@se": {
     "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\BenixXL\\figaro@se.json",
@@ -97,12 +98,10 @@
     "brand": "LU",
     "brandName": "MID.YOU",
     "productGroup": "A1",
-    "settings": {
-      "kaa1": 2316,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
+    "kaa1": 2316,
+    "entlastung": 0,
+    "aktion": 0,
+    "pricing": "linear"
   },
   "XXXLBenix.rubio@se": {
     "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\BenixXL\\rubio@se.json",
@@ -112,12 +111,10 @@
     "brand": "LU",
     "brandName": "MID.YOU",
     "productGroup": "A1",
-    "settings": {
-      "kaa1": 2244,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
+    "kaa1": 2244,
+    "entlastung": 0,
+    "aktion": 0,
+    "pricing": "linear"
   },
   "XXXLBenix.vigo@se": {
     "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\BenixXL\\vigo@se.json",
@@ -127,12 +124,10 @@
     "brand": "LU",
     "brandName": "MID.YOU",
     "productGroup": "A1",
-    "settings": {
-      "kaa1": 2899,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
+    "kaa1": 2899,
+    "entlastung": 0,
+    "aktion": 0,
+    "pricing": "linear"
   },
   "Candy.mr4580@de": {
     "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\CandyXL\\mr4580@de.json",
@@ -142,12 +137,10 @@
     "brand": "LU",
     "brandName": "Musterring",
     "productGroup": "01",
-    "settings": {
-      "kaa1": 230,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
+    "kaa1": 230,
+    "entlastung": 0,
+    "aktion": 0,
+    "pricing": "linear"
   },
   "Candy.mr4930@de": {
     "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\CandyXL\\mr4930@de.json",
@@ -157,12 +150,10 @@
     "brand": "LU",
     "brandName": "Musterring",
     "productGroup": "01",
-    "settings": {
-      "kaa1": 225,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
+    "kaa1": 225,
+    "entlastung": 0,
+    "aktion": 0,
+    "pricing": "linear"
   },
   "Candy.mr365@de": {
     "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\CarinaXL\\mr365@de.json",
@@ -172,12 +163,10 @@
     "brand": "LU",
     "brandName": "Musterring",
     "productGroup": "01",
-    "settings": {
-      "kaa1": 249,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
+    "kaa1": 249,
+    "entlastung": 0,
+    "aktion": 0,
+    "pricing": "linear"
   },
   "Candy.mr370@de": {
     "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\CarinaXL\\mr370@de.json",
@@ -187,12 +176,10 @@
     "brand": "LU",
     "brandName": "",
     "productGroup": "01",
-    "settings": {
-      "kaa1": 232,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
+    "kaa1": 232,
+    "entlastung": 0,
+    "aktion": 0,
+    "pricing": "linear"
   },
   "XXXLEuromebel.madrid@se": {
     "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\EuromebelXL\\madrid@se.json",
@@ -202,12 +189,10 @@
     "brand": "LU",
     "brandName": "MID.YOU",
     "productGroup": "A1",
-    "settings": {
-      "kaa1": 2218,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
+    "kaa1": 2218,
+    "entlastung": 0,
+    "aktion": 0,
+    "pricing": "linear"
   },
   "XXXLEuromebel.norwalk@se": {
     "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\EuromebelXL\\norwalk@se.json",
@@ -217,12 +202,23 @@
     "brand": "LU",
     "brandName": "Best Price",
     "productGroup": "01",
-    "settings": {
-      "kaa1": 2534,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
+    "kaa1": 2534,
+    "entlastung": 0,
+    "aktion": 0,
+    "pricing": "linear"
+  },
+  "XXXLGabiPpuh.sofi@ch": {
+    "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\GabiPpuhMM\\sofi@ch.json",
+    "fileName": "sofi@ch",
+    "productNumber": "0023000203",
+    "locale": "ch",
+    "brand": "",
+    "brandName": "",
+    "productGroup": "",
+    "kaa1": 550,
+    "entlastung": 0,
+    "aktion": 0,
+    "pricing": "linear"
   },
   "XXXLGHG.joy1@de": {
     "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\GHGXL\\joy1@de.json",
@@ -232,12 +228,10 @@
     "brand": "LU",
     "brandName": "MID.YOU",
     "productGroup": "01",
-    "settings": {
-      "kaa1": 540,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
+    "kaa1": 540,
+    "entlastung": 0,
+    "aktion": 0,
+    "pricing": "linear"
   },
   "Polipol.mr270@de": {
     "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\HuklaXL\\mr270@de.json",
@@ -247,12 +241,23 @@
     "brand": "LU",
     "brandName": "Musterring",
     "productGroup": "01",
-    "settings": {
-      "kaa1": 196,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
+    "kaa1": 196,
+    "entlastung": 0,
+    "aktion": 0,
+    "pricing": "linear"
+  },
+  "XXXL2314.juniorgold@at": {
+    "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\MebleGruszkaMX\\juniorgold@at.json",
+    "fileName": "juniorgold@at",
+    "productNumber": "0023140001",
+    "locale": "at",
+    "brand": "MX",
+    "brandName": "",
+    "productGroup": "02",
+    "kaa1": "",
+    "entlastung": "",
+    "aktion": "",
+    "pricing": ""
   },
   "Polipol.so3400@de": {
     "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\MegapolXL\\so3400@de.json",
@@ -262,12 +267,10 @@
     "brand": "LU",
     "brandName": "Set One by Musterring",
     "productGroup": "01",
-    "settings": {
-      "kaa1": 190,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
+    "kaa1": 190,
+    "entlastung": 0,
+    "aktion": 0,
+    "pricing": "linear"
   },
   "XXXLPJSCProgress.florenz@se": {
     "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\PJSCProgressXL\\florenz@se.json",
@@ -277,12 +280,10 @@
     "brand": "LU",
     "brandName": "Carryhome",
     "productGroup": "02",
-    "settings": {
-      "kaa1": 6094,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
+    "kaa1": 6094,
+    "entlastung": 0,
+    "aktion": 0,
+    "pricing": "linear"
   },
   "XXXLPJSCProgress.space@se": {
     "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\PJSCProgressXL\\space@se.json",
@@ -292,12 +293,10 @@
     "brand": "LU",
     "brandName": "Carryhome",
     "productGroup": "02",
-    "settings": {
-      "kaa1": 5951,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
+    "kaa1": 5951,
+    "entlastung": 0,
+    "aktion": 0,
+    "pricing": "linear"
   },
   "Polipol.mr1350@de": {
     "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\PolinovaXL\\mr1350@de.json",
@@ -307,12 +306,36 @@
     "brand": "LU",
     "brandName": "Musterring",
     "productGroup": "01",
-    "settings": {
-      "kaa1": 196,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
+    "kaa1": 196,
+    "entlastung": 0,
+    "aktion": 0,
+    "pricing": "linear"
+  },
+  "Testumgebung.diaderock@de": {
+    "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\QuadrifoglioXL\\diaderock@de.json",
+    "fileName": "diaderock@de",
+    "productNumber": "0017080042",
+    "locale": "de",
+    "brand": "",
+    "brandName": "",
+    "productGroup": "",
+    "kaa1": "",
+    "entlastung": "",
+    "aktion": "",
+    "pricing": ""
+  },
+  "XXXLRauch.feldkirch@at": {
+    "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\RauchMX\\feldkirch@at.json",
+    "fileName": "feldkirch@at",
+    "productNumber": "0003800309",
+    "locale": "at",
+    "brand": "MX",
+    "brandName": "",
+    "productGroup": "02",
+    "kaa1": "",
+    "entlastung": "",
+    "aktion": "",
+    "pricing": ""
   },
   "XXXLRuf.milano@at": {
     "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\RufXL\\milano@at.json",
@@ -322,12 +345,10 @@
     "brand": "LU",
     "brandName": "RUF Betten",
     "productGroup": "02",
-    "settings": {
-      "kaa1": 196,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
+    "kaa1": 196,
+    "entlastung": 0,
+    "aktion": 0,
+    "pricing": "linear"
   },
   "XXXL0675.millenium@at": {
     "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\SchoesswenderXL\\millenium@at.json",
@@ -337,12 +358,10 @@
     "brand": "LU",
     "brandName": "Venda",
     "productGroup": "08",
-    "settings": {
-      "kaa1": 300,
-      "entlasgung": 7,
-      "aktion": 0,
-      "pricing": "linear"
-    }
+    "kaa1": 300,
+    "entlastung": 7,
+    "aktion": 0,
+    "pricing": "linear"
   },
   "XXXL0675.santorin@at": {
     "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\SchoesswenderXL\\santorin@at.json",
@@ -352,12 +371,10 @@
     "brand": "LU",
     "brandName": "Cantus",
     "productGroup": "08",
-    "settings": {
-      "kaa1": 300,
-      "entlasgung": 7,
-      "aktion": 0,
-      "pricing": "linear"
-    }
+    "kaa1": 300,
+    "entlastung": 7,
+    "aktion": 0,
+    "pricing": "linear"
   },
   "XXXLWerSal.nubo@se": {
     "filePath": "C:\\xxxlutz\\IG-Creator\\XXXLutz\\ICOM\\WerSalXL\\nubo@se.json",
@@ -367,11 +384,9 @@
     "brand": "LU",
     "brandName": "Livetastic",
     "productGroup": "A1",
-    "settings": {
-      "kaa1": 2505,
-      "entlasgung": 0,
-      "aktion": 0,
-      "pricing": "linear"
-    }
+    "kaa1": 2505,
+    "entlastung": 0,
+    "aktion": 0,
+    "pricing": "linear"
   }
 }

@@ -1,5 +1,9 @@
 import os
 import json
+import csv
+
+headerList = ["Artikelnummer", "live", "konfigurierbar", "Schiene", "Land"]
+onlineList = {}
 
 def save_json_file(data):
     # Output file path
@@ -9,7 +13,17 @@ def save_json_file(data):
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
-def find_all_json(root_path):
+def read_online_list(search_path, onlineList):
+    with open(r'T:\AT_Datencenter\konfigurierbare_Serien.csv', mode='r') as csvfile:
+        reader = csv.DictReader(csvfile, delimiter=";")
+        for idx, row in enumerate(reader, start=1):
+            filtered_row = {header: row.get(header, '') for header in headerList}
+            onlineList[idx] = filtered_row
+    
+    # print(onlineList)
+    find_all_json(search_path, onlineList)
+
+def find_all_json(root_path, onlineList):
     """
     Walk through all folders starting from root_path, parse JSON files,
     """
@@ -29,6 +43,8 @@ def find_all_json(root_path):
                                     'fileName': filename.split('.')[0],
                                     'productNumber': '',
                                     'productVariants': '',
+                                    'online': '',
+                                    'konfig':'',
                                     'modelName': filename.split('@')[0],
                                     'locale': filename.split('@')[1].split('.')[0],
                                     'currency': data.get('currency', ''),  
@@ -37,12 +53,10 @@ def find_all_json(root_path):
                                     'brandName': data.get('brandName', ''),
                                     'productGroup': data.get('productGroup', ''),
                                     'description': data.get('description', ''),
-                                    'settings': {
-                                        'preis': data.get('settings',{}).get('kaa1', ''),
-                                        'entlasgung': data.get('settings',{}).get('entlastung', ''),
-                                        'aktion': data.get('settings',{}).get('aktion', ''),
-                                        'pricing': data.get('settings', {}).get('pricing', '')
-                                    }
+                                    'preis': data.get('settings',{}).get('kaa1', ''),
+                                    'entlasgung': data.get('settings',{}).get('entlastung', ''),
+                                    'aktion': data.get('settings',{}).get('aktion', ''),
+                                    'pricing': data.get('settings', {}).get('pricing', '')
                                 }
                             }
                             fullModelList.update(model_object)
@@ -64,6 +78,11 @@ def find_all_json(root_path):
                     fullModelList[modelId]['productVariants'] += innerId + ' / '
                     if fullModelList[modelId]['description'] == '':
                         fullModelList[modelId]['description'] = conditionEntry.get('description')
+                    for onlineId, onlineEntry in onlineList.items():
+                        if onlineEntry['Artikelnummer'] != '' and onlineEntry['Artikelnummer'] in fullModelList[modelId]['productNumber'] and onlineEntry['Schiene'] == fullModelList[modelId]['brand'] and onlineEntry['Land'] == fullModelList[modelId]['locale']:
+                            fullModelList[modelId]['online'] = onlineEntry['live']
+                            fullModelList[modelId]['konfig'] = onlineEntry['konfigurierbar']
+
         except KeyError as e:
             print(f'KeyError: {e} not found in conditions.json')
 
@@ -107,4 +126,5 @@ if __name__ == "__main__":
     # Set your search root path and target values here
     # search_path = (r"F:\WebTools\AktionspreisFixer\XML-Test")
     search_path = (r"C:\xxxlutz\IG-Creator\XXXLutz\ICOM")
-    find_all_json(search_path)
+    read_online_list(search_path, onlineList)
+    # find_all_json(search_path)
