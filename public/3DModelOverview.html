@@ -188,12 +188,15 @@
                         var konfig = '<td class="trueCol">'+val.konfig+'</td>';
                         if(val.konfig=='false'){konfig = '<td class="falseCol">'+val.konfig+'</td>'}
                         if(val.konfig==''){konfig = '<td>'+val.konfig+'</td>'}
-                        console.log(val)
+                        var storeUrl = countryShorts[val.brand]+'.'+val.locale;
+                        if(countryShorts[val.brand] === 'xxxlutz' && val.locale === 'si'){
+                            storeUrl = 'lesnina'+'.'+val.locale;
+                        }
                         $('#myTable').append(
                             '<tr><td>'+val.catalog.split('.')[0]+'</td>'+
                             '<td>'+val.brandName+'</td>'+
                             '<td>'+val.modelName+'</td>'+
-                            '<td><a href="https://'+countryShorts[val.brand]+'.'+val.locale+'/s/?s='+val.productNumber+'" target="_blank">'+val.productNumber+'</a></td>'+
+                            '<td><a href="https://'+storeUrl+'/s/?s='+val.productNumber+'" target="_blank">'+val.productNumber+'</a></td>'+
                             online+
                             konfig+
                             '<td>'+val.productVariants.trim().slice(0, -1)+'</td>'+
