@@ -55,8 +55,26 @@ def filter_and_save_modellist(fullModelList, prodGroups, ausLieferanten, maxDisc
         json.dump(removeDiscountList, f, indent=2, ensure_ascii=False)
     
     # needs calculation from entlastung and aktion to get correct percentage
-    # needs final price preview file??
 
+    EKP = 10000
+    kaa1 = 310
+    Entlastung = 29
+    Aktion = 33
+    
+    # EKP * kaa1 - Entlastung - Aktion
+    100 * 3,1 * 0,93 * 0,9 = 259,47
+
+    # EK * kaa1 - Entlastung
+    100 * 3,1 * 0,71 = 220,1
+
+    # EK * kaa1 - Aktion (komplett) 
+    100 * 3,1 * 0,67 = 207,7
+
+    # finale Berechnung für Aktions Prozent wenn Entlastung angegeben
+    (220,1 - 207,7) * 100 / 220,1 = 5,63
+
+    # needs final price preview file
+    
     # data['settings']['aktion'] = 20
 
 # Collects 3D model data, filters by Warengruppen, Lieferanten ausnahmen and highest discount value
