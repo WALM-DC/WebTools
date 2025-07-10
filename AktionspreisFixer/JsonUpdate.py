@@ -34,10 +34,14 @@ def filter_and_save_modellist(fullModelList, prodGroups, ausLieferanten, maxDisc
         # this can be directly used to update all files accordingly but the log files should still be written to ensure we know what was changed
 
         # print(model['fileName'], model['entlastung'], model['aktion'], liefNumb)
-        if model["productGroup"] in prodGroups and num(model['entlastung']) < num(maxDiscount) and num(model['aktion']) < num(maxDiscount) and liefNumb not in ausLieferanten:
+        if model["productGroup"] in prodGroups and num(model['entlastung']) < num(maxDiscount) and num(model['aktion_alt']) < num(maxDiscount) and liefNumb not in ausLieferanten:
             addDiscountList[idx] = model
-        elif num(model['aktion']) > 0:
+            # need to add new discount value to fullModelList entry
+            # model['akton_neu'] = 
+        elif num(model['aktion_alt']) > 0:
+            # need to add new discount value to fullModelList entry, in this case 0
             removeDiscountList[idx] = model
+            # model['akton_neu'] = 0
 
     # Output file path for log
     basePath = r"F:\WebTools\AktionspreisFixer"
@@ -105,7 +109,8 @@ def find_json_with_values(root_path, prodGroups, ausLieferanten, maxDiscount):
                                     'productGroup': data.get('productGroup', ''),
                                     'kaa1': data.get('settings',{}).get('kaa1', ''),
                                     'entlastung': data.get('settings',{}).get('entlastung', ''),
-                                    'aktion': data.get('settings',{}).get('aktion', ''),
+                                    'aktion_alt': data.get('settings',{}).get('aktion', ''),
+                                    'aktion_neu': '',
                                     'pricing': data.get('settings', {}).get('pricing', '')
                                 }
                             }
