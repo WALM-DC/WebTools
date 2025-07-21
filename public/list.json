@@ -1614,6 +1614,25 @@
     "aktion": 48,
     "pricing": "linear"
   },
+  "XXXLBenix.bono@se": {
+    "fileName": "bono@se",
+    "productNumber": "0005530027",
+    "productVariants": "01 / 99 / ",
+    "online": "",
+    "konfig": "",
+    "modelName": "bono",
+    "locale": "se",
+    "currency": "SEK",
+    "catalog": "XXXLBenix.Bono",
+    "brand": "LU",
+    "brandName": "Best Price",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Bono",
+    "preis": 3776,
+    "entlasgung": 0,
+    "aktion": 0,
+    "pricing": "linear"
+  },
   "XXXLBenix.calabria@at": {
     "fileName": "calabria@at",
     "productNumber": "0017000084",
@@ -1956,6 +1975,25 @@
     "aktion": 48,
     "pricing": "linear"
   },
+  "XXXLBenix.rosalie@hu": {
+    "fileName": "rosalie@hu",
+    "productNumber": "0005530139",
+    "productVariants": "01 / 02 / 14 / 24 / YY / ",
+    "online": "",
+    "konfig": "",
+    "modelName": "rosalie",
+    "locale": "hu",
+    "currency": "HUF",
+    "catalog": "XXXLBenix.Rosalie",
+    "brand": "LU",
+    "brandName": "Hom'in",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Rosalie",
+    "preis": 95000,
+    "entlasgung": 0,
+    "aktion": 48,
+    "pricing": "linear"
+  },
   "XXXLBenix.rubio@at": {
     "fileName": "rubio@at",
     "productNumber": "0005530098",
@@ -2011,6 +2049,25 @@
     "preis": 490,
     "entlasgung": 0,
     "aktion": 48,
+    "pricing": "linear"
+  },
+  "XXXLBenix.rubio@hu": {
+    "fileName": "rubio@hu",
+    "productNumber": "0005530098",
+    "productVariants": "06 / 11 / YY / ",
+    "online": "",
+    "konfig": "",
+    "modelName": "rubio",
+    "locale": "hu",
+    "currency": "HUF",
+    "catalog": "XXXLBenix.Rubio",
+    "brand": "LU",
+    "brandName": "Stylife",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Rubio",
+    "preis": 92000,
+    "entlasgung": 0,
+    "aktion": 0,
     "pricing": "linear"
   },
   "XXXLBenix.rubio@se": {
@@ -13207,7 +13264,7 @@
   "XXXLSteinpol.trendywl@at": {
     "fileName": "trendywl@at",
     "productNumber": "0021390041",
-    "productVariants": "10 / 98 / ",
+    "productVariants": "10 / 14 / 98 / ",
     "online": "true",
     "konfig": "true",
     "modelName": "trendywl",
@@ -13245,7 +13302,7 @@
   "XXXLSteinpol.trendywl@de": {
     "fileName": "trendywl@de",
     "productNumber": "0021390041",
-    "productVariants": "10 / 98 / ",
+    "productVariants": "10 / 14 / 98 / ",
     "online": "true",
     "konfig": "true",
     "modelName": "trendywl",
@@ -14176,7 +14233,7 @@
   "XXXLWerSal.braven@at": {
     "fileName": "braven@at",
     "productNumber": "0023070134",
-    "productVariants": "01 / 02 / YY / ",
+    "productVariants": "01 / 02 / 11 / 25 / YY / ",
     "online": "true",
     "konfig": "true",
     "modelName": "braven",
