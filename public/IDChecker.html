@@ -162,6 +162,7 @@
                     </button>
                 </div>
             </div>
+            <div><h4>Links:</h4><p id="linkMsg"></p></div>
             <div><h4>Log:</h4><p id="errorMsg"></p></div>
         </div>
     </body>
@@ -186,7 +187,9 @@
                 if(cleanVal.length>=10){
                     // add leading zero(s) depending on ID length
                     cleanVal.length===12?zeros='':cleanVal.length===11?zeros='0':zeros='00';
-                    window.open('https://'+url+'/p/'+zeros+cleanVal.trim(), id);
+                    var finalUrl = 'https://'+url+'/p/'+zeros+cleanVal.trim();
+                    window.open(finalUrl, id);
+                    $('#linkMsg').append('<p>URL: '+finalUrl+'</p>');
                 } else {
                     $('#errorMsg').append('<p>Fehlerhafte ID: '+idList[id]+'</p>');
                 }
