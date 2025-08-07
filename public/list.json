@@ -8772,7 +8772,7 @@
     "brandName": "Beldomo Style",
     "productGroup": "01",
     "description": "Wohnlandschaft Austin",
-    "preis": 91700,
+    "preis": 99000,
     "entlasgung": 0,
     "aktion": 0,
     "pricing": "linear"
@@ -15164,7 +15164,7 @@
   "XXXLZehdenick.odins@de": {
     "fileName": "odins@de",
     "productNumber": "0004360252",
-    "productVariants": "01 / 03 / 12 / 22 / 30 / 32 / 33 / 99 / ",
+    "productVariants": "03 / 22 / 30 / 32 / 33 / 99 / ",
     "online": "true",
     "konfig": "false",
     "modelName": "odins",
