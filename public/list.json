@@ -3403,7 +3403,7 @@
   "Candy.pure963@at": {
     "fileName": "pure963@at",
     "productNumber": "0015810308",
-    "productVariants": "01 / 02 / 07 / 08 / 09 / 11 / YY / ",
+    "productVariants": "01 / 02 / 07 / 08 / YY / ",
     "online": "true",
     "konfig": "true",
     "modelName": "pure963",
@@ -3422,7 +3422,7 @@
   "Candy.pure963@ch": {
     "fileName": "pure963@ch",
     "productNumber": "0015810308",
-    "productVariants": "02 / 07 / 08 / 16 / 26 / YY / ",
+    "productVariants": "02 / 07 / 08 / YY / ",
     "online": "true",
     "konfig": "true",
     "modelName": "pure963",
@@ -3441,7 +3441,7 @@
   "Candy.pure963@de": {
     "fileName": "pure963@de",
     "productNumber": "0015810308",
-    "productVariants": "01 / 07 / 08 / 09 / YY / ",
+    "productVariants": "01 / 07 / 08 / YY / ",
     "online": "true",
     "konfig": "true",
     "modelName": "pure963",
@@ -3460,7 +3460,7 @@
   "Candy.pure979@at": {
     "fileName": "pure979@at",
     "productNumber": "0015810108",
-    "productVariants": "09 / 14 / 24 / 44 / 91 / 1D / 1K / 99 / ",
+    "productVariants": "24 / 44 / 91 / 1D / 1K / 99 / ",
     "online": "true",
     "konfig": "true",
     "modelName": "pure979",
@@ -3479,7 +3479,7 @@
   "Candy.pure979@ch": {
     "fileName": "pure979@ch",
     "productNumber": "0015810108",
-    "productVariants": "09 / 14 / 24 / 44 / 91 / 1D / 1K / 99 / ",
+    "productVariants": "24 / 44 / 91 / 1D / 1K / 99 / ",
     "online": "true",
     "konfig": "true",
     "modelName": "pure979",
@@ -3498,7 +3498,7 @@
   "Candy.pure979@de": {
     "fileName": "pure979@de",
     "productNumber": "0015810108",
-    "productVariants": "09 / 14 / 24 / 44 / 91 / 1D / 1K / 99 / ",
+    "productVariants": "24 / 44 / 91 / 1D / 1K / 99 / ",
     "online": "true",
     "konfig": "true",
     "modelName": "pure979",
