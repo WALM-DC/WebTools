@@ -1497,7 +1497,7 @@
     "description": "Wohnlandschaft Parole",
     "preis": 220,
     "entlasgung": 0,
-    "aktion": 5,
+    "aktion": 0,
     "pricing": "linear"
   },
   "XXXLBenformato.parole@ch": {
@@ -1781,7 +1781,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Figaro",
     "preis": 10900,
-    "entlasgung": 33,
+    "entlasgung": 31,
     "aktion": 25,
     "pricing": "linear"
   },
@@ -1876,7 +1876,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Figaro",
     "preis": 428,
-    "entlasgung": 33,
+    "entlasgung": 31,
     "aktion": 23,
     "pricing": "linear"
   },
@@ -5467,7 +5467,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Norwalk",
     "preis": 10000,
-    "entlasgung": 31,
+    "entlasgung": 29,
     "aktion": 25,
     "pricing": "linear"
   },
@@ -5524,7 +5524,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Norwalk",
     "preis": 400,
-    "entlasgung": 31,
+    "entlasgung": 29,
     "aktion": 23,
     "pricing": "linear"
   },
@@ -5581,7 +5581,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Rossi",
     "preis": 10000,
-    "entlasgung": 31,
+    "entlasgung": 29,
     "aktion": 25,
     "pricing": "linear"
   },
@@ -5619,7 +5619,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Rossi",
     "preis": 400,
-    "entlasgung": 31,
+    "entlasgung": 29,
     "aktion": 23,
     "pricing": "linear"
   },
@@ -6265,7 +6265,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Inferno",
     "preis": 10300,
-    "entlasgung": 28,
+    "entlasgung": 26,
     "aktion": 25,
     "pricing": "linear"
   },
@@ -6303,7 +6303,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Inferno",
     "preis": 404,
-    "entlasgung": 28,
+    "entlasgung": 26,
     "aktion": 23,
     "pricing": "linear"
   },
