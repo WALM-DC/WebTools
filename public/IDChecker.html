@@ -177,7 +177,7 @@
 */
         var idList = [], zeros = '00';
         function checkIDs(url){
-            $('#errorMsg').html('');
+            $('#errorMsg', '#errorMsg').html('');
             $('#taInput').val($('#taInput').val().trim().replace(/[^\d\n-]/g, '').replace(/^\s*$(?:\r\n?|\n)/gm, ''));
             idList = $('#taInput').val().trim().split('\n');
             $.each(idList, function(id, val){

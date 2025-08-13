@@ -212,14 +212,21 @@
                         if(countryShorts[val.brand] === 'xxxlutz' && val.locale === 'si'){
                             storeUrl = 'xxxlesnina'+'.'+val.locale;
                         }
+                        var variants = val.productVariants.trim().slice(0, -1);
+                        var variantCount = variants.split("/").length;
+                        if(variants.indexOf(98)>-1){variantCount--}
+                        if(variants.indexOf(99)>-1){variantCount--}
+                        if(variants.indexOf('YY')>-1){variantCount--}
+                        if(variants.indexOf('YN')>-1){variantCount--}
+                        if(variants.indexOf('YK')>-1){variantCount--}
                         $('#myTable').append(
-                            '<tr><td>'+val.catalog.split('.')[0]+'</td>'+
+                            '<tr variants="'+variantCount+'"><td>'+val.catalog.split('.')[0]+'</td>'+
                             '<td>'+val.brandName+'</td>'+
                             '<td>'+val.modelName+'</td>'+
                             '<td><a href="https://'+storeUrl+'/s/?s='+val.productNumber+'" target="_blank">'+val.productNumber+'</a></td>'+
                             online+
                             konfig+
-                            '<td>'+val.productVariants.trim().slice(0, -1)+'</td>'+
+                            '<td>'+variants+'</td>'+
                             '<td>'+val.brand+'</td>'+
                             '<td>'+val.locale+'</td>'+
                             '<td>'+val.currency+'</td>'+
