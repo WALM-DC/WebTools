@@ -60,26 +60,26 @@ def filter_and_save_modellist(fullModelList, prodGroups, ausLieferanten, maxDisc
     
     # needs calculation from entlastung and aktion to get correct percentage
 
-    EKP = 10000
-    kaa1 = 310
-    Entlastung = 29
-    Aktion = 33
+    # EKP = 10000
+    # kaa1 = 310
+    # Entlastung = 29
+    # Aktion = 33
     
-    # EKP * kaa1 - Entlastung - Aktion
-    100 * 3,1 * 0,93 * 0,9 = 259,47
+    # # EKP * kaa1 - Entlastung - Aktion
+    # 100 * 3,1 * 0,93 * 0,9 = 259,47
 
-    # EK * kaa1 - Entlastung
-    100 * 3,1 * 0,71 = 220,1
+    # # EK * kaa1 - Entlastung
+    # 100 * 3,1 * 0,71 = 220,1
 
-    # EK * kaa1 - Aktion (komplett) 
-    100 * 3,1 * 0,67 = 207,7
+    # # EK * kaa1 - Aktion (komplett) 
+    # 100 * 3,1 * 0,67 = 207,7
 
-    # finale Berechnung für Aktions Prozent wenn Entlastung angegeben
-    (220,1 - 207,7) * 100 / 220,1 = 5,63
+    # # finale Berechnung für Aktions Prozent wenn Entlastung angegeben
+    # (220,1 - 207,7) * 100 / 220,1 = 5,63
 
-    # needs final price preview file
+    # # needs final price preview file
     
-    # data['settings']['aktion'] = 20
+    # # data['settings']['aktion'] = 20
 
 # Collects 3D model data, filters by Warengruppen, Lieferanten ausnahmen and highest discount value
 def find_json_with_values(root_path, prodGroups, ausLieferanten, maxDiscount):
@@ -174,7 +174,7 @@ def contains_target_keys(data, target_keys):
 
 # Reads MKSAKT file and convert to object
 def read_csv_file(root_path, prodGroups):
-    with open(r'F:\WebTools\AktionspreisFixer\MKSAKT_1_test.csv', mode='r') as csvfile:
+    with open(r'F:\WebTools\AktionspreisFixer\MKSAKT_test_2.csv', mode='r') as csvfile:
         reader = csv.DictReader(csvfile, delimiter=";")
         for idx, row in enumerate(reader, start=1):
             if "1/4/" in f"{row}":
