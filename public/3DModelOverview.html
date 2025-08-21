@@ -220,6 +220,7 @@
                         if(variants.indexOf('YY')>-1){variantCount--}
                         if(variants.indexOf('YN')>-1){variantCount--}
                         if(variants.indexOf('YK')>-1){variantCount--}
+                        if(variants.trim()===""){variantCount=0}
                         $('#myTable').append(
                             '<tr variants="'+variantCount+'"><td>'+val.catalog.split('.')[0]+'</td>'+
                             '<td>'+val.brandName+'</td>'+
