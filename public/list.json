@@ -1595,25 +1595,6 @@
     "aktion": 0,
     "pricing": "linear"
   },
-  "XXXLBenix.bono@de": {
-    "fileName": "bono@de",
-    "productNumber": "0005530027",
-    "productVariants": "01 / 24 / 28 / 30 / 99 / ",
-    "online": "true",
-    "konfig": "true",
-    "modelName": "bono",
-    "locale": "de",
-    "currency": "",
-    "catalog": "XXXLBenix.Bono",
-    "brand": "LU",
-    "brandName": "Carryhome",
-    "productGroup": "01",
-    "description": "Wohnlandschaft Bono",
-    "preis": 450,
-    "entlasgung": 0,
-    "aktion": 48,
-    "pricing": "linear"
-  },
   "XXXLBenix.bono@se": {
     "fileName": "bono@se",
     "productNumber": "0005530027",
@@ -2163,6 +2144,25 @@
     "preis": 2899,
     "entlasgung": 0,
     "aktion": 0,
+    "pricing": "linear"
+  },
+  "XXXLBenix.bono@de": {
+    "fileName": "bono@de",
+    "productNumber": "",
+    "productVariants": "",
+    "online": "",
+    "konfig": "",
+    "modelName": "bono",
+    "locale": "de",
+    "currency": "",
+    "catalog": "XXXLBenix.Bono",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Bono",
+    "preis": 450,
+    "entlasgung": 0,
+    "aktion": 48,
     "pricing": "linear"
   },
   "XXXLBeskidzkie.adria@at": {
@@ -6098,25 +6098,6 @@
     "aktion": 0,
     "pricing": "linear"
   },
-  "XXXLGabiPpuh.burgas@de": {
-    "fileName": "burgas@de",
-    "productNumber": "0023000151",
-    "productVariants": "01 / YY / ",
-    "online": "true",
-    "konfig": "true",
-    "modelName": "burgas",
-    "locale": "de",
-    "currency": "",
-    "catalog": "XXXLGabiPpuh.Burgas",
-    "brand": "LU",
-    "brandName": "Ti'me",
-    "productGroup": "01",
-    "description": "Wohnlandschaft Burgas",
-    "preis": 440,
-    "entlasgung": 0,
-    "aktion": 48,
-    "pricing": "linear"
-  },
   "XXXLGabiPpuh.cancun@de": {
     "fileName": "cancun@de",
     "productNumber": "0023000158",
@@ -6191,6 +6172,25 @@
     "preis": 510,
     "entlasgung": 0,
     "aktion": 48,
+    "pricing": "linear"
+  },
+  "XXXLGabiPpuh.fenix@hu": {
+    "fileName": "fenix@hu",
+    "productNumber": "0023000197",
+    "productVariants": "28 / YY / ",
+    "online": "",
+    "konfig": "",
+    "modelName": "fenix",
+    "locale": "hu",
+    "currency": "HUF",
+    "catalog": "XXXLGabiPpuh.Fenix",
+    "brand": "LU",
+    "brandName": "Stylife",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Fenix",
+    "preis": 100000,
+    "entlasgung": 0,
+    "aktion": 0,
     "pricing": "linear"
   },
   "XXXLGabiPpuh.inferno@at": {
@@ -6269,6 +6269,25 @@
     "aktion": 48,
     "pricing": "linear"
   },
+  "XXXLGabiPpuh.inferno@hu": {
+    "fileName": "inferno@hu",
+    "productNumber": "0023000114",
+    "productVariants": "01 / 02 / YY / ",
+    "online": "",
+    "konfig": "",
+    "modelName": "inferno",
+    "locale": "hu",
+    "currency": "HUF",
+    "catalog": "XXXLGabiPpuh.Inferno",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Inferno",
+    "preis": 96000,
+    "entlasgung": 0,
+    "aktion": 0,
+    "pricing": "linear"
+  },
   "XXXLGabiPpuh.inferno@sk": {
     "fileName": "inferno@sk",
     "productNumber": "0023070228",
@@ -6340,6 +6359,25 @@
     "brandName": "Carryhome",
     "productGroup": "01",
     "description": "Ecksofa Swing",
+    "preis": 440,
+    "entlasgung": 0,
+    "aktion": 48,
+    "pricing": "linear"
+  },
+  "XXXLGabiPpuh.burgas@de": {
+    "fileName": "burgas@de",
+    "productNumber": "",
+    "productVariants": "",
+    "online": "",
+    "konfig": "",
+    "modelName": "burgas",
+    "locale": "de",
+    "currency": "",
+    "catalog": "XXXLGabiPpuh.Burgas",
+    "brand": "LU",
+    "brandName": "Ti'me",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Burgas",
     "preis": 440,
     "entlasgung": 0,
     "aktion": 48,
@@ -13660,7 +13698,7 @@
     "aktion": 0,
     "pricing": "linear"
   },
-  "XXXLSteinpol.alpha@ch": {
+  "Steinpol.alpha@ch": {
     "fileName": "alpha@ch",
     "productNumber": "0021390121",
     "productVariants": "03 / 04 / 06 / 07 / YY / ",
@@ -13669,7 +13707,7 @@
     "modelName": "alpha",
     "locale": "ch",
     "currency": "CHF",
-    "catalog": "XXXLSteinpol.Alpha",
+    "catalog": "Steinpol.Alpha",
     "brand": "LU",
     "brandName": "Moderano",
     "productGroup": "01",
@@ -13679,7 +13717,7 @@
     "aktion": 0,
     "pricing": "linear"
   },
-  "XXXLSteinpol.alpha@de": {
+  "Steinpol.alpha@de": {
     "fileName": "alpha@de",
     "productNumber": "0021390121",
     "productVariants": "03 / 04 / 06 / 07 / YY / ",
@@ -13688,7 +13726,7 @@
     "modelName": "alpha",
     "locale": "de",
     "currency": "",
-    "catalog": "XXXLSteinpol.Alpha",
+    "catalog": "Steinpol.Alpha",
     "brand": "LU",
     "brandName": "Moderano",
     "productGroup": "01",
