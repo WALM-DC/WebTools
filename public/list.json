@@ -889,7 +889,7 @@
     "description": "Wohnlandschaft 7435",
     "preis": 8200,
     "entlasgung": 26,
-    "aktion": 30,
+    "aktion": 25,
     "pricing": "linear"
   },
   "XXXLAda.m7435@de": {
@@ -1136,7 +1136,7 @@
     "description": "Wohnlandschaft M7588",
     "preis": 8200,
     "entlasgung": 26,
-    "aktion": 30,
+    "aktion": 25,
     "pricing": "linear"
   },
   "XXXLAda.m7588@de": {
@@ -1557,44 +1557,6 @@
     "aktion": 48,
     "pricing": "linear"
   },
-  "XXXLBenix.bono@at": {
-    "fileName": "bono@at",
-    "productNumber": "0005530027",
-    "productVariants": "01 / 99 / ",
-    "online": "true",
-    "konfig": "true",
-    "modelName": "bono",
-    "locale": "at",
-    "currency": "",
-    "catalog": "XXXLBenix.Bono",
-    "brand": "LU",
-    "brandName": "Carryhome",
-    "productGroup": "01",
-    "description": "Wohnlandschaft Bono",
-    "preis": 350,
-    "entlasgung": 21,
-    "aktion": 0,
-    "pricing": "linear"
-  },
-  "XXXLBenix.bono@se": {
-    "fileName": "bono@se",
-    "productNumber": "0005530027",
-    "productVariants": "01 / 99 / ",
-    "online": "true",
-    "konfig": "true",
-    "modelName": "bono",
-    "locale": "se",
-    "currency": "SEK",
-    "catalog": "XXXLBenix.Bono",
-    "brand": "LU",
-    "brandName": "Best Price",
-    "productGroup": "01",
-    "description": "Wohnlandschaft Bono",
-    "preis": 3776,
-    "entlasgung": 0,
-    "aktion": 0,
-    "pricing": "linear"
-  },
   "XXXLBenix.calabria@at": {
     "fileName": "calabria@at",
     "productNumber": "0017000084",
@@ -1744,7 +1706,7 @@
     "description": "Wohnlandschaft Figaro",
     "preis": 10900,
     "entlasgung": 31,
-    "aktion": 30,
+    "aktion": 25,
     "pricing": "linear"
   },
   "XXXLBenix.figaro@de": {
@@ -2127,25 +2089,6 @@
     "aktion": 0,
     "pricing": "linear"
   },
-  "XXXLBenix.bono@de": {
-    "fileName": "bono@de",
-    "productNumber": "",
-    "productVariants": "",
-    "online": "",
-    "konfig": "",
-    "modelName": "bono",
-    "locale": "de",
-    "currency": "",
-    "catalog": "XXXLBenix.Bono",
-    "brand": "LU",
-    "brandName": "Carryhome",
-    "productGroup": "01",
-    "description": "Wohnlandschaft Bono",
-    "preis": 450,
-    "entlasgung": 0,
-    "aktion": 48,
-    "pricing": "linear"
-  },
   "XXXLBeskidzkie.adria@at": {
     "fileName": "adria@at",
     "productNumber": "0022570007",
@@ -2492,8 +2435,8 @@
     "fileName": "raul@hu",
     "productNumber": "0024270006",
     "productVariants": "01 / 02 / 03 / 04 / 05 / 06 / 07 / 08 / 09 / 10 / 11 / 12 / 13 / 21 / 24 / 28 / 29 / 30 / YY / ",
-    "online": "",
-    "konfig": "",
+    "online": "true",
+    "konfig": "true",
     "modelName": "raul",
     "locale": "hu",
     "currency": "HUF",
@@ -2624,7 +2567,7 @@
   "XXXLBlanar.remi@at": {
     "fileName": "remi@at",
     "productNumber": "0026480173",
-    "productVariants": "01 / 04 / 05 / 06 / 98 / ",
+    "productVariants": "01 / 04 / 05 / 06 / 07 / 08 / 98 / ",
     "online": "",
     "konfig": "",
     "modelName": "remi",
@@ -2643,7 +2586,7 @@
   "XXXLBlanar.remi@ch": {
     "fileName": "remi@ch",
     "productNumber": "0026480173",
-    "productVariants": "01 / 04 / 05 / 06 / 98 / ",
+    "productVariants": "01 / 04 / 05 / 98 / ",
     "online": "",
     "konfig": "",
     "modelName": "remi",
@@ -2662,7 +2605,7 @@
   "XXXLBlanar.remi@de": {
     "fileName": "remi@de",
     "productNumber": "0026480173",
-    "productVariants": "01 / 04 / 05 / 06 / 98 / ",
+    "productVariants": "01 / 04 / 05 / 06 / 07 / 08 / 98 / ",
     "online": "",
     "konfig": "",
     "modelName": "remi",
@@ -3416,7 +3359,7 @@
     "description": "Wohnlandschaft Pure 926",
     "preis": 9500,
     "entlasgung": 35,
-    "aktion": 30,
+    "aktion": 25,
     "pricing": "linear"
   },
   "Candy.pure963@at": {
@@ -3910,7 +3853,7 @@
     "description": "Wohnlandschaft Pure Comfort 821",
     "preis": 9500,
     "entlasgung": 27,
-    "aktion": 30,
+    "aktion": 25,
     "pricing": "linear"
   },
   "Candy.purecomfort821@de": {
@@ -4120,25 +4063,6 @@
     "preis": 550,
     "entlasgung": 0,
     "aktion": 48,
-    "pricing": "linear"
-  },
-  "XXXLMebleMarzeni.lynx@at": {
-    "fileName": "lynx@at",
-    "productNumber": "0002980042",
-    "productVariants": "07 / 08 / 10 / 12 / 14 / 17 / 19 / 22 / 27 / YY / ",
-    "online": "true",
-    "konfig": "false",
-    "modelName": "lynx",
-    "locale": "at",
-    "currency": "",
-    "catalog": "XXXLMebleMarzeni.Lynx",
-    "brand": "LU",
-    "brandName": "Hom'in",
-    "productGroup": "02",
-    "description": "Boxspringbett Lynx",
-    "preis": 460,
-    "entlasgung": 30,
-    "aktion": 0,
     "pricing": "linear"
   },
   "XXXLMebleMarzeni.orlando@at": {
@@ -5506,7 +5430,7 @@
     "description": "Wohnlandschaft Norwalk",
     "preis": 10000,
     "entlasgung": 29,
-    "aktion": 30,
+    "aktion": 25,
     "pricing": "linear"
   },
   "XXXLEuromebel.norwalk@de": {
@@ -5620,7 +5544,7 @@
     "description": "Wohnlandschaft Rossi",
     "preis": 10000,
     "entlasgung": 29,
-    "aktion": 30,
+    "aktion": 25,
     "pricing": "linear"
   },
   "XXXLEuromebel.rossi@de": {
@@ -5905,7 +5829,7 @@
     "description": "Schlafsofa Santo",
     "preis": 11700,
     "entlasgung": 38,
-    "aktion": 30,
+    "aktion": 25,
     "pricing": "linear"
   },
   "XXXLFilex.santo@sk": {
@@ -6266,7 +6190,7 @@
     "description": "Wohnlandschaft Inferno",
     "preis": 10300,
     "entlasgung": 26,
-    "aktion": 30,
+    "aktion": 25,
     "pricing": "linear"
   },
   "XXXLGabiPpuh.inferno@de": {
@@ -6668,6 +6592,101 @@
     "aktion": 48,
     "pricing": "linear"
   },
+  "XXXLGutmann.donato@at": {
+    "fileName": "donato@at",
+    "productNumber": "0018771000",
+    "productVariants": "01 / 26 / 28 / 60 / 61 / 99 / ",
+    "online": "",
+    "konfig": "",
+    "modelName": "donato",
+    "locale": "at",
+    "currency": "EUR",
+    "catalog": "XXXLGutmann.Donato",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "01",
+    "description": "Ecksofa Donato",
+    "preis": 310,
+    "entlasgung": 39,
+    "aktion": 0,
+    "pricing": "linear"
+  },
+  "XXXLGutmann.donato@ch": {
+    "fileName": "donato@ch",
+    "productNumber": "0018771000",
+    "productVariants": "01 / 26 / 28 / 60 / 61 / 99 / ",
+    "online": "",
+    "konfig": "",
+    "modelName": "donato",
+    "locale": "ch",
+    "currency": "CHF",
+    "catalog": "XXXLGutmann.Donato",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "01",
+    "description": "Ecksofa Donato",
+    "preis": 280,
+    "entlasgung": 30,
+    "aktion": 0,
+    "pricing": "linear"
+  },
+  "XXXLGutmann.donato@cz": {
+    "fileName": "donato@cz",
+    "productNumber": "0018771000",
+    "productVariants": "01 / 99 / ",
+    "online": "",
+    "konfig": "",
+    "modelName": "donato",
+    "locale": "cz",
+    "currency": "CZK",
+    "catalog": "XXXLGutmann.Donato",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "01",
+    "description": "Ecksofa Donato",
+    "preis": 7000,
+    "entlasgung": 24,
+    "aktion": 25,
+    "pricing": "linear"
+  },
+  "XXXLGutmann.donato@de": {
+    "fileName": "donato@de",
+    "productNumber": "0018771000",
+    "productVariants": "01 / 26 / 28 / 60 / 61 / 99 / ",
+    "online": "",
+    "konfig": "",
+    "modelName": "donato",
+    "locale": "de",
+    "currency": "EUR",
+    "catalog": "XXXLGutmann.Donato",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "01",
+    "description": "Ecksofa Donato",
+    "preis": 150,
+    "entlasgung": 0,
+    "aktion": 0,
+    "pricing": "linear"
+  },
+  "XXXLGutmann.donato@sk": {
+    "fileName": "donato@sk",
+    "productNumber": "0018771000",
+    "productVariants": "01 / 99 / ",
+    "online": "",
+    "konfig": "",
+    "modelName": "donato",
+    "locale": "sk",
+    "currency": "EUR",
+    "catalog": "XXXLGutmann.Donato",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "01",
+    "description": "Ecksofa Donato",
+    "preis": 277,
+    "entlasgung": 24,
+    "aktion": 30,
+    "pricing": "linear"
+  },
   "XXXLGutmann.flake@de": {
     "fileName": "flake@de",
     "productNumber": "0018770369",
@@ -6912,7 +6931,7 @@
     "description": "Ecksofa 1928",
     "preis": 8200,
     "entlasgung": 21,
-    "aktion": 30,
+    "aktion": 25,
     "pricing": "linear"
   },
   "XXXLHimolla.M1928@de": {
@@ -8565,7 +8584,7 @@
     "description": "Wohnlandschaft Amanda",
     "preis": 10000,
     "entlasgung": 25,
-    "aktion": 30,
+    "aktion": 25,
     "pricing": "linear"
   },
   "XXXLMebleBugajski.amanda@de": {
@@ -9002,7 +9021,7 @@
     "description": "Wohnlandschaft Spliff-S Express",
     "preis": 10400,
     "entlasgung": 35,
-    "aktion": 30,
+    "aktion": 25,
     "pricing": "linear"
   },
   "Polipol.spliffs@de": {
@@ -9705,7 +9724,7 @@
     "description": "Wohnlandschaft Brooklyn",
     "preis": 8500,
     "entlasgung": 26,
-    "aktion": 30,
+    "aktion": 25,
     "pricing": "linear"
   },
   "XXXLNovaVia.brooklyn@de": {
@@ -10161,7 +10180,7 @@
     "description": "Polsterbett Ravello",
     "preis": 8000,
     "entlasgung": 22,
-    "aktion": 30,
+    "aktion": 25,
     "pricing": "linear"
   },
   "XXXLOschmann.ravello@de": {
@@ -10256,7 +10275,7 @@
     "description": "Bett Cornus",
     "preis": 8800,
     "entlasgung": 25,
-    "aktion": 30,
+    "aktion": 25,
     "pricing": "linear"
   },
   "XXXLOsika.cornus@de": {
@@ -10826,7 +10845,7 @@
     "description": "Wohnlandschaft Austin",
     "preis": 10400,
     "entlasgung": 35,
-    "aktion": 30,
+    "aktion": 25,
     "pricing": "linear"
   },
   "XXXLPolinova.austin@de": {
@@ -10921,7 +10940,7 @@
     "description": "Wohnlandschaft Latina-L",
     "preis": 10400,
     "entlasgung": 35,
-    "aktion": 30,
+    "aktion": 25,
     "pricing": "linear"
   },
   "XXXLPolinova.latinal@de": {
@@ -11111,7 +11130,7 @@
     "description": "Wohnlandschaft Spliff-L",
     "preis": 10400,
     "entlasgung": 35,
-    "aktion": 30,
+    "aktion": 25,
     "pricing": "linear"
   },
   "Polipol.spliffl@de": {
@@ -12403,7 +12422,7 @@
     "description": "Schlafsofa Cleopatra",
     "preis": 8700,
     "entlasgung": 30,
-    "aktion": 30,
+    "aktion": 25,
     "pricing": "linear"
   },
   "XXXLRestyl.cleopatra@de": {
@@ -12574,7 +12593,7 @@
     "description": "Schlafsofa Palermo",
     "preis": 8700,
     "entlasgung": 30,
-    "aktion": 30,
+    "aktion": 25,
     "pricing": "linear"
   },
   "XXXLRestyl.palermo@de": {
@@ -13682,7 +13701,7 @@
   "XXXLSteinpol.varese@cz": {
     "fileName": "varese@cz",
     "productNumber": "0001440085",
-    "productVariants": "01 / 04 / 98 / ",
+    "productVariants": "01 / 04 / 40 / 41 / 98 / ",
     "online": "true",
     "konfig": "true",
     "modelName": "varese",
@@ -13701,7 +13720,7 @@
   "XXXLSteinpol.varese@sk": {
     "fileName": "varese@sk",
     "productNumber": "0001440085",
-    "productVariants": "01 / 04 / 98 / ",
+    "productVariants": "01 / 04 / 40 / 41 / 98 / ",
     "online": "true",
     "konfig": "true",
     "modelName": "varese",
@@ -14268,63 +14287,6 @@
     "aktion": 0,
     "pricing": "linear"
   },
-  "XXXLWerSal.monte@at": {
-    "fileName": "monte@at",
-    "productNumber": "0023070168",
-    "productVariants": "01 / 02 / 98 / ",
-    "online": "true",
-    "konfig": "true",
-    "modelName": "monte",
-    "locale": "at",
-    "currency": "EUR",
-    "catalog": "XXXLWerSal.Monte",
-    "brand": "MM",
-    "brandName": "",
-    "productGroup": "01",
-    "description": "Wohnlandschaft Monte",
-    "preis": 430,
-    "entlasgung": 40,
-    "aktion": 0,
-    "pricing": "linear"
-  },
-  "XXXLWerSal.monte@ch": {
-    "fileName": "monte@ch",
-    "productNumber": "0023070168",
-    "productVariants": "01 / 02 / 98 / ",
-    "online": "false",
-    "konfig": "false",
-    "modelName": "monte",
-    "locale": "ch",
-    "currency": "CHF",
-    "catalog": "XXXLWerSal.Monte",
-    "brand": "",
-    "brandName": "",
-    "productGroup": "",
-    "description": "Wohnlandschaft Monte",
-    "preis": 500,
-    "entlasgung": 40,
-    "aktion": 0,
-    "pricing": "linear"
-  },
-  "XXXLWerSal.monte@de": {
-    "fileName": "monte@de",
-    "productNumber": "0023070168",
-    "productVariants": "01 / 02 / 98 / ",
-    "online": "false",
-    "konfig": "false",
-    "modelName": "monte",
-    "locale": "de",
-    "currency": "EUR",
-    "catalog": "XXXLWerSal.Monte",
-    "brand": "",
-    "brandName": "",
-    "productGroup": "",
-    "description": "Wohnlandschaft Monte",
-    "preis": 430,
-    "entlasgung": 45,
-    "aktion": 0,
-    "pricing": "linear"
-  },
   "XXXLWerSal.nobile@at": {
     "fileName": "nobile@at",
     "productNumber": "0023070305",
@@ -14683,7 +14645,7 @@
     "description": "Boxspringbett Inferno",
     "preis": 9300,
     "entlasgung": 28,
-    "aktion": 30,
+    "aktion": 25,
     "pricing": "linear"
   },
   "XXXLWerSal.inferno@de": {
@@ -14816,26 +14778,7 @@
     "description": "Wohnlandschaft Nubo",
     "preis": 10000,
     "entlasgung": 28,
-    "aktion": 30,
-    "pricing": "linear"
-  },
-  "XXXLWerSal.nubo@de": {
-    "fileName": "nubo@de",
-    "productNumber": "0023070092",
-    "productVariants": "01 / 02 / 03 / 04 / 05 / 06 / 07 / 08 / 09 / 10 / YY / ",
-    "online": "true",
-    "konfig": "true",
-    "modelName": "nubo",
-    "locale": "de",
-    "currency": "",
-    "catalog": "XXXLWerSal.Nubo",
-    "brand": "LU",
-    "brandName": "Carryhome",
-    "productGroup": "01",
-    "description": "Wohnlandschaft Nubo",
-    "preis": 440,
-    "entlasgung": 0,
-    "aktion": 48,
+    "aktion": 25,
     "pricing": "linear"
   },
   "XXXLWerSal.nubo@se": {
@@ -15424,7 +15367,7 @@
     "description": "Wohnlandschaft Sambia-S",
     "preis": 10400,
     "entlasgung": 35,
-    "aktion": 30,
+    "aktion": 25,
     "pricing": "linear"
   },
   "Polipol.sambia@de": {
