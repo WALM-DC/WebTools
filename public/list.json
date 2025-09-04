@@ -2640,25 +2640,6 @@
     "aktion": 0,
     "pricing": "linear"
   },
-  "XXXLBlanar.nero@at": {
-    "fileName": "nero@at",
-    "productNumber": "0026480123",
-    "productVariants": "01 / 02 / 98 / ",
-    "online": "true",
-    "konfig": "true",
-    "modelName": "nero",
-    "locale": "at",
-    "currency": "EUR",
-    "catalog": "XXXLBlanar.Nero",
-    "brand": "MX",
-    "brandName": "",
-    "productGroup": "02",
-    "description": "Boxspringbett Nero",
-    "preis": 300,
-    "entlasgung": 39,
-    "aktion": 0,
-    "pricing": "linear"
-  },
   "XXXLBlanar.nero@cz": {
     "fileName": "nero@cz",
     "productNumber": "0026480123",
@@ -4804,6 +4785,25 @@
     "preis": 470,
     "entlasgung": 0,
     "aktion": 48,
+    "pricing": "linear"
+  },
+  "XXXLDominari.fustic@hu": {
+    "fileName": "fustic@hu",
+    "productNumber": "0014080014",
+    "productVariants": "01 / 02 / 11 / 34 / 35 / YY / ",
+    "online": "",
+    "konfig": "",
+    "modelName": "fustic",
+    "locale": "hu",
+    "currency": "HUF",
+    "catalog": "XXXLDominari.Fustic",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "02",
+    "description": "Boxspringbett Fustic",
+    "preis": 94000,
+    "entlasgung": 0,
+    "aktion": 0,
     "pricing": "linear"
   },
   "XXXLDominari.ibiza@de": {
