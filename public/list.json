@@ -4730,6 +4730,25 @@
     "aktion": 0,
     "pricing": "linear"
   },
+  "XXXLDominari.atlanta@hu": {
+    "fileName": "atlanta@hu",
+    "productNumber": "0014080001",
+    "productVariants": "01 / 02 / 03 / 04 / 05 / 06 / 07 / 09 / YY / ",
+    "online": "",
+    "konfig": "",
+    "modelName": "atlanta",
+    "locale": "hu",
+    "currency": "HUF",
+    "catalog": "XXXLDominari.Atlanta",
+    "brand": "LU",
+    "brandName": "Carryhome",
+    "productGroup": "02",
+    "description": "Boxspringbett Atlanta",
+    "preis": 92500,
+    "entlasgung": 0,
+    "aktion": 0,
+    "pricing": "linear"
+  },
   "XXXLDominari.fustic@at": {
     "fileName": "fustic@at",
     "productNumber": "0014080014",
@@ -6630,25 +6649,6 @@
     "aktion": 0,
     "pricing": "linear"
   },
-  "XXXLGutmann.donato@cz": {
-    "fileName": "donato@cz",
-    "productNumber": "0018771000",
-    "productVariants": "01 / 99 / ",
-    "online": "",
-    "konfig": "",
-    "modelName": "donato",
-    "locale": "cz",
-    "currency": "CZK",
-    "catalog": "XXXLGutmann.Donato",
-    "brand": "LU",
-    "brandName": "Carryhome",
-    "productGroup": "01",
-    "description": "Ecksofa Donato",
-    "preis": 7000,
-    "entlasgung": 24,
-    "aktion": 25,
-    "pricing": "linear"
-  },
   "XXXLGutmann.donato@de": {
     "fileName": "donato@de",
     "productNumber": "0018771000",
@@ -6666,25 +6666,6 @@
     "preis": 150,
     "entlasgung": 0,
     "aktion": 0,
-    "pricing": "linear"
-  },
-  "XXXLGutmann.donato@sk": {
-    "fileName": "donato@sk",
-    "productNumber": "0018771000",
-    "productVariants": "01 / 99 / ",
-    "online": "",
-    "konfig": "",
-    "modelName": "donato",
-    "locale": "sk",
-    "currency": "EUR",
-    "catalog": "XXXLGutmann.Donato",
-    "brand": "LU",
-    "brandName": "Carryhome",
-    "productGroup": "01",
-    "description": "Ecksofa Donato",
-    "preis": 277,
-    "entlasgung": 24,
-    "aktion": 30,
     "pricing": "linear"
   },
   "XXXLGutmann.flake@de": {
