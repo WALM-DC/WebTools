@@ -9077,7 +9077,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Spliff-S Express",
     "preis": 10400,
-    "entlasgung": 35,
+    "entlasgung": 33,
     "aktion": 25,
     "pricing": "linear"
   },
@@ -9134,7 +9134,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Spliff-S Express",
     "preis": 415,
-    "entlasgung": 35,
+    "entlasgung": 33,
     "aktion": 25,
     "pricing": "linear"
   },
@@ -10958,7 +10958,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Austin",
     "preis": 10400,
-    "entlasgung": 35,
+    "entlasgung": 33,
     "aktion": 25,
     "pricing": "linear"
   },
@@ -10996,7 +10996,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Austin",
     "preis": 415,
-    "entlasgung": 35,
+    "entlasgung": 33,
     "aktion": 25,
     "pricing": "linear"
   },
@@ -11053,7 +11053,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Latina-L",
     "preis": 10400,
-    "entlasgung": 35,
+    "entlasgung": 33,
     "aktion": 25,
     "pricing": "linear"
   },
@@ -11110,7 +11110,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Latina-L",
     "preis": 415,
-    "entlasgung": 35,
+    "entlasgung": 33,
     "aktion": 25,
     "pricing": "linear"
   },
@@ -11243,7 +11243,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Spliff-L",
     "preis": 10400,
-    "entlasgung": 35,
+    "entlasgung": 33,
     "aktion": 25,
     "pricing": "linear"
   },
@@ -11300,7 +11300,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Spliff-L",
     "preis": 415,
-    "entlasgung": 35,
+    "entlasgung": 33,
     "aktion": 25,
     "pricing": "linear"
   },
@@ -15294,6 +15294,25 @@
     "aktion": 48,
     "pricing": "linear"
   },
+  "XXXLWSchillig.jackie@hu": {
+    "fileName": "jackie@hu",
+    "productNumber": "0001370064",
+    "productVariants": "25 / 33 / 37 / 39 / 41 / 68 / YY / ",
+    "online": "",
+    "konfig": "",
+    "modelName": "jackie",
+    "locale": "hu",
+    "currency": "HUF",
+    "catalog": "XXXLWSchillig.Jackie",
+    "brand": "LU",
+    "brandName": "Chilliano",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Jackie",
+    "preis": 89000,
+    "entlasgung": 0,
+    "aktion": 0,
+    "pricing": "linear"
+  },
   "XXXLWSchillig.sprint@at": {
     "fileName": "sprint@at",
     "productNumber": "0001370131",
@@ -15556,7 +15575,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Sambia-S",
     "preis": 10400,
-    "entlasgung": 35,
+    "entlasgung": 33,
     "aktion": 25,
     "pricing": "linear"
   },
@@ -15613,7 +15632,7 @@
     "productGroup": "01",
     "description": "Wohnlandschaft Sambia-S",
     "preis": 415,
-    "entlasgung": 35,
+    "entlasgung": 33,
     "aktion": 25,
     "pricing": "linear"
   },
