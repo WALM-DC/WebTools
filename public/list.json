@@ -664,6 +664,25 @@
     "aktion": 48,
     "pricing": "linear"
   },
+  "Ada.atlanta2@hu": {
+    "fileName": "atlanta2@hu",
+    "productNumber": "0006960148",
+    "productVariants": "01 / 02 / YY / ",
+    "online": "",
+    "konfig": "",
+    "modelName": "atlanta2",
+    "locale": "hu",
+    "currency": "HUF",
+    "catalog": "Ada.Atlanta2",
+    "brand": "LU",
+    "brandName": "Dieter Knoll",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Atlanta 2.0",
+    "preis": 90000,
+    "entlasgung": 0,
+    "aktion": 0,
+    "pricing": "linear"
+  },
   "Ada.blues@de": {
     "fileName": "blues@de",
     "productNumber": "0006960147",
@@ -795,6 +814,25 @@
     "preis": 472,
     "entlasgung": 0,
     "aktion": 48,
+    "pricing": "linear"
+  },
+  "XXXLAda.dreamroyal@hu": {
+    "fileName": "dreamroyal@hu",
+    "productNumber": "0026380012",
+    "productVariants": "01 / YY / ",
+    "online": "",
+    "konfig": "",
+    "modelName": "dreamroyal",
+    "locale": "hu",
+    "currency": "CHF",
+    "catalog": "XXXLAda.DreamRoyal",
+    "brand": "LU",
+    "brandName": "Dieter Knoll",
+    "productGroup": "02",
+    "description": "Polsterbett Dream Royal",
+    "preis": 82000,
+    "entlasgung": 0,
+    "aktion": 0,
     "pricing": "linear"
   },
   "XXXLAda.grandsavoy@at": {
@@ -1327,6 +1365,25 @@
     "preis": 425,
     "entlasgung": 0,
     "aktion": 48,
+    "pricing": "linear"
+  },
+  "XXXLAda.m8335@hu": {
+    "fileName": "m8335@hu",
+    "productNumber": "0025270355",
+    "productVariants": "01 / 02 / YY / ",
+    "online": "",
+    "konfig": "",
+    "modelName": "m8335",
+    "locale": "hu",
+    "currency": "HUF",
+    "catalog": "XXXLAda.M8335",
+    "brand": "LU",
+    "brandName": "Xora",
+    "productGroup": "01",
+    "description": "Wohnlandschaft M8335",
+    "preis": 85000,
+    "entlasgung": 0,
+    "aktion": 0,
     "pricing": "linear"
   },
   "Ada.mondello@de": {
