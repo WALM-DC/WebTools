@@ -90,7 +90,8 @@
                                 <th>Hersteller</th>
                                 <th>Lieferant</th>
                                 <th>Modellname</th>
-                                <th>CatalogID</th>
+                                <th>Target_ID</th>
+                                <th>Catalog_ID</th>
                             </tr>
                         </table>
                     </div>
@@ -140,12 +141,13 @@
                     },
 
                     success: function (response) {
-                        var openXMLData = '';
+                        var openXMLName = '', openXMLTarget = '';
                         $(response).find('TARGET').each(function () {
-                            openXMLData += 'Target_ID: '+$(this).find('TARGET_ID').text()+'<br>'+
-                            $(this).find('NAME').text()+'<br><br>';
+                            openXMLTarget += $(this).find('TARGET_ID').text()+'<br>';
+                            openXMLName += $(this).find('NAME').text()+'<br>';
                         })
-                        $('#'+xmlName).html(openXMLData)
+                        $('#target_'+xmlName).html(openXMLTarget)
+                        $('#'+xmlName).html(openXMLName)
                     }
                 })
         }
@@ -161,7 +163,8 @@
                         '<td>'+val.split('_')[0]+'</td>'+
                         '<td>'+val.split('_')[1]+'</td>'+
                         '<td>'+val.split('_')[2]+'</td>'+
-                        '<td id="'+val+'" class="alignRight"><div class="clickMe" onClick="openXML(this)" name="'+val+'">Load Country-Data</div></td></tr>'
+                        '<td id="target_'+val+'" style="width:100px" class="alignRight"></td>'+
+                        '<td id="'+val+'"><div class="clickMe" onClick="openXML(this)" name="'+val+'">Load Country-Data</div></td></tr>'
                     )
                 })
                 filterTable();
