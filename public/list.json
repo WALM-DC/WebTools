@@ -154,7 +154,7 @@
   "XXXLAda.fabala@at": {
     "fileName": "fabala@at",
     "productNumber": "0026380328",
-    "productVariants": "01 / 02 / 03 / 04 / YY / ",
+    "productVariants": "01 / 02 / 03 / 04 / 21 / 23 / 24 / 25 / 26 / 27 / 29 / 87 / 93 / 95 / YY / ",
     "online": "true",
     "konfig": "true",
     "modelName": "fabala",
@@ -173,7 +173,7 @@
   "XXXLAda.fabala@ch": {
     "fileName": "fabala@ch",
     "productNumber": "0026380328",
-    "productVariants": "01 / 21 / 23 / 24 / 25 / 26 / 27 / 29 / 87 / 93 / 95 / YY / ",
+    "productVariants": "01 / 02 / 03 / 21 / 23 / 24 / 25 / 26 / 27 / 29 / 87 / 93 / 95 / YY / ",
     "online": "true",
     "konfig": "true",
     "modelName": "fabala",
@@ -192,7 +192,7 @@
   "XXXLAda.fabala@de": {
     "fileName": "fabala@de",
     "productNumber": "0026380328",
-    "productVariants": "01 / 21 / 23 / 24 / 25 / 26 / 27 / 29 / 87 / 93 / 95 / YY / ",
+    "productVariants": "01 / 03 / 21 / 23 / 24 / 25 / 26 / 27 / 29 / 87 / 93 / 95 / YY / ",
     "online": "true",
     "konfig": "true",
     "modelName": "fabala",
@@ -9309,6 +9309,25 @@
     "aktion": 44.75,
     "pricing": "linear"
   },
+  "Polipol.spliffs@hu": {
+    "fileName": "spliffs@hu",
+    "productNumber": "0007110053",
+    "productVariants": "01 / 02 / 53 / YY / ",
+    "online": "",
+    "konfig": "",
+    "modelName": "spliffs",
+    "locale": "hu",
+    "currency": "HUF",
+    "catalog": "Polipol.Spliff5128",
+    "brand": "LU",
+    "brandName": "Beldomo Speed",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Spliff-S Express",
+    "preis": 100000,
+    "entlasgung": 0,
+    "aktion": 0,
+    "pricing": "linear"
+  },
   "Polipol.spliffs@se": {
     "fileName": "spliffs@se",
     "productNumber": "0007110053",
@@ -11568,6 +11587,25 @@
     "preis": 480,
     "entlasgung": 0,
     "aktion": 44.75,
+    "pricing": "linear"
+  },
+  "Polipol.spliffl@hu": {
+    "fileName": "spliffl@hu",
+    "productNumber": "0025070028",
+    "productVariants": "04 / 05 / YY / ",
+    "online": "",
+    "konfig": "",
+    "modelName": "spliffl",
+    "locale": "hu",
+    "currency": "HUF",
+    "catalog": "Polipol.Spliff5128",
+    "brand": "LU",
+    "brandName": "Beldomo Speed",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Spliff-L",
+    "preis": 100000,
+    "entlasgung": 0,
+    "aktion": 0,
     "pricing": "linear"
   },
   "Polipol.spliffl@se": {
