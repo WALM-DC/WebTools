@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>XML-Liste-Country</title>
+        <title>XML-Checker</title>
         <link rel="stylesheet" href="mattStyle.css">
         <script src="jquery-3.7.1.min.js"></script>
         <script src="ddtf.js"></script>
@@ -21,7 +21,10 @@
                 color: whitesmoke;
             }
             select{
-                max-width: 200px;
+                width: auto;
+            }
+            option{
+                cursor: pointer;
             }
             table{
                 border-collapse: collapse;
@@ -72,6 +75,12 @@
                 color: white;
                 background-color: darkcyan;
             }
+            .selectDiv, .selectDiv>div{
+                display: flex;
+            }
+            .hideMe{
+                display: none;
+            }
         </style>
     </head>
     <body>
@@ -83,13 +92,13 @@
                 <div class="selectDiv">
                     <div>
                         <label for="xmlFirstSelect">XML ausw&auml;hlen:</label>
-                        <select id="xmlFirstSelect">
+                        <select id="xmlFirstSelect" size="50">
                             
                         </select>
                     </div>
                     <div>
                         <label for="xmlSecondSelect">XML ausw&auml;hlen:</label>
-                        <select id="xmlSecondSelect">
+                        <select id="xmlSecondSelect" size="50">
                             
                         </select>
                     </div>
@@ -170,6 +179,18 @@
 
                     $('#xmlFirstSelect').append(
                         '<option value="'+val+'">'+val+'</option>'
+                    )
+                })
+                // filterTable();
+                // jQuery('#myTable').ddTableFilter();
+            });
+            $.getJSON( "https://ig-creator.xxxlgroup.com/idm/indexAll.json", function( data ) {
+                $.each(data, function(id, val){
+
+                    // openXML(val);
+
+                    $('#xmlSecondSelect').append(
+                        '<option value="'+val+'" class="hideMe">'+val+'</option>'
                     )
                 })
                 // filterTable();
