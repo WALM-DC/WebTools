@@ -1,0 +1,181 @@
+<html>
+    <head>
+        <title>XML-Liste-Country</title>
+        <link rel="stylesheet" href="mattStyle.css">
+        <script src="jquery-3.7.1.min.js"></script>
+        <script src="ddtf.js"></script>
+        <script src="mattQuery.js"></script>
+        <style>
+            .resultDiv{
+                width: 100%;
+                /* display: flex; */
+                align-items: center;
+                justify-content: center;
+                text-align: right;
+            }
+            .div_before_table {
+                overflow: auto;
+                height: calc(100% - 133px);
+            }
+            h3{
+                color: whitesmoke;
+            }
+            select{
+                max-width: 200px;
+            }
+            table{
+                border-collapse: collapse;
+                width: 100%;
+                background-color: white;
+                font-size: 14px;
+            }
+            table tr:hover{
+                background-color: khaki;
+            }
+            table td, table th{
+                border: 1px solid #dddddd;
+                padding: 5px;
+                text-align: left;
+                max-width: 200px;
+                align-content: flex-start;
+            }
+            .alignRight{
+                text-align: right;
+            }
+            table th{
+                top: 0;
+                z-index: 2;
+                position: sticky;
+                background-color: white;
+                box-shadow: 2px 2px 2px gray;
+            }
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+            input[type=text] {
+                width: 30%;
+                padding: 8px;
+                margin-top: 6px;
+                margin-bottom: 16px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                text-align: right;
+            }
+            .clickMe{
+                cursor: pointer;
+                background-color: darkorange;
+                text-align: center;
+                border-radius: 7px;
+            }
+            .clickMe:hover{
+                color: white;
+                background-color: darkcyan;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="masterDiv">
+            <div class="topDiv">
+                <h2>XML-Checker</h2>
+            </div>
+            <div>
+                <div class="selectDiv">
+                    <div>
+                        <label for="xmlFirstSelect">XML ausw&auml;hlen:</label>
+                        <select id="xmlFirstSelect">
+                            
+                        </select>
+                    </div>
+                    <div>
+                        <label for="xmlSecondSelect">XML ausw&auml;hlen:</label>
+                        <select id="xmlSecondSelect">
+                            
+                        </select>
+                    </div>
+                </div>
+                <div class="resultDiv">
+                    
+                </div>    
+            </div>
+        </div>
+    </body>
+    <script>
+        // function countColumns(){
+        //     $('#myCounter').html(($('table tr').length-1)-($('table tr[style="display: none;"]').length));
+        // }
+
+        // function filterTable() {
+        //     var input, filter, table, tr, td, i, txtValue;
+        //     input = document.getElementById("myInput");
+        //     filter = input.value.toUpperCase();
+        //     table = document.getElementById("myTable");
+        //     tr = table.getElementsByTagName("tr");
+
+        //     for (i = 0; i < tr.length; i++) {
+        //         td = tr[i].getElementsByTagName("td");
+        //         for (var j = 0; j < td.length; j++) {
+        //         txtValue = td[j].textContent || td[j].innerText;
+        //         if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        //             tr[i].style.display = "";
+        //             break;
+        //         } else {
+        //             tr[i].style.display = "none";
+        //         }
+        //         }
+        //     }
+        //     countColumns()
+        // }
+
+        function openXML(clickedElement){
+            var xmlName = $(clickedElement).attr('name');
+            var xmlPath = 'https://ig-creator.xxxlgroup.com/idm/'+xmlName+'.xml';
+
+            $.ajax({
+                    type: "GET",
+                    url: xmlPath,
+                    dataType: "xml",
+
+                    error: function (e) {
+                        alert("An error occurred while processing XML file");
+                        console.log("XML reading Failed: ", e);
+                    },
+
+                    success: function (response) {
+                        var dataArray = [], openXMLData = {}, openXMLName = '', openXMLTarget = '';
+                        // get Target and Country data
+                        $(response).find('TARGET').each(function () {
+                            openXMLData = {
+                                Target_ID: $(this).find('TARGET_ID').text(),
+                                Country_ID: $(this).find('NAME').text()
+                            }
+                            dataArray.push(openXMLData);
+                        })
+                        dataArray.sort(function(a, b){if(a.Country_ID < b.Country_ID){return -1} if(a.Country_ID > b.Country_ID){return 1} return 0})
+                        $.each(dataArray, function(id, val){
+                            openXMLTarget += val.Target_ID+'<br>';
+                            openXMLName += val.Country_ID+'<br>';
+                        })
+                        $('#target_'+xmlName).html(openXMLTarget)
+                        $('#'+xmlName).html(openXMLName)
+                    }
+                })
+        }
+
+        function readAndShowJSON(){
+            $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index.json", function( data ) {
+                $.each(data, function(id, val){
+
+                    // openXML(val);
+
+                    $('#xmlFirstSelect').append(
+                        '<option value="'+val+'">'+val+'</option>'
+                    )
+                })
+                // filterTable();
+                // jQuery('#myTable').ddTableFilter();
+            });
+        }
+        readAndShowJSON();
+    </script>
+</html>
