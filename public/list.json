@@ -2541,7 +2541,7 @@
     "productGroup": "02",
     "description": "Polsterbett Lesia",
     "preis": 450,
-    "entlasgung": 55,
+    "entlasgung": 57,
     "aktion": 0,
     "pricing": "linear"
   },
@@ -2560,7 +2560,7 @@
     "productGroup": "03",
     "description": "Boxspringbett Remi",
     "preis": 450,
-    "entlasgung": 52,
+    "entlasgung": 54,
     "aktion": 0,
     "pricing": "linear"
   },
@@ -2598,7 +2598,7 @@
     "productGroup": "03",
     "description": "Boxspringbett Remi",
     "preis": 450,
-    "entlasgung": 52,
+    "entlasgung": 54,
     "aktion": 0,
     "pricing": "linear"
   },
@@ -5202,6 +5202,25 @@
     "description": "Wohnlandschaft Malaga",
     "preis": 8331,
     "entlasgung": 35,
+    "aktion": 0,
+    "pricing": "linear"
+  },
+  "XXXLEuromebel.malaga@hu": {
+    "fileName": "malaga@hu",
+    "productNumber": "0008120024",
+    "productVariants": "01 / 02 / 98 / ",
+    "online": "",
+    "konfig": "",
+    "modelName": "malaga",
+    "locale": "hu",
+    "currency": "HUF",
+    "catalog": "XXXLEuromebel.Malaga",
+    "brand": "MX",
+    "brandName": "Ondega",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Malaga",
+    "preis": 136000,
+    "entlasgung": 30,
     "aktion": 0,
     "pricing": "linear"
   },
@@ -9532,8 +9551,8 @@
     "brandName": "",
     "productGroup": "02",
     "description": "Boxspringbett Malaga",
-    "preis": 500,
-    "entlasgung": 43,
+    "preis": 520,
+    "entlasgung": 46,
     "aktion": 0,
     "pricing": "linear"
   },
@@ -9570,8 +9589,8 @@
     "brandName": "",
     "productGroup": "",
     "description": "Boxspringbett Malaga",
-    "preis": 500,
-    "entlasgung": 43,
+    "preis": 520,
+    "entlasgung": 46,
     "aktion": 0,
     "pricing": "linear"
   },
@@ -9609,7 +9628,7 @@
     "productGroup": "02",
     "description": "Boxspringbett Primo",
     "preis": 520,
-    "entlasgung": 51,
+    "entlasgung": 48,
     "aktion": 0,
     "pricing": "linear"
   },
@@ -9628,7 +9647,7 @@
     "productGroup": "02",
     "description": "Boxspringbett Primo",
     "preis": 520,
-    "entlasgung": 51,
+    "entlasgung": 48,
     "aktion": 0,
     "pricing": "linear"
   },
