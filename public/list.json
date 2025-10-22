@@ -984,7 +984,7 @@
     "description": "Wohnlandschaft 7435",
     "preis": 8200,
     "entlasgung": 26,
-    "aktion": 21,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLAda.m7435@de": {
@@ -1022,7 +1022,7 @@
     "description": "Wohnlandschaft 7435",
     "preis": 325,
     "entlasgung": 26,
-    "aktion": 23,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLAda.m7520@at": {
@@ -1231,7 +1231,7 @@
     "description": "Wohnlandschaft M7588",
     "preis": 8200,
     "entlasgung": 26,
-    "aktion": 21,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLAda.m7588@de": {
@@ -1269,7 +1269,7 @@
     "description": "Wohnlandschaft M7588",
     "preis": 325,
     "entlasgung": 26,
-    "aktion": 23,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLAda.m7686@ch": {
@@ -1820,7 +1820,7 @@
     "description": "Wohnlandschaft Figaro",
     "preis": 10900,
     "entlasgung": 31,
-    "aktion": 21,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLBenix.figaro@de": {
@@ -1915,7 +1915,7 @@
     "description": "Wohnlandschaft Figaro",
     "preis": 428,
     "entlasgung": 31,
-    "aktion": 23,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLBenix.marola@cz": {
@@ -1934,7 +1934,7 @@
     "description": "Wohnlandschaft Marola",
     "preis": 10900,
     "entlasgung": 31,
-    "aktion": 21,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLBenix.marola@de": {
@@ -1972,7 +1972,7 @@
     "description": "Wohnlandschaft Marola",
     "preis": 428,
     "entlasgung": 31,
-    "aktion": 23,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLBenix.mevi@de": {
@@ -3321,7 +3321,7 @@
     "description": "Wohnlandschaft Pure 926",
     "preis": 9500,
     "entlasgung": 35,
-    "aktion": 21,
+    "aktion": 20,
     "pricing": "linear"
   },
   "Candy.pure926@hu": {
@@ -3761,10 +3761,48 @@
     "aktion": 0,
     "pricing": "linear"
   },
+  "Candy.purecomfort700@at": {
+    "fileName": "purecomfort700@at",
+    "productNumber": "0002740004",
+    "productVariants": "75 / 76 / 1H / 99 / ",
+    "online": "",
+    "konfig": "",
+    "modelName": "purecomfort700",
+    "locale": "at",
+    "currency": "",
+    "catalog": "Candy.Multi_20",
+    "brand": "LU",
+    "brandName": "Pure Home",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Pure Comfort 700",
+    "preis": 360,
+    "entlasgung": 30,
+    "aktion": 10,
+    "pricing": "linear"
+  },
+  "Candy.purecomfort700@ch": {
+    "fileName": "purecomfort700@ch",
+    "productNumber": "0002740004",
+    "productVariants": "75 / 76 / 1H / 99 / ",
+    "online": "",
+    "konfig": "",
+    "modelName": "purecomfort700",
+    "locale": "ch",
+    "currency": "CHF",
+    "catalog": "Candy.Multi_20",
+    "brand": "LU",
+    "brandName": "Pure Home",
+    "productGroup": "01",
+    "description": "Wohnlandschaft Pure Comfort 700",
+    "preis": 370,
+    "entlasgung": 25,
+    "aktion": 0,
+    "pricing": "linear"
+  },
   "Candy.purecomfort700@de": {
     "fileName": "purecomfort700@de",
     "productNumber": "0002740004",
-    "productVariants": "75 / 76 / 1H / YY / ",
+    "productVariants": "75 / 76 / 1H / 99 / ",
     "online": "true",
     "konfig": "true",
     "modelName": "purecomfort700",
@@ -3853,7 +3891,7 @@
     "description": "Wohnlandschaft Pure Comfort 821",
     "preis": 9500,
     "entlasgung": 27,
-    "aktion": 21,
+    "aktion": 20,
     "pricing": "linear"
   },
   "Candy.purecomfort821@de": {
@@ -4195,7 +4233,7 @@
     "description": "Boxspringbett Pedro",
     "preis": 9500,
     "entlasgung": 30,
-    "aktion": 21,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLMebleMarzeni.pedro@de": {
@@ -5525,7 +5563,7 @@
     "description": "Wohnlandschaft Norwalk",
     "preis": 10000,
     "entlasgung": 29,
-    "aktion": 21,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLEuromebel.norwalk@de": {
@@ -5582,7 +5620,7 @@
     "description": "Wohnlandschaft Norwalk",
     "preis": 400,
     "entlasgung": 29,
-    "aktion": 23,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLEuromebel.rossi@at": {
@@ -5639,7 +5677,7 @@
     "description": "Wohnlandschaft Rossi",
     "preis": 10000,
     "entlasgung": 29,
-    "aktion": 21,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLEuromebel.rossi@de": {
@@ -5696,7 +5734,7 @@
     "description": "Wohnlandschaft Rossi",
     "preis": 400,
     "entlasgung": 29,
-    "aktion": 23,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLEuromebel.santana@at": {
@@ -5943,7 +5981,7 @@
     "description": "Schlafsofa Santo",
     "preis": 11700,
     "entlasgung": 38,
-    "aktion": 21,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLFilex.santo@hu": {
@@ -5981,7 +6019,7 @@
     "description": "Schlafsofa Santo",
     "preis": 457,
     "entlasgung": 38,
-    "aktion": 23,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLGabiPpuh.bonny@at": {
@@ -6323,7 +6361,7 @@
     "description": "Wohnlandschaft Inferno",
     "preis": 10300,
     "entlasgung": 26,
-    "aktion": 21,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLGabiPpuh.inferno@de": {
@@ -6380,7 +6418,7 @@
     "description": "Wohnlandschaft Inferno",
     "preis": 404,
     "entlasgung": 26,
-    "aktion": 23,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLGabiPpuh.swing@at": {
@@ -7064,7 +7102,7 @@
     "description": "Ecksofa 1928",
     "preis": 8200,
     "entlasgung": 21,
-    "aktion": 21,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLHimolla.M1928@de": {
@@ -7102,7 +7140,7 @@
     "description": "Ecksofa 1928",
     "preis": 325,
     "entlasgung": 21,
-    "aktion": 23,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLHimolla.M4537@de": {
@@ -8850,7 +8888,7 @@
     "description": "Wohnlandschaft Amanda",
     "preis": 10000,
     "entlasgung": 25,
-    "aktion": 21,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLMebleBugajski.amanda@de": {
@@ -8888,7 +8926,7 @@
     "description": "Wohnlandschaft Amanda",
     "preis": 393,
     "entlasgung": 25,
-    "aktion": 23,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXL2314.juniorgold@at": {
@@ -9287,7 +9325,7 @@
     "description": "Wohnlandschaft Spliff-S Express",
     "preis": 10400,
     "entlasgung": 33,
-    "aktion": 21,
+    "aktion": 20,
     "pricing": "linear"
   },
   "Polipol.spliffs@de": {
@@ -9363,7 +9401,7 @@
     "description": "Wohnlandschaft Spliff-S Express",
     "preis": 415,
     "entlasgung": 33,
-    "aktion": 23,
+    "aktion": 20,
     "pricing": "linear"
   },
   "Polipol.vegas@at": {
@@ -10066,7 +10104,7 @@
     "description": "Wohnlandschaft Brooklyn",
     "preis": 8500,
     "entlasgung": 26,
-    "aktion": 21,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLNovaVia.brooklyn@de": {
@@ -10104,7 +10142,7 @@
     "description": "Wohnlandschaft Brooklyn",
     "preis": 340,
     "entlasgung": 26,
-    "aktion": 23,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLNovaVia.casablanca@at": {
@@ -10541,7 +10579,7 @@
     "description": "Polsterbett Ravello",
     "preis": 8000,
     "entlasgung": 20,
-    "aktion": 21,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLOschmann.ravello@de": {
@@ -10598,7 +10636,7 @@
     "description": "Polsterbett Ravello",
     "preis": 320,
     "entlasgung": 20,
-    "aktion": 23,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLOsika.cornus@at": {
@@ -10655,7 +10693,7 @@
     "description": "Bett Cornus",
     "preis": 8800,
     "entlasgung": 25,
-    "aktion": 21,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLOsika.cornus@de": {
@@ -10693,7 +10731,7 @@
     "description": "Bett Cornus",
     "preis": 350,
     "entlasgung": 25,
-    "aktion": 23,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLOsika.silene@at": {
@@ -11206,7 +11244,7 @@
     "description": "Wohnlandschaft Austin",
     "preis": 10400,
     "entlasgung": 33,
-    "aktion": 21,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLPolinova.austin@de": {
@@ -11244,7 +11282,7 @@
     "description": "Wohnlandschaft Austin",
     "preis": 415,
     "entlasgung": 33,
-    "aktion": 23,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLPolinova.latinal@at": {
@@ -11301,7 +11339,7 @@
     "description": "Wohnlandschaft Latina-L",
     "preis": 10400,
     "entlasgung": 33,
-    "aktion": 21,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLPolinova.latinal@de": {
@@ -11358,7 +11396,7 @@
     "description": "Wohnlandschaft Latina-L",
     "preis": 415,
     "entlasgung": 33,
-    "aktion": 23,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLPolinova.latinalplus@at": {
@@ -11491,7 +11529,7 @@
     "description": "Wohnlandschaft Spliff-L",
     "preis": 10400,
     "entlasgung": 33,
-    "aktion": 21,
+    "aktion": 20,
     "pricing": "linear"
   },
   "Polipol.spliffl@de": {
@@ -11567,7 +11605,7 @@
     "description": "Wohnlandschaft Spliff-L",
     "preis": 415,
     "entlasgung": 33,
-    "aktion": 23,
+    "aktion": 20,
     "pricing": "linear"
   },
   "Polipol.wiesbadenl@ch": {
@@ -12156,7 +12194,7 @@
     "description": "Bett Fina",
     "preis": 9300,
     "entlasgung": 30,
-    "aktion": 21,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLPrimaNamjestaj.fina@de": {
@@ -12194,7 +12232,7 @@
     "description": "Bett Fina",
     "preis": 370,
     "entlasgung": 30,
-    "aktion": 23,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLPrimaNamjestaj.malibu@at": {
@@ -12878,7 +12916,7 @@
     "description": "Schlafsofa Cleopatra",
     "preis": 8700,
     "entlasgung": 30,
-    "aktion": 21,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLRestyl.cleopatra@de": {
@@ -12935,7 +12973,7 @@
     "description": "Schlafsofa Cleopatra",
     "preis": 348,
     "entlasgung": 30,
-    "aktion": 23,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLRestyl.juice@at": {
@@ -13049,7 +13087,7 @@
     "description": "Schlafsofa Palermo",
     "preis": 8700,
     "entlasgung": 30,
-    "aktion": 21,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLRestyl.palermo@de": {
@@ -13106,7 +13144,7 @@
     "description": "Schlafsofa Palermo",
     "preis": 348,
     "entlasgung": 30,
-    "aktion": 23,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLRestyl.victoria@de": {
@@ -15215,7 +15253,7 @@
     "description": "Boxspringbett Inferno",
     "preis": 9300,
     "entlasgung": 28,
-    "aktion": 21,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLWerSal.inferno@de": {
@@ -15272,7 +15310,7 @@
     "description": "Boxspringbett Inferno",
     "preis": 370,
     "entlasgung": 28,
-    "aktion": 23,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLWerSal.rey@de": {
@@ -15899,7 +15937,7 @@
     "description": "Wohnlandschaft Sambia-S",
     "preis": 10400,
     "entlasgung": 33,
-    "aktion": 21,
+    "aktion": 20,
     "pricing": "linear"
   },
   "Polipol.sambia@de": {
@@ -15956,7 +15994,7 @@
     "description": "Wohnlandschaft Sambia-S",
     "preis": 415,
     "entlasgung": 33,
-    "aktion": 23,
+    "aktion": 20,
     "pricing": "linear"
   },
   "XXXLZehdenick.tyron@at": {
