@@ -29,19 +29,30 @@
             }
             table{
                 border-collapse: collapse;
-                width: 49%;
-                max-width: 600px;
+                width: 100%;
+                max-width: 1200px;
                 background-color: white;
                 font-size: 14px;
             }
-            table tr:hover{
-                background-color: khaki;
+            /* tr:nth-child(even) {
+                background-color: #f2f2f2;
+            } */
+            .match{
+                background-color: lightgreen;
+            }
+            .noMatch{
+                background-color: lightcoral;
+            }
+            table tr:hover td{
+                border: 1px solid black;
+                box-shadow: 5px 0px 6px 0px yellow;
+                background: rgb(255 255 255 / 60%);
             }
             table td, table th{
                 border: 1px solid #dddddd;
                 padding: 5px;
                 text-align: left;
-                max-width: 200px;
+                /* max-width: 200px; */
                 align-content: flex-start;
             }
             table th{
@@ -50,9 +61,6 @@
                 position: sticky;
                 background-color: white;
                 box-shadow: 2px 2px 2px gray;
-            }
-            tr:nth-child(even) {
-                background-color: #f2f2f2;
             }
             .innerTable{
                 width: 100%;
@@ -87,11 +95,12 @@
             .hideMe{
                 display: none;
             }
-            .match{
-                background-color: lightgreen;
-            }
-            .noMatch{
-                background-color: lightcoral;
+            .loading{
+                background-image: url(loading.gif);
+                background-repeat: no-repeat;
+                min-height: 400px;
+                background-position: center 30px;
+                background-size: contain;
             }
         </style>
     </head>
@@ -116,30 +125,58 @@
                     </div>
                 </div>
                 <div class="resultDiv">
+                    <table id="resultTable">
+
+                    </table>
+                    <!-- <table id="tableOld">
+
+                    </table>
                     <table id="tableNew">
 
                     </table>
                     <table id="tableOld">
 
-                    </table>
+                    </table> -->
                 </div>    
             </div>
         </div>
     </body>
     <script>
-        var indexAll = {}, firstXML = '', secondXML = '';
+        var indexAll = {}, firstXML = [], secondXML = [], firstSelectedXML = '', secondSelectedXML = '';
 
         function checkAndCompareTables(){
-            $.each($('#tableNew > tr > td'), function(id, val){
-                var newText = val.innerText;
-                var oldText = $('#tableOld > tr > td')[id].innerText;
-                if(newText === oldText){
-                    $(val).addClass('match');
-                    $($('#tableOld > tr > td')[id]).addClass('match');
-                } else {
-                    $(val).addClass('noMatch');
-                    $($('#tableOld > tr > td')[id]).addClass('noMatch');
-                }
+            // console.log('First XML Array:', firstXML);
+            // console.log('Second XML Array:', secondXML);
+            //     $.each($('#tableNew > tr > td'), function(id, val){
+            //         var newText = val.innerText;
+            //         var oldText = $('#tableOld > tr > td')[id].innerText;
+            //         if(newText === oldText){
+            //             $(val).addClass('match');
+            //             $($('#tableOld > tr > td')[id]).addClass('match');
+            //         } else {
+            //             $(val).addClass('noMatch');
+            //             $($('#tableOld > tr > td')[id]).addClass('noMatch');
+            //         }
+            //     })
+            $('#resultTable').empty();
+            $('#resultTable').append('<tr><th>Zeile</th><th>XML Bezeichnung</th><th>XML: '+firstSelectedXML+'</th><th>XML: '+secondSelectedXML+'</th></tr>');
+            var lineCounter = 1;
+            $.each(firstXML, function(id, val){
+                $.each(val, function(sId, sVal){
+                    var firstVal = sVal;
+                    var secondVal = secondXML[id][sId];
+                    if(firstVal === secondVal){
+                        $('#resultTable').append(
+                            '<tr class="match"><td>'+lineCounter+'</td><th>'+sId+'</th><td>'+firstVal+'</td><td>'+secondVal+'</td></tr>'
+                        )
+                    } else {
+                        $('#resultTable').append(
+                            '<tr class="noMatch"><td>'+lineCounter+'</td><th>'+sId+'</th><td>'+firstVal+'</td><td>'+secondVal+'</td></tr>'
+                        )
+                    }
+                    lineCounter++;
+                })
+                
             })
         }
         
@@ -175,50 +212,82 @@
                             }
                             dataArrayArticle.push(openXMLData);
                         })
-                        dataArrayCatalog.sort(function(a, b){if(a.Country_ID < b.Country_ID){return -1} if(a.Country_ID > b.Country_ID){return 1} return 0})
-                        $.each(dataArrayCatalog, function(id, val){
-                            openXMLTarget += val.Target_ID+'<br>';
-                            openXMLName += val.Country_ID+'<br>';
-                        })
+                        // sort and compose result XML data for both files
+                        dataArrayCatalog.sort(function(a, b){if(a.Target_ID < b.Target_ID){return -1} if(a.Target_ID > b.Target_ID){return 1} return 0})
+                        // $.each(dataArrayCatalog, function(id, val){
+                        //     openXMLTarget += '<tr><td>'+val.Target_ID+'_'+val.Country_ID+'</td></tr>';
+                        //     // openXMLTarget += val.Target_ID+'<br>';
+                        //     // openXMLName += val.Country_ID+'<br>';
+                        // })
                         dataArrayArticle.sort(function(a, b){if(a.Sequence_No < b.Sequence_No){return -1} if(a.Sequence_No > b.Sequence_No){return 1} return 0})
-                        $('#'+tableID).empty();
-                        $('#'+tableID).append('<tr><th>XML: '+fileName+'</th></tr>');
-                        $.each(dataArrayArticle, function(id, val){
-                            $('#'+tableID).append(
-                                '<tr><td>Type_No: '+val.Type_No+'</td></tr>'+
-                                '<tr><td>Short_Text: '+val.Short_Text+'</td></tr>'+
-                                '<tr><td>Iso_Language: '+val.Iso_Lang+'</td></tr>'+
-                                '<tr><td>Sequence_No: '+val.Sequence_No+'</td></tr>'+
-                                '<tr><td><table class="innerTable"><tr><th>Target_ID</th><th>Catalog_ID</th><tr><tr><td>'+openXMLTarget+'</td><td>'+openXMLName+'</td></tr></table></td></tr>'
-                            )
-                        })
+                        // $('#'+tableID).empty();
+                        // $('#'+tableID).append('<tr><th>XML: '+fileName+'</th></tr>');
+                        // $.each(dataArrayArticle, function(id, val){
+                        //     $('#'+tableID).append(
+                        //         '<tr><td>Type_No: '+val.Type_No+'</td></tr>'+
+                        //         '<tr><td>Short_Text: '+val.Short_Text+'</td></tr>'+
+                        //         '<tr><td>Iso_Language: '+val.Iso_Lang+'</td></tr>'+
+                        //         '<tr><td>Sequence_No: '+val.Sequence_No+'</td></tr>'+
+                        //         openXMLTarget
+                        //         // '<tr><td><table class="innerTable"><tr><th>Target_ID</th><th>Catalog_ID</th><tr><tr><td>'+openXMLTarget+'</td><td>'+openXMLName+'</td></tr></table></td></tr>'
+                        //     )
+                        // })
                         if(tableID === 'tableOld'){
+                            secondXML = $.merge(dataArrayArticle, dataArrayCatalog);
+                            // $.each(dataArrayArticle, function(id, val){
+                            //     secondXML.push(val.Type_No);
+                            //     secondXML.push(val.Short_Text);
+                            //     secondXML.push(val.Iso_Lang);
+                            //     secondXML.push(val.Sequence_No);
+                            // })
+                            // $.each(dataArrayCatalog, function(id, val){
+                            //     secondXML.push(val.Target_ID);
+                            //     secondXML.push(val.Country_ID);
+                            // })
                             checkAndCompareTables();
+                        } else {
+                            firstXML = $.merge(dataArrayArticle, dataArrayCatalog);
+                            // $.each(dataArrayArticle, function(id, val){
+                            //     firstXML.push(val.Type_No);
+                            //     firstXML.push(val.Short_Text);
+                            //     firstXML.push(val.Iso_Lang);
+                            //     firstXML.push(val.Sequence_No);
+                            // })
+                            // $.each(dataArrayCatalog, function(id, val){
+                            //     firstXML.push(val.Target_ID);
+                            //     firstXML.push(val.Country_ID);
+                            // })
                         }
                     }
                 })
+                
         }
 
-        function readAndShowComparison(firstXML, secondXML){
-            readXML(firstXML, 'tableNew');
-            readXML(secondXML, 'tableOld');
+        function readAndShowComparison(firstSelectedXML, secondSelectedXML){
+            readXML(firstSelectedXML, 'tableNew');
+            readXML(secondSelectedXML, 'tableOld');
         }
 
         function secondXmlSelect(){
-            secondXML = $('#xmlSecondSelect').val();
+            $('.resultDiv').addClass('loading');
+            $('#resultTable').empty();
+            secondSelectedXML = $('#xmlSecondSelect').val();
             $('#resultTableBody').empty();
-            readAndShowComparison(firstXML, secondXML);
+            readAndShowComparison(firstSelectedXML, secondSelectedXML);
         }
 
         function firstXmlSelect(){
-            firstXML = $('#xmlFirstSelect').val();
+            $('.resultDiv').removeClass('loading');
+            $('#resultTable').empty();
+            firstXML = [], secondXML = [];
+            firstSelectedXML = $('#xmlFirstSelect').val();
             $('#xmlSecondSelect').empty();
             $.each(indexAll, function(id, val){
                 var shortVal = val[0].substring(0, val[0].length - 3);
-                var shortSelected = firstXML.substring(0, firstXML.length - 3);
+                var shortSelected = firstSelectedXML.substring(0, firstSelectedXML.length - 3);
                 if(shortSelected.indexOf(shortVal) > -1){
                     $.each(val, function(sId, sVal){
-                        if(sVal !== firstXML){
+                        if(sVal !== firstSelectedXML){
                             $('#xmlSecondSelect').append(
                                 '<option value="'+sVal+'" onClick="secondXmlSelect()">'+sVal+'</option>'
                             )
