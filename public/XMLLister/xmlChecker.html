@@ -1,314 +1,493 @@
 <html>
-    <head>
-        <title>XML-Checker</title>
-        <link rel="stylesheet" href="mattStyle.css">
-        <script src="jquery-3.7.1.min.js"></script>
-        <script src="ddtf.js"></script>
-        <script src="mattQuery.js"></script>
-        <style>
-            .resultDiv{
-                width: 100%;
-                display: flex;
-                align-items: flex-start;
-                justify-content: center;
-                padding-top: 14px;
-            }
-            .div_before_table {
-                overflow: auto;
-                height: calc(100% - 133px);
-            }
-            h3{
-                color: whitesmoke;
-            }
-            select{
-                width: auto;
-                min-width: 340px;
-            }
-            option{
-                cursor: pointer;
-            }
-            table{
-                border-collapse: collapse;
-                width: 100%;
-                max-width: 1200px;
-                background-color: white;
-                font-size: 14px;
-            }
-            /* tr:nth-child(even) {
-                background-color: #f2f2f2;
-            } */
-            .match{
-                background-color: lightgreen;
-            }
-            .noMatch{
-                background-color: lightcoral;
-            }
-            table tr:hover td{
-                border: 1px solid black;
-                box-shadow: 5px 0px 6px 0px yellow;
-                background: rgb(255 255 255 / 60%);
-            }
-            table td, table th{
-                border: 1px solid #dddddd;
-                padding: 5px;
-                text-align: left;
-                /* max-width: 200px; */
-                align-content: flex-start;
-            }
-            table th{
-                top: 0;
-                z-index: 2;
-                position: sticky;
-                background-color: white;
-                box-shadow: 2px 2px 2px gray;
-            }
-            .innerTable{
-                width: 100%;
-            }
-            input[type=text] {
-                width: 30%;
-                padding: 8px;
-                margin-top: 6px;
-                margin-bottom: 16px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                box-sizing: border-box;
-                text-align: right;
-            }
-            .clickMe{
-                cursor: pointer;
-                background-color: darkorange;
-                text-align: center;
-                border-radius: 7px;
-            }
-            .clickMe:hover{
-                color: white;
-                background-color: darkcyan;
-            }
-            .selectDiv{
-                display: flex;
-                justify-content: center;
-            }
-            .selectDiv div{
-                padding: 0 7px;
-            }
-            .hideMe{
-                display: none;
-            }
-            .loading{
-                background-image: url(loading.gif);
-                background-repeat: no-repeat;
-                min-height: 400px;
-                background-position: center 30px;
-                background-size: contain;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="masterDiv">
-            <div class="topDiv">
-                <h2>XML-Checker</h2>
-            </div>
-            <div>
-                <div class="selectDiv">
-                    <div>
-                        <h3 for="xmlFirstSelect">XML Neu:</h3>
-                        <select id="xmlFirstSelect" size="30">
-                            
-                        </select>
-                    </div>
-                    <div>
-                        <h3 for="xmlSecondSelect">XML Alt:</h3>
-                        <select id="xmlSecondSelect" size="5">
-                            
-                        </select>
-                    </div>
+
+<head>
+    <title>XML-Checker</title>
+    <link rel="stylesheet" href="mattStyle.css">
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="ddtf.js"></script>
+    <script src="mattQuery.js"></script>
+    <style>
+        html{
+            scroll-padding-top: 30px;
+        }
+        .resultDiv {
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 14px;
+        }
+        .div_before_table {
+            overflow: auto;
+            height: calc(100% - 133px);
+        }
+        h3 {
+            color: whitesmoke;
+        }
+        select {
+            width: auto;
+            min-width: 340px;
+        }
+        option {
+            cursor: pointer;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 1200px;
+            background-color: white;
+            font-size: 14px;
+        }
+        .match {
+            background-color: lightgreen;
+        }
+        .noMatch {
+            background-color: darksalmon;
+        }
+        .empty {
+            background-color: lightblue;
+        }
+        table tr:hover td {
+            border: 1px solid black;
+            box-shadow: 5px 0px 6px 0px yellow;
+            background: rgb(255 255 255 / 60%);
+        }
+
+        table td,
+        table th {
+            border: 1px solid #dddddd;
+            padding: 5px;
+            text-align: left;
+            /* max-width: 200px; */
+            align-content: flex-start;
+        }
+
+        table th {
+            top: 0;
+            z-index: 2;
+            position: sticky;
+            background-color: white;
+            box-shadow: 2px 2px 2px gray;
+        }
+
+        table tr.subEntry>th, table tr.subEntry>td:nth-child(1n + 2) {
+            padding-left: 20px;
+        }
+
+        .innerTable {
+            width: 100%;
+        }
+
+        input[type=text] {
+            width: 30%;
+            padding: 8px;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            text-align: right;
+        }
+
+        .clickMe {
+            cursor: pointer;
+            background-color: darkorange;
+            text-align: center;
+            border-radius: 7px;
+        }
+
+        .clickMe:hover {
+            color: white;
+            background-color: darkcyan;
+        }
+
+        .selectDiv {
+            display: flex;
+            justify-content: center;
+        }
+
+        .selectDiv div {
+            padding: 0 7px;
+        }
+
+        .hideMe {
+            display: none;
+        }
+
+        .loading {
+            background-image: url(loading.gif);
+            background-repeat: no-repeat;
+            min-height: 600px;
+            background-position: center 30px;
+            background-size: 600px auto;
+        }
+
+        .errorDiv {
+            display: flex;
+            justify-content: center;
+        }
+
+        #errorList {
+            color: yellow;
+            text-align: left;
+        }
+
+        #errorList span {
+            font-weight: bold;
+            color: orange;
+        }
+
+        #errorList a:hover {
+            color: rosybrown;
+        }
+
+        #errorList a,
+        #errorList a:visited {
+            color: darksalmon
+        }
+        #errorList span.noErrors {
+            color: lightgreen;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="masterDiv">
+        <div class="topDiv">
+            <h2>XML-Checker</h2>
+        </div>
+        <div>
+            <div class="selectDiv">
+                <div>
+                    <h3 for="xmlFirstSelect">XML Neu:</h3>
+                    <select id="xmlFirstSelect" size="30">
+
+                    </select>
                 </div>
-                <div class="resultDiv">
-                    <table id="resultTable">
+                <div>
+                    <h3 for="xmlSecondSelect">XML Alt:</h3>
+                    <select id="xmlSecondSelect" size="5">
 
-                    </table>
-                    <!-- <table id="tableOld">
+                    </select>
+                </div>
+            </div>
+            <div class="errorDiv">
+                <h3 id="errorList"></h3>
+            </div>
+            <div class="resultDiv">
+                <table id="resultTable">
 
-                    </table>
-                    <table id="tableNew">
-
-                    </table>
-                    <table id="tableOld">
-
-                    </table> -->
-                </div>    
+                </table>
             </div>
         </div>
-    </body>
-    <script>
-        var indexAll = {}, firstXML = [], secondXML = [], firstSelectedXML = '', secondSelectedXML = '';
+    </div>
+</body>
+<script>
+    var indexAll = {}, firstXML = [], secondXML = [], firstSelectedXML = '', secondSelectedXML = '', errorLog = {};
 
-        function checkAndCompareTables(){
-            // console.log('First XML Array:', firstXML);
-            // console.log('Second XML Array:', secondXML);
-            //     $.each($('#tableNew > tr > td'), function(id, val){
-            //         var newText = val.innerText;
-            //         var oldText = $('#tableOld > tr > td')[id].innerText;
-            //         if(newText === oldText){
-            //             $(val).addClass('match');
-            //             $($('#tableOld > tr > td')[id]).addClass('match');
-            //         } else {
-            //             $(val).addClass('noMatch');
-            //             $($('#tableOld > tr > td')[id]).addClass('noMatch');
-            //         }
-            //     })
-            $('#resultTable').empty();
-            $('#resultTable').append('<tr><th>Zeile</th><th>XML Bezeichnung</th><th>XML: '+firstSelectedXML+'</th><th>XML: '+secondSelectedXML+'</th></tr>');
-            var lineCounter = 1;
-            $.each(firstXML, function(id, val){
-                $.each(val, function(sId, sVal){
-                    var firstVal = sVal;
-                    var secondVal = secondXML[id][sId];
-                    if(firstVal === secondVal){
-                        $('#resultTable').append(
-                            '<tr class="match"><td>'+lineCounter+'</td><th>'+sId+'</th><td>'+firstVal+'</td><td>'+secondVal+'</td></tr>'
-                        )
+    function checkAndCompareTables() {
+        // Helper: convert object-with-numeric-keys into a dense array (0..max)
+        function normalizeToArray(obj) {
+            const keys = Object.keys(obj)
+                .map(k => parseInt(k, 10))
+                .filter(n => !Number.isNaN(n))
+                .sort((a, b) => a - b);
+            if (keys.length === 0) return [];
+            const max = keys[keys.length - 1];
+            const arr = new Array(max + 1);
+            for (let i = 0; i <= max; i++) {
+                arr[i] = Object.prototype.hasOwnProperty.call(obj, i) ? obj[i] : undefined;
+            }
+            return arr;
+        }
+
+        function pickBusinessKey(entry, keyOrder) {
+            if (!entry || typeof entry !== "object") return undefined;
+            for (const k of keyOrder) {
+                if (k in entry) return `${k}:${entry[k]}`;
+            }
+            return undefined;
+        }
+
+        function buildPlaceholderFrom(exemplar) {
+            if (!exemplar || typeof exemplar !== "object") return "-KEIN EINTRAG-";
+            const placeholder = {};
+            for (const k of Object.keys(exemplar)) {
+                placeholder[k] = "-KEIN EINTRAG-";
+            }
+            return placeholder;
+        }
+
+        /**
+         * Aligns by business key and orders rows so those with placeholders appear first.
+         * Ordering strategy:
+         * 1) Any row where either side is a placeholder (has "empty" object) goes to the top.
+         * 2) Ties resolved by original stable order (firstXML keys first, then extras from secondXML).
+         */
+        function alignByKeyWithEmptyOnTop(
+            firstObj,
+            secondObj,
+            keyOrder = ["Type_No", "CountryID_TargetID", "Short_Text", "Iso_Lang", "Feature_No", "Feature_Text"]
+        ) {
+            const arr1 = normalizeToArray(firstObj);
+            const arr2 = normalizeToArray(secondObj);
+
+            const map1 = new Map();
+            const map2 = new Map();
+            const order1 = [];
+            const order2 = [];
+
+            for (let i = 0; i < arr1.length; i++) {
+                const e = arr1[i];
+                const key = pickBusinessKey(e, keyOrder);
+                if (key !== undefined && !map1.has(key)) {
+                    map1.set(key, e);
+                    order1.push(key);
+                }
+            }
+            for (let i = 0; i < arr2.length; i++) {
+                const e = arr2[i];
+                const key = pickBusinessKey(e, keyOrder);
+                if (key !== undefined && !map2.has(key)) {
+                    map2.set(key, e);
+                    order2.push(key);
+                }
+            }
+
+            // Stable union order (baseline)
+            const seen = new Set();
+            const baselineOrder = [];
+            for (const k of order1) if (!seen.has(k)) { seen.add(k); baselineOrder.push(k); }
+            for (const k of order2) if (!seen.has(k)) { seen.add(k); baselineOrder.push(k); }
+
+            // Build rows with metadata for sorting
+            const rows = baselineOrder.map((key, idx) => {
+                const left = map1.get(key);
+                const right = map2.get(key);
+                let outLeft, outRight;
+                let hasPlaceholderLeft = false;
+                let hasPlaceholderRight = false;
+
+                if (left && right) {
+                    outLeft = left;
+                    outRight = right;
+                } else if (left && !right) {
+                    outLeft = left;
+                    outRight = buildPlaceholderFrom(left);
+                    hasPlaceholderRight = true;
+                } else if (!left && right) {
+                    outLeft = buildPlaceholderFrom(right);
+                    hasPlaceholderLeft = true;
+                    outRight = right;
+                } else {
+                    // Shouldn't happen, but keep safe fallback
+                    outLeft = "-KEIN EINTRAG-";
+                    outRight = "-KEIN EINTRAG-";
+                    hasPlaceholderLeft = true;
+                    hasPlaceholderRight = true;
+                }
+
+                return {
+                    key,
+                    outLeft,
+                    outRight,
+                    anyPlaceholder: hasPlaceholderLeft || hasPlaceholderRight,
+                    originalIndex: idx // preserves stable order within groups
+                };
+            });
+
+            // Sorting rule: any row with a placeholder goes to the top (anyEmptyFirst)
+            rows.sort((a, b) => {
+                if (a.anyPlaceholder && !b.anyPlaceholder) return -1;
+                if (!a.anyPlaceholder && b.anyPlaceholder) return 1;
+                return a.originalIndex - b.originalIndex; // keep stable order otherwise
+            });
+
+            // Emit aligned arrays in new order
+            const alignedFirst = rows.map(r => r.outLeft);
+            const alignedSecond = rows.map(r => r.outRight);
+            const keys = rows.map(r => r.key);
+
+            return { alignedFirst, alignedSecond, keys };
+        }
+
+        const { alignedFirst, alignedSecond, keys } = alignByKeyWithEmptyOnTop(firstXML, secondXML);
+        firstXML = alignedFirst;
+        secondXML = alignedSecond;
+
+        $('#resultTable').empty();
+        $('#resultTable').append('<tr><th>Zeile</th><th>XML Bezeichnung</th><th>XML: ' + firstSelectedXML + '</th><th>XML: ' + secondSelectedXML + '</th></tr>');
+        var lineCounter = 1;
+        errorLog = {
+            Errors: 0,
+            ErrorLines: [],
+            Empty: 0,
+            EmptyLines: [],
+            ErrorKeys: []
+        };
+        $.each(firstXML, function (id, val) {
+            $.each(val, function (sId, sVal) {
+                var firstVal = sVal;
+                var secondVal = secondXML[id][sId];
+                var highlighter = 'empty';
+                if (firstVal === secondVal) {
+                    highlighter = 'match';
+                } else {
+                    if (secondVal === '-KEIN EINTRAG-' || firstVal === '-KEIN EINTRAG-') {
+                        errorLog.Empty++;
+                        errorLog.EmptyLines.push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
+                        highlighter = 'empty';
                     } else {
-                        $('#resultTable').append(
-                            '<tr class="noMatch"><td>'+lineCounter+'</td><th>'+sId+'</th><td>'+firstVal+'</td><td>'+secondVal+'</td></tr>'
-                        )
+                        errorLog.Errors++;
+                        errorLog.ErrorLines.push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
+                        highlighter = 'noMatch';
                     }
-                    lineCounter++;
-                })
-                
+                    errorLog.ErrorKeys.push(sId);
+                }
+                 if (sId !== "Type_No" && sId !== "Feature_No" && sId !== "CountryID_TargetID") {
+                    highlighter += ' subEntry';
+                }
+                $('#resultTable').append(
+                    '<tr class="'+highlighter+'"><td id="' + lineCounter + '"> ' + lineCounter + '</td><th>' + sId + '</th><td>' + firstVal + '</td><td>' + secondVal + '</td></tr>'
+                )
+                lineCounter++;
             })
+
+        })
+        if(errorLog.Errors > 0){
+            $('#errorList').append('Unterschiede: <span>' + errorLog.Errors + '</span><br>Unterschiede in Zeile: <span>' + errorLog.ErrorLines.join(', ') + '</span>');    
+        }
+        if(errorLog.Empty > 0){
+            $('#errorList').append('<br><br>Leere Felder: <span>' + errorLog.Empty + '</span><br>Leere Felder in Zeile: <span>' + errorLog.EmptyLines.join(', ') + '</span>');
+        }
+        if(errorLog.Errors > 0 || errorLog.Empty > 0 ){
+            $('#errorList').append('<br><br>Betroffene Felder: <span>' + [...new Set(errorLog.ErrorKeys)].join(', ') + '</span>');
+        }
+        if(errorLog.Errors === 0 && errorLog.Empty === 0){
+            $('#errorList').append('<span class="noErrors">Keine Unterschiede gefunden. Beide XMLs sind identisch.</span>');
         }
         
-        function readXML(fileName, tableID){
-            var xmlPath = 'https://ig-creator.xxxlgroup.com/idm/'+fileName+'.xml';
-            $('#tableNew').empty();
-            $.ajax({
-                    type: "GET",
-                    url: xmlPath,
-                    dataType: "xml",
+    }
 
-                    error: function (e) {
-                        alert("An error occurred while processing XML file");
-                        console.log("XML reading Failed: ", e);
-                    },
+    function waitForXMLToLoad(){
+        function isFilled(obj) {
+            return obj && typeof obj === 'object' && Object.keys(obj).length > 0;
+        }
 
-                    success: function (response) {
-                        var dataArrayCatalog = [], dataArrayArticle = [], openXMLData = {}, openXMLName = '', openXMLTarget = '', openXMLArticle = '';
-                        // get Target and Country data
-                        $(response).find('TARGET').each(function () {
-                            openXMLData = {
-                                Target_ID: $(this).find('TARGET_ID').text(),
-                                Country_ID: $(this).find('NAME').text()
-                            }
-                            dataArrayCatalog.push(openXMLData);
-                        })
-                        $(response).find('ITEM').each(function () {
-                            openXMLData = {
-                                Type_No: $(this).attr('TYPE_NO'),
-                                Short_Text: $(this).find('SHORT_TEXT').find('TEXT').text(),
-                                Iso_Lang: $(this).find('LANGUAGE').attr('ISO_LANGUAGE_ID'),
-                                Sequence_No: $(this).find('TEXT_LINE').attr('SEQUENCE_NO')
-                            }
-                            dataArrayArticle.push(openXMLData);
-                        })
-                        // sort and compose result XML data for both files
-                        dataArrayCatalog.sort(function(a, b){if(a.Target_ID < b.Target_ID){return -1} if(a.Target_ID > b.Target_ID){return 1} return 0})
-                        // $.each(dataArrayCatalog, function(id, val){
-                        //     openXMLTarget += '<tr><td>'+val.Target_ID+'_'+val.Country_ID+'</td></tr>';
-                        //     // openXMLTarget += val.Target_ID+'<br>';
-                        //     // openXMLName += val.Country_ID+'<br>';
-                        // })
-                        dataArrayArticle.sort(function(a, b){if(a.Sequence_No < b.Sequence_No){return -1} if(a.Sequence_No > b.Sequence_No){return 1} return 0})
-                        // $('#'+tableID).empty();
-                        // $('#'+tableID).append('<tr><th>XML: '+fileName+'</th></tr>');
-                        // $.each(dataArrayArticle, function(id, val){
-                        //     $('#'+tableID).append(
-                        //         '<tr><td>Type_No: '+val.Type_No+'</td></tr>'+
-                        //         '<tr><td>Short_Text: '+val.Short_Text+'</td></tr>'+
-                        //         '<tr><td>Iso_Language: '+val.Iso_Lang+'</td></tr>'+
-                        //         '<tr><td>Sequence_No: '+val.Sequence_No+'</td></tr>'+
-                        //         openXMLTarget
-                        //         // '<tr><td><table class="innerTable"><tr><th>Target_ID</th><th>Catalog_ID</th><tr><tr><td>'+openXMLTarget+'</td><td>'+openXMLName+'</td></tr></table></td></tr>'
-                        //     )
-                        // })
-                        if(tableID === 'tableOld'){
-                            secondXML = $.merge(dataArrayArticle, dataArrayCatalog);
-                            // $.each(dataArrayArticle, function(id, val){
-                            //     secondXML.push(val.Type_No);
-                            //     secondXML.push(val.Short_Text);
-                            //     secondXML.push(val.Iso_Lang);
-                            //     secondXML.push(val.Sequence_No);
-                            // })
-                            // $.each(dataArrayCatalog, function(id, val){
-                            //     secondXML.push(val.Target_ID);
-                            //     secondXML.push(val.Country_ID);
-                            // })
-                            checkAndCompareTables();
-                        } else {
-                            firstXML = $.merge(dataArrayArticle, dataArrayCatalog);
-                            // $.each(dataArrayArticle, function(id, val){
-                            //     firstXML.push(val.Type_No);
-                            //     firstXML.push(val.Short_Text);
-                            //     firstXML.push(val.Iso_Lang);
-                            //     firstXML.push(val.Sequence_No);
-                            // })
-                            // $.each(dataArrayCatalog, function(id, val){
-                            //     firstXML.push(val.Target_ID);
-                            //     firstXML.push(val.Country_ID);
-                            // })
-                        }
+        const intervalId = setInterval(() => {
+            if (isFilled(firstXML) && isFilled(secondXML)) {
+                console.log('Both objects are filled. Stopping interval.');
+                clearInterval(intervalId);
+                checkAndCompareTables();
+            } else {
+                console.log('Waiting... firstXML filled:', isFilled(firstXML), 'secondXML filled:', isFilled(secondXML));
+            }
+        }, 1000);
+    }
+
+    function readXML(fileName, tableID) {
+        var xmlPath = 'https://ig-creator.xxxlgroup.com/idm/' + fileName + '.xml';
+        $('#tableNew').empty();
+        $.ajax({
+            type: "GET",
+            url: xmlPath,
+            dataType: "xml",
+
+            error: function (e) {
+                alert("An error occurred while processing XML file");
+                console.log("XML reading Failed: ", e);
+            },
+
+            success: function (response) {
+                var dataArrayCatalog = [], dataArrayArticle = [], dataArrayFeature = [], openXMLData = {}, openXMLName = '', openXMLTarget = '', openXMLArticle = '';
+                // get Target and Country data
+                $(response).find('TARGET').each(function () {
+                    openXMLData = {
+                        CountryID_TargetID: $(this).find('NAME').text() + '_' + $(this).find('TARGET_ID').text()
+                    }
+                    dataArrayCatalog.push(openXMLData);
+                })
+                $(response).find('ITEM').each(function () {
+                    openXMLData = {
+                        Type_No: $(this).attr('TYPE_NO'),
+                        Short_Text: $(this).find('SHORT_TEXT').find('TEXT').text(),
+                        Iso_Lang: $(this).find('LANGUAGE').attr('ISO_LANGUAGE_ID')                    }
+                    dataArrayArticle.push(openXMLData);
+                })
+                $(response).find('FEATURE').each(function () {
+                    openXMLData = {
+                        Feature_No: $(this).attr('FEATURE_NO'),
+                        Feature_Text: $(this).find('FEATURE_TEXT').find('TEXT').text()
+                    }
+                    dataArrayFeature.push(openXMLData);
+                })
+                // sort and compose result XML data for both files
+                dataArrayCatalog.sort(function (a, b) { if (a.CountryID_TargetID < b.CountryID_TargetID) { return -1 } if (a.CountryID_TargetID > b.CountryID_TargetID) { return 1 } return 0 })
+                dataArrayArticle.sort(function (a, b) { if (a.Type_No < b.Type_No) { return -1 } if (a.Type_No > b.Type_No) { return 1 } return 0 })
+                dataArrayFeature.sort(function (a, b) { if (a.Feature_Text < b.Feature_Text) { return -1 } if (a.Feature_Text > b.Feature_Text) { return 1 } return 0 })
+                if (tableID === 'tableOld') {
+                    secondXML = $.merge(dataArrayArticle, dataArrayFeature);
+                    secondXML = $.merge(secondXML, dataArrayCatalog);
+                    waitForXMLToLoad();
+                } else {
+                    firstXML = $.merge(dataArrayArticle, dataArrayFeature);
+                    firstXML = $.merge(firstXML, dataArrayCatalog);
+                }
+            }
+        })
+
+    }
+
+    function readAndShowComparison(firstSelectedXML, secondSelectedXML) {
+        readXML(firstSelectedXML, 'tableNew');
+        readXML(secondSelectedXML, 'tableOld');
+    }
+
+    function secondXmlSelect() {
+        $('.resultDiv').addClass('loading');
+        $('#resultTable').empty();
+        $('#errorList').empty();
+        secondSelectedXML = $('#xmlSecondSelect').val();
+        $('#resultTableBody').empty();
+        readAndShowComparison(firstSelectedXML, secondSelectedXML);
+    }
+
+    function firstXmlSelect() {
+        $('.resultDiv').removeClass('loading');
+        $('#resultTable').empty();
+        $('#errorList').empty();
+        firstXML = [], secondXML = [];
+        firstSelectedXML = $('#xmlFirstSelect').val();
+        $('#xmlSecondSelect').empty();
+        $.each(indexAll, function (id, val) {
+            var shortVal = val[0].substring(0, val[0].length - 3);
+            var shortSelected = firstSelectedXML.substring(0, firstSelectedXML.length - 3);
+            if (shortSelected.indexOf(shortVal) > -1) {
+                $.each(val, function (sId, sVal) {
+                    if (sVal !== firstSelectedXML) {
+                        $('#xmlSecondSelect').append(
+                            '<option value="' + sVal + '" onClick="secondXmlSelect()">' + sVal + '</option>'
+                        )
                     }
                 })
-                
-        }
+            }
+        })
+    }
 
-        function readAndShowComparison(firstSelectedXML, secondSelectedXML){
-            readXML(firstSelectedXML, 'tableNew');
-            readXML(secondSelectedXML, 'tableOld');
-        }
-
-        function secondXmlSelect(){
-            $('.resultDiv').addClass('loading');
-            $('#resultTable').empty();
-            secondSelectedXML = $('#xmlSecondSelect').val();
-            $('#resultTableBody').empty();
-            readAndShowComparison(firstSelectedXML, secondSelectedXML);
-        }
-
-        function firstXmlSelect(){
-            $('.resultDiv').removeClass('loading');
-            $('#resultTable').empty();
-            firstXML = [], secondXML = [];
-            firstSelectedXML = $('#xmlFirstSelect').val();
-            $('#xmlSecondSelect').empty();
-            $.each(indexAll, function(id, val){
-                var shortVal = val[0].substring(0, val[0].length - 3);
-                var shortSelected = firstSelectedXML.substring(0, firstSelectedXML.length - 3);
-                if(shortSelected.indexOf(shortVal) > -1){
-                    $.each(val, function(sId, sVal){
-                        if(sVal !== firstSelectedXML){
-                            $('#xmlSecondSelect').append(
-                                '<option value="'+sVal+'" onClick="secondXmlSelect()">'+sVal+'</option>'
-                            )
-                        }
-                    })
-                }
+    function readAndShowJSON() {
+        $.getJSON("https://ig-creator.xxxlgroup.com/idm/index.json", function (data) {
+            $.each(data, function (id, val) {
+                $('#xmlFirstSelect').append(
+                    '<option value="' + val + '" onClick="firstXmlSelect()">' + val + '</option>'
+                )
             })
-        }
+        });
+        $.getJSON("https://ig-creator.xxxlgroup.com/idm/index-all.json", function (data) {
+            indexAll = data;
+        });
+    }
+    readAndShowJSON();
+</script>
 
-        function readAndShowJSON(){
-            $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index.json", function( data ) {
-                $.each(data, function(id, val){
-                    $('#xmlFirstSelect').append(
-                        '<option value="'+val+'" onClick="firstXmlSelect()">'+val+'</option>'
-                    )
-                })
-            });
-            $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index-all.json", function( data ) {
-                indexAll = data;
-            });
-        }
-        readAndShowJSON();
-    </script>
 </html>
