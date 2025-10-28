@@ -161,7 +161,7 @@
             <div class="selectDiv">
                 <div>
                     <h3 for="xmlFirstSelect">XML Neu:</h3>
-                    <select id="xmlFirstSelect" size="30">
+                    <select id="xmlFirstSelect" size="20">
 
                     </select>
                 </div>
@@ -184,7 +184,7 @@
     </div>
 </body>
 <script>
-    var indexAll = {}, firstXML = [], secondXML = [], firstSelectedXML = '', secondSelectedXML = '', errorLog = {};
+    var indexAll = {}, firstXML = [], secondXML = [], firstSelectedXML = '', secondSelectedXML = '', errorLog = {}, landCheck = ['_AT_', '_DE_', '_CH_', '_CZ', '_SK_', '_FR_', '_SE_', '_HU_', '_SI_', '_PL_', '_RO_'];
 
     function checkAndCompareTables() {
         // Helper: convert object-with-numeric-keys into a dense array (0..max)
@@ -228,7 +228,7 @@
         function alignByKeyWithEmptyOnTop(
             firstObj,
             secondObj,
-            keyOrder = ["Type_No", "CountryID_TargetID", "Short_Text", "Iso_Lang", "Feature_No", "Feature_Text"]
+            keyOrder = ["Type_No", "CountryID_TargetID", "Short_Text", "Feature_No", "Feature_Text"]
         ) {
             const arr1 = normalizeToArray(firstObj);
             const arr2 = normalizeToArray(secondObj);
@@ -320,6 +320,7 @@
         $('#resultTable').append('<tr><th>Zeile</th><th>XML Bezeichnung</th><th>XML: ' + firstSelectedXML + '</th><th>XML: ' + secondSelectedXML + '</th></tr>');
         var lineCounter = 1;
         errorLog = {
+            Lang: [],
             Errors: 0,
             ErrorLines: [],
             Empty: 0,
@@ -347,6 +348,9 @@
                 }
                  if (sId !== "Type_No" && sId !== "Feature_No" && sId !== "CountryID_TargetID") {
                     highlighter += ' subEntry';
+                } else if (sId === "CountryID_TargetID") {
+                    var langPart = firstVal.split('_')[0].split('-');
+                    errorLog.Lang.push(langPart.pop());
                 }
                 $('#resultTable').append(
                     '<tr class="'+highlighter+'"><td id="' + lineCounter + '"> ' + lineCounter + '</td><th>' + sId + '</th><td>' + firstVal + '</td><td>' + secondVal + '</td></tr>'
@@ -367,7 +371,21 @@
         if(errorLog.Errors === 0 && errorLog.Empty === 0){
             $('#errorList').append('<span class="noErrors">Keine Unterschiede gefunden. Beide XMLs sind identisch.</span>');
         }
-        
+        landCheck.forEach(function(land){
+            var langFile = false, missingLang = false;
+            if(firstSelectedXML.indexOf(land) === -1){
+                missingLang = true;   
+            } else {
+                langFile = true;
+            }
+            if(langFile && missingLang){
+                $('#errorList').append('<br><br><span>!! ACHTUNG !! - XML Land fehlt: ' +firstSelectedXML + ' --> ' + land.replace(/_/g, '') + '</span>');
+            }
+        });
+        if(errorLog.Lang.length > 0){
+            errorLog.Lang = [...new Set(errorLog.Lang)];
+            $('#errorList').append('<br><br><span class="noErrors">Country_IDs enthalten im XML:</span> <span style="color:white;">' + errorLog.Lang.join(', ') + '</span>');
+        }
     }
 
     function waitForXMLToLoad(){
@@ -411,8 +429,8 @@
                 $(response).find('ITEM').each(function () {
                     openXMLData = {
                         Type_No: $(this).attr('TYPE_NO'),
-                        Short_Text: $(this).find('SHORT_TEXT').find('TEXT').text(),
-                        Iso_Lang: $(this).find('LANGUAGE').attr('ISO_LANGUAGE_ID')                    }
+                        Short_Text: $(this).find('SHORT_TEXT').find('TEXT').text()
+                    }
                     dataArrayArticle.push(openXMLData);
                 })
                 $(response).find('FEATURE').each(function () {
