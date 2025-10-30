@@ -83,6 +83,9 @@
             .testMode{
                 display: none;
             }
+            .Extern{
+                background-color: lightcyan;
+            }
         </style>
     </head>
     <body>
@@ -114,6 +117,7 @@
                                 <th>Hersteller</th>
                                 <th>Marke</th>
                                 <th>Modellname</th>
+                                <th>Herkunft</th>
                                 <th>Nummer</th>
                                 <th>Online</th>
                                 <th>Konfig.</th>
@@ -135,18 +139,15 @@
         </div>
     </body>
     <script>
-        var runLocalTest = false;
-
-        var testJSON = {"XXXL2330.madeira@at":{"fileName":"madeira@at","productNumber":"0023300028","productVariants":"01 / 02 / 03 / 98 / ","modelName":"xmadeira","locale":"at","currency":"EUR","catalog":"XXXL2330.Madeira","brand":"MM","brandName":"Adale","productGroup":"02","description":"Boxspringbett Madeira","settings":{"preis":470,"entlasgung":45,"aktion":0,"pricing":"linear"}},"XXXL2330.madeira@ch":{"fileName":"madeira@ch","productNumber":"0023300028","productVariants":"01 / 02 / 03 / 98 / ","modelName":"madeira","locale":"ch","currency":"CHF","catalog":"XXXL2330.Madeira","brand":"MM","brandName":"Adale","productGroup":"02","description":"Boxspringbett Madeira","settings":{"preis":480,"entlasgung":42,"aktion":0,"pricing":"linear"}},"XXXL2330.madeira@de":{"fileName":"madeira@de","productNumber":"0023300028","productVariants":"01 / 02 / 03 / 98 / ","modelName":"madeira","locale":"de","currency":"EUR","catalog":"XXXL2330.Madeira","brand":"MM","brandName":"Yulu","productGroup":"02","description":"Boxspringbett Madeira","settings":{"preis":470,"entlasgung":45,"aktion":0,"pricing":"linear"}},"XXXL2330.nova@at":{"fileName":"nova@at","productNumber":"0023300027","productVariants":"01 / 98 / ","modelName":"bnova","locale":"at","currency":"EUR","catalog":"XXXL2330.Nova","brand":"MM","brandName":"","productGroup":"14","description":"Liege Nova","settings":{"preis":410,"entlasgung":35,"aktion":0,"pricing":"linear"}},"XXXL2330.nova@ch":{"fileName":"nova@ch","productNumber":"0023300027","productVariants":"01 / 98 / ","modelName":"nova","locale":"ch","currency":"CHF","catalog":"XXXL2330.Nova","brand":"MM","brandName":"","productGroup":"14","description":"Liege Nova","settings":{"preis":480,"entlasgung":0,"aktion":0,"pricing":"linear"}},"XXXL2330.nova@de":{"fileName":"nova@de","productNumber":"0023300027","productVariants":"01 / 98 / ","modelName":"nova","locale":"de","currency":"EUR","catalog":"XXXL2330.Nova","brand":"MM","brandName":"Langu","productGroup":"14","description":"Liege Nova","settings":{"preis":410,"entlasgung":35,"aktion":0,"pricing":"linear"}},"XXXLAda.fabala@at":{"fileName":"fabala@at","productNumber":"0026380328","productVariants":"01 / 02 / 03 / 04 / YY / ","modelName":"fabala","locale":"at","currency":"EUR","catalog":"XXXLAda.Fabala","brand":"LU","brandName":"Esposa","productGroup":"02","description":"Boxspringbett Fabala","settings":{"preis":370,"entlasgung":30,"aktion":0,"pricing":"linear"}},"XXXLAda.fabala@ch":{"fileName":"fabala@ch","productNumber":"0026380328","productVariants":"01 / 21 / 23 / 24 / 25 / 26 / 27 / 29 / 87 / 93 / 95 / YY / ","modelName":"fabala","locale":"ch","currency":"CHF","catalog":"XXXLAda.Fabala","brand":"LU","brandName":"Esposa","productGroup":"02","description":"Boxspringbett Fabala","settings":{"preis":380,"entlasgung":20,"aktion":0,"pricing":"linear"}},"XXXLAda.fabala@de":{"fileName":"fabala@de","productNumber":"0026380328","productVariants":"01 / 21 / 23 / 24 / 25 / 26 / 27 / 29 / 87 / 93 / 95 / YY / ","modelName":"fabala","locale":"de","currency":"EUR","catalog":"XXXLAda.Fabala","brand":"LU","brandName":"Esposa","productGroup":"02","description":"Boxspringbett Fabala","settings":{"preis":470,"entlasgung":0,"aktion":44.75,"pricing":"linear"}},"XXXLAda.famelia@at":{"fileName":"famelia@at","productNumber":"0026380161","productVariants":"01 / 03 / 04 / 05 / YY / ","modelName":"famelia","locale":"at","currency":"EUR","catalog":"XXXLAda.Famelia","brand":"LU","brandName":"Esposa","productGroup":"02","description":"Boxspringbett Famelia","settings":{"preis":370,"entlasgung":30,"aktion":0,"pricing":"linear"}},"XXXLAda.famelia@ch":{"fileName":"famelia@ch","productNumber":"0026380161","productVariants":"01 / 03 / 04 / YY / ","modelName":"famelia","locale":"ch","currency":"CHF","catalog":"XXXLAda.Famelia","brand":"LU","brandName":"Esposa","productGroup":"02","description":"Boxspringbett Famelia","settings":{"preis":380,"entlasgung":20,"aktion":0,"pricing":"linear"}}};
-
+        var intern = 0, extern = 0;
         var countryShorts = {
             "LU": "xxxlutz",
             "MM": "moemax",
             "MX": "moebelix"
         }
         function sortList(a, b) {
-            let ca = a.catalog.split('.')[0].toLowerCase();
-            let cb = b.catalog.split('.')[0].toLowerCase();
+            let ca = a.catalog.split('.')[0].replace('XXXL', '').toLowerCase();
+            let cb = b.catalog.split('.')[0].replace('XXXL', '').toLowerCase();
             let ba = a.brandName.toLowerCase();
             let bb = b.brandName.toLowerCase();
             let ma = a.modelName.toLowerCase();
@@ -213,9 +214,8 @@
             });
         })
         function readAndShowJSON(){
-            if(runLocalTest){
-                $('marquee').removeClass('testMode');
-                var sortArray = $.map(testJSON, function(value, index) {return [value]});
+            $.getJSON( "https://walm-dc.github.io/WebTools/public/list.json", function( data ) {
+                var sortArray = $.map(data, function(value, index) {return [value]});
                 sortArray.sort(sortList);
                 $.each(sortArray, function(id, val){
                     var online = '<td class="trueCol">'+val.online+'</td>';
@@ -228,18 +228,29 @@
                     if(countryShorts[val.brand] === 'xxxlutz' && val.locale === 'si'){
                         storeUrl = 'xxxlesnina'+'.'+val.locale;
                     }
-                    var variants = val.productVariants.trim().slice(0, -1);
-                    var variantCount = variants.split("/").length;
-                    if(variants.indexOf(98)>-1){variantCount--}
+                    // var variants = val.productVariants.trim().slice(0, -1);
+                    var variantCount = val.productVariants.split("/").length;
+                    var variants = val.productVariants.split('/').map(function(item) {
+                        return item.trim();
+                    }).join(', ').slice(0, -2);
+                                        if(variants.indexOf(98)>-1){variantCount--}
                     if(variants.indexOf(99)>-1){variantCount--}
                     if(variants.indexOf('YY')>-1){variantCount--}
                     if(variants.indexOf('YN')>-1){variantCount--}
                     if(variants.indexOf('YK')>-1){variantCount--}
                     if(variants.trim()===""){variantCount=0}
+                    var inOrEx = 'Intern';
+                    if(val.catalog.split('.')[0].indexOf('XXXL')>-1){
+                        intern++;
+                    } else {
+                        extern++;
+                        inOrEx = 'Extern';
+                    }
                     $('#myTable').append(
-                        '<tr variants="'+variantCount+'"><td>'+val.catalog.split('.')[0]+'</td>'+
+                        '<tr variants="'+variantCount+'"><td>'+val.catalog.split('.')[0].replace('XXXL', '')+'</td>'+
                         '<td>'+val.brandName+'</td>'+
                         '<td>'+val.modelName+'</td>'+
+                        '<td class="'+inOrEx+'">'+inOrEx+'</td>'+
                         '<td><a href="https://'+storeUrl+'/s/?s='+val.productNumber+'" target="_blank">'+val.productNumber+'</a></td>'+
                         online+
                         konfig+
@@ -257,52 +268,7 @@
                 })
                 filterTable();
                 jQuery('#myTable').ddTableFilter();
-            } else {
-                $.getJSON( "https://walm-dc.github.io/WebTools/public/list.json", function( data ) {
-                    var sortArray = $.map(data, function(value, index) {return [value]});
-                    sortArray.sort(sortList);
-                    $.each(sortArray, function(id, val){
-                        var online = '<td class="trueCol">'+val.online+'</td>';
-                        if(val.online=='false'){online = '<td class="falseCol">'+val.online+'</td>'}
-                        if(val.online==''){online = '<td>'+val.online+'</td>'}
-                        var konfig = '<td class="trueCol">'+val.konfig+'</td>';
-                        if(val.konfig=='false'){konfig = '<td class="falseCol">'+val.konfig+'</td>'}
-                        if(val.konfig==''){konfig = '<td>'+val.konfig+'</td>'}
-                        var storeUrl = countryShorts[val.brand]+'.'+val.locale;
-                        if(countryShorts[val.brand] === 'xxxlutz' && val.locale === 'si'){
-                            storeUrl = 'xxxlesnina'+'.'+val.locale;
-                        }
-                        var variants = val.productVariants.trim().slice(0, -1);
-                        var variantCount = variants.split("/").length;
-                        if(variants.indexOf(98)>-1){variantCount--}
-                        if(variants.indexOf(99)>-1){variantCount--}
-                        if(variants.indexOf('YY')>-1){variantCount--}
-                        if(variants.indexOf('YN')>-1){variantCount--}
-                        if(variants.indexOf('YK')>-1){variantCount--}
-                        if(variants.trim()===""){variantCount=0}
-                        $('#myTable').append(
-                            '<tr variants="'+variantCount+'"><td>'+val.catalog.split('.')[0]+'</td>'+
-                            '<td>'+val.brandName+'</td>'+
-                            '<td>'+val.modelName+'</td>'+
-                            '<td><a href="https://'+storeUrl+'/s/?s='+val.productNumber+'" target="_blank">'+val.productNumber+'</a></td>'+
-                            online+
-                            konfig+
-                            '<td>'+variants+'</td>'+
-                            '<td>'+variantCount+'</td>'+
-                            '<td>'+val.brand+'</td>'+
-                            '<td>'+val.locale+'</td>'+
-                            '<td>'+val.currency+'</td>'+
-                            '<td>'+val.preis+'</td>'+
-                            '<td>'+val.entlasgung+'</td>'+
-                            '<td>'+val.aktion+'</td>'+
-                            '<td>'+val.description+'</td>'+
-                            '<td>'+val.productGroup+'</td></tr>'
-                        )
-                    })
-                    filterTable();
-                    jQuery('#myTable').ddTableFilter();
-                });
-            }
+            });
         }
         readAndShowJSON();
     </script>
