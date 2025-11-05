@@ -206,7 +206,7 @@
             }
         })
         $('#taInput').on('keyup, change', function(){
-            $('#taInput').val($('#taInput').val().trim().replace(/[^\d\n-]/g, '').replace(/^\s*$(?:\r\n?|\n)/gm, ''));
+            $('#taInput').val($('#taInput').val().trim().replace(/[^\d\n-]/g, '').replace(/^\s*$(?:\r\n?|\n)/gm, '').replace(/^.{0,9}$/, '\n'));
         })
     </script>
 </html>
