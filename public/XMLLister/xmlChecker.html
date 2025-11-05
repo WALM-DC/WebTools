@@ -185,7 +185,7 @@
     </div>
 </body>
 <script>
-    var indexAll = {}, firstXML = [], secondXML = [], firstSelectedXML = '', secondSelectedXML = '', errorLog = {}, xmlDataVersion = '';
+    var indexAll = {}, firstXML = [], secondXML = [], firstSelectedXML = '', secondSelectedXML = '', errorLog = {}, xmlDataVersion = '', firstXMLDataVersion = "", secondXMLDataVersion = '', firstXMLCatalogID = '', secondXMLCatalogID = '';
     var langCheck = ['_AT_', '_DE_', '_CH_', '_CZ', '_SK_', '_FR_', '_SE_', '_HU_', '_SI_', '_PL_', '_RO_'];
 
     function checkAndCompareTables() {
@@ -361,7 +361,10 @@
             })
 
         })
-        $('#errorList').append('Datenversion:<br>' + secondSelectedXML + ': <span style="color:white;">' + secondXMLDataVersion + '</span><br>' + firstSelectedXML + ': <span style="color:white;">' + firstXMLDataVersion + '</span>');
+        $('#errorList').append('Datenversion:<br>' + secondSelectedXML + ': <span style="color:white;">' + secondXMLDataVersion + '</span><br>' + firstSelectedXML + ': <span style="color:white;">' + firstXMLDataVersion + '</span>');    
+        if(firstXMLCatalogID !== secondXMLCatalogID){
+            $('#errorList').append('<br><br>Fehler bei Schiene:<br>' + secondSelectedXML + ': <span style="color:red;">' + secondXMLCatalogID + '</span><br>' + firstSelectedXML + ': <span style="color:red;">' + firstXMLCatalogID + '</span>');    
+        }
         if(errorLog.Errors > 0){
             $('#errorList').append('<br><br>Unterschiede: <span>' + errorLog.Errors + '</span><br>Unterschiede in Zeile: <span>' + errorLog.ErrorLines.join(', ') + '</span>');    
         }
@@ -373,7 +376,7 @@
         }
         if(errorLog.Errors === 0 && errorLog.Empty === 0){
             $('#errorList').append('<br><br><span class="noErrors">Keine Unterschiede gefunden. Beide XMLs sind identisch.</span>');
-        }firstXMLDataVersion = '', secondXMLDataVersion = '';
+        }firstXMLDataVersion = '', firstXMLCatalogID = "", secondXMLDataVersion = '', secondXMLCatalogID = '';
         langCheck.forEach(function(land){
             var langFile = false, missingLang = false;
             if(firstSelectedXML.indexOf(land) === -1){
@@ -429,6 +432,12 @@
                     }
                     dataArrayCatalog.push(openXMLData);
                 })
+                $(response).find('CATALOG').each(function () {
+                    openXMLData = {
+                        CountryID_CatalogID: $(this).find('CATALOG').text()
+                    }
+                    dataArrayCatalog.push(openXMLData);
+                })
                 $(response).find('ITEM').each(function () {
                     openXMLData = {
                         Type_No: $(this).attr('TYPE_NO'),
@@ -449,11 +458,13 @@
                 dataArrayFeature.sort(function (a, b) { if (a.Feature_Text < b.Feature_Text) { return -1 } if (a.Feature_Text > b.Feature_Text) { return 1 } return 0 })
                 if (tableID === 'tableOld') {
                     secondXMLDataVersion = $(response).find('DATA_VERSION').text();
+                    firstXMLCatalogID = $(response).find('CATALOG').find('CATALOG_ID').text();
                     secondXML = $.merge(dataArrayArticle, dataArrayFeature);
                     secondXML = $.merge(secondXML, dataArrayCatalog);
                     waitForXMLToLoad();
                 } else {
                     firstXMLDataVersion = $(response).find('DATA_VERSION').text();
+                    secondXMLCatalogID = $(response).find('CATALOG').find('CATALOG_ID').text();
                     firstXML = $.merge(dataArrayArticle, dataArrayFeature);
                     firstXML = $.merge(firstXML, dataArrayCatalog);
                 }
