@@ -174,19 +174,18 @@ def contains_target_keys(data, target_keys):
 
 # Reads MKSAKT file and convert to object
 def read_csv_file(root_path, prodGroups):
-    with open(r'F:\WebTools\AktionspreisFixer\MKSAKT_test_2.csv', mode='r') as csvfile:
-        reader = csv.DictReader(csvfile, delimiter=";")
+    with open(r'C:\Users\walm\Downloads\MKSAKT\MHS_MKSAKT.csv', mode='r',encoding='utf8') as csvfile:
+        reader = csv.DictReader(csvfile, delimiter=",")
         for idx, row in enumerate(reader, start=1):
             if "1/4/" in f"{row}":
                 filtered_row = {header: row.get(header, '') for header in headerList}
-                startDate = datetime.datetime.strptime(filtered_row["vonDatum"], '%d.%m.%Y')
-                endDate = datetime.datetime.strptime(filtered_row["bisDatum"], '%d.%m.%Y')
+                startDate = datetime.datetime.strptime(filtered_row["vonDatum"], '%Y-%m-%d %H:%M:%S.%f')
+                endDate = datetime.datetime.strptime(filtered_row["bisDatum"], '%Y-%m-%d %H:%M:%S.%f')
                 if startDate <= today and endDate >= today:
-                    MKSAKTobject[idx] = filtered_row
-
-    # from pprint import pprint
-    # pprint(dict(list(MKSAKTobject.items())[:3]))
-    extended_filters(root_path, prodGroups, ausLieferanten, maxDiscount)
+                    MKSAKTobject[idx+1] = filtered_row
+    from pprint import pprint
+    pprint(dict(list(MKSAKTobject.items())[:3]))
+    # extended_filters(root_path, prodGroups, ausLieferanten, maxDiscount)
 
 # get going
 if __name__ == "__main__":
