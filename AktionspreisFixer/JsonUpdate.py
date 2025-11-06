@@ -177,11 +177,11 @@ def read_csv_file(root_path, prodGroups):
     with open(r'C:\Users\walm\Downloads\MKSAKT\MHS_MKSAKT.csv', mode='r',encoding='utf8') as csvfile:
         reader = csv.DictReader(csvfile, delimiter=",")
         for idx, row in enumerate(reader, start=1):
-            if "1/4/" in f"{row}":
-                filtered_row = {header: row.get(header, '') for header in headerList}
+            filtered_row = {header: row.get(header, '') for header in headerList}
+            if "1/4/" in filtered_row['StatKZ_Kombi']:    
                 startDate = datetime.datetime.strptime(filtered_row["vonDatum"], '%Y-%m-%d %H:%M:%S.%f')
                 endDate = datetime.datetime.strptime(filtered_row["bisDatum"], '%Y-%m-%d %H:%M:%S.%f')
-                if startDate <= today and endDate >= today and filtered_row["NachlassinProzent"].isnumeric():
+                if startDate <= today and endDate >= today and float(filtered_row["NachlassinProzent"]) > 0:
                     MKSAKTobject[idx+1] = filtered_row
     from pprint import pprint
     pprint(dict(list(MKSAKTobject.items())[:3]))
