@@ -187,6 +187,15 @@ def read_csv_file(root_path, prodGroups):
     pprint(dict(list(MKSAKTobject.items())[:3]))
     # extended_filters(root_path, prodGroups, ausLieferanten, maxDiscount)
 
+    # Output file path for log
+    basePath = r"F:\WebTools\AktionspreisFixer"
+    curPath = time.strftime("%Y%m%d-%H%M%S")+"_currentDiscounts.json"
+    output_path_cur = os.path.join(basePath, curPath)
+
+    # Write JSON object to file
+    with open(output_path_cur, 'w', encoding='utf-8') as f:
+        json.dump(MKSAKTobject, f, indent=2, ensure_ascii=False)
+
 # get going
 if __name__ == "__main__":
     # Test URL
