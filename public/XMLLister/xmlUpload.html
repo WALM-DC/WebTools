@@ -112,7 +112,7 @@
             formData.append('file', file);
 
             // Adjust URL to your server endpoint
-            const res = await fetch('upload', {
+            const res = await fetch('/upload', {
                 method: 'POST',
                 body: formData,
             });

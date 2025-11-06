@@ -458,13 +458,13 @@
                 dataArrayFeature.sort(function (a, b) { if (a.Feature_Text < b.Feature_Text) { return -1 } if (a.Feature_Text > b.Feature_Text) { return 1 } return 0 })
                 if (tableID === 'tableOld') {
                     secondXMLDataVersion = $(response).find('DATA_VERSION').text();
-                    firstXMLCatalogID = $(response).find('CATALOG').find('CATALOG_ID').text();
+                    firstXMLCatalogID = $(response).find('CATALOG').find('CATALOG_ID_INTERN').text();
                     secondXML = $.merge(dataArrayArticle, dataArrayFeature);
                     secondXML = $.merge(secondXML, dataArrayCatalog);
                     waitForXMLToLoad();
                 } else {
                     firstXMLDataVersion = $(response).find('DATA_VERSION').text();
-                    secondXMLCatalogID = $(response).find('CATALOG').find('CATALOG_ID').text();
+                    secondXMLCatalogID = $(response).find('CATALOG').find('CATALOG_ID_INTERN').text();
                     firstXML = $.merge(dataArrayArticle, dataArrayFeature);
                     firstXML = $.merge(firstXML, dataArrayCatalog);
                 }

@@ -45,7 +45,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
   return res.json({
     message: 'File uploaded successfully.',
     filename: req.file.filename,
-    path: `upload/${req.file.filename}`,
+    path: `/uploads/${req.file.filename}`,
   });
 });
 
