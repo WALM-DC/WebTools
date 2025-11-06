@@ -181,7 +181,7 @@ def read_csv_file(root_path, prodGroups):
                 filtered_row = {header: row.get(header, '') for header in headerList}
                 startDate = datetime.datetime.strptime(filtered_row["vonDatum"], '%Y-%m-%d %H:%M:%S.%f')
                 endDate = datetime.datetime.strptime(filtered_row["bisDatum"], '%Y-%m-%d %H:%M:%S.%f')
-                if startDate <= today and endDate >= today:
+                if startDate <= today and endDate >= today and filtered_row["NachlassinProzent"].isnumeric():
                     MKSAKTobject[idx+1] = filtered_row
     from pprint import pprint
     pprint(dict(list(MKSAKTobject.items())[:3]))
@@ -189,7 +189,7 @@ def read_csv_file(root_path, prodGroups):
 
     # Output file path for log
     basePath = r"F:\WebTools\AktionspreisFixer"
-    curPath = time.strftime("%Y%m%d-%H%M%S")+"_currentDiscounts.json"
+    curPath = "currentDiscounts.json"
     output_path_cur = os.path.join(basePath, curPath)
 
     # Write JSON object to file
