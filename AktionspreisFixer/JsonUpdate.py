@@ -9,7 +9,7 @@ import os
 today = datetime.datetime.now()
 
 # List of column headers we need to extract
-headerList = ["Aktion", "vonDatum", "bisDatum", "NachlassinProzent", "Warengruppe_Kombi", "AusnahmeWarengruppe", "StatKZ_Kombi", "Marken", "ausmark", "AusnahmeLieferant"]
+headerList = ["Aktion", "vonDatum", "bisDatum", "NachlassinProzent", "Artikel_Set", "AF_Set", "Warengruppe_Kombi", "AusnahmeWarengruppe", "StatKZ_Kombi", "Marken", "ausmark", "AusnahmeLieferant"]
 MKSAKTobject = {}
 prodGroups = []
 ausLieferanten = []
