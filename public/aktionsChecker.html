@@ -73,6 +73,7 @@
                         <table id="myTable" cellspacing="0" cellpadding="0">
                             <tr>
                                 <th>Aktions-Name</th>
+                                <th>Filiale</th>
                                 <th>Von Datum</th>
                                 <th>Bis Datum</th>
                                 <th>Nachlass %</th>
@@ -123,6 +124,7 @@
                 $.each(data, function(id, val){
                     $('#myTable').append(
                         '<tr><td>'+val.Aktion+'</td>'+
+                        '<tr><td>'+val.Filiale+'</td>'+
                         '<td>'+val.vonDatum.split(' ')[0]+'</td>'+
                         '<td>'+val.bisDatum.split(' ')[0]+'</td>'+
                         '<td>'+val.NachlassinProzent+'</td>'+

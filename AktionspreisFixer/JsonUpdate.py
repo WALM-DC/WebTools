@@ -9,7 +9,8 @@ import os
 today = datetime.datetime.now()
 
 # List of column headers we need to extract
-headerList = ["Aktion", "vonDatum", "bisDatum", "NachlassinProzent", "Artikel_Set", "AF_Set", "Warengruppe_Kombi", "AusnahmeWarengruppe", "StatKZ_Kombi", "Marken", "ausmark", "AusnahmeLieferant"]
+headerList = ["Aktion", "vonDatum", "bisDatum", "Filiale", "NachlassinProzent", "Artikel_Set", "AF_Set", "Warengruppe_Kombi", "AusnahmeWarengruppe", "StatKZ_Kombi", "Marken", "ausmark", "AusnahmeLieferant"]
+filialenList = ['XI', 'XK', 'HY', 'XZ', 'XL', 'M7', 'HO', 'XX', 'ZO', 'ZJ', 'YP', 'CS', 'YH', '66', 'YI', 'YL']
 MKSAKTobject = {}
 prodGroups = []
 ausLieferanten = []
@@ -178,7 +179,7 @@ def read_csv_file(root_path, prodGroups):
         reader = csv.DictReader(csvfile, delimiter=",")
         for idx, row in enumerate(reader, start=1):
             filtered_row = {header: row.get(header, '') for header in headerList}
-            if "1/4/" in filtered_row['StatKZ_Kombi']:    
+            if "1/4/" in filtered_row['StatKZ_Kombi'] and filtered_row['Filiale'] in filialenList:    
                 startDate = datetime.datetime.strptime(filtered_row["vonDatum"], '%Y-%m-%d %H:%M:%S.%f')
                 endDate = datetime.datetime.strptime(filtered_row["bisDatum"], '%Y-%m-%d %H:%M:%S.%f')
                 if startDate <= today and endDate >= today and float(filtered_row["NachlassinProzent"]) > 0:
