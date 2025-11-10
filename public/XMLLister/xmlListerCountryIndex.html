@@ -87,6 +87,7 @@
                         <table id="myTable" cellspacing="0" cellpadding="0">
                             <tr>
                                 <th>XML-Name</th>
+                                <th>Land</th>
                                 <th>Hersteller</th>
                                 <th>Lieferant</th>
                                 <th>Modellname</th>
@@ -100,6 +101,7 @@
         </div>
     </body>
     <script>
+        var langCheck = ['AT', 'DE', 'CH', 'CZ', 'SK', 'FR', 'SE', 'HU', 'SI', 'PL', 'RO'];
         function countColumns(){
             $('#myCounter').html(($('table tr').length-1)-($('table tr[style="display: none;"]').length));
         }
@@ -166,14 +168,17 @@
         function readAndShowJSON(){
             $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index.json", function( data ) {
                 $.each(data, function(id, val){
-
-                    // openXML(val);
-
+                    var land = '';
+                    var splitVal = val.split('_');
+                    if(langCheck.indexOf(splitVal[splitVal.length - 2]) > -1){
+                        land = splitVal[splitVal.length - 2];
+                    }
                     $('#myTable').append(
                         '<tr><td>'+val+'</td>'+
-                        '<td>'+val.split('_')[0]+'</td>'+
-                        '<td>'+val.split('_')[1]+'</td>'+
-                        '<td>'+val.split('_')[2]+'</td>'+
+                        '<td>'+land+'</td>'+
+                        '<td>'+splitVal[0]+'</td>'+
+                        '<td>'+splitVal[1]+'</td>'+
+                        '<td>'+splitVal[2]+'</td>'+
                         '<td id="target_'+val+'" style="width:100px" class="alignRight"></td>'+
                         '<td id="'+val+'"><div class="clickMe" onClick="openXML(this)" name="'+val+'">Load Country-Data</div></td></tr>'
                     )
