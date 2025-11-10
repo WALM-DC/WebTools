@@ -89,6 +89,9 @@ def find_json_with_values(root_path, prodGroups, ausLieferanten, maxDiscount):
     # print(ausLieferanten)
     # print(maxDiscount)
 
+    # logic requires filter table to sort internet branch name with actual country XI = AT_LU + rail (brand) etc.
+    # country can be taken from filename after @ symbol
+
     fullModelList = {}
     fullConditionsList = {}
     for dirpath, _, filenames in os.walk(root_path):
