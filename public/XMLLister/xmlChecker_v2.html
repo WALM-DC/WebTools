@@ -1,0 +1,607 @@
+<html>
+
+<head>
+    <title>XML-Checker V2</title>
+    <link rel="stylesheet" href="mattStyle.css">
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="ddtf.js"></script>
+    <script src="mattQuery.js"></script>
+    <style>
+        html{
+            scroll-padding-top: 30px;
+        }
+        .resultDiv {
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 14px;
+        }
+        .div_before_table {
+            overflow: auto;
+            height: calc(100% - 133px);
+        }
+        h3 {
+            color: whitesmoke;
+        }
+        select {
+            width: auto;
+            min-width: 340px;
+        }
+        option {
+            cursor: pointer;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 1200px;
+            background-color: white;
+            font-size: 14px;
+        }
+        .match {
+            background-color: lightgreen;
+        }
+        .noMatch {
+            background-color: darksalmon;
+        }
+        .empty {
+            background-color: lightblue;
+        }
+        table tr:hover td {
+            border: 1px solid black;
+            box-shadow: 5px 0px 6px 0px yellow;
+            background: rgb(255 255 255 / 60%);
+        }
+
+        table td,
+        table th {
+            border: 1px solid #dddddd;
+            padding: 5px;
+            text-align: left;
+            /* max-width: 200px; */
+            align-content: flex-start;
+        }
+
+        table th {
+            top: 0;
+            z-index: 2;
+            position: sticky;
+            background-color: white;
+            box-shadow: 2px 2px 2px gray;
+        }
+
+        table tr.subEntry>th, table tr.subEntry>td:nth-child(1n + 2) {
+            padding-left: 20px;
+        }
+
+        .innerTable {
+            width: 100%;
+        }
+
+        input[type=text] {
+            width: 30%;
+            padding: 8px;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            text-align: right;
+        }
+
+        .clickMe {
+            cursor: pointer;
+            background-color: darkorange;
+            text-align: center;
+            border-radius: 7px;
+        }
+
+        .clickMe:hover {
+            color: white;
+            background-color: darkcyan;
+        }
+
+        .selectDiv {
+            display: flex;
+            justify-content: center;
+        }
+
+        .selectDiv div {
+            padding: 0 7px;
+        }
+
+        .hideMe {
+            display: none;
+        }
+
+        .loading {
+            background-image: url(loading.gif);
+            background-repeat: no-repeat;
+            min-height: 600px;
+            background-position: center 30px;
+            background-size: 600px auto;
+        }
+
+        .errorDiv {
+            display: flex;
+            justify-content: center;
+        }
+
+        #errorList {
+            color: yellow;
+            text-align: left;
+            max-width: 1200px;
+        }
+
+        #errorList span {
+            font-weight: bold;
+            color: orange;
+        }
+
+        #errorList a:hover {
+            color: rosybrown;
+        }
+
+        #errorList a,
+        #errorList a:visited {
+            color: darksalmon
+        }
+        #errorList span.noErrors {
+            color: lightgreen;
+            font-weight: bold;
+        }
+        #errorList span.bigError {
+            color: red;
+            background-color: whitesmoke;
+            padding: 6px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="masterDiv">
+        <div class="topDiv">
+            <h2>XML-Checker V2</h2>
+        </div>
+        <div>
+            <div class="selectDiv">
+                <div>
+                    <h3 for="xmlFirstSelect">XML Neu:</h3>
+                    <form id="xmlForm">
+                        <input type="file" id="xmlFile" accept=".xml" />
+                        <button type="button" id="uploadBtn">Upload</button>
+                    </form>
+                    <select id="xmlUploaded" size="20">
+
+                    </select>
+                </div>
+                <div>
+                    <h3 for="xmlSecondSelect">XML Server:</h3>
+                    <select id="xmlFirstSelect" size="20">
+
+                    </select>
+                </div>
+            </div>
+            <div class="errorDiv">
+                <h3 id="errorList"></h3>
+            </div>
+            <div class="resultDiv">
+                <table id="resultTable">
+
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var indexAll = {}, firstXML = [], secondXML = [], firstSelectedXML = '', secondSelectedXML = '', errorLog = {}, xmlDataVersion = '', firstXMLDataVersion = "", secondXMLDataVersion = '', firstXMLCatalogID = '', secondXMLCatalogID = '';
+    var langCheck = ['_AT_', '_DE_', '_CH_', '_CZ', '_SK_', '_FR_', '_SE_', '_HU_', '_SI_', '_PL_', '_RO_'];
+    var checkTargetCountryID = false;
+
+    function checkAndCompareTables() {
+        // Helper: convert object-with-numeric-keys into a dense array (0..max)
+        function normalizeToArray(obj) {
+            const keys = Object.keys(obj)
+                .map(k => parseInt(k, 10))
+                .filter(n => !Number.isNaN(n))
+                .sort((a, b) => a - b);
+            if (keys.length === 0) return [];
+            const max = keys[keys.length - 1];
+            const arr = new Array(max + 1);
+            for (let i = 0; i <= max; i++) {
+                arr[i] = Object.prototype.hasOwnProperty.call(obj, i) ? obj[i] : undefined;
+            }
+            return arr;
+        }
+
+        function pickBusinessKey(entry, keyOrder) {
+            if (!entry || typeof entry !== "object") return undefined;
+            for (const k of keyOrder) {
+                if (k in entry) return `${k}:${entry[k]}`;
+            }
+            return undefined;
+        }
+
+        function buildPlaceholderFrom(exemplar) {
+            if (!exemplar || typeof exemplar !== "object") return "-KEIN EINTRAG-";
+            const placeholder = {};
+            for (const k of Object.keys(exemplar)) {
+                placeholder[k] = "-KEIN EINTRAG-";
+            }
+            return placeholder;
+        }
+
+        /**
+         * Aligns by business key and orders rows so those with placeholders appear first.
+         * Ordering strategy:
+         * 1) Any row where either side is a placeholder (has "empty" object) goes to the top.
+         * 2) Ties resolved by original stable order (firstXML keys first, then extras from secondXML).
+         */
+        function alignByKeyWithEmptyOnTop(
+            firstObj,
+            secondObj,
+            keyOrder = ["Type_No", "CountryID_TargetID", "Short_Text", "Feature_No", "Feature_Text"]
+        ) {
+            const arr1 = normalizeToArray(firstObj);
+            const arr2 = normalizeToArray(secondObj);
+
+            const map1 = new Map();
+            const map2 = new Map();
+            const order1 = [];
+            const order2 = [];
+
+            for (let i = 0; i < arr1.length; i++) {
+                const e = arr1[i];
+                const key = pickBusinessKey(e, keyOrder);
+                if (key !== undefined && !map1.has(key)) {
+                    map1.set(key, e);
+                    order1.push(key);
+                }
+            }
+            for (let i = 0; i < arr2.length; i++) {
+                const e = arr2[i];
+                const key = pickBusinessKey(e, keyOrder);
+                if (key !== undefined && !map2.has(key)) {
+                    map2.set(key, e);
+                    order2.push(key);
+                }
+            }
+
+            // Stable union order (baseline)
+            const seen = new Set();
+            const baselineOrder = [];
+            for (const k of order1) if (!seen.has(k)) { seen.add(k); baselineOrder.push(k); }
+            for (const k of order2) if (!seen.has(k)) { seen.add(k); baselineOrder.push(k); }
+
+            // Build rows with metadata for sorting
+            const rows = baselineOrder.map((key, idx) => {
+                const left = map1.get(key);
+                const right = map2.get(key);
+                let outLeft, outRight;
+                let hasPlaceholderLeft = false;
+                let hasPlaceholderRight = false;
+
+                if (left && right) {
+                    outLeft = left;
+                    outRight = right;
+                } else if (left && !right) {
+                    outLeft = left;
+                    outRight = buildPlaceholderFrom(left);
+                    hasPlaceholderRight = true;
+                } else if (!left && right) {
+                    outLeft = buildPlaceholderFrom(right);
+                    hasPlaceholderLeft = true;
+                    outRight = right;
+                } else {
+                    // Shouldn't happen, but keep safe fallback
+                    outLeft = "-KEIN EINTRAG-";
+                    outRight = "-KEIN EINTRAG-";
+                    hasPlaceholderLeft = true;
+                    hasPlaceholderRight = true;
+                }
+
+                return {
+                    key,
+                    outLeft,
+                    outRight,
+                    anyPlaceholder: hasPlaceholderLeft || hasPlaceholderRight,
+                    originalIndex: idx // preserves stable order within groups
+                };
+            });
+
+            // Sorting rule: any row with a placeholder goes to the top (anyEmptyFirst)
+            rows.sort((a, b) => {
+                if (a.anyPlaceholder && !b.anyPlaceholder) return -1;
+                if (!a.anyPlaceholder && b.anyPlaceholder) return 1;
+                return a.originalIndex - b.originalIndex; // keep stable order otherwise
+            });
+
+            // Emit aligned arrays in new order
+            const alignedFirst = rows.map(r => r.outLeft);
+            const alignedSecond = rows.map(r => r.outRight);
+            const keys = rows.map(r => r.key);
+
+            return { alignedFirst, alignedSecond, keys };
+        }
+
+        const { alignedFirst, alignedSecond, keys } = alignByKeyWithEmptyOnTop(firstXML, secondXML);
+        firstXML = alignedFirst;
+        secondXML = alignedSecond;
+
+        $('#resultTable').empty();
+        $('#resultTable').append('<tr><th>Zeile</th><th>XML Bezeichnung</th><th>XML: ' + firstSelectedXML + '</th><th>XML: ' + secondSelectedXML + '</th></tr>');
+        var lineCounter = 1;
+        errorLog = {
+            Lang: [],
+            Errors: 0,
+            ErrorLines: [],
+            Empty: 0,
+            EmptyLines: [],
+            ErrorKeys: []
+        };
+        $.each(firstXML, function (id, val) {
+            $.each(val, function (sId, sVal) {
+                var firstVal = sVal;
+                var secondVal = secondXML[id][sId];
+                var highlighter = 'empty';
+                if (firstVal === secondVal) {
+                    highlighter = 'match';
+                } else {
+                    if (secondVal === '-KEIN EINTRAG-' || firstVal === '-KEIN EINTRAG-') {
+                        errorLog.Empty++;
+                        errorLog.EmptyLines.push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
+                        highlighter = 'empty';
+                    } else {
+                        errorLog.Errors++;
+                        errorLog.ErrorLines.push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
+                        highlighter = 'noMatch';
+                    }
+                    errorLog.ErrorKeys.push(sId);
+                }
+                if (sId !== "Type_No" && sId !== "Feature_No" && sId !== "CountryID_TargetID") {
+                    highlighter += ' subEntry';
+                } else if (sId === "CountryID_TargetID") {
+                    var langPart = firstVal.split('_')[0].split('-');
+                    if(langPart[0]!==""){
+                        errorLog.Lang.push(langPart.pop());
+                    }
+                }
+                $('#resultTable').append(
+                    '<tr class="'+highlighter+'"><td id="' + lineCounter + '"> ' + lineCounter + '</td><th>' + sId + '</th><td>' + firstVal + '</td><td>' + secondVal + '</td></tr>'
+                )
+                lineCounter++;
+            })
+
+        })
+        $('#errorList').append('Datenversion:<br>' + secondSelectedXML + ': <span style="color:white;">' + secondXMLDataVersion + '</span><br>' + firstSelectedXML + ': <span style="color:white;">' + firstXMLDataVersion + '</span>');    
+        if(firstXMLCatalogID !== secondXMLCatalogID){
+            $('#errorList').append('<br><br>Fehler bei Schiene:<br>' + secondSelectedXML + ': <span class="bigError">' + secondXMLCatalogID + '</span><br>' + firstSelectedXML + ': <span class="bigError">' + firstXMLCatalogID + '</span>');    
+        }
+        if(errorLog.Errors > 0){
+            $('#errorList').append('<br><br>Unterschiede: <span>' + errorLog.Errors + '</span><br>Unterschiede in Zeile: <span>' + errorLog.ErrorLines.join(', ') + '</span>');    
+        }
+        if(errorLog.Empty > 0){
+            $('#errorList').append('<br><br>Leere Felder: <span>' + errorLog.Empty + '</span><br>Leere Felder in Zeile: <span>' + errorLog.EmptyLines.join(', ') + '</span>');
+        }
+        if(errorLog.Errors > 0 || errorLog.Empty > 0 ){
+            $('#errorList').append('<br><br>Betroffene Felder: <span>' + [...new Set(errorLog.ErrorKeys)].join(', ') + '</span>');
+        }
+        if(errorLog.Errors === 0 && errorLog.Empty === 0){
+            $('#errorList').append('<br><br><span class="noErrors">Keine Unterschiede gefunden. Beide XMLs sind identisch.</span>');
+        }firstXMLDataVersion = '', firstXMLCatalogID = "", secondXMLDataVersion = '', secondXMLCatalogID = '';
+        langCheck.forEach(function(land){
+            var langFile = false, missingLang = false;
+            if(firstSelectedXML.indexOf(land) === -1){
+                missingLang = true;   
+            } else {
+                langFile = true;
+            }
+            if(langFile && missingLang){
+                $('#errorList').append('<br><br><span class="bigError">!! ACHTUNG !! - XML Land fehlt: ' +firstSelectedXML + ' --> ' + land.replace(/_/g, '') + '</span>');
+            }
+        });
+        if(errorLog.Lang.length > 0){
+            errorLog.Lang = [...new Set(errorLog.Lang)];
+            $('#errorList').append('<br><br><span class="noErrors">Zielm&auml;rkte enthalten im XML:</span> <span style="color:white;">' + errorLog.Lang.join(', ') + '</span>');
+        } else {
+            $('#errorList').append('<br><br><span class="bigError">!! ACHTUNG !! - Keine Zielm&auml;rkte im XML gefunden.</span>');
+        }
+    }
+
+    function waitForXMLToLoad(){
+        function isFilled(obj) {
+            return obj && typeof obj === 'object' && Object.keys(obj).length > 0;
+        }
+
+        const intervalId = setInterval(() => {
+            if (isFilled(firstXML) && isFilled(secondXML)) {
+                console.log('Both objects are filled. Stopping interval.');
+                clearInterval(intervalId);
+                checkAndCompareTables();
+            } else {
+                console.log('Waiting... firstXML filled:', isFilled(firstXML), 'secondXML filled:', isFilled(secondXML));
+            }
+        }, 1000);
+    }
+
+    function getXMLFields(response, tableID){
+        var dataArrayCatalog = [], dataArrayArticle = [], dataArrayFeature = [], openXMLData = {}, openXMLName = '', openXMLTarget = '', openXMLArticle = '';
+        // get Target and Country data
+        $(response).find('TARGET').each(function () {
+            openXMLData = {
+                CountryID_TargetID: $(this).find('NAME').text() + '_' + $(this).find('TARGET_ID').text()
+            }
+            dataArrayCatalog.push(openXMLData);
+        })
+        $(response).find('CATALOG').each(function () {
+            openXMLData = {
+                CountryID_CatalogID: $(this).find('CATALOG').text()
+            }
+            dataArrayCatalog.push(openXMLData);
+        })
+        $(response).find('ITEM').each(function () {
+            openXMLData = {
+                Type_No: $(this).attr('TYPE_NO'),
+                Short_Text: $(this).find('SHORT_TEXT').find('TEXT').text()
+            }
+            dataArrayArticle.push(openXMLData);
+        })
+        $(response).find('FEATURE').each(function () {
+            openXMLData = {
+                Feature_No: $(this).attr('FEATURE_NO'),
+                Feature_Text: $(this).find('FEATURE_TEXT').find('TEXT').text()
+            }
+            dataArrayFeature.push(openXMLData);
+        })
+        // sort and compose result XML data for both files
+        dataArrayCatalog.sort(function (a, b) { if (a.CountryID_TargetID < b.CountryID_TargetID) { return -1 } if (a.CountryID_TargetID > b.CountryID_TargetID) { return 1 } return 0 })
+        dataArrayArticle.sort(function (a, b) { if (a.Type_No < b.Type_No) { return -1 } if (a.Type_No > b.Type_No) { return 1 } return 0 })
+        dataArrayFeature.sort(function (a, b) { if (a.Feature_Text < b.Feature_Text) { return -1 } if (a.Feature_Text > b.Feature_Text) { return 1 } return 0 })
+        if (tableID === 'tableOld') {
+            secondXMLDataVersion = $(response).find('DATA_VERSION').text();
+            firstXMLCatalogID = $(response).find('CATALOG').find('CATALOG_ID_INTERN').text();
+            secondXML = $.merge(dataArrayArticle, dataArrayFeature);
+            secondXML = $.merge(secondXML, dataArrayCatalog);
+            waitForXMLToLoad();
+        } else {
+            firstXMLDataVersion = $(response).find('DATA_VERSION').text();
+            secondXMLCatalogID = $(response).find('CATALOG').find('CATALOG_ID_INTERN').text();
+            firstXML = $.merge(dataArrayArticle, dataArrayFeature);
+            firstXML = $.merge(firstXML, dataArrayCatalog);
+        }
+    }
+    function readXML(fileName, tableID) {
+        var xmlPath = 'https://ig-creator.xxxlgroup.com/idm/' + fileName + '.xml';
+        $('#tableNew').empty();
+        $.ajax({
+            type: "GET",
+            url: xmlPath,
+            dataType: "xml",
+
+            error: function (e) {
+                alert("An error occurred while processing XML file");
+                console.log("XML reading Failed: ", e);
+            },
+
+            success: function (response) {
+                getXMLFields(response, tableID);
+            }
+        })
+
+    }
+
+    // create additional object from local files and fill first List with it before displaying second list
+
+
+    
+    function readAndShowComparison(firstSelectedXML) {
+        readXML(firstSelectedXML, 'tableOld');
+        // readXML(secondSelectedXML, 'tableOld');
+    }
+
+    // function secondXmlSelect() {
+    //     $('.resultDiv').addClass('loading');
+    //     $('#resultTable').empty();
+    //     $('#errorList').empty();
+    //     secondSelectedXML = $('#xmlSecondSelect').val();
+    //     $('#resultTableBody').empty();
+    //     readAndShowComparison(firstSelectedXML, secondSelectedXML);
+    // }
+
+    function firstXmlSelect() {
+        $('.resultDiv').removeClass('loading');
+        $('#resultTable').empty();
+        $('#errorList').empty();
+        firstXML = [], secondXML = [];
+        firstSelectedXML = $('#xmlFirstSelect').val();
+        readAndShowComparison(firstSelectedXML);
+        // $('#xmlSecondSelect').empty();
+        // $.each(indexAll, function (id, val) {
+        //     var shortVal = val[0].substring(0, val[0].length - 3).toLowerCase();
+        //     var shortSelected = firstSelectedXML.substring(0, firstSelectedXML.length - 3).toLowerCase();
+        //     if (shortSelected.indexOf(shortVal) > -1) {
+        //         $.each(val, function (sId, sVal) {
+        //             if (sVal !== firstSelectedXML) {
+        //                 $('#xmlSecondSelect').append(
+        //                     '<option value="' + sVal + '" onClick="secondXmlSelect()">' + sVal + '</option>'
+        //                 )
+        //             }
+        //         })
+        //     }
+        // })
+    }
+
+    $("#uploadBtn").click(function() {
+        // Get the selected file
+        const fileInput = $("#xmlFile")[0];
+        const file = fileInput.files[0];
+
+        // Check if a file is selected
+        if (!file) {
+            alert("Please select an XML file.");
+            return;
+        }
+
+        // Ensure the file is an XML file
+        if (file.type !== "text/xml" && !file.name.endsWith(".xml")) {
+            alert("Please upload a valid XML file.");
+            return;
+        }
+
+        // Read the file using FileReader
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const xmlContent = event.target.result;
+
+            // Parse the XML
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlContent, "application/xml");
+
+            // Check for parsing errors
+            const parseError = xmlDoc.getElementsByTagName("parsererror");
+            if (parseError.length > 0) {
+                alert("Error parsing XML file.");
+                return;
+            }
+
+            // Example: Display the XML content in the output div
+            // const output = $("#output");
+            // output.empty(); // Clear previous content
+            // output.append("<h2>XML Content:</h2>");
+            // output.append("<pre>" + xmlContent + "</pre>");
+
+            // Example: Extract specific elements (modify as per your XML structure)
+            // const exampleElements = xmlDoc.getElementsByTagName("exampleTag"); // Replace with your tag name
+            getXMLFields(xmlDoc)
+
+            // if (exampleElements.length > 0) {
+            //     output.append("<h3>Extracted Data:</h3>");
+            //     for (let i = 0; i < exampleElements.length; i++) {
+            //         output.append("<p>" + exampleElements[i].textContent + "</p>");
+            //     }
+            // } else {
+            //     output.append("<p>No matching elements found.</p>");
+            // }
+        };
+
+        // Read the file as text
+        reader.readAsText(file);
+    });
+
+    function readAndShowJSON() {
+        $.getJSON("https://ig-creator.xxxlgroup.com/idm/index.json", function (data) {
+            $.each(data, function (id, val) {
+                $('#xmlFirstSelect').append(
+                    '<option value="' + val + '" onClick="firstXmlSelect()">' + val + '</option>'
+                )
+            })
+        });
+        $.getJSON("https://ig-creator.xxxlgroup.com/idm/index-all.json", function (data) {
+            indexAll = data;
+        });
+    }
+    readAndShowJSON();
+</script>
+
+</html>

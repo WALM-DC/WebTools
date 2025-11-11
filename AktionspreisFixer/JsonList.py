@@ -56,7 +56,8 @@ def find_all_json(root_path, onlineList):
                                     'preis': data.get('settings',{}).get('kaa1', ''),
                                     'entlasgung': data.get('settings',{}).get('entlastung', ''),
                                     'aktion': data.get('settings',{}).get('aktion', ''),
-                                    'pricing': data.get('settings', {}).get('pricing', '')
+                                    'pricing': data.get('settings', {}).get('pricing', ''),
+                                    'properties': data.get('properties', [])
                                 }
                             }
                             fullModelList.update(model_object)
@@ -125,6 +126,6 @@ def contains_target_keys(data, target_keys):
 if __name__ == "__main__":
     # Set your search root path and target values here
     # search_path = (r"F:\WebTools\AktionspreisFixer\XML-Test")
-    search_path = (r"C:\xxxlutz\IG-Creator\xxxl\ICOM")
+    search_path = (r"C:\xxxlutz\IG-Creator\XXXLutz\ICOM")
     read_online_list(search_path, onlineList)
     # find_all_json(search_path)

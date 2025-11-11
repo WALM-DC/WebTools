@@ -150,6 +150,12 @@
             color: lightgreen;
             font-weight: bold;
         }
+        #errorList span.bigError {
+            color: red;
+            background-color: whitesmoke;
+            padding: 6px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 
@@ -187,6 +193,7 @@
 <script>
     var indexAll = {}, firstXML = [], secondXML = [], firstSelectedXML = '', secondSelectedXML = '', errorLog = {}, xmlDataVersion = '', firstXMLDataVersion = "", secondXMLDataVersion = '', firstXMLCatalogID = '', secondXMLCatalogID = '';
     var langCheck = ['_AT_', '_DE_', '_CH_', '_CZ', '_SK_', '_FR_', '_SE_', '_HU_', '_SI_', '_PL_', '_RO_'];
+    var checkTargetCountryID = false;
 
     function checkAndCompareTables() {
         // Helper: convert object-with-numeric-keys into a dense array (0..max)
@@ -348,11 +355,13 @@
                     }
                     errorLog.ErrorKeys.push(sId);
                 }
-                 if (sId !== "Type_No" && sId !== "Feature_No" && sId !== "CountryID_TargetID") {
+                if (sId !== "Type_No" && sId !== "Feature_No" && sId !== "CountryID_TargetID") {
                     highlighter += ' subEntry';
                 } else if (sId === "CountryID_TargetID") {
                     var langPart = firstVal.split('_')[0].split('-');
-                    errorLog.Lang.push(langPart.pop());
+                    if(langPart[0]!==""){
+                        errorLog.Lang.push(langPart.pop());
+                    }
                 }
                 $('#resultTable').append(
                     '<tr class="'+highlighter+'"><td id="' + lineCounter + '"> ' + lineCounter + '</td><th>' + sId + '</th><td>' + firstVal + '</td><td>' + secondVal + '</td></tr>'
@@ -363,7 +372,7 @@
         })
         $('#errorList').append('Datenversion:<br>' + secondSelectedXML + ': <span style="color:white;">' + secondXMLDataVersion + '</span><br>' + firstSelectedXML + ': <span style="color:white;">' + firstXMLDataVersion + '</span>');    
         if(firstXMLCatalogID !== secondXMLCatalogID){
-            $('#errorList').append('<br><br>Fehler bei Schiene:<br>' + secondSelectedXML + ': <span style="color:red;">' + secondXMLCatalogID + '</span><br>' + firstSelectedXML + ': <span style="color:red;">' + firstXMLCatalogID + '</span>');    
+            $('#errorList').append('<br><br>Fehler bei Schiene:<br>' + secondSelectedXML + ': <span class="bigError">' + secondXMLCatalogID + '</span><br>' + firstSelectedXML + ': <span class="bigError">' + firstXMLCatalogID + '</span>');    
         }
         if(errorLog.Errors > 0){
             $('#errorList').append('<br><br>Unterschiede: <span>' + errorLog.Errors + '</span><br>Unterschiede in Zeile: <span>' + errorLog.ErrorLines.join(', ') + '</span>');    
@@ -385,12 +394,14 @@
                 langFile = true;
             }
             if(langFile && missingLang){
-                $('#errorList').append('<br><br><span>!! ACHTUNG !! - XML Land fehlt: ' +firstSelectedXML + ' --> ' + land.replace(/_/g, '') + '</span>');
+                $('#errorList').append('<br><br><span class="bigError">!! ACHTUNG !! - XML Land fehlt: ' +firstSelectedXML + ' --> ' + land.replace(/_/g, '') + '</span>');
             }
         });
         if(errorLog.Lang.length > 0){
             errorLog.Lang = [...new Set(errorLog.Lang)];
-            $('#errorList').append('<br><br><span class="noErrors">Country_IDs enthalten im XML:</span> <span style="color:white;">' + errorLog.Lang.join(', ') + '</span>');
+            $('#errorList').append('<br><br><span class="noErrors">Zielm&auml;rkte enthalten im XML:</span> <span style="color:white;">' + errorLog.Lang.join(', ') + '</span>');
+        } else {
+            $('#errorList').append('<br><br><span class="bigError">!! ACHTUNG !! - Keine Zielm&auml;rkte im XML gefunden.</span>');
         }
     }
 
@@ -495,8 +506,8 @@
         firstSelectedXML = $('#xmlFirstSelect').val();
         $('#xmlSecondSelect').empty();
         $.each(indexAll, function (id, val) {
-            var shortVal = val[0].substring(0, val[0].length - 3);
-            var shortSelected = firstSelectedXML.substring(0, firstSelectedXML.length - 3);
+            var shortVal = val[0].substring(0, val[0].length - 3).toLowerCase();
+            var shortSelected = firstSelectedXML.substring(0, firstSelectedXML.length - 3).toLowerCase();
             if (shortSelected.indexOf(shortVal) > -1) {
                 $.each(val, function (sId, sVal) {
                     if (sVal !== firstSelectedXML) {

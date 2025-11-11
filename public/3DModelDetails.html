@@ -1,0 +1,277 @@
+<html>
+    <head>
+        <title>3D-Modell-Detail&uuml;bersicht</title>
+        <link rel="stylesheet" href="mattStyle.css">
+        <script src="jquery-3.7.1.min.js"></script>
+        <script src="table2csv.js"></script>
+        <script src="ddtf.js"></script>
+        <script src="mattQuery.js"></script>
+        <style>
+            .resultDiv{
+                width: 100%;
+                /* display: flex; */
+                align-items: center;
+                justify-content: center;
+                text-align: right;
+            }
+            .div_before_table {
+                overflow: auto;
+                height: calc(100% - 133px);
+            }
+            h3{
+                color: whitesmoke;
+            }
+            h3.withButton{
+                display: flex;
+                justify-content: end;
+                align-items: center;
+            }
+            select{
+                max-width: 200px;
+            }
+            table{
+                border-collapse: collapse;
+                width: 100%;
+                background-color: white;
+                font-size: 14px;
+            }
+            table tr:hover{
+                background-color: khaki;
+            }
+            table td, table th{
+                border: 1px solid #dddddd;
+                padding: 5px;
+                text-align: left;
+                max-width: 200px;
+            }
+            table th{
+                top: 0;
+                z-index: 2;
+                position: sticky;
+                background-color: white;
+                box-shadow: 2px 2px 2px gray;
+            }
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+            input[type=text] {
+                width: 30%;
+                padding: 8px;
+                margin-top: 6px;
+                margin-bottom: 16px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                text-align: right;
+            }
+            .trueCol{
+                background-color: aquamarine;
+            }
+            .falseCol{
+                background-color: lightsalmon;
+            }
+            button{
+                width: 210px;
+                margin-left: 14px;
+            }
+            .front{
+                font-size: 17px;
+            }
+            h1{
+                color: red;
+            }
+            .testMode{
+                display: none;
+            }
+            .Extern{
+                background-color: lightcyan;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="masterDiv">
+            <div class="topDiv">
+                <h2>3D-Modell-Detail&uuml;bersicht</h2>
+            </div>
+            <div>
+                <div class="resultDiv">
+                    <h3>Anzahl der gefilterten Artikel: <span id="myCounter"></span></h3>
+                    <h3>Anzahl der Varianten / Absprungpunkte: <span id="myVariantCounter"></span></h3>
+                    <h3 class="withButton">CSV Export: 
+                        <button id="exportAll" class="pushable">
+                            <span class="shadow"></span>
+                            <span class="edge"></span>
+                            <span class="front">Alle Daten</span>
+                        </button>
+                        <button id="exportFiltered" class="pushable">
+                            <span class="shadow"></span>
+                            <span class="edge"></span>
+                            <span class="front">Gefilterte Daten</span>
+                        </button>
+                    </h3>
+                    <input type="text" id="myInput" onkeyup="filterTable()" placeholder="Allgemeine Suche auf alle Felder...">
+                    <div class="div_before_table">
+                        <table id="myTable" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <th>Hersteller</th>
+                                <th>Marke</th>
+                                <th>Modellname</th>
+                                <th>3D Domain</th>
+                                <th>Herkunft</th>
+                                <th>Nummer</th>
+                                <th>Online</th>
+                                <th>Konfig.</th>
+                                <th>Varianten</th>
+                                <th>Absp.</th>
+                                <th>Schiene</th>
+                                <th>Land</th>
+                                <th>W&auml;hrung</th>
+                                <th>kaa1</th>
+                                <th>entlastung</th>
+                                <th>aktion</th>
+                                <th>Beschreibung</th>
+                                <th>Warengruppe</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </body>
+    <script>
+        var intern = 0, extern = 0;
+        var countryShorts = {
+            "LU": "xxxlutz",
+            "MM": "moemax",
+            "MX": "moebelix"
+        }
+        function sortList(a, b) {
+            let ca = a.catalog.split('.')[0].replace('XXXL', '').toLowerCase();
+            let cb = b.catalog.split('.')[0].replace('XXXL', '').toLowerCase();
+            let ba = a.brandName.toLowerCase();
+            let bb = b.brandName.toLowerCase();
+            let ma = a.modelName.toLowerCase();
+            let mb = b.modelName.toLowerCase();
+            if(ca !== cb) return (ca < cb) ? -1 : 1;
+            if(ba !== bb) return (ba < bb) ? -1 : 1;
+            return (ma < mb) ? -1 : 1;
+        }
+        function countColumns(){
+            $('#myCounter').html(($('table tr').length-1)-($('table tr[style="display: none;"]').length));
+            var allVarantCount = 0, inactiveVariantCount = 0;
+            $.each($('table tr'),function(id, val){
+                if(typeof($(val).attr('variants'))!='undefined'){
+                    allVarantCount += parseInt($(val).attr('variants'));
+                }
+            })
+            $.each($('table tr[style="display: none;"]'),function(id, val){
+                if(typeof($(val).attr('variants'))!='undefined'){
+                    inactiveVariantCount += parseInt($(val).attr('variants'));
+                }
+            })
+            $('#myVariantCounter').html(allVarantCount-inactiveVariantCount);
+        }
+        function filterTable() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td");
+                for (var j = 0; j < td.length; j++) {
+                txtValue = td[j].textContent || td[j].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                    break;
+                } else {
+                    tr[i].style.display = "none";
+                }
+                }
+            }
+            countColumns()
+        }
+        // docu for plugin: https://www.jqueryscript.net/table/jQuery-Plugin-To-Export-Table-Data-To-CSV-File-table2csv.html
+        $('#exportAll').on('click',function(){
+            $("table").table2csv({  
+                filename:'3D-Modellliste.csv',
+                separator: ';',
+                newline: '\n',
+                quoteFields: false,
+                trimContent: true,
+                excludeHidden: false          
+            });
+        })
+        $('#exportFiltered').on('click',function(){
+            $("table").table2csv({
+                filename:'3D-Modellliste-gefiltert.csv',
+                separator: ';',
+                newline: '\n',
+                quoteFields: false,
+                trimContent: true,
+                excludeHidden: true
+            });
+        })
+        function readAndShowJSON(){
+            $.getJSON( "https://walm-dc.github.io/WebTools/public/list.json", function( data ) {
+                var sortArray = $.map(data, function(value, index) {return [value]});
+                sortArray.sort(sortList);
+                console.log(sortArray);
+                $.each(sortArray, function(id, val){
+                    var online = '<td class="trueCol">'+val.online+'</td>';
+                    if(val.online=='false'){online = '<td class="falseCol">'+val.online+'</td>'}
+                    if(val.online==''){online = '<td>'+val.online+'</td>'}
+                    var konfig = '<td class="trueCol">'+val.konfig+'</td>';
+                    if(val.konfig=='false'){konfig = '<td class="falseCol">'+val.konfig+'</td>'}
+                    if(val.konfig==''){konfig = '<td>'+val.konfig+'</td>'}
+                    var storeUrl = countryShorts[val.brand]+'.'+val.locale;
+                    if(countryShorts[val.brand] === 'xxxlutz' && val.locale === 'si'){
+                        storeUrl = 'xxxlesnina'+'.'+val.locale;
+                    }
+                    // var variants = val.productVariants.trim().slice(0, -1);
+                    var variantCount = val.productVariants.split("/").length;
+                    var variants = val.productVariants.split('/').map(function(item) {
+                        return item.trim();
+                    }).join(', ').slice(0, -2);
+                                        if(variants.indexOf(98)>-1){variantCount--}
+                    if(variants.indexOf(99)>-1){variantCount--}
+                    if(variants.indexOf('YY')>-1){variantCount--}
+                    if(variants.indexOf('YN')>-1){variantCount--}
+                    if(variants.indexOf('YK')>-1){variantCount--}
+                    if(variants.trim()===""){variantCount=0}
+                    var inOrEx = 'Intern';
+                    if(val.catalog.split('.')[0].indexOf('XXXL')>-1){
+                        intern++;
+                    } else {
+                        extern++;
+                        inOrEx = 'Extern';
+                    }
+                    $('#myTable').append(
+                        '<tr variants="'+variantCount+'"><td>'+val.catalog.split('.')[0].replace('XXXL', '')+'</td>'+
+                        '<td>'+val.brandName+'</td>'+
+                        '<td>'+val.modelName+'</td>'+
+                        '<td>'+val.catalog+'</td>'+
+                        '<td class="'+inOrEx+'">'+inOrEx+'</td>'+
+                        '<td><a href="https://'+storeUrl+'/s/?s='+val.productNumber+'" target="_blank">'+val.productNumber+'</a></td>'+
+                        online+
+                        konfig+
+                        '<td>'+variants+'</td>'+
+                        '<td>'+variantCount+'</td>'+
+                        '<td>'+val.brand+'</td>'+
+                        '<td>'+val.locale+'</td>'+
+                        '<td>'+val.currency+'</td>'+
+                        '<td>'+val.preis+'</td>'+
+                        '<td>'+val.entlasgung+'</td>'+
+                        '<td>'+val.aktion+'</td>'+
+                        '<td>'+val.description+'</td>'+
+                        '<td>'+val.productGroup+'</td></tr>'
+                    )
+                })
+                filterTable();
+                jQuery('#myTable').ddTableFilter();
+            });
+        }
+        readAndShowJSON();
+    </script>
+</html>
