@@ -123,8 +123,6 @@
                                 <th>Konfig.</th>
                                 <th>Schiene</th>
                                 <th>Land</th>
-                                <th>Beschreibung</th>
-                                <th>Warengruppe</th>
                                 <th>Properties</th>
                             </tr>
                         </table>
@@ -134,7 +132,7 @@
         </div>
     </body>
     <script>
-        var intern = 0, extern = 0;
+        var intern = 0, extern = 0, propTableHeader = [];
         var countryShorts = {
             "LU": "xxxlutz",
             "MM": "moemax",
@@ -242,17 +240,15 @@
                         extern++;
                         inOrEx = 'Extern';
                     }
-                    var propTable = '<table><tr>', propTableHeader = '', propTableColumn = [];
+                    var propTable = '';
                     $.each(val.properties, function(propId, propVal){
-                        propTableHeader += '<th>'+propVal.property+'-'+propVal.name+'</th>';
+                        propTable += propVal.name+': <ul>';
                         $.each(propVal.values, function(valuesId, valuesVal){
-                            console.log(valuesId);
-                            propTableColumn[valuesId] = '<td>'+valuesVal.name+'-'+valuesVal.value+'</td>';
+                            propTable += '<li>'+valuesVal.name+'-'+valuesVal.value+'</li>';
                         })
+                        propTable += '</ul>';
                     })
-                    console.log(propTableColumn);
-                    propTable += propTableHeader + '</tr><tr>' + propTableColumn + '</tr></table>';
-                    console.log(propTable);
+                    // propTable += propTableHeader + '</tr><tr>' + propTableColumn + '</tr></table>';
                     $('#myTable').append(
                         '<tr variants="'+variantCount+'"><td>'+val.catalog.split('.')[0].replace('XXXL', '')+'</td>'+
                         '<td>'+val.brandName+'</td>'+
@@ -264,9 +260,10 @@
                         konfig+
                         '<td>'+val.brand+'</td>'+
                         '<td>'+val.locale+'</td>'+
-                        '<td>'+val.description+'</td>'+
-                        '<td>'+val.productGroup+'</td>'+
-                        '<td>'+propTable+'</td></tr>'
+                        '<td>'+propTable+'</td>'
+                        // '<td>'+val.description+'</td>'+
+                        // '<td>'+val.productGroup+'</td>'+
+                        // '<td>'+propTable+'</td></tr>'
                     )
                 })
                 filterTable();
