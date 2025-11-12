@@ -86,6 +86,13 @@
             .Extern{
                 background-color: lightcyan;
             }
+            .loading {
+                background-image: url(XMLLister/loading.gif);
+                background-repeat: no-repeat;
+                min-height: 600px;
+                background-position: center;
+                background-size: 600px auto;
+            }
         </style>
     </head>
     <body>
@@ -110,7 +117,7 @@
                         </button>
                     </h3>
                     <input type="text" id="myInput" onkeyup="filterTable()" placeholder="Allgemeine Suche auf alle Felder...">
-                    <div class="div_before_table">
+                    <div class="div_before_table loading">
                         <table id="myTable" cellspacing="0" cellpadding="0">
                             <tr id="headerRow">
                                 <th>Hersteller</th>
