@@ -112,7 +112,7 @@
                     <input type="text" id="myInput" onkeyup="filterTable()" placeholder="Allgemeine Suche auf alle Felder...">
                     <div class="div_before_table">
                         <table id="myTable" cellspacing="0" cellpadding="0">
-                            <tr>
+                            <tr id="headerRow">
                                 <th>Hersteller</th>
                                 <th>Marke</th>
                                 <th>Modellname</th>
@@ -121,16 +121,11 @@
                                 <th>Nummer</th>
                                 <th>Online</th>
                                 <th>Konfig.</th>
-                                <th>Varianten</th>
-                                <th>Absp.</th>
                                 <th>Schiene</th>
                                 <th>Land</th>
-                                <th>W&auml;hrung</th>
-                                <th>kaa1</th>
-                                <th>entlastung</th>
-                                <th>aktion</th>
                                 <th>Beschreibung</th>
                                 <th>Warengruppe</th>
+                                <th>Properties</th>
                             </tr>
                         </table>
                     </div>
@@ -247,6 +242,17 @@
                         extern++;
                         inOrEx = 'Extern';
                     }
+                    var propTable = '<table><tr>', propTableHeader = '', propTableColumn = [];
+                    $.each(val.properties, function(propId, propVal){
+                        propTableHeader += '<th>'+propVal.property+'-'+propVal.name+'</th>';
+                        $.each(propVal.values, function(valuesId, valuesVal){
+                            console.log(valuesId);
+                            propTableColumn[valuesId] = '<td>'+valuesVal.name+'-'+valuesVal.value+'</td>';
+                        })
+                    })
+                    console.log(propTableColumn);
+                    propTable += propTableHeader + '</tr><tr>' + propTableColumn + '</tr></table>';
+                    console.log(propTable);
                     $('#myTable').append(
                         '<tr variants="'+variantCount+'"><td>'+val.catalog.split('.')[0].replace('XXXL', '')+'</td>'+
                         '<td>'+val.brandName+'</td>'+
@@ -256,16 +262,11 @@
                         '<td><a href="https://'+storeUrl+'/s/?s='+val.productNumber+'" target="_blank">'+val.productNumber+'</a></td>'+
                         online+
                         konfig+
-                        '<td>'+variants+'</td>'+
-                        '<td>'+variantCount+'</td>'+
                         '<td>'+val.brand+'</td>'+
                         '<td>'+val.locale+'</td>'+
-                        '<td>'+val.currency+'</td>'+
-                        '<td>'+val.preis+'</td>'+
-                        '<td>'+val.entlasgung+'</td>'+
-                        '<td>'+val.aktion+'</td>'+
                         '<td>'+val.description+'</td>'+
-                        '<td>'+val.productGroup+'</td></tr>'
+                        '<td>'+val.productGroup+'</td>'+
+                        '<td>'+propTable+'</td></tr>'
                     )
                 })
                 filterTable();
