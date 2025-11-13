@@ -1,25 +1,10 @@
 {
-  "201052": {
-    "Aktion": "XZ442",
-    "vonDatum": "2025-11-04 00:00:00.000",
-    "bisDatum": "2025-11-10 00:00:00.000",
-    "Filiale": "XZ",
-    "NachlassinProzent": "15.00000",
-    "Artikel_Set": " ",
-    "AF_Set": "!",
-    "Warengruppe_Kombi": "A0/A1/A2/A3/A4/A5/A6/A7/A8/B0/B1/B2/B3/B4/B5/G0/G1/G2/G3/G4/G5/G6/G7/G8/G9/H0/H8/",
-    "AusnahmeWarengruppe": "G465/",
-    "StatKZ_Kombi": "1/4/6/",
-    "Marken": "0",
-    "ausmark": "0",
-    "AusnahmeLieferant": ""
-  },
-  "201060": {
+  "201061": {
     "Aktion": "XZ443",
-    "vonDatum": "2025-11-04 00:00:00.000",
-    "bisDatum": "2025-11-10 00:00:00.000",
+    "vonDatum": "2025-11-11 00:00:00.000",
+    "bisDatum": "2025-11-24 00:00:00.000",
     "Filiale": "XZ",
-    "NachlassinProzent": "23.00000",
+    "NachlassinProzent": "25.00000",
     "Artikel_Set": " ",
     "AF_Set": "!",
     "Warengruppe_Kombi": "00/01/02/03/05/06/07/08/09/10/11/12/13/14/15/",
@@ -29,32 +14,17 @@
     "ausmark": "0",
     "AusnahmeLieferant": ""
   },
-  "215390": {
-    "Aktion": "M7175",
-    "vonDatum": "2025-11-04 00:00:00.000",
-    "bisDatum": "2025-11-10 00:00:00.000",
+  "215407": {
+    "Aktion": "M7179",
+    "vonDatum": "2025-11-11 00:00:00.000",
+    "bisDatum": "2025-11-24 00:00:00.000",
     "Filiale": "M7",
-    "NachlassinProzent": "23.00000",
+    "NachlassinProzent": "25.00000",
     "Artikel_Set": " ",
     "AF_Set": "!",
     "Warengruppe_Kombi": "00/01/02/03/05/06/07/08/09/10/11/12/13/14/15/",
     "AusnahmeWarengruppe": "04/",
     "StatKZ_Kombi": "1/4/",
-    "Marken": "0",
-    "ausmark": "0",
-    "AusnahmeLieferant": ""
-  },
-  "215394": {
-    "Aktion": "M7176",
-    "vonDatum": "2025-11-04 00:00:00.000",
-    "bisDatum": "2025-11-10 00:00:00.000",
-    "Filiale": "M7",
-    "NachlassinProzent": "20.00000",
-    "Artikel_Set": " ",
-    "AF_Set": "!",
-    "Warengruppe_Kombi": "A0/A1/A2/A3/A4/A5/A6/A7/A8/B0/B1/B2/B3/B4/B5/G0/G1/G2/G4/G3/G5/G6/G7/G8/G9/H0/H8/",
-    "AusnahmeWarengruppe": "G465/",
-    "StatKZ_Kombi": "1/4/6/",
     "Marken": "0",
     "ausmark": "0",
     "AusnahmeLieferant": ""

@@ -182,7 +182,8 @@ def read_csv_file(root_path, prodGroups):
         reader = csv.DictReader(csvfile, delimiter=",")
         for idx, row in enumerate(reader, start=1):
             filtered_row = {header: row.get(header, '') for header in headerList}
-            if "1/4/" in filtered_row['StatKZ_Kombi'] and filtered_row['Filiale'] in filialenList:    
+            # only 1/4/ is relevant for us
+            if "1/4/" == filtered_row['StatKZ_Kombi'] and filtered_row['Filiale'] in filialenList:    
                 startDate = datetime.datetime.strptime(filtered_row["vonDatum"], '%Y-%m-%d %H:%M:%S.%f')
                 endDate = datetime.datetime.strptime(filtered_row["bisDatum"], '%Y-%m-%d %H:%M:%S.%f')
                 if startDate <= today and endDate >= today and float(filtered_row["NachlassinProzent"]) > 0:
