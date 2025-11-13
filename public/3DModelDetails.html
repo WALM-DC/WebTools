@@ -182,7 +182,7 @@
                 td = tr[i].getElementsByTagName("td");
                 for (var j = 0; j < td.length; j++) {
                     txtValue = td[j].textContent || td[j].innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1 && tr[i].style.display === "") {
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
                         tr[i].style.display = "";
                         break;
                     } else {
