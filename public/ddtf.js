@@ -65,7 +65,8 @@ $.fn.ddTableFilter = function(options) {
           console.log('Search: ' + (changeStop.getTime() - changeStart.getTime()) + 'ms');
         }
         refreshFilters(table);
-        countColumns();
+        filterTable();
+        // countColumns();
       });
       table.addClass('ddtf-processed');
       if($.isFunction(options.afterBuild)) {
