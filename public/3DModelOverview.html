@@ -86,6 +86,28 @@
             .Extern{
                 background-color: lightcyan;
             }
+            .emptySearch{
+                filter: invert(100%);
+                width: 40px;
+                height: 40px;
+                margin: -16px 10px;
+                cursor: pointer;
+                transition: all 0.5s;
+            }
+            .emptySearch:hover {
+                transform: scale(1.1) rotate(180deg);
+            }
+            .loading {
+                background-image: url(XMLLister/loading.gif);
+                background-repeat: no-repeat;
+                min-height: 600px;
+                background-position: center;
+                background-size: 600px auto;
+            }
+            mark{
+                background-color: yellow;
+                color: black;
+            }
         </style>
     </head>
     <body>
@@ -110,8 +132,8 @@
                             <span class="front">Gefilterte Daten</span>
                         </button>
                     </h3>
-                    <input type="text" id="myInput" onkeyup="filterTable()" placeholder="Allgemeine Suche auf alle Felder...">
-                    <div class="div_before_table">
+                    <img src="refresh-button.png" class="emptySearch" title="Suche leeren" alt="Suche leeren"><input type="text" id="myInput" placeholder="Allgemeine Suche auf alle Felder...">
+                    <div class="div_before_table loading">
                         <table id="myTable" cellspacing="0" cellpadding="0">
                             <tr>
                                 <th>Hersteller</th>
@@ -172,27 +194,67 @@
             })
             $('#myVariantCounter').html(allVarantCount-inactiveVariantCount);
         }
+        function removeHighlights() {
+            $("mark").each(function() {
+                // Replace the <mark> tag with its inner text
+                $(this).replaceWith($(this).text());
+            });
+        }
+        function highlightOccurrences(searchString) {
+            // Loop through all elements on the page
+            removeHighlights();
+            const regex = new RegExp(searchString, "gi");
+            $("body *").contents().each(function() {
+                if (this.nodeType === 3) { // Only process text nodes
+                    const text = $(this).text();
+                     // Case-insensitive search
+
+                    // Replace occurrences with <mark>
+                    const highlightedText = text.replace(regex, function(match) {
+                        return `<mark>${match}</mark>`;
+                    });
+                    $(this).replaceWith(highlightedText);
+                }
+            });
+        }
         function filterTable() {
             var input, filter, table, tr, td, i, txtValue;
             input = document.getElementById("myInput");
-            filter = input.value.toUpperCase();
+            filter = input.value;
             table = document.getElementById("myTable");
             tr = table.getElementsByTagName("tr");
 
             for (i = 0; i < tr.length; i++) {
                 td = tr[i].getElementsByTagName("td");
                 for (var j = 0; j < td.length; j++) {
-                txtValue = td[j].textContent || td[j].innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                    break;
-                } else {
-                    tr[i].style.display = "none";
-                }
+                    txtValue = td[j].textContent || td[j].innerText;
+                    if (txtValue.toUpperCase().indexOf(filter.toUpperCase()) > -1) {
+                        tr[i].style.display = "";
+                        break;
+                    } else {
+                        tr[i].style.display = "none";
+                    }
                 }
             }
-            countColumns()
+            countColumns();
+            highlightOccurrences(filter);
         }
+        $('#myInput').on('keydown', function(e) {
+            if (e.which === 13) { // Check if the Enter key is pressed (key code 13)
+                if($(this).val() === ""){
+                    removeHighlights();
+                    $('#myTable tr').show();
+                } else {
+                    filterTable();
+                }
+            }
+        });
+        $('.emptySearch').on('click', function(){
+            $('#myInput').val('');
+            removeHighlights();
+            $('#myTable tr').show();
+            countColumns();
+        });
         // docu for plugin: https://www.jqueryscript.net/table/jQuery-Plugin-To-Export-Table-Data-To-CSV-File-table2csv.html
         $('#exportAll').on('click',function(){
             $("table").table2csv({  
@@ -268,7 +330,9 @@
                         '<td>'+val.productGroup+'</td></tr>'
                     )
                 })
-                filterTable();
+                // filterTable();
+                $('.loading').removeClass('loading');
+                countColumns()
                 jQuery('#myTable').ddTableFilter();
             });
         }
