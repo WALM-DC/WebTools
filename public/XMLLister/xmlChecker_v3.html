@@ -145,6 +145,7 @@
             color: yellow;
             text-align: left;
             max-width: 1200px;
+            line-height: 20px;
         }
 
         #errorList span {
@@ -169,7 +170,7 @@
         #errorList span.bigError {
             color: red;
             background-color: whitesmoke;
-            padding: 6px;
+            padding: 0px 1px;
             border-radius: 5px;
         }
 
@@ -272,7 +273,7 @@
     </div>
 </body>
 <script>
-    var indexAll = {}, multiXMLImport = {}, firstXML = [], secondXML = [], firstSelectedXML = '', secondSelectedXML = '', errorLog = {}, xmlDataVersion = '', firstXMLDataVersion = "", secondXMLDataVersion = '', firstXMLCatalogID = '', secondXMLCatalogID = '';
+    var indexAll = {}, multiXMLImport = {}, firstXML = [], secondXML = [], firstSelectedXML = '', secondSelectedXML = '', errorLog = {}, xmlDataVersion = '', firstXMLSerieNo = "", secondXMLSerieNo = '', firstXMLDataVersion = "", secondXMLDataVersion = '', firstXMLCatalogID = '', secondXMLCatalogID = '';
     var langCheck = ['_AT_', '_DE_', '_CH_', '_CZ', '_SK_', '_FR_', '_SE_', '_HU_', '_SI_', '_PL_', '_RO_'];
     var checkTargetCountryID = false;
 
@@ -452,8 +453,11 @@
 
         })
         $('#errorList').append('Datenversion:<br>' + secondSelectedXML + ': <span style="color:white;">' + secondXMLDataVersion + '</span><br>' + firstSelectedXML + ': <span style="color:white;">' + firstXMLDataVersion + '</span>');
+        if (firstXMLSerieNo !== secondXMLSerieNo) {
+            $('#errorList').append('<br><br>Unterschied bei Seriennummer:<br>' + secondSelectedXML + ': <span class="bigError">' + secondXMLSerieNo + '</span><br>' + firstSelectedXML + ': <span class="bigError">' + firstXMLSerieNo + '</span>');
+        }
         if (firstXMLCatalogID !== secondXMLCatalogID) {
-            $('#errorList').append('<br><br>Fehler bei Schiene:<br>' + secondSelectedXML + ': <span class="bigError">' + secondXMLCatalogID + '</span><br>' + firstSelectedXML + ': <span class="bigError">' + firstXMLCatalogID + '</span>');
+            $('#errorList').append('<br><br>Unterschied bei Schiene:<br>' + secondSelectedXML + ': <span class="bigError">' + secondXMLCatalogID + '</span><br>' + firstSelectedXML + ': <span class="bigError">' + firstXMLCatalogID + '</span>');
         }
         if (errorLog.Errors > 0) {
             $('#errorList').append('<br><br>Unterschiede: <span>' + errorLog.Errors + '</span><br>Unterschiede in Zeile: <span>' + errorLog.ErrorLines.join(', ') + '</span>');
@@ -538,12 +542,14 @@
         dataArrayFeature.sort(function (a, b) { if (a.Feature_Text < b.Feature_Text) { return -1 } if (a.Feature_Text > b.Feature_Text) { return 1 } return 0 })
         if (tableID === 'tableOld') {
             secondXMLDataVersion = $(response).find('DATA_VERSION').text();
+            secondXMLSerieNo = $(response).find('SERIE').attr('SERIE_NO');
             firstXMLCatalogID = $(response).find('CATALOG').find('CATALOG_ID_INTERN').text();
             secondXML = $.merge(dataArrayArticle, dataArrayFeature);
             secondXML = $.merge(secondXML, dataArrayCatalog);
             waitForXMLToLoad();
         } else {
             firstXMLDataVersion = $(response).find('DATA_VERSION').text();
+            firstXMLSerieNo = $(response).find('SERIE').attr('SERIE_NO');
             secondXMLCatalogID = $(response).find('CATALOG').find('CATALOG_ID_INTERN').text();
             firstXML = $.merge(dataArrayArticle, dataArrayFeature);
             firstXML = $.merge(firstXML, dataArrayCatalog);
