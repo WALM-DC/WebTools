@@ -169,7 +169,7 @@
 
         #errorList span.bigError {
             color: red;
-            background-color: whitesmoke;
+            background-color: black;
             padding: 0px 1px;
             border-radius: 5px;
         }
@@ -276,6 +276,7 @@
     var indexAll = {}, multiXMLImport = {}, firstXML = [], secondXML = [], firstSelectedXML = '', secondSelectedXML = '', errorLog = {}, xmlDataVersion = '', firstXMLSerieNo = "", secondXMLSerieNo = '', firstXMLDataVersion = "", secondXMLDataVersion = '', firstXMLCatalogID = '', secondXMLCatalogID = '';
     var langCheck = ['_AT_', '_DE_', '_CH_', '_CZ', '_SK_', '_FR_', '_SE_', '_HU_', '_SI_', '_PL_', '_RO_'];
     var checkTargetCountryID = false;
+    var modelListJSON = {};
 
     function checkAndCompareTables() {
         // Helper: convert object-with-numeric-keys into a dense array (0..max)
@@ -416,8 +417,13 @@
             ErrorLines: [],
             Empty: 0,
             EmptyLines: [],
-            ErrorKeys: []
+            IDsInUseCount: 0,
+            IDsInUse:[],
+            ErrorKeys: [],
+            GenErrors: false
         };
+        var firmID = secondSelectedXML.split('_')[0], firmName = secondSelectedXML.split('_')[1];
+        var matchedIDs = [];
         $.each(firstXML, function (id, val) {
             $.each(val, function (sId, sVal) {
                 var firstVal = sVal;
@@ -430,6 +436,23 @@
                         errorLog.Empty++;
                         errorLog.EmptyLines.push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
                         highlighter = 'empty';
+                        if(secondVal !== '-KEIN EINTRAG-' && sId === 'Feature_No'){
+                            errorLog.IDsInUseCount++;
+                            errorLog.IDsInUse.push(secondVal);
+                            $.each(errorLog.IDsInUse, function(id, val){
+                                $.each(modelListJSON, function(modelId, modelVal){
+                                    if(modelId.indexOf(firmName)>-1 || modelId.indexOf(firmID)>-1){
+                                        console.log(modelVal);
+                                        $.each(modelVal.properties, function(propId, propVal){
+                                            if(propVal.property === val){
+                                                matchedIDs.push('!!! ACHTUNG !!! - Die Feature_No '+ val + ' wird im Modell ' + modelId + ' verwendet!');
+                                                highlighter = 'noMatch';
+                                            }
+                                        });
+                                    }
+                                });
+                            });
+                        }
                     } else {
                         errorLog.Errors++;
                         errorLog.ErrorLines.push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
@@ -452,12 +475,20 @@
             })
 
         })
-        $('#errorList').append('Datenversion:<br>' + secondSelectedXML + ': <span style="color:white;">' + secondXMLDataVersion + '</span><br>' + firstSelectedXML + ': <span style="color:white;">' + firstXMLDataVersion + '</span>');
+
+        if(secondXMLDataVersion !== firstXMLDataVersion){
+            $('#errorList').append('<br><br>Datenversion:<br>' + secondSelectedXML + ': <span style="color:white;">' + secondXMLDataVersion + '</span><br>' + firstSelectedXML + ': <span class="bigError">' + firstXMLDataVersion + '</span>');
+        }
+        if(matchedIDs.length>0){
+            $('#errorList').append('<br><br><span class="bigError">' + matchedIDs.join('<br>') + '</span>');
+        }
         if (firstXMLSerieNo !== secondXMLSerieNo) {
-            $('#errorList').append('<br><br>Unterschied bei Seriennummer:<br>' + secondSelectedXML + ': <span class="bigError">' + secondXMLSerieNo + '</span><br>' + firstSelectedXML + ': <span class="bigError">' + firstXMLSerieNo + '</span>');
+            $('#errorList').append('<br><br>Unterschied bei Seriennummer:<br>' + secondSelectedXML + ': <span style="color:white">' + secondXMLSerieNo + '</span><br>' + firstSelectedXML + ': <span class="bigError">' + firstXMLSerieNo + '</span>');
+            errorLog.GenErrors = true;
         }
         if (firstXMLCatalogID !== secondXMLCatalogID) {
-            $('#errorList').append('<br><br>Unterschied bei Schiene:<br>' + secondSelectedXML + ': <span class="bigError">' + secondXMLCatalogID + '</span><br>' + firstSelectedXML + ': <span class="bigError">' + firstXMLCatalogID + '</span>');
+            $('#errorList').append('<br><br>Unterschied bei Schiene:<br>' + secondSelectedXML + ': <span style="color:white">' + secondXMLCatalogID + '</span><br>' + firstSelectedXML + ': <span class="bigError">' + firstXMLCatalogID + '</span>');
+            errorLog.GenErrors = true;
         }
         if (errorLog.Errors > 0) {
             $('#errorList').append('<br><br>Unterschiede: <span>' + errorLog.Errors + '</span><br>Unterschiede in Zeile: <span>' + errorLog.ErrorLines.join(', ') + '</span>');
@@ -468,7 +499,7 @@
         if (errorLog.Errors > 0 || errorLog.Empty > 0) {
             $('#errorList').append('<br><br>Betroffene Felder: <span>' + [...new Set(errorLog.ErrorKeys)].join(', ') + '</span>');
         }
-        if (errorLog.Errors === 0 && errorLog.Empty === 0) {
+        if (errorLog.Errors === 0 && errorLog.Empty === 0 && !errorLog.GenErrors) {
             $('#errorList').append('<br><br><span class="noErrors">Keine Unterschiede gefunden. Beide XMLs sind identisch.</span>');
         } firstXMLDataVersion = '', firstXMLCatalogID = "", secondXMLDataVersion = '', secondXMLCatalogID = '';
         langCheck.forEach(function (land) {
@@ -543,14 +574,14 @@
         if (tableID === 'tableOld') {
             secondXMLDataVersion = $(response).find('DATA_VERSION').text();
             secondXMLSerieNo = $(response).find('SERIE').attr('SERIE_NO');
-            firstXMLCatalogID = $(response).find('CATALOG').find('CATALOG_ID_INTERN').text();
+            secondXMLCatalogID = $(response).find('CATALOG').find('CATALOG_ID_INTERN').text();
             secondXML = $.merge(dataArrayArticle, dataArrayFeature);
             secondXML = $.merge(secondXML, dataArrayCatalog);
             waitForXMLToLoad();
         } else {
             firstXMLDataVersion = $(response).find('DATA_VERSION').text();
             firstXMLSerieNo = $(response).find('SERIE').attr('SERIE_NO');
-            secondXMLCatalogID = $(response).find('CATALOG').find('CATALOG_ID_INTERN').text();
+            firstXMLCatalogID = $(response).find('CATALOG').find('CATALOG_ID_INTERN').text();
             firstXML = $.merge(dataArrayArticle, dataArrayFeature);
             firstXML = $.merge(firstXML, dataArrayCatalog);
         }
@@ -670,16 +701,18 @@
         }
     });
 
+    function readModelListJSON() {
+        $.getJSON( "https://walm-dc.github.io/WebTools/public/list.json", function( data ) {
+            modelListJSON = data;
+            // $.map(data, function(value, index) {return [value]});
+        });
+    }
+
     function readAndShowJSON() {
         $.getJSON("https://ig-creator.xxxlgroup.com/idm/index.json", function (data) {
             indexAll = data;
-            // $.each(data, function (id, val) {
-            //     $('#xmlSecondSelect').append('<option value="' + val + '" onClick="secondXmlSelect()">' + val + '</option>');
-            // })
+            readModelListJSON();
         });
-        // $.getJSON("https://ig-creator.xxxlgroup.com/idm/index-all.json", function (data) {
-        //     indexAll = data;
-        // });
     }
     readAndShowJSON();
 </script>
