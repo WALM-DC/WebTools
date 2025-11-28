@@ -168,7 +168,7 @@
         }
 
         #errorList span.bigError {
-            color: red;
+            color: orangered;
             background-color: black;
             padding: 0px 1px;
             border-radius: 5px;
@@ -476,7 +476,7 @@
 
         })
 
-        if(secondXMLDataVersion !== firstXMLDataVersion){
+        if(firstXMLDataVersion<secondXMLDataVersion){
             $('#errorList').append('<br><br>Datenversion:<br>' + secondSelectedXML + ': <span style="color:white;">' + secondXMLDataVersion + '</span><br>' + firstSelectedXML + ': <span class="bigError">' + firstXMLDataVersion + '</span>');
         }
         if(matchedIDs.length>0){
@@ -500,7 +500,7 @@
             $('#errorList').append('<br><br>Betroffene Felder: <span>' + [...new Set(errorLog.ErrorKeys)].join(', ') + '</span>');
         }
         if (errorLog.Errors === 0 && errorLog.Empty === 0 && !errorLog.GenErrors) {
-            $('#errorList').append('<br><br><span class="noErrors">Keine Unterschiede gefunden. Beide XMLs sind identisch.</span>');
+            $('#errorList').append('<br><br><span class="noErrors">Keine relevanten Unterschiede gefunden.</span>');
         } firstXMLDataVersion = '', firstXMLCatalogID = "", secondXMLDataVersion = '', secondXMLCatalogID = '';
         langCheck.forEach(function (land) {
             var langFile = false, missingLang = false;

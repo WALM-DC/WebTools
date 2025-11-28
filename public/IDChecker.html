@@ -34,6 +34,57 @@
             .rightCol button{
                 margin-bottom: 7px;
             }
+            .custom-file-upload{
+            margin-bottom: 233px;
+        }
+        .custom-file-upload, button {
+            align-items: center;
+            background-image: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
+            border: 0;
+            border-radius: 8px;
+            box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            display: flex;
+            font-family: Phantomsans, sans-serif;
+            font-size: 20px;
+            justify-content: center;
+            line-height: 1em;
+            max-width: 200px;
+            min-width: 140px;
+            padding: 3px;
+            text-decoration: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .custom-file-upload:active, button:active,
+        .custom-file-upload:hover, button:hover {
+            outline: 0;
+        }
+
+        .custom-file-upload span, button span {
+            background-color: rgb(5, 6, 45);
+            padding: 10px 24px;
+            border-radius: 6px;
+            width: 100%;
+            height: 100%;
+            transition: 300ms;
+        }
+
+        .custom-file-upload:hover span, button:hover span {
+            background: none;
+        }
+
+        @media (min-width: 768px) {
+            .custom-file-upload, button {
+                font-size: 18px;
+                min-width: 160px;
+            }
+        }
         </style>
     </head>
     <body>
@@ -47,122 +98,76 @@
                 </div>    
                 <div class="rightCol" id="outPut">
                     <button class="pushable" value="xxxlutz.at">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
                         <span class="front">xxxlutz.at</span>
                     </button>
                     <button class="pushable" value="xxxlutz.de">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
                         <span class="front">xxxlutz.de</span>
                     </button>
                     <button class="pushable" value="xxxlutz.ch">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
                         <span class="front">xxxlutz.ch</span>
                     </button>
                     <button class="pushable" value="xxxlutz.cz">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
                         <span class="front">xxxlutz.cz</span>
                     </button>
                     <button class="pushable" value="xxxlutz.sk">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
                         <span class="front">xxxlutz.sk</span>
                     </button>
                     <button class="pushable" value="xxxlutz.hu">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
                         <span class="front">xxxlutz.hu</span>
                     </button>
                     <button class="pushable" value="xxxlutz.ro">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
                         <span class="front">xxxlutz.ro</span>
                     </button>
                     <button class="pushable" value="xxxlutz.se">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
                         <span class="front">xxxlutz.se</span>
                     </button>
                     <button class="pushable" value="xxxlesnina.si">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
                         <span class="front">xxxlesnina.si</span>
                     </button>
                 </div>
                 <div class="rightCol">
                     <button class="pushable" value="moemax.at">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
                         <span class="front">moemax.at</span>
                     </button>
                     <button class="pushable" value="moemax.de">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
                         <span class="front">moemax.de</span>
                     </button>
                     <button class="pushable" value="moemax.si">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
                         <span class="front">moemax.si</span>
                     </button>
                     <button class="pushable" value="moemax.hu">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
                         <span class="front">moemax.hu</span>
                     </button>
                     <button class="pushable" value="moemax.bg">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
                         <span class="front">moemax.bg</span>
                     </button>
                     <button class="pushable" value="moemax.ro">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
                         <span class="front">moemax.ro</span>
                     </button>
                     <button class="pushable" value="moemax.hr">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
                         <span class="front">moemax.hr</span>
                     </button>
                     <button class="pushable" value="moemax.ch">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
                         <span class="front">moemax.ch</span>
                     </button>
                     <button class="pushable" value="moemax.pl">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
                         <span class="front">moemax.pl</span>
                     </button>
                     <button class="pushable" value="moemax.rs">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
                         <span class="front">moemax.rs</span>
                     </button>
                 </div>
                 <div class="rightCol">
                     <button class="pushable" value="moebelix.at">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
                         <span class="front">moebelix.at</span>
                     </button>
                     <button class="pushable" value="moebelix.cz">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
                         <span class="front">moebelix.cz</span>
                     </button>
                     <button class="pushable" value="moebelix.sk">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
                         <span class="front">moebelix.sk</span>
                     </button>
                     <button class="pushable" value="moebelix.hu">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
                         <span class="front">moebelix.hu</span>
                     </button>
                 </div>
