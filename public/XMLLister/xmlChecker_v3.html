@@ -276,7 +276,8 @@
     var indexAll = {}, multiXMLImport = {}, firstXML = [], secondXML = [], firstSelectedXML = '', secondSelectedXML = '', errorLog = {}, xmlDataVersion = '', firstXMLSerieNo = "", secondXMLSerieNo = '', firstXMLDataVersion = "", secondXMLDataVersion = '', firstXMLCatalogID = '', secondXMLCatalogID = '';
     var langCheck = ['_AT_', '_DE_', '_CH_', '_CZ', '_SK_', '_FR_', '_SE_', '_HU_', '_SI_', '_PL_', '_RO_'];
     var checkTargetCountryID = false;
-    var modelListJSON = {}, _registryJSON = {}, _registryMoebelixJSON = {}, _registryMoemaxJSON = {}, _registryXXXLutzJSON = {};
+    var modelListJSON = {};
+    var combinedRegistry = [];
 
     function checkAndCompareTables() {
         // Helper: convert object-with-numeric-keys into a dense array (0..max)
@@ -311,12 +312,11 @@
             return placeholder;
         }
 
-        /**
-         * Aligns by business key and orders rows so those with placeholders appear first.
-         * Ordering strategy:
-         * 1) Any row where either side is a placeholder (has "empty" object) goes to the top.
-         * 2) Ties resolved by original stable order (firstXML keys first, then extras from secondXML).
-         */
+        function removeAfterLastUnderscore(inputString) {
+            const lastUnderscoreIndex = inputString.lastIndexOf('_');
+            return lastUnderscoreIndex !== -1 ? inputString.substring(0, lastUnderscoreIndex + 1) : inputString;
+        }
+
         function alignByKeyWithEmptyOnTop(
             firstObj,
             secondObj,
@@ -474,7 +474,12 @@
             })
 
         })
-
+        var shortXmlName = removeAfterLastUnderscore(firstSelectedXML);
+        if($.inArray(shortXmlName, combinedRegistry) > -1){
+            $('#errorList').append('<br><br><span class="noErrors">Die XML <span style="color:white;">' + firstSelectedXML + '</span> ist im ICOM-Registry vorhanden.</span>');
+        } else {
+            $('#errorList').append('<br><br><span class="bigError">!! ACHTUNG !! - Die XML <span style="color:white;">' + firstSelectedXML + '</span> ist NICHT im ICOM-Registry vorhanden.</span>');
+        }
         if(firstXMLDataVersion<secondXMLDataVersion){
             $('#errorList').append('<br><br>Datenversion:<br>' + secondSelectedXML + ': <span style="color:white;">' + secondXMLDataVersion + '</span><br>' + firstSelectedXML + ': <span class="bigError">' + firstXMLDataVersion + '</span>');
         }
@@ -701,22 +706,39 @@
         }
     });
 
+    function formatNameAndCheckDupes(addressName){
+        var entry = addressName.replace('https://ig-creator.xxxlgroup.com/idm/', '').split('*')[0];
+        $.inArray(entry, combinedRegistry) === -1 ? combinedRegistry.push(entry) : null;
+    }
+    function combineRegistries(curRegistry, fileName){
+        $.each(curRegistry.Domains, function( key, value ) {
+            if(value.ComService === undefined) return; //skip entries without address
+            if(value.ComService.Setups === undefined){
+                formatNameAndCheckDupes(value.ComService.Address);
+            } else {
+                $.each(value.ComService.Setups, function( setupKey, setupValue ) {
+                    formatNameAndCheckDupes(setupValue.Address);
+                });
+            }
+        });
+    }
+
     function readModelListJSON() {
         $.getJSON( "https://walm-dc.github.io/WebTools/public/list.json", function( data ) {
             modelListJSON = data;
             // $.map(data, function(value, index) {return [value]});
         });
-        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry.json", function( data ) {
-            _registryJSON = data;
-        });
         $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moebelix.json", function( data ) {
-            _registryMoebelixJSON  = data;
+            combineRegistries(data, 'moebelix');
         });
         $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moemax.json", function( data ) {
-            _registryMoemaxJSON = data;
+            combineRegistries(data, 'moemax');
         });
         $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-xxxl.json", function( data ) {
-            _registryXXXLutzJSON = data;
+            combineRegistries(data, 'xxxl');
+        });
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry.json", function( data ) {
+            combineRegistries(data, 'registry');
         });
     }
 

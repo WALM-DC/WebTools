@@ -1,5 +1,5 @@
 html, body{
-    background-color: darkslategrey;
+    background-color: #4f8684;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .masterDiv{
@@ -10,7 +10,7 @@ html, body{
     text-align: center;
 }
 h2{
-    color: red;
+    color: aquamarine;
 }
 .splitDiv_Two{
     display: flex;

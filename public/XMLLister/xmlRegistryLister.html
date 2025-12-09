@@ -146,12 +146,9 @@
                     Address: addressArray
                 }
 
-                const isDuplicate = combinedRegistry.some(item => item.ID === entry.ID);
+                const isDuplicate = combinedRegistry.some(item => item.ID.toLowerCase() === entry.ID.toLowerCase());
 
                 if (!isDuplicate) {
-                    if(entry.ID === 'Zehdenick XXXLUTZ 13309[LatinaS]'){
-                        console.log('Adding entry:', entry);
-                    }
                     combinedRegistry.push(entry);
                 }
             })
@@ -159,8 +156,10 @@
                 $.each(combinedRegistry, function( index, registryEntry ) {
                     $('#myTable').append('<tr>'+
                         '<td>'+registryEntry.ID+'</td>'+
-                        '<td>'+registryEntry.FileName+'</td>'+
+                        '<td>'+registryEntry.Scope.split('.')[0]+'</td>'+
+                        '<td>'+registryEntry.Scope.split('.')[1]+'</td>'+
                         '<td>'+registryEntry.Scope+'</td>'+
+                        '<td>'+registryEntry.FileName+'</td>'+
                         '<td>'+registryEntry.Address.join('<br>')+'</td>'+
                     '</tr>');
                 });
