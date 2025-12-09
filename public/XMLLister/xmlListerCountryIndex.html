@@ -91,6 +91,7 @@
                                 <th>Hersteller</th>
                                 <th>Lieferant</th>
                                 <th>Modellname</th>
+                                <th>In Registry</th>
                                 <th>Target_ID</th>
                                 <th>Catalog_ID</th>
                             </tr>
@@ -102,6 +103,7 @@
     </body>
     <script>
         var langCheck = ['AT', 'DE', 'CH', 'CZ', 'SK', 'FR', 'SE', 'HU', 'SI', 'PL', 'RO'];
+        var combinedRegistry = [];
         function countColumns(){
             $('#myCounter').html(($('table tr').length-1)-($('table tr[style="display: none;"]').length));
         }
@@ -165,13 +167,50 @@
                 })
         }
 
+        function formatNameAndCheckDupes(addressName){
+            var entry = addressName.replace('https://ig-creator.xxxlgroup.com/idm/', '').split('*')[0];
+            $.inArray(entry, combinedRegistry) === -1 ? combinedRegistry.push(entry) : null;
+        }
+        function combineRegistries(curRegistry, fileName){
+            $.each(curRegistry.Domains, function( key, value ) {
+                if(value.ComService === undefined) return; //skip entries without address
+                if(value.ComService.Setups === undefined){
+                    formatNameAndCheckDupes(value.ComService.Address);
+                } else {
+                    $.each(value.ComService.Setups, function( setupKey, setupValue ) {
+                        formatNameAndCheckDupes(setupValue.Address);
+                    });
+                }
+            });
+        }
+        function removeAfterLastUnderscore(inputString) {
+            const lastUnderscoreIndex = inputString.lastIndexOf('_');
+            return lastUnderscoreIndex !== -1 ? inputString.substring(0, lastUnderscoreIndex + 1) : inputString;
+        }
         function readAndShowJSON(){
+            $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moebelix.json", function( data ) {
+                combineRegistries(data, 'moebelix');
+            });
+            $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moemax.json", function( data ) {
+                combineRegistries(data, 'moemax');
+            });
+            $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-xxxl.json", function( data ) {
+                combineRegistries(data, 'xxxl');
+            });
+            $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry.json", function( data ) {
+                combineRegistries(data, 'registry');
+            });
             $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index.json", function( data ) {
                 $.each(data, function(id, val){
-                    var land = '';
+                    var land = '', inRegistry = 'Nein';
                     var splitVal = val.split('_');
+                    var shortXmlName = removeAfterLastUnderscore(val);
+
                     if(langCheck.indexOf(splitVal[splitVal.length - 2]) > -1){
                         land = splitVal[splitVal.length - 2];
+                    }
+                    if($.inArray(shortXmlName, combinedRegistry) > -1){
+                        inRegistry = 'Ja';
                     }
                     $('#myTable').append(
                         '<tr><td>'+val+'</td>'+
@@ -179,6 +218,7 @@
                         '<td>'+splitVal[0]+'</td>'+
                         '<td>'+splitVal[1]+'</td>'+
                         '<td>'+splitVal[2]+'</td>'+
+                        '<td>'+inRegistry+'</td>'+
                         '<td id="target_'+val+'" style="width:100px" class="alignRight"></td>'+
                         '<td id="'+val+'"><div class="clickMe" onClick="openXML(this)" name="'+val+'">Load Country-Data</div></td></tr>'
                     )

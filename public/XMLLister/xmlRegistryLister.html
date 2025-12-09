@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>XML-Registry-Liste</title>
+        <title>Registry-Liste</title>
         <link rel="stylesheet" href="mattStyle.css">
         <script src="jquery-3.7.1.min.js"></script>
         <script src="ddtf.js"></script>
@@ -37,6 +37,7 @@
                 padding: 5px;
                 text-align: left;
                 max-width: 200px;
+                vertical-align: top;
             }
             table th{
                 top: 0;
@@ -63,7 +64,7 @@
     <body>
         <div class="masterDiv">
             <div class="topDiv">
-                <h2>XML-Registry-Liste</h2>
+                <h2>Registry-Liste</h2>
             </div>
             <div>
                 <div class="resultDiv">
@@ -73,7 +74,7 @@
                         <table id="myTable" cellspacing="0" cellpadding="0">
                             <tr>
                                 <th>ID</th>
-                                <th>Registry</th>
+                                <th>Schiene</th>
                                 <th>3D Domain</th>
                                 <th>Address + Markets</th>
                             </tr>
@@ -123,7 +124,7 @@
                             marketArray.push(`${key}: ${val}`);
                         });
                     });
-                    addressArray.push(value.ComService.Address+'<br>Markets: '+marketArray.join(', '));
+                    addressArray.push(value.ComService.Address.replace('https://ig-creator.xxxlgroup.com/idm/', '')+'<br>Markets: '+marketArray.join(', '));
                 } else {
                     addressArray = [];
                     $.each(value.ComService.Setups, function( setupKey, setupValue ) {
@@ -133,45 +134,50 @@
                                 marketArray.push(`${key}: ${val}`);
                             });
                         });
-                        addressArray.push(setupValue.Address+'<br>Markets: '+marketArray.join(', '));
+                        addressArray.push(setupValue.Address.replace('https://ig-creator.xxxlgroup.com/idm/', '')+'<br>Markets: '+marketArray.join(', '));
                     });
                 }
                 entry = {
                     ID: key,
-                    File: fileName,
+                    FileName: fileName,
                     Scope: value.Scope,
                     Address: addressArray
                 }
 
-                const isDuplicate = combinedRegistry.some(item => item.Address === entry.Address && item.Scope === entry.Scope);
+                const isDuplicate = combinedRegistry.some(item => item.ID === entry.ID);
 
                 if (!isDuplicate) {
+                    if(entry.ID === 'Zehdenick XXXLUTZ 13309[LatinaS]'){
+                        console.log('Adding entry:', entry);
+                    }
                     combinedRegistry.push(entry);
                 }
             })
-            $.each(combinedRegistry, function( index, registryEntry ) {
-                $('#myTable').append('<tr>'+
-                    '<td>'+registryEntry.ID+'</td>'+
-                    '<td>'+registryEntry.File+'</td>'+
-                    '<td>'+registryEntry.Scope+'</td>'+
-                    '<td>'+registryEntry.Address.join('<br>')+'</td>'+
+            if(fileName === 'registry'){
+                $.each(combinedRegistry, function( index, registryEntry ) {
+                    $('#myTable').append('<tr>'+
+                        '<td>'+registryEntry.ID+'</td>'+
+                        '<td>'+registryEntry.FileName+'</td>'+
+                        '<td>'+registryEntry.Scope+'</td>'+
+                        '<td>'+registryEntry.Address.join('<br>')+'</td>'+
                     '</tr>');
-            });
-            countColumns()
-            jQuery('#myTable').ddTableFilter();
+                });
+                jQuery('#myTable').ddTableFilter();
+                countColumns()
+            }
         }
         function readAndShowJSON(){
             $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moebelix.json", function( data ) {
-                combineRegistries(data, '_registry-moebelix.json');
+                combineRegistries(data, 'moebelix');
             });
             $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moemax.json", function( data ) {
-                combineRegistries(data, '_registry-moemax.json');
+                combineRegistries(data, 'moemax');
             });
             $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-xxxl.json", function( data ) {
-                combineRegistries(data, '_registry-xxxl.json');
+                combineRegistries(data, 'xxxl');
             });
             $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry.json", function( data ) {
-                combineRegistries(data, '_registry.json');
+                combineRegistries(data, 'registry');
             });
         }
         readAndShowJSON();
