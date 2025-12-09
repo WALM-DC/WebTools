@@ -1,18 +1,46 @@
-<html>
-    <head>
-        <title>Tabs</title>
-        <link rel="stylesheet" href="https://walm-dc.github.io/WebTools/public/mattStyle.css">
-        <script src="jquery-3.7.1.min.js"></script>
-        <script src="ddtf.js"></script>
-        <script src="mattQuery.js"></script>
-        <style>
-            
-        </style>
-    </head>
-    <body>
-        
-    </body>
-    <script>
-        
-    </script>
-</html>
+<style>
+    html, body, h2{
+        margin: 0;
+        padding: 0;
+    }
+    .tabList{
+        display: flex;
+        background-color: #333;
+        -webkit-user-select: none; /* Safari */
+        -ms-user-select: none; /* IE 10 and IE 11 */
+        user-select: none; /* Standard syntax */
+    }
+    .tab{
+        cursor: pointer;
+        padding: 18px;
+        background-color: #413d58;
+        margin-bottom: 8px;
+        margin-left: 8px;
+        border-radius: 0 0 8px 8px;
+        transition: 300ms;
+    }
+    .tab:hover{
+        background-color: #61b9b6;
+        margin-top: 8px;
+        margin-bottom: 0px;
+        border-radius: 8px 8px 0 0;
+        text-shadow: 1px 2px 5px black;
+    }
+    .tab.active{
+        background-color: #4f8684;
+        margin-bottom: 0;
+        margin-top: 8px;
+        border-radius: 8px 8px 0 0;
+    }
+    .tab h2{
+        font-size: 18px;
+    }
+</style>
+<div class="tabList">
+    <div class="tab" link="https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlListerIndex.html"><h2>XML Liste</h2></div>
+    <div class="tab" link="https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlListerCountryIndex.html"><h2>XML Liste + County</h2></div>
+    <div class="tab" link="https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlChecker_v3.html"><h2>XML Checker</h2></div>
+    <div class="tab" link="https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlRegistryLister.html"><h2>Registry Liste</h2></div>
+    <div class="tab" link="https://walm-dc.github.io/WebTools/public/3DModelOverview.html"><h2>3D Modell&uuml;bersicht</h2></div>
+    <div class="tab" link="https://walm-dc.github.io/WebTools/public/3DModelDetails.html"><h2>3D Modell-Details</h2></div>
+</div>
