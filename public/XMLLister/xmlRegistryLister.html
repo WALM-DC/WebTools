@@ -1,0 +1,179 @@
+<html>
+    <head>
+        <title>XML-Registry-Liste</title>
+        <link rel="stylesheet" href="mattStyle.css">
+        <script src="jquery-3.7.1.min.js"></script>
+        <script src="ddtf.js"></script>
+        <script src="mattQuery.js"></script>
+        <style>
+            .resultDiv{
+                width: 100%;
+                /* display: flex; */
+                align-items: center;
+                justify-content: center;
+                text-align: right;
+            }
+            .div_before_table {
+                overflow: auto;
+                height: calc(100% - 133px);
+            }
+            h3{
+                color: whitesmoke;
+            }
+            select{
+                max-width: 200px;
+            }
+            table{
+                border-collapse: collapse;
+                width: 100%;
+                background-color: white;
+                font-size: 14px;
+            }
+            table tr:hover{
+                background-color: khaki;
+            }
+            table td, table th{
+                border: 1px solid #dddddd;
+                padding: 5px;
+                text-align: left;
+                max-width: 200px;
+            }
+            table th{
+                top: 0;
+                z-index: 2;
+                position: sticky;
+                background-color: white;
+                box-shadow: 2px 2px 2px gray;
+            }
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+            input[type=text] {
+                width: 30%;
+                padding: 8px;
+                margin-top: 6px;
+                margin-bottom: 16px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                text-align: right;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="masterDiv">
+            <div class="topDiv">
+                <h2>XML-Registry-Liste</h2>
+            </div>
+            <div>
+                <div class="resultDiv">
+                    <h3>Anzahl in der aktuellen Auflistung: <span id="myCounter"></span></h3>
+                    <input type="text" id="myInput" onkeyup="filterTable()" placeholder="Allgemeine Suche auf alle Felder...">
+                    <div class="div_before_table">
+                        <table id="myTable" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <th>ID</th>
+                                <th>Registry</th>
+                                <th>3D Domain</th>
+                                <th>Address + Markets</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </body>
+    <script>
+        var langCheck = ['AT', 'DE', 'CH', 'CZ', 'SK', 'FR', 'SE', 'HU', 'SI', 'PL', 'RO'];
+        var combinedRegistry = [];
+
+        function countColumns(){
+            $('#myCounter').html(($('table tr').length-1)-($('table tr[style="display: none;"]').length));
+        }
+
+        function filterTable() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td");
+                for (var j = 0; j < td.length; j++) {
+                    txtValue = td[j].textContent || td[j].innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                        break;
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+            countColumns()
+        }
+        function combineRegistries(curRegistry, fileName){
+            $.each(curRegistry.Domains, function( key, value ) {
+                var addressArray = [], marketArray = [];
+                if(value.ComService === undefined) return; //skip entries without address
+                var entry = {};
+                if(value.ComService.Setups === undefined){
+                    $(value.ComService.Markets).each(function(mIndex, mValue) {
+                        $.each(mValue, function(key, val) {
+                            marketArray.push(`${key}: ${val}`);
+                        });
+                    });
+                    addressArray.push(value.ComService.Address+'<br>Markets: '+marketArray.join(', '));
+                } else {
+                    addressArray = [];
+                    $.each(value.ComService.Setups, function( setupKey, setupValue ) {
+                         marketArray = [];
+                        $(setupValue).each(function(mIndex, mValue) {
+                            $.each(mValue.Markets, function(key, val) {
+                                marketArray.push(`${key}: ${val}`);
+                            });
+                        });
+                        addressArray.push(setupValue.Address+'<br>Markets: '+marketArray.join(', '));
+                    });
+                }
+                entry = {
+                    ID: key,
+                    File: fileName,
+                    Scope: value.Scope,
+                    Address: addressArray
+                }
+
+                const isDuplicate = combinedRegistry.some(item => item.Address === entry.Address && item.Scope === entry.Scope);
+
+                if (!isDuplicate) {
+                    combinedRegistry.push(entry);
+                }
+            })
+            $.each(combinedRegistry, function( index, registryEntry ) {
+                $('#myTable').append('<tr>'+
+                    '<td>'+registryEntry.ID+'</td>'+
+                    '<td>'+registryEntry.File+'</td>'+
+                    '<td>'+registryEntry.Scope+'</td>'+
+                    '<td>'+registryEntry.Address.join('<br>')+'</td>'+
+                    '</tr>');
+            });
+            countColumns()
+            jQuery('#myTable').ddTableFilter();
+        }
+        function readAndShowJSON(){
+            $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moebelix.json", function( data ) {
+                combineRegistries(data, '_registry-moebelix.json');
+            });
+            $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moemax.json", function( data ) {
+                combineRegistries(data, '_registry-moemax.json');
+            });
+            $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-xxxl.json", function( data ) {
+                combineRegistries(data, '_registry-xxxl.json');
+            });
+            $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry.json", function( data ) {
+                combineRegistries(data, '_registry.json');
+            });
+        }
+        readAndShowJSON();
+    </script>
+</html>
