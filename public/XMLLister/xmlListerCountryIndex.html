@@ -72,6 +72,12 @@
                 color: white;
                 background-color: darkcyan;
             }
+            .trueCol{
+                background-color: aquamarine;
+            }
+            .falseCol{
+                background-color: lightsalmon;
+            }
         </style>
     </head>
     <body>
@@ -202,7 +208,7 @@
             });
             $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index.json", function( data ) {
                 $.each(data, function(id, val){
-                    var land = '', inRegistry = 'Nein';
+                    var land = '', inRegistry = '<td class="falseCol">Nein</td>';
                     var splitVal = val.split('_');
                     var shortXmlName = removeAfterLastUnderscore(val);
 
@@ -210,7 +216,7 @@
                         land = splitVal[splitVal.length - 2];
                     }
                     if($.inArray(shortXmlName, combinedRegistry) > -1){
-                        inRegistry = 'Ja';
+                        inRegistry = '<td class="trueCol">Ja</td>';
                     }
                     $('#myTable').append(
                         '<tr><td>'+val+'</td>'+

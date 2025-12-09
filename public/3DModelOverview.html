@@ -281,9 +281,9 @@
                     var online = '<td class="trueCol">'+val.online+'</td>';
                     if(val.online=='false'){online = '<td class="falseCol">'+val.online+'</td>'}
                     if(val.online==''){online = '<td>'+val.online+'</td>'}
-                    var konfig = '<td class="trueCol">'+val.konfig+'</td>';
-                    if(val.konfig=='false'){konfig = '<td class="falseCol">'+val.konfig+'</td>'}
-                    if(val.konfig==''){konfig = '<td>'+val.konfig+'</td>'}
+                    var konfig = '<td class="trueCol">Ja</td>';
+                    if(val.konfig=='false'){konfig = '<td class="falseCol">Nein</td>'}
+                    if(val.konfig==''){konfig = '<td></td>'}
                     var storeUrl = countryShorts[val.brand]+'.'+val.locale;
                     if(countryShorts[val.brand] === 'xxxlutz' && val.locale === 'si'){
                         storeUrl = 'xxxlesnina'+'.'+val.locale;
