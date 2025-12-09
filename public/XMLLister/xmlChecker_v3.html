@@ -276,7 +276,7 @@
     var indexAll = {}, multiXMLImport = {}, firstXML = [], secondXML = [], firstSelectedXML = '', secondSelectedXML = '', errorLog = {}, xmlDataVersion = '', firstXMLSerieNo = "", secondXMLSerieNo = '', firstXMLDataVersion = "", secondXMLDataVersion = '', firstXMLCatalogID = '', secondXMLCatalogID = '';
     var langCheck = ['_AT_', '_DE_', '_CH_', '_CZ', '_SK_', '_FR_', '_SE_', '_HU_', '_SI_', '_PL_', '_RO_'];
     var checkTargetCountryID = false;
-    var modelListJSON = {};
+    var modelListJSON = {}, _registryJSON = {}, _registryMoebelixJSON = {}, _registryMoemaxJSON = {}, _registryXXXLutzJSON = {};
 
     function checkAndCompareTables() {
         // Helper: convert object-with-numeric-keys into a dense array (0..max)
@@ -442,7 +442,6 @@
                             $.each(errorLog.IDsInUse, function(id, val){
                                 $.each(modelListJSON, function(modelId, modelVal){
                                     if(modelId.indexOf(firmName)>-1 || modelId.indexOf(firmID)>-1){
-                                        console.log(modelVal);
                                         $.each(modelVal.properties, function(propId, propVal){
                                             if(propVal.property === val){
                                                 matchedIDs.push('!!! ACHTUNG !!! - Die Feature_No '+ val + ' wird im Modell ' + modelId + ' verwendet!');
@@ -519,6 +518,7 @@
         } else {
             $('#errorList').append('<br><br><span class="bigError">!! ACHTUNG !! - Keine Zielm&auml;rkte im XML gefunden.</span>');
         }
+        console.log(_registryJSON, _registryMoebelixJSON, _registryMoemaxJSON, _registryXXXLutzJSON);
     }
 
     function waitForXMLToLoad() {
@@ -705,6 +705,18 @@
         $.getJSON( "https://walm-dc.github.io/WebTools/public/list.json", function( data ) {
             modelListJSON = data;
             // $.map(data, function(value, index) {return [value]});
+        });
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry.json", function( data ) {
+            _registryJSON = data;
+        });
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moebelix.json", function( data ) {
+            _registryMoebelixJSON  = data;
+        });
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moemax.json", function( data ) {
+            _registryMoemaxJSON = data;
+        });
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-xxxl.json", function( data ) {
+            _registryXXXLutzJSON = data;
         });
     }
 

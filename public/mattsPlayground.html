@@ -51,13 +51,6 @@
             </div>
             <div class="splitDiv_Two">
                 <div class="leftCol">
-                    <textarea id="taInput"></textarea>
-
-                    <button class="pushable" id="convertMe">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
-                        <span class="front">Moch wos</span>
-                    </button>
 
                 </div>    
                 <div class="rightCol" id="outPut">
@@ -67,49 +60,15 @@
         </div>
     </body>
     <script>
-
-        $.ajax({
-            url: 'https://www.xxxlutz.de/s/?s=0000210006',
-            type: 'GET',
-            success: function(res) {
-                var data = $.parseHTML(res);  //<----try with $.parseHTML().
-                $(data).find('div.content').each(function(){
-                    $('#here').append($(this).html());
-                });
-
-            }
-            });
-
-        // var dimensonObj = {};
-        // function assignValues(obj, keys, value){
-        //     // console.log(keys);
-        //     // console.log(value);
-        //     keys.forEach(key => {
-        //         obj[key] = value;
-        //     });
-        // }
-        // const height45 = {
-        //     "629|7854": {  "height": 45 }, 
-        //     "629|8097": {  "height": 45 }, 
-        //     "629|7853": {  "height": 45 }, 
-        //     "629|8096": {  "height": 45 } 
-        // }
-        // function convertData(){
-        //     dimensonObj = {
-        //         'Komforthöhe': {
-        //             "629|3002": { "width": 218, "height": 86 },
-        //             // "629|1002": { "width": 98, "height": 86 }, 
-        //             // "629|1003": { "width": 98, "height": 86 }, 
-        //             // "629|1004": { "width": 98, "height": 86 }
-        //         }
-        //     }
-        //     // dimensonObj.Komforthöhe["629|1002"] = dimensonObj.Komforthöhe["629|1003"] = dimensonObj.Komforthöhe["629|1004"] = { "width": 98, "height": 86 };
-        //     assignValues(dimensonObj.Komforthöhe, ["629|1002", "629|1004", "629|1014"], { "width": 98, "height": 86 });
-        //     Object.assign(dimensonObj.Komforthöhe, height45);
-        //     console.log(dimensonObj);
-        // }
-        // $('#convertMe').on('click', function(){
-        //     convertData();
-        // })
+    function readAndShowJSON(){
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry.json", function( data ) {
+            var sortArray = $.map(data, function(value, index) {return [value]});
+            sortArray.sort(sortList);
+            $.each(sortArray, function(id, val){
+                $("#outPut").append("<div class='innerOutput' id='"+val.id+"'><table><tr><th colspan='2'>"+val.name+"</th></tr><tr><td class='cap'>ID</td><td>"+val.id+"</td></tr><tr><td class='cap'>Type</td><td>"+val.type+"</td></tr><tr><td class='cap bottomBorder'>Category</td><td class='bottomBorder'>"+val.category+"</td></tr></table></div>");
+            })
+        });
+    }
+    readAndShowJSON();
     </script>
 </html>
