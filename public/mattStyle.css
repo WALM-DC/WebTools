@@ -6,10 +6,70 @@ html, body, h2{
     margin: 0;
     padding: 0;
 }
-/* #topDiv{
+
+/* global elements */
+h2{
+    color: aquamarine;
+}
+h3{
+    color: whitesmoke;
+    margin: 8px;
+}
+h3.withButton{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+select{
+    max-width: 200px;
+}
+textarea{
     width: 100%;
-    text-align: center;
-} */
+    min-height: 600px;
+    border-radius: 12px;
+}
+table{
+    border-collapse: collapse;
+    width: 100%;
+    background-color: white;
+    font-size: 14px;
+}
+table tr:hover{
+    background-color: khaki;
+}
+table td, table th{
+    border: 1px solid #dddddd;
+    padding: 5px;
+    text-align: left;
+    max-width: 200px;
+    vertical-align: top;
+}
+table th{
+    top: 0;
+    z-index: 2;
+    position: sticky;
+    background-color: white;
+    box-shadow: 2px 2px 2px gray;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+input[type=text] {
+    width: 30%;
+    padding: 8px;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    text-align: right;
+}
+button{
+    width: 210px;
+    margin-left: 14px;
+}
+
+/* tablist */
 .tabList{
     display: flex;
     background-color: #333;
@@ -42,20 +102,10 @@ html, body, h2{
 .tab h2{
     font-size: 16px;
 }
-.masterDiv{
-    font-size: 14px;
-}
-h2{
-    color: aquamarine;
-}
-h3{
-    color: whitesmoke;
-    margin: 8px;
-}
-h3.withButton{
-    display: flex;
-    justify-content: end;
-    align-items: center;
+
+/* global */
+.front{
+    font-size: 17px;
 }
 .splitDiv_Two{
     display: flex;
@@ -63,11 +113,20 @@ h3.withButton{
 .splitDiv_Two > div{
     width: 50%;
 }
-textarea{
-    width: 100%;
-    min-height: 600px;
-    border-radius: 12px;
+.masterDiv{
+    font-size: 14px;
 }
+.resultDiv{
+    width: 100%;
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    text-align: right;
+}
+.div_before_table {
+    overflow: auto;
+    height: calc(100% - 230px);
+} 
 .custom-file-upload{
     margin-bottom: 233px;
 }
@@ -94,12 +153,10 @@ textarea{
     white-space: nowrap;
     cursor: pointer;
 }
-
 .custom-file-upload:active, button:active,
 .custom-file-upload:hover, button:hover {
     outline: 0;
 }
-
 .custom-file-upload span, button span {
     background-color: rgb(5, 6, 45);
     padding: 10px 24px;
@@ -108,11 +165,9 @@ textarea{
     height: 100%;
     transition: 300ms;
 }
-
 .custom-file-upload:hover span, button:hover span {
     background: none;
 }
-
 @media (min-width: 768px) {
     .custom-file-upload, button {
         font-size: 18px;
@@ -141,15 +196,6 @@ textarea{
 .pushable:focus:not(:focus-visible) {
     outline: none;
 }
-.trueCol{
-    background-color: aquamarine;
-}
-.falseCol{
-    background-color: lightsalmon;
-}
-.Extern{
-    background-color: lightcyan;
-}
 .emptySearch{
     filter: invert(100%);
     width: 35px;
@@ -161,11 +207,21 @@ textarea{
 .emptySearch:hover {
     transform: scale(1.1) rotate(180deg);
 }
+
+/* highlights and special styles */
 mark{
     background-color: yellow;
     color: black;
 }
-.div_before_table {
-    overflow: auto;
-    height: calc(100% - 230px);
+.trueCol{
+    background-color: aquamarine;
+}
+.falseCol{
+    background-color: lightsalmon;
+}
+.Extern{
+    background-color: lightcyan;
+}
+.alignRight{
+    text-align: right;
 }

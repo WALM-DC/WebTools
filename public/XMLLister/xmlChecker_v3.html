@@ -9,7 +9,6 @@
         html {
             scroll-padding-top: 30px;
         }
-
         .resultDiv {
             width: 100%;
             display: flex;
@@ -17,116 +16,65 @@
             justify-content: center;
             padding-top: 14px;
         }
-
-        .div_before_table {
-            overflow: auto;
-            height: calc(100% - 133px);
-        }
-
-        h3 {
-            color: whitesmoke;
-        }
-
         select {
             width: auto;
             min-width: 340px;
             height: 340px;
             overflow: auto;
         }
-
         option {
             cursor: pointer;
         }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            max-width: 1200px;
-            background-color: white;
-            font-size: 14px;
-        }
-
         .match {
             background-color: lightgreen;
         }
-
         .noMatch {
             background-color: darksalmon;
         }
-
         .empty {
             background-color: lightblue;
         }
-
         table tr:hover td {
             border: 1px solid black;
             box-shadow: 5px 0px 6px 0px yellow;
             background: rgb(255 255 255 / 60%);
         }
-
         table td,
         table th {
             border: 1px solid #dddddd;
             padding: 5px;
             text-align: left;
-            /* max-width: 200px; */
+            max-width: unset;
             align-content: flex-start;
         }
-
-        table th {
-            top: 0;
-            z-index: 2;
-            position: sticky;
-            background-color: white;
-            box-shadow: 2px 2px 2px gray;
-        }
-
         table tr.subEntry>th,
         table tr.subEntry>td:nth-child(1n + 2) {
             padding-left: 20px;
         }
-
         .innerTable {
             width: 100%;
         }
-
-        input[type=text] {
-            width: 30%;
-            padding: 8px;
-            margin-top: 6px;
-            margin-bottom: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            text-align: right;
-        }
-
         .clickMe {
             cursor: pointer;
             background-color: darkorange;
             text-align: center;
             border-radius: 7px;
         }
-
         .clickMe:hover {
             color: white;
             background-color: darkcyan;
         }
-
         .selectDiv {
             display: flex;
             justify-content: center;
             position: relative;
         }
-
         .selectDiv div {
             padding: 0 7px;
         }
-
         .hideMe {
             display: none;
         }
-
         .loading {
             background-image: url(loading.gif);
             background-repeat: no-repeat;
@@ -134,24 +82,20 @@
             background-position: center 30px;
             background-size: 600px auto;
         }
-
         .errorDiv {
             display: flex;
             justify-content: center;
         }
-
         #errorList {
             color: yellow;
             text-align: left;
             max-width: 1200px;
             line-height: 20px;
         }
-
         #errorList span {
             font-weight: bold;
             color: orange;
         }
-
         #errorList a:hover {
             color: rosybrown;
         }
@@ -160,72 +104,18 @@
         #errorList a:visited {
             color: darksalmon
         }
-
         #errorList span.noErrors {
             color: lightgreen;
             font-weight: bold;
         }
-
         #errorList span.bigError {
             color: orangered;
             background-color: black;
             padding: 0px 1px;
             border-radius: 5px;
         }
-
         input[type=file]{
             display: none;
-        }
-        .custom-file-upload{
-            margin-bottom: 233px;
-        }
-        .custom-file-upload, button {
-            align-items: center;
-            background-image: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
-            border: 0;
-            border-radius: 8px;
-            box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
-            box-sizing: border-box;
-            color: #FFFFFF;
-            display: flex;
-            font-family: Phantomsans, sans-serif;
-            font-size: 20px;
-            justify-content: center;
-            line-height: 1em;
-            max-width: 200px;
-            min-width: 140px;
-            padding: 3px;
-            text-decoration: none;
-            user-select: none;
-            -webkit-user-select: none;
-            touch-action: manipulation;
-            white-space: nowrap;
-            cursor: pointer;
-        }
-
-        .custom-file-upload:active, button:active,
-        .custom-file-upload:hover, button:hover {
-            outline: 0;
-        }
-
-        .custom-file-upload span, button span {
-            background-color: rgb(5, 6, 45);
-            padding: 10px 24px;
-            border-radius: 6px;
-            width: 100%;
-            height: 100%;
-            transition: 300ms;
-        }
-
-        .custom-file-upload:hover span, button:hover span {
-            background: none;
-        }
-
-        @media (min-width: 768px) {
-            .custom-file-upload, button {
-                font-size: 18px;
-                min-width: 160px;
-            }
         }
     </style>
 </head>
