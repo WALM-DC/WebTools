@@ -2,6 +2,42 @@ html, body{
     background-color: #4f8684;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+html, body, h2{
+    margin: 0;
+    padding: 0;
+}
+.tabList{
+    display: flex;
+    background-color: #333;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+.tab{
+    cursor: pointer;
+    padding: 16px;
+    background-color: #413d58;
+    margin-bottom: 8px;
+    margin-left: 8px;
+    border-radius: 0 0 8px 8px;
+    transition: 300ms;
+}
+.tab:hover{
+    background-color: #61b9b6;
+    margin-top: 8px;
+    margin-bottom: 0px;
+    border-radius: 8px 8px 0 0;
+    text-shadow: 1px 2px 5px black;
+}
+.tab.active{
+    background-color: #4f8684;
+    margin-bottom: 0;
+    margin-top: 8px;
+    border-radius: 8px 8px 0 0;
+}
+.tab h2{
+    font-size: 16px;
+}
 .masterDiv{
     font-size: 14px;
 }
@@ -11,6 +47,15 @@ html, body{
 }
 h2{
     color: aquamarine;
+}
+h3{
+    color: whitesmoke;
+    margin: 8px;
+}
+h3.withButton{
+    display: flex;
+    justify-content: end;
+    align-items: center;
 }
 .splitDiv_Two{
     display: flex;
@@ -95,4 +140,32 @@ textarea{
 }
 .pushable:focus:not(:focus-visible) {
     outline: none;
+}
+.trueCol{
+    background-color: aquamarine;
+}
+.falseCol{
+    background-color: lightsalmon;
+}
+.Extern{
+    background-color: lightcyan;
+}
+.emptySearch{
+    filter: invert(100%);
+    width: 35px;
+    height: 35px;
+    margin: -13px 10px;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+.emptySearch:hover {
+    transform: scale(1.1) rotate(180deg);
+}
+mark{
+    background-color: yellow;
+    color: black;
+}
+.div_before_table {
+    overflow: auto;
+    height: calc(100% - 230px);
 }
