@@ -22,9 +22,9 @@ function createTabs(){
     });
 }
 function injectTabs(){
-    createTabs();
     $.get('https://walm-dc.github.io/WebTools/public/tabs.html', function(data){
         $('#topDiv').html(data);
-        $('[link="'+window.location.href+'"]').addClass('active');
+        createTabs();
+        $('.tab[link="'+window.location.href+'"]').addClass('active');
     });
 }

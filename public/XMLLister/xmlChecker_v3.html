@@ -1,11 +1,10 @@
 <html>
-
 <head>
     <title>XML-Checker_v3</title>
     <link rel="stylesheet" href="https://walm-dc.github.io/WebTools/public/mattStyle.css">
-    <script src="jquery-3.7.1.min.js"></script>
-    <script src="ddtf.js"></script>
-    <script src="mattQuery.js"></script>
+    <script src="https://walm-dc.github.io/WebTools/public/jquery-3.7.1.min.js"></script>
+    <script src="https://walm-dc.github.io/WebTools/public/ddtf.js"></script>
+    <script src="https://walm-dc.github.io/WebTools/public/mattQuery.js"></script>
     <style>
         html {
             scroll-padding-top: 30px;
@@ -232,10 +231,11 @@
 </head>
 
 <body>
+    <div id="topDiv"></div>
     <div class="masterDiv">
-        <div class="topDiv">
+        <!-- <div class="topDiv">
             <h2>XML-Checker_v3</h2>
-        </div>
+        </div> -->
         <div>
             <div class="selectDiv">
                 <div class="uploadDiv">
@@ -273,6 +273,8 @@
     </div>
 </body>
 <script>
+    injectTabs();
+
     var indexAll = {}, multiXMLImport = {}, firstXML = [], secondXML = [], firstSelectedXML = '', secondSelectedXML = '', errorLog = {}, xmlDataVersion = '', firstXMLSerieNo = "", secondXMLSerieNo = '', firstXMLDataVersion = "", secondXMLDataVersion = '', firstXMLCatalogID = '', secondXMLCatalogID = '';
     var langCheck = ['_AT_', '_DE_', '_CH_', '_CZ', '_SK_', '_FR_', '_SE_', '_HU_', '_SI_', '_PL_', '_RO_'];
     var checkTargetCountryID = false;
@@ -750,5 +752,4 @@
     }
     readAndShowJSON();
 </script>
-
 </html>
