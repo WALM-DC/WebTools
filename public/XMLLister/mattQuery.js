@@ -5,7 +5,3 @@ function injectTabs(){
         $('[link="'+window.location.href+'"]').addClass('active');
     });
 }
-function relinkToPage(this){
-    var link = $(this).attr('link');
-    window.location.href = link;
-}
