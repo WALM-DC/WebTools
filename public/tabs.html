@@ -53,19 +53,17 @@
         '3D Modell&uuml;bersicht': "https://walm-dc.github.io/WebTools/public/3DModelOverview.html",
         '3D Modell-Details': "https://walm-dc.github.io/WebTools/public/3DModelDetails.html"
     };
-    function injectTabs(){
+    function createTabs(){
         Object.entries(tabs).forEach(([name, link]) => {
-        // Create the div element with the "tab" class and the name as its content
             const tabDiv = document.createElement("div");
             tabDiv.className = "tab";
+            tabDiv.setAttribute("link", link);
             tabDiv.innerHTML = `<h2>${name}</h2>`;
 
-            // Add a click event listener to redirect to the link
             tabDiv.addEventListener("click", () => {
                 window.location.href = link;
             });
 
-            // Append the tabDiv to the desired parent (add this if needed)
             document.body.appendChild(tabDiv); // Example: Append to the <body>
         });
         // $.each(tabs, function(name, link){
@@ -75,5 +73,5 @@
         //     })
         // })
     }
-    injectTabs();
+    createTabs();
 </script>
