@@ -126,7 +126,10 @@ button{
 .div_before_table {
     overflow: auto;
     height: calc(100% - 230px);
-} 
+}
+.div_before_table.igServer {
+    height: calc(100% - 150px);
+}
 .custom-file-upload{
     margin-bottom: 233px;
 }
