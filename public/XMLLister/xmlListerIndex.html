@@ -5,6 +5,7 @@
         <script src="https://walm-dc.github.io/WebTools/public/jquery-3.7.1.min.js"></script>
         <script src="https://walm-dc.github.io/WebTools/public/ddtf.js"></script>
         <script src="https://walm-dc.github.io/WebTools/public/mattQuery.js"></script>
+        <script src="mattQuery.js"></script>
         <style>
             .resultDiv{
                 width: 100%;
@@ -70,9 +71,9 @@
     <body>
         <div id="topDiv"></div>
         <div class="masterDiv">
-            <div class="topDiv">
+            <!-- <div class="topDiv">
                 <h2>XML-Liste</h2>
-            </div>
+            </div> -->
             <div>
                 <div class="resultDiv">
                     <h3>Anzahl in der aktuellen Auflistung: <span id="myCounter"></span></h3>
@@ -94,6 +95,8 @@
         </div>
     </body>
     <script>
+        injectTabs();
+
         var langCheck = ['AT', 'DE', 'CH', 'CZ', 'SK', 'FR', 'SE', 'HU', 'SI', 'PL', 'RO'];
         var combinedRegistry = [];
         function countColumns(){

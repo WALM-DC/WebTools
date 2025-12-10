@@ -37,10 +37,29 @@
     }
 </style>
 <div class="tabList">
-    <div class="tab" link="https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlListerIndex.html"><h2>XML Liste</h2></div>
+    <!-- <div class="tab" onclick="window.location.href='https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlListerIndex.html'"><h2>XML Liste</h2></div>
     <div class="tab" link="https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlListerCountryIndex.html"><h2>XML Liste + County</h2></div>
     <div class="tab" link="https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlChecker_v3.html"><h2>XML Checker</h2></div>
     <div class="tab" link="https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlRegistryLister.html"><h2>Registry Liste</h2></div>
     <div class="tab" link="https://walm-dc.github.io/WebTools/public/3DModelOverview.html"><h2>3D Modell&uuml;bersicht</h2></div>
-    <div class="tab" link="https://walm-dc.github.io/WebTools/public/3DModelDetails.html"><h2>3D Modell-Details</h2></div>
+    <div class="tab" link="https://walm-dc.github.io/WebTools/public/3DModelDetails.html"><h2>3D Modell-Details</h2></div> -->
 </div>
+<script>
+    const tabs = {
+        'XML Liste': "https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlListerIndex.html",
+        'XML Liste + Country': "https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlListerCountryIndex.html",
+        'XML Checker': "https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlChecker_v3.html",
+        'Registry Liste': "https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlRegistryLister.html",
+        '3D Modell&uuml;bersicht': "https://walm-dc.github.io/WebTools/public/3DModelOverview.html",
+        '3D Modell-Details': "https://walm-dc.github.io/WebTools/public/3DModelDetails.html"
+    };
+    function injectTabs(){
+        $.each(tabs, function(name, link){
+            const tabDiv = $('<div class="tab"><h2>'+name+'</h2></div>');
+            tabDiv.click(function(){
+                window.location.href = link;
+            })
+        })
+    }
+    injectTabs();
+</script>
