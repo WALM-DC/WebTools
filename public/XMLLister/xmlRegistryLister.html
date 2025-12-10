@@ -7,7 +7,9 @@
     <script src="https://walm-dc.github.io/WebTools/public/mattQuery.js"></script>
     <!-- <script src="mattQuery.js"></script> -->
     <style>
-              
+        .markets{
+            padding-left: 20px;
+        }
     </style>
 </head>
 <body>
@@ -77,17 +79,19 @@
                         marketArray.push(`${key}: ${val}`);
                     });
                 });
-                addressArray.push(value.ComService.Address.replace('https://ig-creator.xxxlgroup.com/idm/', '')+'<br>Markets: '+marketArray.join(', '));
+                addressArray.push(value.ComService.Address.replace('https://ig-creator.xxxlgroup.com/idm/', '')+
+                '<br><span class="markets">Markets: '+marketArray.join(', ')+'</span>');
             } else {
                 addressArray = [];
                 $.each(value.ComService.Setups, function( setupKey, setupValue ) {
-                        marketArray = [];
+                    marketArray = [];
                     $(setupValue).each(function(mIndex, mValue) {
                         $.each(mValue.Markets, function(key, val) {
                             marketArray.push(`${key}: ${val}`);
                         });
                     });
-                    addressArray.push(setupValue.Address.replace('https://ig-creator.xxxlgroup.com/idm/', '')+'<br>Markets: '+marketArray.join(', '));
+                    addressArray.push(setupValue.Address.replace('https://ig-creator.xxxlgroup.com/idm/', '')+
+                    '<br><span class="markets">Markets: '+marketArray.join(', ')+'</span>');
                 });
             }
             entry = {
@@ -107,7 +111,7 @@
             $.each(combinedRegistry, function( index, registryEntry ) {
                 $('#myTable').append('<tr>'+
                     '<td>'+registryEntry.ID+'</td>'+
-                    '<td>'+registryEntry.Scope.split('.')[0]+'</td>'+
+                    '<td>'+registryEntry.Scope.split('.')[0].replace('XXXL', '')+'</td>'+
                     '<td>'+registryEntry.Scope.split('.')[1]+'</td>'+
                     '<td>'+registryEntry.Scope+'</td>'+
                     '<td>'+registryEntry.FileName+'</td>'+

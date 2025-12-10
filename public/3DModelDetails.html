@@ -44,8 +44,8 @@
                             <th>3D Domain</th>
                             <th>Herkunft</th>
                             <th>Nummer</th>
-                            <th>Online</th>
-                            <th>Konfig.</th>
+                            <th>Aktiv</th>
+                            <!-- <th>Konfig.</th> -->
                             <th>Schiene</th>
                             <th>Land</th>
                             <th>Properties</th>
@@ -136,6 +136,26 @@
         countColumns();
         highlightOccurrences(filter);
     }
+    function formatNameAndCheckDupes(addressName){
+        var entry = addressName.replace('https://ig-creator.xxxlgroup.com/idm/', '').split('*')[0];
+        $.inArray(entry, combinedRegistry) === -1 ? combinedRegistry.push(entry) : null;
+    }
+    function combineRegistries(curRegistry, fileName){
+        $.each(curRegistry.Domains, function( key, value ) {
+            if(value.ComService === undefined) return; //skip entries without address
+            if(value.ComService.Setups === undefined){
+                formatNameAndCheckDupes(value.ComService.Address);
+            } else {
+                $.each(value.ComService.Setups, function( setupKey, setupValue ) {
+                    formatNameAndCheckDupes(setupValue.Address);
+                });
+            }
+        });
+    }
+    function removeAfterLastUnderscore(inputString) {
+        const lastUnderscoreIndex = inputString.lastIndexOf('_');
+        return lastUnderscoreIndex !== -1 ? inputString.substring(0, lastUnderscoreIndex + 1) : inputString;
+    }
     $('#myInput').on('keydown', function(e) {
         if (e.which === 13) { // Check if the Enter key is pressed (key code 13)
             if($(this).val() === ""){
@@ -174,6 +194,18 @@
         });
     })
     function readAndShowJSON(){
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moebelix.json", function( data ) {
+            combineRegistries(data, 'moebelix');
+        });
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moemax.json", function( data ) {
+            combineRegistries(data, 'moemax');
+        });
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-xxxl.json", function( data ) {
+            combineRegistries(data, 'xxxl');
+        });
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry.json", function( data ) {
+            combineRegistries(data, 'registry');
+        });
         $.getJSON( "https://walm-dc.github.io/WebTools/public/list.json", function( data ) {
             var sortArray = $.map(data, function(value, index) {return [value]});
             sortArray.sort(sortList);
@@ -214,6 +246,10 @@
                     })
                     propTable += '</ul>';
                 })
+                var inRegistry = '<td class="falseCol">Nein</td>';
+                if($.inArray(shortXmlName, combinedRegistry) > -1){
+                    inRegistry = '<td class="trueCol">Ja</td>';
+                }
                 // propTable += propTableHeader + '</tr><tr>' + propTableColumn + '</tr></table>';
                 $('#myTable').append(
                     '<tr variants="'+variantCount+'"><td>'+val.catalog.split('.')[0].replace('XXXL', '')+'</td>'+
@@ -222,8 +258,7 @@
                     '<td>'+val.catalog+'</td>'+
                     '<td class="'+inOrEx+'">'+inOrEx+'</td>'+
                     '<td><a href="https://'+storeUrl+'/s/?s='+val.productNumber+'" target="_blank">'+val.productNumber+'</a></td>'+
-                    online+
-                    konfig+
+                    inRegistry+
                     '<td>'+val.brand+'</td>'+
                     '<td>'+val.locale+'</td>'+
                     '<td>'+propTable+'</td>'
