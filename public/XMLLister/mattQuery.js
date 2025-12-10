@@ -18,14 +18,8 @@ function createTabs(){
             window.location.href = link;
         });
 
-        document.body.appendChild(tabDiv); // Example: Append to the <body>
+        document.getElementById('tabList').appendChild(tabDiv);
     });
-    // $.each(tabs, function(name, link){
-    //     const tabDiv = $('<div class="tab"><h2>'+name+'</h2></div>');
-    //     tabDiv.click(function(){
-    //         window.location.href = link;
-    //     })
-    // })
 }
 function injectTabs(){
     createTabs();
