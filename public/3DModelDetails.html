@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>3D-Modell-Detail&uuml;bersicht</title>
-        <link rel="stylesheet" href="https://walm-dc.github.io/WebTools/public/mattStyle.css">
+        <link rel="stylesheet" href="mattStyle.css">
         <script src="jquery-3.7.1.min.js"></script>
         <script src="table2csv.js"></script>
         <script src="ddtf.js"></script>
@@ -112,10 +112,11 @@
         </style>
     </head>
     <body>
+        <div id="topDiv"></div>
         <div class="masterDiv">
-            <div class="topDiv">
+            <!-- <div class="topDiv">
                 <h2>3D-Modell-Detail&uuml;bersicht</h2>
-            </div>
+            </div> -->
             <div>
                 <div class="resultDiv">
                     <h3>Anzahl der gefilterten Artikel: <span id="myCounter"></span></h3>
@@ -151,6 +152,8 @@
         </div>
     </body>
     <script>
+        injectTabs();
+        
         var intern = 0, extern = 0, propTableHeader = [];
         var countryShorts = {
             "LU": "xxxlutz",

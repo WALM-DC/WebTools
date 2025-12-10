@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>3D-Modell&uuml;bersicht</title>
-        <link rel="stylesheet" href="https://walm-dc.github.io/WebTools/public/mattStyle.css">
+        <link rel="stylesheet" href="mattStyle.css">
         <script src="jquery-3.7.1.min.js"></script>
         <script src="table2csv.js"></script>
         <script src="ddtf.js"></script>
@@ -112,9 +112,9 @@
         </style>
     </head>
     <body>
+        <div id="topDiv"></div>
         <div class="masterDiv">
             <div class="topDiv">
-                <marquee class="testMode" behavior="" direction=""><h1>!!! -- TEST MODE -- !!! -- TEST MODE -- !!! -- TEST MODE -- !!! -- TEST MODE -- !!! -- TEST MODE -- !!! -- TEST MODE -- !!! -- TEST MODE -- !!! -- TEST MODE -- !!!</h1></marquee>
                 <h2>3D-Modell&uuml;bersicht</h2>
             </div>
             <div>
@@ -159,6 +159,8 @@
         </div>
     </body>
     <script>
+        injectTabs();
+
         var intern = 0, extern = 0;
         var countryShorts = {
             "LU": "xxxlutz",
