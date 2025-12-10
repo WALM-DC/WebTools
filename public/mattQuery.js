@@ -7,14 +7,10 @@ const tabs = {
     '3D Modell&uuml;bersicht': "https://walm-dc.github.io/WebTools/public/3DModelOverview.html",
     '3D Modell-Details': "https://walm-dc.github.io/WebTools/public/3DModelDetails.html"
 };
-function createTabs(){
-    
-}
 function injectTabs(){
-    // $.get('https://walm-dc.github.io/WebTools/public/tabs.html', function(data){
-        // $('#topDiv').html(data);
     const tabListDiv = document.createElement("div");
     tabListDiv.id = "tabList";
+    tabListDiv.className = "tabList";
     document.getElementById('topDiv').appendChild(tabListDiv);
     Object.entries(tabs).forEach(([name, link]) => {
         const tabDiv = document.createElement("div");
@@ -28,5 +24,4 @@ function injectTabs(){
         document.getElementById('tabList').appendChild(tabDiv);
     });
     $('.tab[link="'+window.location.href+'"]').addClass('active');
-    // });
 }

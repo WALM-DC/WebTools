@@ -6,6 +6,10 @@ html, body, h2{
     margin: 0;
     padding: 0;
 }
+/* #topDiv{
+    width: 100%;
+    text-align: center;
+} */
 .tabList{
     display: flex;
     background-color: #333;
@@ -40,10 +44,6 @@ html, body, h2{
 }
 .masterDiv{
     font-size: 14px;
-}
-.topDiv{
-    width: 100%;
-    text-align: center;
 }
 h2{
     color: aquamarine;
