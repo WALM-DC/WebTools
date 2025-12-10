@@ -1,11 +1,11 @@
 <html>
 <head>
-    <title>3D-Modell-Detail&uuml;bersicht</title>
-    <link rel="stylesheet" href="mattStyle.css">
-    <script src="jquery-3.7.1.min.js"></script>
-    <script src="table2csv.js"></script>
-    <script src="ddtf.js"></script>
-    <script src="mattQuery.js"></script>
+    <title>3D-Modell-Detail&uuml;bersicht</title>    
+    <link rel="stylesheet" href="https://walm-dc.github.io/WebTools/public/mattStyle.css">
+    <script src="https://walm-dc.github.io/WebTools/public/jquery-3.7.1.min.js"></script>
+    <script src="https://walm-dc.github.io/WebTools/public/table2csv.js"></script>
+    <script src="https://walm-dc.github.io/WebTools/public/ddtf.js"></script>
+    <script src="https://walm-dc.github.io/WebTools/public/mattQuery.js"></script>
     <style>
         .loading {
             background-image: url(XMLLister/loading.gif);
@@ -44,8 +44,8 @@
                             <th>3D Domain</th>
                             <th>Herkunft</th>
                             <th>Nummer</th>
-                            <th>Aktiv</th>
-                            <!-- <th>Konfig.</th> -->
+                            <th>Online</th>
+                            <th>Konfig.</th>
                             <th>Schiene</th>
                             <th>Land</th>
                             <th>Properties</th>
@@ -136,26 +136,6 @@
         countColumns();
         highlightOccurrences(filter);
     }
-    function formatNameAndCheckDupes(addressName){
-        var entry = addressName.replace('https://ig-creator.xxxlgroup.com/idm/', '').split('*')[0];
-        $.inArray(entry, combinedRegistry) === -1 ? combinedRegistry.push(entry) : null;
-    }
-    function combineRegistries(curRegistry, fileName){
-        $.each(curRegistry.Domains, function( key, value ) {
-            if(value.ComService === undefined) return; //skip entries without address
-            if(value.ComService.Setups === undefined){
-                formatNameAndCheckDupes(value.ComService.Address);
-            } else {
-                $.each(value.ComService.Setups, function( setupKey, setupValue ) {
-                    formatNameAndCheckDupes(setupValue.Address);
-                });
-            }
-        });
-    }
-    function removeAfterLastUnderscore(inputString) {
-        const lastUnderscoreIndex = inputString.lastIndexOf('_');
-        return lastUnderscoreIndex !== -1 ? inputString.substring(0, lastUnderscoreIndex + 1) : inputString;
-    }
     $('#myInput').on('keydown', function(e) {
         if (e.which === 13) { // Check if the Enter key is pressed (key code 13)
             if($(this).val() === ""){
@@ -194,18 +174,6 @@
         });
     })
     function readAndShowJSON(){
-        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moebelix.json", function( data ) {
-            combineRegistries(data, 'moebelix');
-        });
-        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moemax.json", function( data ) {
-            combineRegistries(data, 'moemax');
-        });
-        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-xxxl.json", function( data ) {
-            combineRegistries(data, 'xxxl');
-        });
-        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry.json", function( data ) {
-            combineRegistries(data, 'registry');
-        });
         $.getJSON( "https://walm-dc.github.io/WebTools/public/list.json", function( data ) {
             var sortArray = $.map(data, function(value, index) {return [value]});
             sortArray.sort(sortList);
@@ -220,7 +188,6 @@
                 if(countryShorts[val.brand] === 'xxxlutz' && val.locale === 'si'){
                     storeUrl = 'xxxlesnina'+'.'+val.locale;
                 }
-                // var variants = val.productVariants.trim().slice(0, -1);
                 var variantCount = val.productVariants.split("/").length;
                 var variants = val.productVariants.split('/').map(function(item) {
                     return item.trim();
@@ -246,11 +213,6 @@
                     })
                     propTable += '</ul>';
                 })
-                var inRegistry = '<td class="falseCol">Nein</td>';
-                if($.inArray(shortXmlName, combinedRegistry) > -1){
-                    inRegistry = '<td class="trueCol">Ja</td>';
-                }
-                // propTable += propTableHeader + '</tr><tr>' + propTableColumn + '</tr></table>';
                 $('#myTable').append(
                     '<tr variants="'+variantCount+'"><td>'+val.catalog.split('.')[0].replace('XXXL', '')+'</td>'+
                     '<td>'+val.brandName+'</td>'+
@@ -258,16 +220,13 @@
                     '<td>'+val.catalog+'</td>'+
                     '<td class="'+inOrEx+'">'+inOrEx+'</td>'+
                     '<td><a href="https://'+storeUrl+'/s/?s='+val.productNumber+'" target="_blank">'+val.productNumber+'</a></td>'+
-                    inRegistry+
+                    online+
+                    konfig+
                     '<td>'+val.brand+'</td>'+
                     '<td>'+val.locale+'</td>'+
                     '<td>'+propTable+'</td>'
-                    // '<td>'+val.description+'</td>'+
-                    // '<td>'+val.productGroup+'</td>'+
-                    // '<td>'+propTable+'</td></tr>'
                 )
             })
-            // filterTable();
             $('.loading').removeClass('loading');
             countColumns();
             jQuery('#myTable').ddTableFilter();
