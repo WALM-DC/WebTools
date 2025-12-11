@@ -1,6 +1,7 @@
 html, body{
     background-color: #4f8684;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    overflow: hidden;
 }
 html, body, h2{
     margin: 0;

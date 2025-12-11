@@ -1,0 +1,646 @@
+<html>
+<head>
+    <title>XML-Checker_v3</title>
+    <link rel="stylesheet" href="https://walm-dc.github.io/WebTools/public/mattStyle.css">
+    <script src="https://walm-dc.github.io/WebTools/public/jquery-3.7.1.min.js"></script>
+    <script src="https://walm-dc.github.io/WebTools/public/ddtf.js"></script>
+    <script src="https://walm-dc.github.io/WebTools/public/mattQuery.js"></script>
+    <style>
+        html {
+            scroll-padding-top: 30px;
+        }
+        .resultDiv {
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 14px;
+        }
+        select {
+            width: auto;
+            min-width: 340px;
+            height: 340px;
+            overflow: auto;
+        }
+        option {
+            cursor: pointer;
+        }
+        .match {
+            background-color: lightgreen;
+        }
+        .noMatch {
+            background-color: darksalmon;
+        }
+        .empty {
+            background-color: lightblue;
+        }
+        table tr:hover td {
+            border: 1px solid black;
+            box-shadow: 5px 0px 6px 0px yellow;
+            background: rgb(255 255 255 / 60%);
+        }
+        table td,
+        table th {
+            border: 1px solid #dddddd;
+            padding: 5px;
+            text-align: left;
+            max-width: unset;
+            align-content: flex-start;
+        }
+        table tr.subEntry>th,
+        table tr.subEntry>td:nth-child(1n + 2) {
+            padding-left: 20px;
+        }
+        .innerTable {
+            width: 100%;
+        }
+        .clickMe {
+            cursor: pointer;
+            background-color: darkorange;
+            text-align: center;
+            border-radius: 7px;
+        }
+        .clickMe:hover {
+            color: white;
+            background-color: darkcyan;
+        }
+        .selectDiv {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            padding-top: 12px;
+        }
+        .selectDiv div {
+            padding: 0 7px;
+        }
+        .hideMe {
+            display: none;
+        }
+        .loading {
+            background-image: url(loading.gif);
+            background-repeat: no-repeat;
+            min-height: 600px;
+            background-position: center 30px;
+            background-size: 600px auto;
+        }
+        .errorDiv {
+            display: flex;
+            justify-content: center;
+        }
+        #errorList {
+            color: yellow;
+            text-align: left;
+            max-width: 1200px;
+            line-height: 20px;
+        }
+        #errorList span {
+            font-weight: bold;
+            color: orange;
+        }
+        #errorList a:hover {
+            color: rosybrown;
+        }
+
+        #errorList a,
+        #errorList a:visited {
+            color: darksalmon
+        }
+        #errorList span.noErrors {
+            color: lightgreen;
+            font-weight: bold;
+        }
+        #errorList span.bigError {
+            color: orangered;
+            background-color: black;
+            padding: 0px 1px;
+            border-radius: 5px;
+        }
+        input[type=file]{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="topDiv"></div>
+    <div class="masterDiv">
+        <!-- <div class="topDiv">
+            <h2>XML-Checker_v3</h2>
+        </div> -->
+        <div>
+            <div class="selectDiv">
+                <div class="uploadDiv">
+                    <h3 for="xmlFirstSelect">XML Import</h3>
+                    <form id="xmlForm">
+                        <label for="xmlFiles" class="custom-file-upload">
+                            <span>XMLs Ausw&auml;hlen</span>
+                        </label>
+                            <input type="file" id="xmlFiles" multiple accept=".xml" />
+                        <button type="button" id="hideFields"><span>Identische<br>Zeilen ausblenden</span></button>
+                    </form>
+                </div>
+                <div>
+                    <h3 for="xmlFirstSelect">Neu XMLs:</h3>
+                    <select id="xmlFirstSelect" size="20">
+
+                    </select>
+                </div>
+                <div>
+                    <h3 for="xmlSecondSelect">Server XMLs:</h3>
+                    <select id="xmlSecondSelect" size="20">
+
+                    </select>
+                </div>
+            </div>
+            <div class="errorDiv">
+                <h3 id="errorList"></h3>
+            </div>
+            <div class="resultDiv">
+                <table id="resultTable">
+
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    injectTabs();
+
+    var indexAll = {}, multiXMLImport = {}, firstXML = [], secondXML = [], firstSelectedXML = '', secondSelectedXML = '', errorLog = {}, xmlDataVersion = '', firstXMLSerieNo = "", secondXMLSerieNo = '', firstXMLDataVersion = "", secondXMLDataVersion = '', firstXMLCatalogID = '', secondXMLCatalogID = '';
+    var langCheck = ['_AT_', '_DE_', '_CH_', '_CZ', '_SK_', '_FR_', '_SE_', '_HU_', '_SI_', '_PL_', '_RO_'];
+    var checkTargetCountryID = false;
+    var modelListJSON = {};
+    var combinedRegistry = [];
+
+    function checkAndCompareTables() {
+        // Helper: convert object-with-numeric-keys into a dense array (0..max)
+        function normalizeToArray(obj) {
+            const keys = Object.keys(obj)
+                .map(k => parseInt(k, 10))
+                .filter(n => !Number.isNaN(n))
+                .sort((a, b) => a - b);
+            if (keys.length === 0) return [];
+            const max = keys[keys.length - 1];
+            const arr = new Array(max + 1);
+            for (let i = 0; i <= max; i++) {
+                arr[i] = Object.prototype.hasOwnProperty.call(obj, i) ? obj[i] : undefined;
+            }
+            return arr;
+        }
+
+        function pickBusinessKey(entry, keyOrder) {
+            if (!entry || typeof entry !== "object") return undefined;
+            for (const k of keyOrder) {
+                if (k in entry) return `${k}:${entry[k]}`;
+            }
+            return undefined;
+        }
+
+        function buildPlaceholderFrom(exemplar) {
+            if (!exemplar || typeof exemplar !== "object") return "-KEIN EINTRAG-";
+            const placeholder = {};
+            for (const k of Object.keys(exemplar)) {
+                placeholder[k] = "-KEIN EINTRAG-";
+            }
+            return placeholder;
+        }
+
+        function removeAfterLastUnderscore(inputString) {
+            const lastUnderscoreIndex = inputString.lastIndexOf('_');
+            return lastUnderscoreIndex !== -1 ? inputString.substring(0, lastUnderscoreIndex + 1) : inputString;
+        }
+
+        function alignByKeyWithEmptyOnTop(
+            firstObj,
+            secondObj,
+            keyOrder = ["Type_No", "CountryID_TargetID", "Short_Text", "Feature_No", "Feature_Text"]
+        ) {
+            const arr1 = normalizeToArray(firstObj);
+            const arr2 = normalizeToArray(secondObj);
+
+            const map1 = new Map();
+            const map2 = new Map();
+            const order1 = [];
+            const order2 = [];
+
+            for (let i = 0; i < arr1.length; i++) {
+                const e = arr1[i];
+                const key = pickBusinessKey(e, keyOrder);
+                if (key !== undefined && !map1.has(key)) {
+                    map1.set(key, e);
+                    order1.push(key);
+                }
+            }
+            for (let i = 0; i < arr2.length; i++) {
+                const e = arr2[i];
+                const key = pickBusinessKey(e, keyOrder);
+                if (key !== undefined && !map2.has(key)) {
+                    map2.set(key, e);
+                    order2.push(key);
+                }
+            }
+
+            // Stable union order (baseline)
+            const seen = new Set();
+            const baselineOrder = [];
+            for (const k of order1) if (!seen.has(k)) { seen.add(k); baselineOrder.push(k); }
+            for (const k of order2) if (!seen.has(k)) { seen.add(k); baselineOrder.push(k); }
+
+            // Build rows with metadata for sorting
+            const rows = baselineOrder.map((key, idx) => {
+                const left = map1.get(key);
+                const right = map2.get(key);
+                let outLeft, outRight;
+                let hasPlaceholderLeft = false;
+                let hasPlaceholderRight = false;
+
+                if (left && right) {
+                    outLeft = left;
+                    outRight = right;
+                } else if (left && !right) {
+                    outLeft = left;
+                    outRight = buildPlaceholderFrom(left);
+                    hasPlaceholderRight = true;
+                } else if (!left && right) {
+                    outLeft = buildPlaceholderFrom(right);
+                    hasPlaceholderLeft = true;
+                    outRight = right;
+                } else {
+                    // Shouldn't happen, but keep safe fallback
+                    outLeft = "-KEIN EINTRAG-";
+                    outRight = "-KEIN EINTRAG-";
+                    hasPlaceholderLeft = true;
+                    hasPlaceholderRight = true;
+                }
+
+                return {
+                    key,
+                    outLeft,
+                    outRight,
+                    anyPlaceholder: hasPlaceholderLeft || hasPlaceholderRight,
+                    originalIndex: idx // preserves stable order within groups
+                };
+            });
+
+            // Sorting rule: any row with a placeholder goes to the top (anyEmptyFirst)
+            rows.sort((a, b) => {
+                if (a.anyPlaceholder && !b.anyPlaceholder) return -1;
+                if (!a.anyPlaceholder && b.anyPlaceholder) return 1;
+                return a.originalIndex - b.originalIndex; // keep stable order otherwise
+            });
+
+            // Emit aligned arrays in new order
+            const alignedFirst = rows.map(r => r.outLeft);
+            const alignedSecond = rows.map(r => r.outRight);
+            const keys = rows.map(r => r.key);
+
+            return { alignedFirst, alignedSecond, keys };
+        }
+
+        const { alignedFirst, alignedSecond, keys } = alignByKeyWithEmptyOnTop(firstXML, secondXML);
+        firstXML = alignedFirst;
+        secondXML = alignedSecond;
+
+        $('#resultTable').empty();
+        $('#resultTable').append('<tr><th>Zeile</th><th>XML Bezeichnung</th><th>XML: ' + firstSelectedXML + '</th><th>XML: ' + secondSelectedXML + '</th></tr>');
+        var lineCounter = 1;
+        errorLog = {
+            Lang: [],
+            Errors: 0,
+            ErrorLines: [],
+            Empty: 0,
+            EmptyLines: [],
+            IDsInUseCount: 0,
+            IDsInUse:[],
+            ErrorKeys: [],
+            GenErrors: false
+        };
+        var firmID = secondSelectedXML.split('_')[0], firmName = secondSelectedXML.split('_')[1];
+        var matchedIDs = [];
+        $.each(firstXML, function (id, val) {
+            $.each(val, function (sId, sVal) {
+                var firstVal = sVal;
+                var secondVal = secondXML[id][sId];
+                var highlighter = 'empty';
+                if (firstVal === secondVal) {
+                    highlighter = 'match';
+                } else {
+                    if (secondVal === '-KEIN EINTRAG-' || firstVal === '-KEIN EINTRAG-') {
+                        errorLog.Empty++;
+                        errorLog.EmptyLines.push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
+                        highlighter = 'empty';
+                        if(secondVal !== '-KEIN EINTRAG-' && sId === 'Feature_No'){
+                            errorLog.IDsInUseCount++;
+                            errorLog.IDsInUse.push(secondVal);
+                            $.each(errorLog.IDsInUse, function(id, val){
+                                $.each(modelListJSON, function(modelId, modelVal){
+                                    if(modelId.indexOf(firmName)>-1 || modelId.indexOf(firmID)>-1){
+                                        $.each(modelVal.properties, function(propId, propVal){
+                                            if(propVal.property === val){
+                                                matchedIDs.push('!!! ACHTUNG !!! - Die Feature_No '+ val + ' wird im Modell ' + modelId + ' verwendet!');
+                                                highlighter = 'noMatch';
+                                            }
+                                        });
+                                    }
+                                });
+                            });
+                        }
+                    } else {
+                        errorLog.Errors++;
+                        errorLog.ErrorLines.push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
+                        highlighter = 'noMatch';
+                    }
+                    errorLog.ErrorKeys.push(sId);
+                }
+                if (sId !== "Type_No" && sId !== "Feature_No" && sId !== "CountryID_TargetID") {
+                    highlighter += ' subEntry';
+                } else if (sId === "CountryID_TargetID") {
+                    var langPart = firstVal.split('_')[0].split('-');
+                    if (langPart[0] !== "") {
+                        errorLog.Lang.push(langPart.pop());
+                    }
+                }
+                $('#resultTable').append(
+                    '<tr class="' + highlighter + '"><td id="' + lineCounter + '"> ' + lineCounter + '</td><th>' + sId + '</th><td>' + firstVal + '</td><td>' + secondVal + '</td></tr>'
+                )
+                lineCounter++;
+            })
+
+        })
+        var shortXmlName = removeAfterLastUnderscore(firstSelectedXML);
+        if($.inArray(shortXmlName, combinedRegistry) > -1){
+            $('#errorList').append('<br><br><span class="noErrors">Die XML <span style="color:white;">' + firstSelectedXML + '</span> ist im ICOM-Registry vorhanden.</span>');
+        } else {
+            $('#errorList').append('<br><br><span class="bigError">!! ACHTUNG !! - Die XML <span style="color:white;">' + firstSelectedXML + '</span> ist NICHT im ICOM-Registry vorhanden.</span>');
+        }
+        if(firstXMLDataVersion<secondXMLDataVersion){
+            $('#errorList').append('<br><br>Datenversion:<br>' + secondSelectedXML + ': <span style="color:white;">' + secondXMLDataVersion + '</span><br>' + firstSelectedXML + ': <span class="bigError">' + firstXMLDataVersion + '</span>');
+        }
+        if(matchedIDs.length>0){
+            $('#errorList').append('<br><br><span class="bigError">' + matchedIDs.join('<br>') + '</span>');
+        }
+        if (firstXMLSerieNo !== secondXMLSerieNo) {
+            $('#errorList').append('<br><br>Unterschied bei Seriennummer:<br>' + secondSelectedXML + ': <span style="color:white">' + secondXMLSerieNo + '</span><br>' + firstSelectedXML + ': <span class="bigError">' + firstXMLSerieNo + '</span>');
+            errorLog.GenErrors = true;
+        }
+        if (firstXMLCatalogID !== secondXMLCatalogID) {
+            $('#errorList').append('<br><br>Unterschied bei Schiene:<br>' + secondSelectedXML + ': <span style="color:white">' + secondXMLCatalogID + '</span><br>' + firstSelectedXML + ': <span class="bigError">' + firstXMLCatalogID + '</span>');
+            errorLog.GenErrors = true;
+        }
+        if (errorLog.Errors > 0) {
+            $('#errorList').append('<br><br>Unterschiede: <span>' + errorLog.Errors + '</span><br>Unterschiede in Zeile: <span>' + errorLog.ErrorLines.join(', ') + '</span>');
+        }
+        if (errorLog.Empty > 0) {
+            $('#errorList').append('<br><br>Leere Felder: <span>' + errorLog.Empty + '</span><br>Leere Felder in Zeile: <span>' + errorLog.EmptyLines.join(', ') + '</span>');
+        }
+        if (errorLog.Errors > 0 || errorLog.Empty > 0) {
+            $('#errorList').append('<br><br>Betroffene Felder: <span>' + [...new Set(errorLog.ErrorKeys)].join(', ') + '</span>');
+        }
+        if (errorLog.Errors === 0 && errorLog.Empty === 0 && !errorLog.GenErrors) {
+            $('#errorList').append('<br><br><span class="noErrors">Keine relevanten Unterschiede gefunden.</span>');
+        } firstXMLDataVersion = '', firstXMLCatalogID = "", secondXMLDataVersion = '', secondXMLCatalogID = '';
+        langCheck.forEach(function (land) {
+            var langFile = false, missingLang = false;
+            if (firstSelectedXML.indexOf(land) === -1) {
+                missingLang = true;
+            } else {
+                langFile = true;
+            }
+            if (langFile && missingLang) {
+                $('#errorList').append('<br><br><span class="bigError">!! ACHTUNG !! - XML Land fehlt: ' + firstSelectedXML + ' --> ' + land.replace(/_/g, '') + '</span>');
+            }
+        });
+        if (errorLog.Lang.length > 0) {
+            errorLog.Lang = [...new Set(errorLog.Lang)];
+            $('#errorList').append('<br><br><span class="noErrors">Zielm&auml;rkte enthalten im XML:</span> <span style="color:white;">' + errorLog.Lang.join(', ') + '</span>');
+        } else {
+            $('#errorList').append('<br><br><span class="bigError">!! ACHTUNG !! - Keine Zielm&auml;rkte im XML gefunden.</span>');
+        }
+        console.log(_registryJSON, _registryMoebelixJSON, _registryMoemaxJSON, _registryXXXLutzJSON);
+    }
+
+    function waitForXMLToLoad() {
+        function isFilled(obj) {
+            return obj && typeof obj === 'object' && Object.keys(obj).length > 0;
+        }
+
+        const intervalId = setInterval(() => {
+            if (isFilled(secondXML)) {
+                console.log('Objects is filled. Stopping interval.');
+                clearInterval(intervalId);
+                checkAndCompareTables();
+                $('.resultDiv').removeClass('loading');
+            } else {
+                console.log('Waiting... secondXML filled:', isFilled(secondXML));
+            }
+        }, 1000);
+    }
+
+    function processXMLs(response, tableID) {
+        var dataArrayCatalog = [], dataArrayArticle = [], dataArrayFeature = [], openXMLData = {}, openXMLName = '', openXMLTarget = '', openXMLArticle = '';
+        // get Target and Country data
+        $(response).find('TARGET').each(function () {
+            openXMLData = {
+                CountryID_TargetID: $(this).find('NAME').text() + '_' + $(this).find('TARGET_ID').text()
+            }
+            dataArrayCatalog.push(openXMLData);
+        })
+        $(response).find('CATALOG').each(function () {
+            openXMLData = {
+                CountryID_CatalogID: $(this).find('CATALOG').text()
+            }
+            dataArrayCatalog.push(openXMLData);
+        })
+        $(response).find('ITEM').each(function () {
+            openXMLData = {
+                Type_No: $(this).attr('TYPE_NO'),
+                Short_Text: $(this).find('SHORT_TEXT').find('TEXT').text()
+            }
+            dataArrayArticle.push(openXMLData);
+        })
+        $(response).find('FEATURE').each(function () {
+            openXMLData = {
+                Feature_No: $(this).attr('FEATURE_NO'),
+                Feature_Text: $(this).find('FEATURE_TEXT').find('TEXT').text()
+            }
+            dataArrayFeature.push(openXMLData);
+        })
+        // sort and compose result XML data for both files
+        dataArrayCatalog.sort(function (a, b) { if (a.CountryID_TargetID < b.CountryID_TargetID) { return -1 } if (a.CountryID_TargetID > b.CountryID_TargetID) { return 1 } return 0 })
+        dataArrayArticle.sort(function (a, b) { if (a.Type_No < b.Type_No) { return -1 } if (a.Type_No > b.Type_No) { return 1 } return 0 })
+        dataArrayFeature.sort(function (a, b) { if (a.Feature_Text < b.Feature_Text) { return -1 } if (a.Feature_Text > b.Feature_Text) { return 1 } return 0 })
+        if (tableID === 'tableOld') {
+            secondXMLDataVersion = $(response).find('DATA_VERSION').text();
+            secondXMLSerieNo = $(response).find('SERIE').attr('SERIE_NO');
+            secondXMLCatalogID = $(response).find('CATALOG').find('CATALOG_ID_INTERN').text();
+            secondXML = $.merge(dataArrayArticle, dataArrayFeature);
+            secondXML = $.merge(secondXML, dataArrayCatalog);
+            waitForXMLToLoad();
+        } else {
+            firstXMLDataVersion = $(response).find('DATA_VERSION').text();
+            firstXMLSerieNo = $(response).find('SERIE').attr('SERIE_NO');
+            firstXMLCatalogID = $(response).find('CATALOG').find('CATALOG_ID_INTERN').text();
+            firstXML = $.merge(dataArrayArticle, dataArrayFeature);
+            firstXML = $.merge(firstXML, dataArrayCatalog);
+        }
+    }
+
+    function readXML(fileName, tableID) {
+        if(tableID==='tableOld'){
+            var xmlPath = 'https://ig-creator.xxxlgroup.com/idm/' + fileName + '.xml';
+            $('#tableNew').empty();
+            $.ajax({
+                type: "GET",
+                url: xmlPath,
+                dataType: "xml",
+
+                error: function (e) {
+                    alert("An error occurred while processing XML file");
+                    console.log("XML reading Failed: ", e);
+                },
+
+                success: function (response) {
+                    processXMLs(response, tableID);
+                }
+            })
+        } else {
+            var firstXMLContent = multiXMLImport[fileName];
+            var parser = new DOMParser();
+            var firstXMLDoc = parser.parseFromString(firstXMLContent, "application/xml");
+            processXMLs(firstXMLDoc, tableID);
+        }
+    }
+
+    function readAndShowComparison(firstSelectedXML, secondSelectedXML) {
+        readXML(firstSelectedXML, 'tableNew');
+        readXML(secondSelectedXML, 'tableOld');
+    }
+
+    function secondXmlSelect() {
+        $('.resultDiv').addClass('loading');
+        $('#resultTable').empty();
+        $('#errorList').empty();
+        secondSelectedXML = $('#xmlSecondSelect').val();
+        $('#resultTableBody').empty();
+        readAndShowComparison(firstSelectedXML, secondSelectedXML);
+    }
+
+    function firstXmlSelect() {
+        $('.resultDiv').removeClass('loading');
+        $('#resultTable').empty();
+        $('#errorList').empty();
+        secondXML = [];
+        firstSelectedXML = $('#xmlFirstSelect').val();
+        $('#xmlSecondSelect').empty();
+        $.each(indexAll, function (id, val) {
+            var shortVal = val.substring(0, val.length - 3).toLowerCase();
+            var shortSelected = firstSelectedXML.substring(0, firstSelectedXML.length - 3).toLowerCase();
+            if (shortSelected.indexOf(shortVal) > -1) {
+                if (val !== firstSelectedXML) {
+                    $('#xmlSecondSelect').append(
+                        '<option value="' + this + '" onClick="secondXmlSelect()">' + this + '</option>'
+                    )
+                }
+            }
+        })
+    }
+
+    $('#xmlFiles').change(function () {
+        const fileInput = $("#xmlFiles")[0];
+        const files = fileInput.files;
+
+        if (files.length === 0) {
+            alert("Please select at least one XML file.");
+            return;
+        }
+
+        // Loop through all selected files
+        Array.from(files).forEach(file => {
+            if (file.type !== "text/xml" && !file.name.endsWith(".xml")) {
+                alert("Invalid file type. Please upload XML files only.");
+                return;
+            }
+
+            // Read the file content
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const xmlContent = event.target.result;
+
+                // Parse the XML content
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(xmlContent, "application/xml");
+
+                // Check for parsing errors
+                const parseError = xmlDoc.getElementsByTagName("parsererror");
+                if (parseError.length > 0) {
+                    alert(`Error parsing file: ${file.name}`);
+                    return;
+                }
+
+                // Extract the file name without the .xml extension
+                const fileName = file.name.replace(".xml", "");
+
+                // Store the XML content into the object
+                multiXMLImport[fileName] = xmlContent;
+                $('#xmlFirstSelect').append('<option value="' + fileName + '" onClick="firstXmlSelect()">' + fileName + '</option>');
+            };
+
+            // Read the file as text
+            reader.readAsText(file);
+        });
+    });
+
+    $('#hideFields').click(function () {
+        $('tr.match').toggleClass('hideMe');
+        if($(this).text().indexOf('ausblenden')>-1){
+            $(this).html('<span>Identische<br>Zeilen einblenden</span>');
+        } else {
+            $(this).html('<span>Identische<br>Zeilen ausblenden</span>');
+        }
+    });
+
+    function formatNameAndCheckDupes(addressName){
+        var entry = addressName.replace('https://ig-creator.xxxlgroup.com/idm/', '').split('*')[0];
+        $.inArray(entry, combinedRegistry) === -1 ? combinedRegistry.push(entry) : null;
+    }
+    function combineRegistries(curRegistry, fileName){
+        $.each(curRegistry.Domains, function( key, value ) {
+            if(value.ComService === undefined) return; //skip entries without address
+            if(value.ComService.Setups === undefined){
+                formatNameAndCheckDupes(value.ComService.Address);
+            } else {
+                $.each(value.ComService.Setups, function( setupKey, setupValue ) {
+                    formatNameAndCheckDupes(setupValue.Address);
+                });
+            }
+        });
+    }
+
+    function readModelListJSON() {
+        $.getJSON( "https://walm-dc.github.io/WebTools/public/list.json", function( data ) {
+            modelListJSON = data;
+            // $.map(data, function(value, index) {return [value]});
+        });
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moebelix.json", function( data ) {
+            combineRegistries(data, 'moebelix');
+        });
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moemax.json", function( data ) {
+            combineRegistries(data, 'moemax');
+        });
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-xxxl.json", function( data ) {
+            combineRegistries(data, 'xxxl');
+        });
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry.json", function( data ) {
+            combineRegistries(data, 'registry');
+        });
+    }
+
+    function readAndShowJSON() {
+        $.getJSON("https://ig-creator.xxxlgroup.com/idm/index.json", function (data) {
+            indexAll = data;
+            readModelListJSON();
+        });
+    }
+    readAndShowJSON();
+</script>
+</html>

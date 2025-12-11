@@ -33,6 +33,7 @@ function removeHighlights() {
 }
 function highlightOccurrences(searchString) {
     // Loop through all elements on the page
+    $('#searching').addClass('show');
     removeHighlights();    
     const regex = new RegExp(searchString, "gi");
     $("body *").contents().each(function() {
@@ -47,6 +48,7 @@ function highlightOccurrences(searchString) {
             $(this).replaceWith(highlightedText);
         }
     });
+    $('#searching').removeClass('show');
 }
 function filterTable() {
     var input, filter, table, tr, td, i, txtValue;
