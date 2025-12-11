@@ -28,7 +28,7 @@
         <div>
             <div class="resultDiv">
                 <h3>Anzahl in der aktuellen Auflistung: <span id="myCounter"></span></h3>
-                <img src="refresh-button.png" class="emptySearch" title="Suche leeren" alt="Suche leeren"><input type="text" id="myInput" onkeyup="filterTable()" placeholder="Allgemeine Suche auf alle Felder...">
+                <img src="refresh-button.png" class="emptySearch" title="Suche leeren" alt="Suche leeren"><input type="text" id="myInput" placeholder="Allgemeine Suche auf alle Felder...">
                 <div class="div_before_table igServer">
                     <table id="myTable" cellspacing="0" cellpadding="0">
                         <tr>
@@ -74,7 +74,6 @@
     function openXML(clickedElement){
         var xmlName = $(clickedElement).attr('name');
         var xmlPath = 'https://ig-creator.xxxlgroup.com/idm/'+xmlName+'.xml';
-
         $.ajax({
                 type: "GET",
                 url: xmlPath,
@@ -107,7 +106,6 @@
                 }
             })
     }
-
     function formatNameAndCheckDupes(addressName){
         var entry = addressName.replace('https://ig-creator.xxxlgroup.com/idm/', '').split('*')[0];
         $.inArray(entry, combinedRegistry) === -1 ? combinedRegistry.push(entry) : null;

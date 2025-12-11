@@ -68,5 +68,7 @@ function filterTable() {
         }
     }
     countColumns();
-    highlightOccurrences(filter);
+    if(filter.length > 0){
+        highlightOccurrences(filter);
+    }
 }

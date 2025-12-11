@@ -80,7 +80,6 @@
         const lastUnderscoreIndex = inputString.lastIndexOf('_');
         return lastUnderscoreIndex !== -1 ? inputString.substring(0, lastUnderscoreIndex + 1) : inputString;
     }
-
     function readAndShowJSON(){
         $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moebelix.json", function( data ) {
             combineRegistries(data, 'moebelix');
