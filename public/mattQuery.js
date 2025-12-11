@@ -32,6 +32,7 @@ function removeHighlights() {
     });
 }
 function highlightOccurrences(searchString) {
+    console.log("Highlighting occurrences of:", searchString);
     // Loop through all elements on the page
     removeHighlights();
     const regex = new RegExp(searchString, "gi");
