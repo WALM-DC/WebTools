@@ -32,11 +32,8 @@ function removeHighlights() {
     });
 }
 function highlightOccurrences(searchString) {
-    console.log("Highlighting occurrences of:", searchString);
     // Loop through all elements on the page
-    if (searchString=== ''){
-        removeHighlights();    
-    }
+    removeHighlights();    
     const regex = new RegExp(searchString, "gi");
     $("body *").contents().each(function() {
         if (this.nodeType === 3) { // Only process text nodes
@@ -51,3 +48,41 @@ function highlightOccurrences(searchString) {
         }
     });
 }
+function filterTable() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td");
+        for (var j = 0; j < td.length; j++) {
+            txtValue = td[j].textContent || td[j].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+                break;
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+    countColumns();
+    highlightOccurrences(filter);
+}
+$('#myInput').on('keydown', function(e) {
+    if (e.which === 13) { // Check if the Enter key is pressed (key code 13)
+        if($(this).val() === ""){
+            removeHighlights();
+            $('#myTable tr').show();
+        } else {
+            filterTable();
+        }
+    }
+});
+$('.emptySearch').on('click', function(){
+    $('#myInput').val('');
+    removeHighlights();
+    $('#myTable tr').show();
+    countColumns();
+});

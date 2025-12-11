@@ -21,7 +21,7 @@
         <div>
             <div class="resultDiv">
                 <h3>Anzahl in der aktuellen Auflistung: <span id="myCounter"></span></h3>
-                <input type="text" id="myInput" onkeyup="filterTable()" placeholder="Allgemeine Suche auf alle Felder...">
+                <img src="refresh-button.png" class="emptySearch" title="Suche leeren" alt="Suche leeren"><input type="text" id="myInput" placeholder="Allgemeine Suche auf alle Felder...">
                 <div class="div_before_table igServer">
                     <table id="myTable" cellspacing="0" cellpadding="0">
                         <tr>
@@ -54,29 +54,6 @@
         if(ca !== cb) return (ca < cb) ? -1 : 1;
         if(ba !== bb) return (ba < bb) ? -1 : 1;
         return (ma < mb) ? -1 : 1;
-    }
-    function filterTable() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("myInput");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("myTable");
-        tr = table.getElementsByTagName("tr");
-
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td");
-            for (var j = 0; j < td.length; j++) {
-                txtValue = td[j].textContent || td[j].innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                    break;
-                } else {
-                    tr[i].style.display = "none";
-                }
-            }
-        }
-        countColumns();
-        console.log(filter);
-        highlightOccurrences(filter);
     }
     function combineRegistries(curRegistry, fileName){
         $.each(curRegistry.Domains, function( key, value ) {
