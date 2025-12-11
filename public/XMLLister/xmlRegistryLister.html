@@ -46,7 +46,15 @@
     function countColumns(){
         $('#myCounter').html(($('table tr').length-1)-($('table tr[style="display: none;"]').length));
     }
-
+    function sortList(a, b) {
+        let ca = a.ID.toLowerCase();
+        let cb = b.ID.toLowerCase();
+        let ba = a.Scope.toLowerCase();
+        let bb = b.Scope.toLowerCase();
+        if(ca !== cb) return (ca < cb) ? -1 : 1;
+        if(ba !== bb) return (ba < bb) ? -1 : 1;
+        return (ma < mb) ? -1 : 1;
+    }
     function filterTable() {
         var input, filter, table, tr, td, i, txtValue;
         input = document.getElementById("myInput");
@@ -66,7 +74,8 @@
                 }
             }
         }
-        countColumns()
+        countColumns();
+        highlightOccurrences(filter);
     }
     function combineRegistries(curRegistry, fileName){
         $.each(curRegistry.Domains, function( key, value ) {
@@ -108,7 +117,9 @@
             }
         })
         if(fileName === 'registry'){
-            $.each(combinedRegistry, function( index, registryEntry ) {
+            var sortArray = $.map(combinedRegistry, function(value, index) {return [value]});
+            sortArray.sort(sortList);
+            $.each(sortArray, function( index, registryEntry ) {
                 $('#myTable').append('<tr>'+
                     '<td>'+registryEntry.ID+'</td>'+
                     '<td>'+registryEntry.Scope.split('.')[0].replace('XXXL', '')+'</td>'+

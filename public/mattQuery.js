@@ -25,3 +25,26 @@ function injectTabs(){
     });
     $('.tab[link="'+window.location.href+'"]').addClass('active');
 }
+function removeHighlights() {
+    $("mark").each(function() {
+        // Replace the <mark> tag with its inner text
+        $(this).replaceWith($(this).text());
+    });
+}
+function highlightOccurrences(searchString) {
+    // Loop through all elements on the page
+    removeHighlights();
+    const regex = new RegExp(searchString, "gi");
+    $("body *").contents().each(function() {
+        if (this.nodeType === 3) { // Only process text nodes
+            const text = $(this).text();
+                // Case-insensitive search
+
+            // Replace occurrences with <mark>
+            const highlightedText = text.replace(regex, function(match) {
+                return `<mark>${match}</mark>`;
+            });
+            $(this).replaceWith(highlightedText);
+        }
+    });
+}

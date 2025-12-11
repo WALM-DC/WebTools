@@ -64,7 +64,8 @@
             }
             }
         }
-        countColumns()
+        countColumns();
+        highlightOccurrences(filter);
     }
     function formatNameAndCheckDupes(addressName){
         var entry = addressName.replace('https://ig-creator.xxxlgroup.com/idm/', '').split('*')[0];
