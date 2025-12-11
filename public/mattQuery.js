@@ -33,14 +33,12 @@ function removeHighlights() {
 }
 function highlightOccurrences(searchString) {
     // Loop through all elements on the page
-    $('#searching').addClass('show');
     removeHighlights();    
     const regex = new RegExp(searchString, "gi");
     $("body *").contents().each(function() {
         if (this.nodeType === 3) { // Only process text nodes
             const text = $(this).text();
                 // Case-insensitive search
-
             // Replace occurrences with <mark>
             const highlightedText = text.replace(regex, function(match) {
                 return `<mark>${match}</mark>`;
@@ -48,7 +46,6 @@ function highlightOccurrences(searchString) {
             $(this).replaceWith(highlightedText);
         }
     });
-    $('#searching').removeClass('show');
 }
 function filterTable() {
     var input, filter, table, tr, td, i, txtValue;
