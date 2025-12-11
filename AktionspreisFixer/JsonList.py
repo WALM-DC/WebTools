@@ -49,6 +49,7 @@ def find_all_json(root_path, onlineList):
                                     'locale': filename.split('@')[1].split('.')[0],
                                     'currency': data.get('currency', ''),  
                                     'catalog': data.get('catalog', ''), 
+                                    'model': data.get('model', ''),
                                     'brand': data.get('brand', ''),
                                     'brandName': data.get('brandName', ''),
                                     'productGroup': data.get('productGroup', ''),
