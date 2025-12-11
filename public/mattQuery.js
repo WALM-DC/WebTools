@@ -34,7 +34,9 @@ function removeHighlights() {
 function highlightOccurrences(searchString) {
     console.log("Highlighting occurrences of:", searchString);
     // Loop through all elements on the page
-    removeHighlights();
+    if (searchString=== ''){
+        removeHighlights();    
+    }
     const regex = new RegExp(searchString, "gi");
     $("body *").contents().each(function() {
         if (this.nodeType === 3) { // Only process text nodes
