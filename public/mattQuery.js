@@ -70,19 +70,3 @@ function filterTable() {
     countColumns();
     highlightOccurrences(filter);
 }
-$('#myInput').on('keydown', function(e) {
-    if (e.which === 13) { // Check if the Enter key is pressed (key code 13)
-        if($(this).val() === ""){
-            removeHighlights();
-            $('#myTable tr').show();
-        } else {
-            filterTable();
-        }
-    }
-});
-$('.emptySearch').on('click', function(){
-    $('#myInput').val('');
-    removeHighlights();
-    $('#myTable tr').show();
-    countColumns();
-});

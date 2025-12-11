@@ -55,6 +55,22 @@
         if(ba !== bb) return (ba < bb) ? -1 : 1;
         return (ma < mb) ? -1 : 1;
     }
+    $('#myInput').on('keydown', function(e) {
+        if (e.which === 13) { // Check if the Enter key is pressed (key code 13)
+            if($(this).val() === ""){
+                removeHighlights();
+                $('#myTable tr').show();
+            } else {
+                filterTable();
+            }
+        }
+    });
+    $('.emptySearch').on('click', function(){
+        $('#myInput').val('');
+        removeHighlights();
+        $('#myTable tr').show();
+        countColumns();
+    });
     function combineRegistries(curRegistry, fileName){
         $.each(curRegistry.Domains, function( key, value ) {
             var addressArray = [], marketArray = [];

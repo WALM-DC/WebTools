@@ -98,6 +98,22 @@
         })
         $('#myVariantCounter').html(allVarantCount-inactiveVariantCount);
     }
+    $('#myInput').on('keydown', function(e) {
+        if (e.which === 13) { // Check if the Enter key is pressed (key code 13)
+            if($(this).val() === ""){
+                removeHighlights();
+                $('#myTable tr').show();
+            } else {
+                filterTable();
+            }
+        }
+    });
+    $('.emptySearch').on('click', function(){
+        $('#myInput').val('');
+        removeHighlights();
+        $('#myTable tr').show();
+        countColumns();
+    });
     // docu for plugin: https://www.jqueryscript.net/table/jQuery-Plugin-To-Export-Table-Data-To-CSV-File-table2csv.html
     $('#exportAll').on('click',function(){
         $("table").table2csv({  
