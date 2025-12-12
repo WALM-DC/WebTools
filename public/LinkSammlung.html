@@ -1,0 +1,124 @@
+<html>
+<head>
+    <title>LinkSammlung</title>
+    <link rel="stylesheet" href="https://walm-dc.github.io/WebTools/public/mattStyle.css">
+    <script src="https://walm-dc.github.io/WebTools/public/jquery-3.7.1.min.js"></script>
+    <script src="https://walm-dc.github.io/WebTools/public/ddtf.js"></script>
+    <script src="https://walm-dc.github.io/WebTools/public/mattQuery.js"></script>
+    <style>
+        h2 {
+            margin: 20px;
+        }
+        h3{
+            margin: 15px 50px;
+            font-size: 20px;
+            color: cyan;
+        }
+        a {
+            margin: 15px 80px;
+            font-size: 17px;
+            line-height: 22px;
+            background: linear-gradient(to bottom, var(--mainColor) 0%, var(--mainColor) 100%);
+            background-position: 0 100%;
+            background-repeat: repeat-x;
+            background-size: 3px 3px;
+            color: whitesmoke;
+            text-decoration: none;
+            transition: 200ms;
+        }
+        a:hover {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg id='squiggle-link' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ev='http://www.w3.org/2001/xml-events' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .7s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-20px);}}%3C/style%3E%3Cpath fill='none' stroke='%23ff9800' stroke-width='2' class='squiggle' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3'/%3E%3C/svg%3E");
+            background-position: 0 100%;
+            background-size: auto 6px;
+            background-repeat: repeat-x;
+            text-decoration: none;
+            color: rgb(250, 209, 133);
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="topDiv"></div>
+    <div class="masterDiv">
+        
+    </div>
+</body>
+<script>
+    injectTabs();
+
+    var testJson = {
+        'JIRA': {
+            'Filter: Suche auf Ticket-Beschreibung': 'https://jira.xxxlgroup.com/browse/DM-475?filter=40833',
+            'Dashboards': {
+                '3D Datenerfassung - MML Erstellung': 'https://jira.xxxlgroup.com/secure/Dashboard.jspa?selectPageId=27501',
+                '3D Endkunden - MGMT': 'https://jira.xxxlgroup.com/secure/Dashboard.jspa?selectPageId=26901',
+                '3D Endkunden - Erstellung MML bei Volker': 'https://jira.xxxlgroup.com/secure/Dashboard.jspa?selectPageId=27500',
+                'Externe Modelle- Ticket &Uuml;bersicht': 'https://jira.xxxlgroup.com/secure/Dashboard.jspa?selectPageId=28403',
+                'ICOM - Ticket &Uuml;bersicht': 'https://jira.xxxlgroup.com/secure/Dashboard.jspa?selectPageId=27502',
+                'QA - Ticket &Uuml;bersicht': 'https://jira.xxxlgroup.com/secure/Dashboard.jspa?selectPageId=28405'
+            },
+            'Kanbanboards': {
+                '3D Datenbasis IG': 'https://jira.xxxlgroup.com/secure/RapidBoard.jspa?rapidView=708#',
+                '3D Endkunde - MGMT': 'https://jira.xxxlgroup.com/secure/RapidBoard.jspa?rapidView=1231#'
+            },  
+            'Auswertungen': {
+                '3D Datenbasis': 'https://jira.xxxlgroup.com/secure/Dashboard.jspa?selectPageId=23200',
+                '3D Modelldaten': 'https://jira.xxxlgroup.com/secure/Dashboard.jspa?selectPageId=27503',
+                'DC Übersicht': 'https://jira.xxxlgroup.com/secure/Dashboard.jspa?selectPageId=26802'
+            }
+        },
+        'Confluence': {
+            'Datencenter': 'https://confluence.xxxlgroup.com/spaces/4NG/pages/525674172/Datencenter+Startseite',
+            'Projekte': 'https://confluence.xxxlgroup.com/spaces/DCP/pages/344594601/Projekte',
+            'Anleitungen': {
+                '&Uuml;bersiucht':'https://confluence.xxxlgroup.com/spaces/DCP/pages/868784528/Guides',
+                'Jira Ticket Workflows':'https://confluence.xxxlgroup.com/spaces/DCP/pages/868784537/Jira+Ticket+Workflow',
+                'Neuen Lieferanten anlegen in Git und IG': 'https://confluence.xxxlgroup.com/spaces/DCP/pages/877006688/Neuen+Lieferanten+anlegen+in+Git+und+SourceTree',
+                'Neues Modelle Anlegen in Git und IG': 'https://confluence.xxxlgroup.com/spaces/DCP/pages/868789212/Neues+Modelle+Anlegen+in+Git+und+IG',
+                '&Uuml;bersetzungen anfordern und importieren': 'https://confluence.xxxlgroup.com/spaces/DCP/pages/877033027/%C3%9Cbersetzungen+anfordern+und+importieren',
+                'XML Info & Workflow': 'https://confluence.xxxlgroup.com/spaces/DCP/pages/877020638/XML+Info+Workflow'
+            }
+
+        },
+        'WebTools': {
+            'XML Liste': "https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlListerIndex.html",
+            'XML Liste + Country': "https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlListerCountryIndex.html",
+            'XML Checker': "https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlChecker_v3.html",
+            'Registry Liste': "https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlRegistryLister.html",
+            '3D Modell&uuml;bersicht': "https://walm-dc.github.io/WebTools/public/3DModelOverview.html",
+            '3D Modell-Details': "https://walm-dc.github.io/WebTools/public/3DModelDetails.html"
+        },
+        'GitHub Repositories': {
+            'Altes GitHub': 'https://github.xxxlgroup.com/datacenter',
+            'Neues GitHub': 'https://github.com/XXXLutz',
+            'Neues GitHub - Datencenter Repos': 'https://github.com/orgs/XXXLutz/teams/dc-3d-konfiguratoren/repositories'
+        },
+        'Sonstiges': {
+
+        }
+    }
+
+    function injectLinks(){
+        $.each(testJson, function(category, links){
+            var categoryDiv = $('<div class="linkCategoryDiv"></div>');
+            var categoryTitle = $('<h2>'+category+'</h2>');
+            categoryDiv.append(categoryTitle);
+            $.each(links, function(linkName, linkUrlOrSubLinks){
+                if(typeof linkUrlOrSubLinks === 'string'){
+                    var linkElement = $('<a href="'+linkUrlOrSubLinks+'" target="_blank">'+linkName+'</a><br>');
+                    categoryDiv.append(linkElement);
+                } else if(typeof linkUrlOrSubLinks === 'object'){
+                    var subCategoryTitle = $('<h3>'+linkName+'</h3>');
+                    categoryDiv.append(subCategoryTitle);
+                    $.each(linkUrlOrSubLinks, function(subLinkName, subLinkUrl){
+                        var subLinkElement = $('<a href="'+subLinkUrl+'" target="_blank">'+subLinkName+'</a><br>');
+                        categoryDiv.append(subLinkElement);
+                    });
+                }
+            });
+            $('.masterDiv').append(categoryDiv);
+        });
+    }
+    injectLinks();
+</script>
+</html>
