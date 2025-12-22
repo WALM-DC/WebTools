@@ -28,15 +28,6 @@
         option {
             cursor: pointer;
         }
-        .match {
-            background-color: lightgreen;
-        }
-        .noMatch {
-            background-color: darksalmon;
-        }
-        .empty {
-            background-color: lightblue;
-        }
         table tr:hover td {
             border: 1px solid black;
             box-shadow: 5px 0px 6px 0px yellow;
@@ -56,6 +47,15 @@
         }
         .innerTable {
             width: 100%;
+        }
+        tr.match {
+            background-color: lightgreen;
+        }
+        tr.noMatch {
+            background-color: darksalmon;
+        }
+        tr.empty {
+            background-color: lightblue;
         }
         .clickMe {
             cursor: pointer;
@@ -419,7 +419,6 @@
         } else {
             $('#errorList').append('<br><br><span class="bigError">!! ACHTUNG !! - Keine Zielm&auml;rkte im XML gefunden.</span>');
         }
-        console.log(_registryJSON, _registryMoebelixJSON, _registryMoemaxJSON, _registryXXXLutzJSON);
     }
 
     function waitForXMLToLoad() {
@@ -520,7 +519,7 @@
     }
 
     function secondXmlSelect() {
-        $('.resultDiv').addClass('loading');
+        // $('.resultDiv').addClass('loading');
         $('#resultTable').empty();
         $('#errorList').empty();
         secondSelectedXML = $('#xmlSecondSelect').val();
