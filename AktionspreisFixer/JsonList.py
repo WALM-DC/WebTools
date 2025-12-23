@@ -45,6 +45,7 @@ def find_all_json(root_path, onlineList):
                                     'productVariants': '',
                                     'online': '',
                                     'konfig':'',
+                                    'active': '',
                                     'modelName': filename.split('@')[0],
                                     'locale': filename.split('@')[1].split('.')[0],
                                     'currency': data.get('currency', ''),  

@@ -170,9 +170,9 @@
                 var online = '<td class="trueCol">Ja</td>';
                 if(val.online=='false'){online = '<td class="falseCol">Nein</td>'}
                 if(val.online==''){online = '<td></td>'}
-                var konfig = '<td class="trueCol">Ja</td>';
-                if(val.konfig=='false'){konfig = '<td class="falseCol">Nein</td>'}
-                if(val.konfig==''){konfig = '<td></td>'}
+                // var konfig = '<td class="trueCol">Ja</td>';
+                // if(val.konfig=='false'){konfig = '<td class="falseCol">Nein</td>'}
+                // if(val.konfig==''){konfig = '<td></td>'}
                 var storeUrl = countryShorts[val.brand]+'.'+val.locale;
                 if(countryShorts[val.brand] === 'xxxlutz' && val.locale === 'si'){
                     storeUrl = 'xxxlesnina'+'.'+val.locale;
@@ -210,7 +210,7 @@
                     '<td class="'+inOrEx+'">'+inOrEx+'</td>'+
                     '<td><a href="https://'+storeUrl+'/s/?s='+val.productNumber+'" target="_blank">'+val.productNumber+'</a></td>'+
                     online+
-                    konfig+
+                    // konfig+
                     '<td>'+val.brand+'</td>'+
                     '<td>'+val.locale+'</td>'+
                     '<td>'+propTable+'</td>'

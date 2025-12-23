@@ -1,136 +1,128 @@
-import os, os.path
+import requests
 import json
-import csv
 
-# Take unified list from 4 registries
-# extract model jsons based on registry entries
+combined_registry = []
+
+BASE_URL = "https://ig-creator.xxxlgroup.com/idm/"
+
+def extract_markets(markets):
+    market_array = []
+
+    if not isinstance(markets, list):
+        return market_array  # unexpected structure → skip
+
+    for market_block in markets:
+
+        print("DEBUG market_block =", repr(market_block))
+        # Case A — expected dict
+        if isinstance(market_block, dict):
+            for k, v in market_block.items():
+                market_array.append(f"{k}: {v}")
+
+        # Case B — list (rare but possible)
+        elif isinstance(market_block, list):
+            for item in market_block:
+                if isinstance(item, dict):
+                    for k, v in item.items():
+                        market_array.append(f"{k}: {v}")
+
+        # Case C — string (JS loops characters, but that makes no sense)
+        elif isinstance(market_block, str):
+            # Your JS code would treat each character as a key…  
+            # This is useless, so we SKIP it instead.
+            continue
+
+        # Case D — anything else → skip
+        else:
+            continue
+
+    return market_array
+
+def combine_registries(cur_registry, file_name):
+    for key, value in cur_registry.get("Domains", {}).items():
+
+        # Skip entries without ComService
+        com_service = value.get("ComService")
+        if com_service is None:
+            continue
+
+        address_array = []
+
+        # -------- CASE 1: No setups (single address) --------
+        if com_service.get("Setups") is None:
+
+            # Collect markets
+            market_array = []
+            markets = com_service.get("Markets", [])
+            market_array = extract_markets(markets)
+
+            print("ID:", key, "Markets raw:", com_service.get("Markets"))
+
+            # Build final address string
+            address_clean = com_service["Address"].replace(BASE_URL, "")
+            address_array.append(
+                f"{address_clean}\nMarkets: {', '.join(market_array)}"
+            )
+
+        # -------- CASE 2: Setups present (multiple possible formats) --------
+        else:
+            setups = com_service["Setups"]
+
+            # Setup as dictionary
+            if isinstance(setups, dict):
+                setup_iter = setups.values()
+            # Setup as list
+            elif isinstance(setups, list):
+                setup_iter = setups
+            else:
+                print("WARNING: Unknown setups type:", type(setups))
+                continue
+
+            # Loop through each setup
+            for setup_value in setup_iter:
+                market_array = []
+
+                # Markets live inside each setup
+                markets = setup_value.get("Markets", [])
+                market_array = extract_markets(markets)
+
+                print("ID:", key, "Setup Markets raw:", setup_value.get("Markets"))
+
+                # Build
+                address_clean = setup_value["Address"].replace(BASE_URL, "")
+                address_array.append(
+                    f"{address_clean}\nMarkets: {', '.join(market_array)}"
+                )
+
+        # -------- Build entry object --------
+        entry = {
+            "ID": key,
+            "FileName": file_name,
+            "Scope": value.get("Scope"),
+            "Address": address_array,
+        }
+
+        # -------- Avoid duplicates by ID (case-insensitive) --------
+        exists = any(item["ID"].lower() == key.lower() for item in combined_registry)
+        if not exists:
+            combined_registry.append(entry)
 
 
-headerList = ["Artikelnummer", "live", "konfigurierbar", "Schiene", "Land"]
-onlineList = {}
+def read_and_show_json():
+    urls = [
+        ("https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moebelix.json", "moebelix"),
+        ("https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moemax.json", "moemax"),
+        ("https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-xxxl.json", "xxxl"),
+        ("https://ig-creator.xxxlgroup.com/icom/ICOM/_registry.json", "registry"),
+    ]
 
-def save_json_file(data):
-    # Output file path
-    output_path = "F:\WebTools\public\list.json"
+    for url, name in urls:
+        response = requests.get(url)
+        if response.ok:
+            text = response.content.decode("utf-8-sig")
+            data = json.loads(text)
+            combine_registries(data, name)
 
-    # Write JSON object to file
-    with open(output_path, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
 
-def read_online_list(search_path, onlineList):
-    with open(r'T:\AT_Datencenter\konfigurierbare_Serien.csv', mode='r') as csvfile:
-        reader = csv.DictReader(csvfile, delimiter=";")
-        for idx, row in enumerate(reader, start=1):
-            filtered_row = {header: row.get(header, '') for header in headerList}
-            onlineList[idx] = filtered_row
-    
-    # print(onlineList)
-    find_all_json(search_path, onlineList)
-
-def find_all_json(root_path, onlineList):
-    """
-    Walk through all folders starting from root_path, parse JSON files,
-    """
-    fullModelList = {}
-    fullConditionsList = {}
-    for dirpath, _, filenames in os.walk(root_path):
-        for filename in filenames:
-            if filename.endswith('.json') and filename.find(' ')==-1:
-                file_path = os.path.join(dirpath, filename)
-                try:
-                    with open(file_path, 'r', encoding='utf-8') as f:
-                        data = json.load(f)
-                        # if contains_target_values(data, target_values):
-                        if contains_target_keys(data, {'catalog'}):
-                            model_object = {
-                                data['catalog'].split('.')[0] +'.'+ filename.split('.')[0]: {
-                                    'fileName': filename.split('.')[0],
-                                    'productNumber': '',
-                                    'productVariants': '',
-                                    'online': '',
-                                    'konfig':'',
-                                    'modelName': filename.split('@')[0],
-                                    'locale': filename.split('@')[1].split('.')[0],
-                                    'currency': data.get('currency', ''),  
-                                    'catalog': data.get('catalog', ''), 
-                                    'model': data.get('model', ''),
-                                    'brand': data.get('brand', ''),
-                                    'brandName': data.get('brandName', ''),
-                                    'productGroup': data.get('productGroup', ''),
-                                    'description': data.get('description', ''),
-                                    'preis': data.get('settings',{}).get('kaa1', ''),
-                                    'entlasgung': data.get('settings',{}).get('entlastung', ''),
-                                    'aktion': data.get('settings',{}).get('aktion', ''),
-                                    'pricing': data.get('settings', {}).get('pricing', ''),
-                                    'properties': data.get('properties', [])
-                                }
-                            }
-                            fullModelList.update(model_object)
-
-                        if filename.startswith('conditions'):
-                            conditions_object = data['sets']
-                            fullConditionsList.update(conditions_object)
-
-                except Exception as e:
-                    print(f"[ERROR] Unexpected error with {file_path}: {e}")
-    
-    # print(fullModelList)
-    for modelId, modelEntry in fullModelList.items():
-        try:
-            modesIdShort = fullModelList[modelId]['fileName']
-            if fullConditionsList[modesIdShort] != '':
-                for innerId, conditionEntry in fullConditionsList[modesIdShort].items():
-                    fullModelList[modelId]['productNumber'] = conditionEntry.get('productNo')
-                    fullModelList[modelId]['productVariants'] += innerId + ' / '
-                    if fullModelList[modelId]['description'] == '':
-                        fullModelList[modelId]['description'] = conditionEntry.get('description')
-                    for onlineId, onlineEntry in onlineList.items():
-                        if onlineEntry['Artikelnummer'] != '' and onlineEntry['Artikelnummer'] in fullModelList[modelId]['productNumber'] and onlineEntry['Schiene'] == fullModelList[modelId]['brand'] and onlineEntry['Land'] == fullModelList[modelId]['locale']:
-                            fullModelList[modelId]['online'] = onlineEntry['live']
-                            fullModelList[modelId]['konfig'] = onlineEntry['konfigurierbar']
-
-        except KeyError as e:
-            print(f'KeyError: {e} not found in conditions.json')
-
-    save_json_file(fullModelList)
-
-def contains_target_values(data, target_values):
-    """
-    Recursively check if any of the target values exist in the JSON data.
-    
-    :param data: JSON-parsed Python object.
-    :param target_values: Set or list of values to look for.
-    :return: True if any target value is found, False otherwise.
-    """
-    if isinstance(data, dict):
-        return any(contains_target_values(v, target_values) for v in data.values())
-    elif isinstance(data, list):
-        return any(contains_target_values(item, target_values) for item in data)
-    else:
-        return data in target_values
-    
-def contains_target_keys(data, target_keys):
-    """
-    Recursively check if any of the target keys exist in the JSON data.
-
-    :param data: JSON-parsed Python object.
-    :param target_keys: Set of keys to look for.
-    :return: True if any target key is found, False otherwise.
-    """
-    if isinstance(data, dict):
-        for key, value in data.items():
-            if key in target_keys:
-                return True
-            if contains_target_keys(value, target_keys):
-                return True
-    elif isinstance(data, list):
-        return any(contains_target_keys(item, target_keys) for item in data)
-    return False
-
-# Example usage:
-if __name__ == "__main__":
-    # Set your search root path and target values here
-    # search_path = (r"F:\WebTools\AktionspreisFixer\XML-Test")
-    search_path = (r"C:\xxxlutz\IG-Creator\XXXLutz\ICOM")
-    read_online_list(search_path, onlineList)
-    # find_all_json(search_path)
+read_and_show_json()
+print(combined_registry)
