@@ -1,0 +1,606 @@
+{
+    "$schema": "https://archive.intelligentgraphics.biz/schemas/icom/set.json",
+    "catalog": "XXXLAda.Emma",
+    "description": "Wohnlandschaft Emma",
+    "currency": "EUR",
+    "context": "Ada.EmmaMX.Context",
+    "image": "Emma/thumb.jpg",
+    "productGroup": "01",
+    "brand": "MX",
+    "settings": {
+        "kaa1": 310,
+        "entlastung": 7,
+        "aktion": 0,
+        "pricing": "linear"
+    },
+    "properties": [
+        {
+            "property": "SET",
+            "name": "Ausführung",
+            "type": "FixChoice",
+            "setIndex": 1,
+            "values": [
+                {
+                    "value": "ECKSOFA_RECHTS",
+                    "name": "Ecksofa Rechts",
+                    "image": "../images/Icons/Wohnlandschaft_rechts.jpg"
+                },
+                {
+                    "value": "ECKSOFA_LINKS",
+                    "name": "Ecksofa Links",
+                    "image": "../images/Icons/Wohnlandschaft_links.jpg"
+                },
+                {
+                    "value": "SOFA_130",
+                    "name": "Bank 2-sitzig, Sitzbreite 130 cm",
+                    "image": "../images/Icons/Zweisitzer_Sofa.jpg"
+                },
+                {
+                    "value": "SOFA_156",
+                    "name": "Bank 2-sitzig, Sitzbreite 156 cm",
+                    "image": "../images/Icons/Zweisitzer_Sofa.jpg"
+                }
+            ],
+            "default": "ECKSOFA_RECHTS",
+            "position": 0
+        },
+        {
+            "property": "3",
+            "name": "Bezug",
+            "valueImage": "Material/{0}.jpg",
+            "type": "FixChoice",
+            "values": [
+                {
+                    "value": "S-TAV29",
+                    "name": "Anthrazit",
+                    "fabric": "pe100",
+                    "section": "fabric"
+                },
+                {
+                    "value": "S-TAV2",
+                    "name": "Seidengrau",
+                    "fabric": "pe100"
+                },
+                {
+                    "value": "S-TAV3",
+                    "name": "Olivegrün",
+                    "fabric": "pe100"
+                },
+                {
+                    "value": "S-TAV4",
+                    "name": "Grün-Braun",
+                    "fabric": "pe100"
+                },
+                {
+                    "value": "S-TAV5",
+                    "name": "Sonnengelb",
+                    "fabric": "pe100"
+                },
+                {
+                    "value": "S-TAV6",
+                    "name": "Taubenblau",
+                    "fabric": "pe100"
+                },
+                {
+                    "value": "S-TAV9",
+                    "name": "Grau-Weiß",
+                    "fabric": "pe100"
+                },
+                {
+                    "value": "S-TAV16",
+                    "name": "Türkisblau",
+                    "fabric": "pe100"
+                },
+                {
+                    "value": "S-TAV17",
+                    "name": "Rot-Orange",
+                    "fabric": "pe100"
+                },
+                {
+                    "value": "S-TAV19",
+                    "name": "Blau-Grau",
+                    "fabric": "pe100"
+                }
+            ],
+            "default": "S-TAV29",
+            "position": 1,
+            "_material": "XXXLAda.Basics"
+        },
+        {
+            "property": "17",
+            "name": "Fussform",
+            "type": "FixChoice",
+            "values": [
+                {
+                    "value": "FUS11-13",
+                    "name": "Schwarz",
+                    "image": "Emma/FUS11-13.jpg"
+                },
+                {
+                    "value": "FUC11-13",
+                    "name": "Chromfarbig",
+                    "image": "Emma/FUC11-13.jpg"
+                }
+            ],
+            "default": "FUS11-13",
+            "position": 2
+        },
+        {
+            "property": "33",
+            "name": "Sitzhärte/-Qualität",
+            "type": "FixChoice",
+            "values": [
+                {
+                    "value": "PS",
+                    "name": "Polyätherschaum",
+                    "image": "../images/Sitzqualitaet/polyaetherschaum.jpg"
+                },
+                {
+                    "value": "KSM",
+                    "name": "Kaltschaum",
+                    "image": "../images/Sitzqualitaet/Kaltschaum.png",
+                    "prices": [
+                        {
+                            "rule": "$S['SET'] === 'ECKSOFA_RECHTS' || $S['SET'] === 'ECKSOFA_LINKS'",
+                            "_price": 13000
+                        },
+                        {
+                            "rule": "$S['SET'] === 'SOFA_130'",
+                            "_price": 4400
+                        },
+                        {
+                            "rule": "$S['SET'] === 'SOFA_156'",
+                            "_price": 5200
+                        }
+                    ]
+                },
+                {
+                    "value": "PSKW",
+                    "name": "Polyäther und Kaltschaum",
+                    "image": "../images/Sitzqualitaet/Vollschaum.png",
+                    "prices": [
+                        {
+                            "rule": "$S['SET'] === 'ECKSOFA_RECHTS' || $S['SET'] === 'ECKSOFA_LINKS'",
+                            "_price": 9200
+                        },
+                        {
+                            "rule": "$S['SET'] === 'SOFA_130'",
+                            "_price": 3100
+                        },
+                        {
+                            "rule": "$S['SET'] === 'SOFA_156'",
+                            "_price": 3600
+                        }
+                    ]
+                }
+            ],
+            "default": "PS",
+            "position": 6
+        },
+        {
+            "property": "HOCKER",
+            "name": "Hocker",
+            "type": "FixChoice",
+            "addOn": true,
+            "virtual": "addl",
+            "values": [
+                {
+                    "value": "OHNE",
+                    "name": "ohne Hocker",
+                    "image": "../images/Icons/Hockerbank.jpg"
+                },
+                {
+                    "value": "057-130",
+                    "name": "Hocker 130 cm",
+                    "image": "../images/Icons/Hockerbank.jpg",
+                    "prices": [
+                        {
+                            "rule": "$S['3'].substring(0,5) === 'S-TAV' && $S['33'] === 'PS'",
+                            "_price": 17600
+                        },
+                        {
+                            "rule": "$S['3'].substring(0,5) === 'S-TAV' && $S['33'] === 'KSM'",
+                            "_price": 20200
+                        },
+                        {
+                            "rule": "$S['3'].substring(0,5) === 'S-TAV' && $S['33'] === 'PSKW'",
+                            "_price": 19500
+                        }
+                    ]
+                },
+                {
+                    "value": "057-156",
+                    "name": "Hocker 156 cm",
+                    "image": "../images/Icons/Hockerbank.jpg",
+                    "prices": [
+                        {
+                            "rule": "$S['3'].substring(0,5) === 'S-TAV' && $S['33'] === 'PS'",
+                            "_price": 18900
+                        },
+                        {
+                            "rule": "$S['3'].substring(0,5) === 'S-TAV' && $S['33'] === 'KSM'",
+                            "_price": 22000
+                        },
+                        {
+                            "rule": "$S['3'].substring(0,5) === 'S-TAV' && $S['33'] === 'PSKW'",
+                            "_price": 21100
+                        }
+                    ]
+                }
+            ],
+            "default": "OHNE",
+            "position": 15
+        }
+    ],
+    "sets": [
+        {
+            "S1": "ECKSOFA_RECHTS",
+            "set": {
+                "dimensions": {
+                    "width": 301,
+                    "height": 83,
+                    "depth": 210
+                },
+                "properties": [
+                    {
+                        "property": "248",
+                        "routes": [
+                            {
+                                "product": "410409|210-156",
+                                "property": "248"
+                            }
+                        ],
+                        "name": "Funktion",
+                        "type": "FixChoice",
+                        "values": [
+                            {
+                                "value": "MVZBU",
+                                "name": "Motor-Vorziehbank mit USB",
+                                "image": "../images/Icons/Sitzvorzug.jpg"
+                            },
+                            {
+                                "value": "VZB",
+                                "name": "Vorziehbank manuell",
+                                "image": "../images/Icons/Sitzvorzug.jpg",
+                                "_price": -7900
+                            },
+                            {
+                                "value": "OZFKT",
+                                "name": "Ohne Vorziehbank",
+                                "image": "../images/Icons/Sitzvorzug_ohne.jpg",
+                                "_price": -16600
+                            }
+                        ],
+                        "default": "MVZBU",
+                        "position": 4
+                    },
+                    {
+                        "property": "427",
+                        "name": "Schalterfarbe",
+                        "type": "FixChoice",
+                        "values": [
+                            {
+                                "value": "SCHWARZ",
+                                "name": "Schwarz",
+                                "image": "Emma/Schalter-Schwarz.jpg"
+                            },
+                            {
+                                "value": "CHROM",
+                                "name": "Chrom",
+                                "image": "Emma/Schalter-Chrom.jpg"
+                            },
+                            {
+                                "value": "NoActiveOption",
+                                "name": "Nicht aktiv"
+                            }
+                        ],
+                        "default": "SCHWARZ",
+                        "position": 5
+                    }
+                ],
+                "prices": [
+                    {
+                        "rule": null,
+                        "_price": 105500
+                    }
+                ],
+                "products": [
+                    {
+                        "product": "410409|210-156",
+                        "description": "2 Sitzer",
+                        "dimensions": {
+                            "width": 185,
+                            "height": 83,
+                            "depth": 109
+                        }
+                    },
+                    {
+                        "product": "410409|946-180",
+                        "description": "Eckbank",
+                        "dimensions": {
+                            "width": 210,
+                            "height": 83,
+                            "depth": 116
+                        },
+                        "position": {
+                            "x": 1.83
+                        }
+                    },
+                    {
+                        "excludeFromBox": true,
+                        "rule": "HOCKER|057-130",
+                        "product": "410409|057-130",
+                        "description": "Hocker 130 cm",
+                        "dimensions": {
+                            "width": 130,
+                            "height": 47,
+                            "depth": 70
+                        },
+                        "position": {
+                            "x": 0.3,
+                            "z": 2.4
+                        }
+                    },
+                    {
+                        "excludeFromBox": true,
+                        "rule": "HOCKER|057-156",
+                        "product": "410409|057-156",
+                        "description": "Hocker 156 cm",
+                        "dimensions": {
+                            "width": 156,
+                            "height": 47,
+                            "depth": 70
+                        },
+                        "position": {
+                            "x": 0.15,
+                            "z": 2.4
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "S1": "ECKSOFA_LINKS",
+            "set": {
+                "view": "Right",
+                "dimensions": {
+                    "width": 301,
+                    "height": 83,
+                    "depth": 210
+                },
+                "properties": [
+                    {
+                        "property": "248",
+                        "routes": [
+                            {
+                                "product": "410409|220-156",
+                                "property": "248"
+                            }
+                        ],
+                        "name": "Funktion",
+                        "type": "FixChoice",
+                        "values": [
+                            {
+                                "value": "MVZBU",
+                                "name": "Motor-Vorziehbank mit USB",
+                                "image": "../images/Icons/Sitzvorzug.jpg"
+                            },
+                            {
+                                "value": "VZB",
+                                "name": "Vorziehbank manuell",
+                                "image": "../images/Icons/Sitzvorzug.jpg",
+                                "_price": -7900
+                            },
+                            {
+                                "value": "OZFKT",
+                                "name": "Ohne Vorziehbank",
+                                "image": "../images/Icons/Sitzvorzug_ohne.jpg",
+                                "_price": -16600
+                            }
+                        ],
+                        "default": "MVZBU",
+                        "position": 4
+                    },
+                    {
+                        "property": "427",
+                        "name": "Schalterfarbe",
+                        "type": "FixChoice",
+                        "values": [
+                            {
+                                "value": "SCHWARZ",
+                                "name": "Schwarz",
+                                "image": "Emma/Schalter-Schwarz.jpg"
+                            },
+                            {
+                                "value": "CHROM",
+                                "name": "Chrom",
+                                "image": "Emma/Schalter-Chrom.jpg"
+                            },
+                            {
+                                "value": "NoActiveOption",
+                                "name": "Nicht aktiv"
+                            }
+                        ],
+                        "default": "SCHWARZ",
+                        "position": 5
+                    }
+                ],
+                "prices": [
+                    {
+                        "rule": null,
+                        "_price": 105500
+                    }
+                ],
+                "products": [
+                    {
+                        "product": "410409|945-180",
+                        "description": "Eckbank",
+                        "dimensions": {
+                            "width": 210,
+                            "height": 83,
+                            "depth": 116
+                        }
+                    },
+                    {
+                        "product": "410409|220-156",
+                        "description": "2 Sitzer",
+                        "dimensions": {
+                            "width": 185,
+                            "height": 83,
+                            "depth": 109
+                        },
+                        "position": {
+                            "x": 0.89
+                        }
+                    },
+                    {
+                        "excludeFromBox": true,
+                        "rule": "HOCKER|057-130",
+                        "product": "410409|057-130",
+                        "description": "Hocker 130 cm",
+                        "dimensions": {
+                            "width": 130,
+                            "height": 47,
+                            "depth": 70
+                        },
+                        "position": {
+                            "x": 1.4,
+                            "z": 2.4
+                        }
+                    },
+                    {
+                        "excludeFromBox": true,
+                        "rule": "HOCKER|057-156",
+                        "product": "410409|057-156",
+                        "description": "Hocker 156 cm",
+                        "dimensions": {
+                            "width": 156,
+                            "height": 47,
+                            "depth": 70
+                        },
+                        "position": {
+                            "x": 1.25,
+                            "z": 2.4
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "S1": "SOFA_130",
+            "set": {
+                "dimensions": {
+                    "width": 186,
+                    "height": 83,
+                    "depth": 109
+                },
+                "properties": [],
+                "prices": [
+                    {
+                        "rule": null,
+                        "_price": 45100
+                    }
+                ],
+                "products": [
+                    {
+                        "product": "410409|230-130",
+                        "description": "2 Sitzer",
+                        "dimensions": {
+                            "width": 186,
+                            "height": 83,
+                            "depth": 109
+                        }
+                    },
+                    {
+                        "excludeFromBox": true,
+                        "rule": "HOCKER|057-130",
+                        "product": "410409|057-130",
+                        "description": "Hocker 130 cm",
+                        "dimensions": {
+                            "width": 130,
+                            "height": 47,
+                            "depth": 70
+                        },
+                        "position": {
+                            "x": 0.25,
+                            "z": 2
+                        }
+                    },
+                    {
+                        "excludeFromBox": true,
+                        "rule": "HOCKER|057-156",
+                        "product": "410409|057-156",
+                        "description": "Hocker 156 cm",
+                        "dimensions": {
+                            "width": 156,
+                            "height": 47,
+                            "depth": 70
+                        },
+                        "position": {
+                            "x": 0.10,
+                            "z": 2
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "S1": "SOFA_156",
+            "set": {
+                "dimensions": {
+                    "width": 212,
+                    "height": 83,
+                    "depth": 109
+                },
+                "properties": [],
+                "prices": [
+                    {
+                        "rule": null,
+                        "_price": 48700
+                    }
+                ],
+                "products": [
+                    {
+                        "product": "410409|230-156",
+                        "description": "2 Sitzer",
+                        "dimensions": {
+                            "width": 212,
+                            "height": 83,
+                            "depth": 109
+                        }
+                    },
+                    {
+                        "excludeFromBox": true,
+                        "rule": "HOCKER|057-130",
+                        "product": "410409|057-130",
+                        "description": "Hocker 130 cm",
+                        "dimensions": {
+                            "width": 130,
+                            "height": 47,
+                            "depth": 70
+                        },
+                        "position": {
+                            "x": 0.4,
+                            "z": 2
+                        }
+                    },
+                    {
+                        "excludeFromBox": true,
+                        "rule": "HOCKER|057-156",
+                        "product": "410409|057-156",
+                        "description": "Hocker 156 cm",
+                        "dimensions": {
+                            "width": 156,
+                            "height": 47,
+                            "depth": 70
+                        },
+                        "position": {
+                            "x": 0.25,
+                            "z": 2
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

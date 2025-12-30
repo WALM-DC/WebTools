@@ -26,7 +26,7 @@
             color: red;
         }
         #errorDiv h4{
-            margin: 9px 0;
+            margin: 0 0 9px 0;
             color: darkslateblue;
             font-size: 1.17em;
         }
@@ -39,6 +39,9 @@
             text-decoration: underline;
             position: absolute;
             right: 9px;
+        }
+        table{
+            margin-bottom: 9px;
         }
     </style>
 </head>
@@ -111,6 +114,7 @@
             $('#innerErrodDiv').html('Details anzeigen &#9660;');
         } else {
             errorDiv.css('height', 'auto');
+            errorDiv.css('overflow', 'auto');
             $('#innerErrodDiv').html('Details ausblenden &#9650;');
         }
     });
@@ -191,7 +195,7 @@
                 $('#errorDiv').append('<h3>ACHTUNG XML-Pfad-Unterschiede gefunden</h3>'+xmlMismatches.join('<br><br>'));
             }
             if(registryOnly.length > 0){
-                $('#errorDiv').append('<h4>WARNUNG '+registryOnly.length+' Eintr&auml;ge nur in der _registry.json gefunden</h4><table>'+registryOnly.join('')+'</table>');
+                $('#errorDiv').append('<h4>INFO '+registryOnly.length+' Eintr&auml;ge nur in der _registry.json gefunden</h4><table>'+registryOnly.join('')+'</table>');
             }
             jQuery('#myTable').ddTableFilter();
             countColumns()
