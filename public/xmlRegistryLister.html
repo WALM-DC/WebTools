@@ -19,6 +19,7 @@
             background-color: #ffe5e5;
             z-index: 10;
             height: 20px;
+            max-height: 90vh;
             overflow: hidden;
         }
         #errorDiv h3{
@@ -111,6 +112,7 @@
         var errorDiv = $('#errorDiv');
         if(errorDiv.css('height') !== '20px'){
             errorDiv.css('height', '20px');
+            errorDiv.css('overflow', 'hidden');
             $('#innerErrodDiv').html('Details anzeigen &#9660;');
         } else {
             errorDiv.css('height', 'auto');
@@ -129,9 +131,9 @@
                         marketArray.push(`${key}: ${val}`);
                     });
                 });
-                addressArray.push(value.ComService.Address.replace('https://ig-creator.xxxlgroup.com/idm/', '')+
+                addressArray.push(value.ComService.Address.replace('https://ig-creator.xxxlgroup.com/idm/', '').replace('lokal/', '')+
                 '<br><span class="markets">Markets: '+marketArray.join(', ')+'</span>');
-                pathArray.push(value.ComService.Address.replace('https://ig-creator.xxxlgroup.com/idm/', ''));
+                pathArray.push(value.ComService.Address.replace('https://ig-creator.xxxlgroup.com/idm/', '').replace('lokal/', ''));
             } else {
                 addressArray = [];
                 $.each(value.ComService.Setups, function( setupKey, setupValue ) {
@@ -141,9 +143,9 @@
                             marketArray.push(`${key}: ${val}`);
                         });
                     });
-                    addressArray.push(setupValue.Address.replace('https://ig-creator.xxxlgroup.com/idm/', '')+
+                    addressArray.push(setupValue.Address.replace('https://ig-creator.xxxlgroup.com/idm/', '').replace('lokal/', '')+
                     '<br><span class="markets">Markets: '+marketArray.join(', ')+'</span>');
-                    pathArray.push(setupValue.Address.replace('https://ig-creator.xxxlgroup.com/idm/', ''));
+                    pathArray.push(setupValue.Address.replace('https://ig-creator.xxxlgroup.com/idm/', '').replace('lokal/', ''));
                 });
             }
             entry = {
