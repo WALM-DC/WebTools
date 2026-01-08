@@ -48,6 +48,14 @@
     </div>
 </body>
 <script>
+    $(window).on("blur", function() {
+        console.log("Browser window lost focus");
+    });
+    $(window).on("focus", function() {
+        console.log("Browser window gained focus - refreshing data...");
+        readAndShowJSON(true);
+    });
+
     injectTabs();
 
     var langCheck = ['AT', 'DE', 'CH', 'CZ', 'SK', 'FR', 'SE', 'HU', 'SI', 'PL', 'RO'];
@@ -69,7 +77,9 @@
         $('#myInput').val('');
         removeHighlights();
         $('#myTable tr').show();
-        countColumns();
+        // countColumns();
+        jQuery('#myTable').ddTableFilter();
+        readAndShowJSON(true);
     });
     function openXML(clickedElement){
         var xmlName = $(clickedElement).attr('name');
@@ -126,7 +136,7 @@
         const lastUnderscoreIndex = inputString.lastIndexOf('_');
         return lastUnderscoreIndex !== -1 ? inputString.substring(0, lastUnderscoreIndex + 1) : inputString;
     }
-    function readAndShowJSON(){
+    function readAndShowJSON(refresher){
         $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moebelix.json", function( data ) {
             combineRegistries(data, 'moebelix');
         });
@@ -141,31 +151,43 @@
         });
         $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index.json", function( data ) {
             $.each(data, function(id, val){
-                var land = '', inRegistry = '<td class="falseCol">Nein</td>';
+                var land = '', inRegistry = 'Nein', inRegOrNot = 'falseCol';
                 var splitVal = val.split('_');
                 var shortXmlName = removeAfterLastUnderscore(val);
+
+                var xmlNameID = val.substring(0, val.lastIndexOf('_'));
+                var registryID = 'registryID'+val.substring(0, val.lastIndexOf('_'));
 
                 if(langCheck.indexOf(splitVal[splitVal.length - 2]) > -1){
                     land = splitVal[splitVal.length - 2];
                 }
                 if($.inArray(shortXmlName, combinedRegistry) > -1){
-                    inRegistry = '<td class="trueCol">Ja</td>';
+                    inRegistry = 'Ja';
+                    inRegOrNot = 'trueCol';
                 }
-                $('#myTable').append(
-                    '<tr><td>'+val+'</td>'+
-                    '<td>'+land+'</td>'+
-                    '<td>'+splitVal[0]+'</td>'+
-                    '<td>'+splitVal[1]+'</td>'+
-                    '<td>'+splitVal[2]+'</td>'+
-                    inRegistry+
-                    '<td id="target_'+val+'" style="width:100px" class="alignRight"></td>'+
-                    '<td id="'+val+'"><div class="clickMe" onClick="openXML(this)" name="'+val+'">Load Country-Data</div></td></tr>'
-                )
+                if(refresher){
+                    $('#'+xmlNameID).html(val);
+                    $('#'+registryID).html(inRegistry);
+                    $('#'+registryID).removeClass('trueCol falseCol').addClass(inRegOrNot);
+                } else {
+                    $('#myTable').append(
+                        '<tr><td id="'+xmlNameID+'">'+val+'</td>'+
+                        '<td>'+land+'</td>'+
+                        '<td>'+splitVal[0]+'</td>'+
+                        '<td>'+splitVal[1]+'</td>'+
+                        '<td>'+splitVal[2]+'</td>'+
+                        '<td class="'+inRegOrNot+'" id="'+registryID+'">'+inRegistry+'</td>'+
+                        '<td id="target_'+val+'" style="width:100px" class="alignRight"></td>'+
+                        '<td id="'+val+'"><div class="clickMe" onClick="openXML(this)" name="'+val+'">Load Country-Data</div></td></tr>'
+                    )
+                }
             })
-            filterTable();
-            jQuery('#myTable').ddTableFilter();
+            if(!refresher){
+                filterTable();
+                jQuery('#myTable').ddTableFilter();
+            }
         });
     }
-    readAndShowJSON();
+    readAndShowJSON(false);
 </script>
 </html>
