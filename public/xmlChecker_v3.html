@@ -81,10 +81,8 @@
         }
         .loading {
             background-image: url(loading.gif);
+            background-size: contain;
             background-repeat: no-repeat;
-            min-height: 600px;
-            background-position: center 30px;
-            background-size: 600px auto;
         }
         .errorDiv {
             display: flex;
@@ -169,7 +167,7 @@
 <script>
     injectTabs();
 
-    var indexAll = {}, multiXMLImport = {}, firstXML = [], secondXML = [], firstSelectedXML = '', secondSelectedXML = '', errorLog = {}, xmlDataVersion = '', firstXMLSerieNo = "", secondXMLSerieNo = '', firstXMLDataVersion = "", secondXMLDataVersion = '', firstXMLCatalogID = '', secondXMLCatalogID = '';
+    var indexAll = {}, multiXMLImport = {}, firstXML = [], secondXML = [], firstSelectedXML = '', secondSelectedXML = '', errorLog = {}, xmlDataVersion = '', firstXMLSerieNo = "", secondXMLSerieNo = '', firstXMLDataVersion = "", secondXMLDataVersion = '', firstXMLCatalogID = '', secondXMLCatalogID = '', noSecondXML = false;
     var langCheck = ['_AT_', '_DE_', '_CH_', '_CZ', '_SK_', '_FR_', '_SE_', '_HU_', '_SI_', '_PL_', '_RO_'];
     var checkTargetCountryID = false;
     var modelListJSON = {};
@@ -305,7 +303,11 @@
         secondXML = alignedSecond;
 
         $('#resultTable').empty();
-        $('#resultTable').append('<tr><th>Zeile</th><th>XML Bezeichnung</th><th>XML: ' + firstSelectedXML + '</th><th>XML: ' + secondSelectedXML + '</th></tr>');
+        if(noSecondXML){
+            $('#resultTable').append('<tr><th>Zeile</th><th>XML Bezeichnung</th><th>XML: ' + firstSelectedXML + '</th></tr>');
+        } else {
+            $('#resultTable').append('<tr><th>Zeile</th><th>XML Bezeichnung</th><th>XML: ' + firstSelectedXML + '</th><th>XML: ' + secondSelectedXML + '</th></tr>');
+        }
         var lineCounter = 1;
         errorLog = {
             Lang: [],
@@ -363,18 +365,21 @@
                         errorLog.Lang.push(langPart.pop());
                     }
                 }
-                $('#resultTable').append(
-                    '<tr class="' + highlighter + '"><td id="' + lineCounter + '"> ' + lineCounter + '</td><th>' + sId + '</th><td>' + firstVal + '</td><td>' + secondVal + '</td></tr>'
-                )
+                if(noSecondXML){
+                    $('#resultTable').append('<tr class="' + highlighter + '"><td id="' + lineCounter + '"> ' + lineCounter + '</td><th>' + sId + '</th><td>' + firstVal + '</td></tr>');
+                } else {
+                    $('#resultTable').append('<tr class="' + highlighter + '"><td id="' + lineCounter + '"> ' + lineCounter + '</td><th>' + sId + '</th><td>' + firstVal + '</td><td>' + secondVal + '</td></tr>');
+                }
                 lineCounter++;
             })
 
         })
         var shortXmlName = removeAfterLastUnderscore(firstSelectedXML);
         if($.inArray(shortXmlName, combinedRegistry) > -1){
-            $('#errorList').append('<br><br><span class="noErrors">Die XML <span style="color:white;">' + firstSelectedXML + '</span> ist im ICOM-Registry vorhanden.</span>');
+            $('#errorList').append('<br><br><span class="noErrors">Das 3D Modell zur XML <span style="color:white;">' + firstSelectedXML + '</span> ist Aktiv in Verwendung.</span>');
         } else {
-            $('#errorList').append('<br><br><span class="bigError">!! ACHTUNG !! - Die XML <span style="color:white;">' + firstSelectedXML + '</span> ist NICHT im ICOM-Registry vorhanden.</span>');
+            var prodNumber = firstSelectedXML.split('_')[0];
+            $('#errorList').append('<br><br><span class="bigError">!! ACHTUNG !! - Das 3D Modell zur XML <span style="color:white;">' + firstSelectedXML + '</span> ist nicht in Verwendung.<br><span style="color:white;">Entweder ist es ausgelaufen oder noch nicht aktiv, bitte im Jira pr&uuml;fen ob das Modell bestellt ist oder nicht: </span><a target="_blank" href="https://jira.xxxlgroup.com/browse/DM-3247?filter=40833&jql=project%20%3D%20DM%20AND%20Systeme%20%3D%20%223D%20Konfigurierbar%22%20AND%20summary%20%20~%20%22'+prodNumber+'%22">Jira Link</a></span>');
         }
         if(firstXMLDataVersion<secondXMLDataVersion){
             $('#errorList').append('<br><br>Datenversion:<br>' + secondSelectedXML + ': <span style="color:white;">' + secondXMLDataVersion + '</span><br>' + firstSelectedXML + ': <span class="bigError">' + firstXMLDataVersion + '</span>');
@@ -399,7 +404,7 @@
         if (errorLog.Errors > 0 || errorLog.Empty > 0) {
             $('#errorList').append('<br><br>Betroffene Felder: <span>' + [...new Set(errorLog.ErrorKeys)].join(', ') + '</span>');
         }
-        if (errorLog.Errors === 0 && errorLog.Empty === 0 && !errorLog.GenErrors) {
+        if (errorLog.Errors === 0 && errorLog.Empty === 0 && !errorLog.GenErrors && !noSecondXML) {
             $('#errorList').append('<br><br><span class="noErrors">Keine relevanten Unterschiede gefunden.</span>');
         } firstXMLDataVersion = '', firstXMLCatalogID = "", secondXMLDataVersion = '', secondXMLCatalogID = '';
         langCheck.forEach(function (land) {
@@ -419,6 +424,7 @@
         } else {
             $('#errorList').append('<br><br><span class="bigError">!! ACHTUNG !! - Keine Zielm&auml;rkte im XML gefunden.</span>');
         }
+        noSecondXML = false;
     }
 
     function waitForXMLToLoad() {
@@ -519,10 +525,12 @@
     }
 
     function secondXmlSelect() {
-        // $('.resultDiv').addClass('loading');
         $('#resultTable').empty();
         $('#errorList').empty();
         secondSelectedXML = $('#xmlSecondSelect').val();
+        if(noSecondXML){
+            secondSelectedXML = firstSelectedXML;
+        }
         $('#resultTableBody').empty();
         readAndShowComparison(firstSelectedXML, secondSelectedXML);
     }
@@ -539,9 +547,11 @@
             var shortSelected = firstSelectedXML.substring(0, firstSelectedXML.length - 3).toLowerCase();
             if (shortSelected.indexOf(shortVal) > -1) {
                 if (val !== firstSelectedXML) {
-                    $('#xmlSecondSelect').append(
-                        '<option value="' + this + '" onClick="secondXmlSelect()">' + this + '</option>'
-                    )
+                    $('#xmlSecondSelect').append('<option value="' + this + '" onClick="secondXmlSelect()">' + this + '</option>');
+                } else {
+                    $('#xmlSecondSelect').append('<option style="background-color: lightyellow" disabled>Vergleich nicht m&ouml;glich - XML Version Selbe wie Live.</option>');
+                    noSecondXML = true;
+                    secondXmlSelect();
                 }
             }
         })
@@ -549,48 +559,71 @@
 
     $('#xmlFiles').change(function () {
         const fileInput = $("#xmlFiles")[0];
-        const files = fileInput.files;
+        const files = Array.from(fileInput.files);
+
+        $('#xmlFirstSelect').addClass('loading');
 
         if (files.length === 0) {
             alert("Please select at least one XML file.");
             return;
         }
 
-        // Loop through all selected files
-        Array.from(files).forEach(file => {
-            if (file.type !== "text/xml" && !file.name.endsWith(".xml")) {
-                alert("Invalid file type. Please upload XML files only.");
-                return;
-            }
-
-            // Read the file content
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const xmlContent = event.target.result;
-
-                // Parse the XML content
-                const parser = new DOMParser();
-                const xmlDoc = parser.parseFromString(xmlContent, "application/xml");
-
-                // Check for parsing errors
-                const parseError = xmlDoc.getElementsByTagName("parsererror");
-                if (parseError.length > 0) {
-                    alert(`Error parsing file: ${file.name}`);
-                    return;
+        // Create an array of promises, one per file
+        const readPromises = files.map(file => {
+            return new Promise((resolve, reject) => {
+                if (file.type !== "text/xml" && !file.name.endsWith(".xml")) {
+                    return reject(`Invalid file type: ${file.name}`);
                 }
 
-                // Extract the file name without the .xml extension
-                const fileName = file.name.replace(".xml", "");
+                const reader = new FileReader();
 
-                // Store the XML content into the object
-                multiXMLImport[fileName] = xmlContent;
-                $('#xmlFirstSelect').append('<option value="' + fileName + '" onClick="firstXmlSelect()">' + fileName + '</option>');
-            };
+                reader.onload = function(event) {
+                    const xmlContent = event.target.result;
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(xmlContent, "application/xml");
 
-            // Read the file as text
-            reader.readAsText(file);
+                    if (xmlDoc.getElementsByTagName("parsererror").length > 0) {
+                        return reject(`Error parsing file: ${file.name}`);
+                    }
+
+                    const fileName = file.name.replace(".xml", "");
+                    resolve({ fileName, xmlContent });
+                };
+
+                reader.onerror = () => reject(`Error reading file: ${file.name}`);
+                reader.readAsText(file);
+                console.log(`Successfully loaded file: ${file.name}`);
+            });
         });
+
+        // Wait until *all* files are successfully read
+        Promise.all(readPromises)
+            .then(results => {
+                // Sort alphabetically by fileName
+                results.sort((a, b) =>
+                    a.fileName.localeCompare(b.fileName, undefined, {
+                        numeric: true,
+                        sensitivity: "base"
+                    })
+                );
+
+                $('#xmlFirstSelect').removeClass('loading');
+                // Append in correct order
+                results.forEach(result => {
+                    multiXMLImport[result.fileName] = result.xmlContent;
+
+                    $('#xmlFirstSelect').append(
+                        `<option value="${result.fileName}" onClick="firstXmlSelect()">
+                            ${result.fileName}
+                        </option>`
+                    );
+                });
+            })
+            .catch(err => {
+                alert(err);
+            });
     });
+
 
     $('#hideFields').click(function () {
         $('tr.match').toggleClass('hideMe');
