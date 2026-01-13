@@ -495,22 +495,30 @@
 
     function readXML(fileName, tableID) {
         if(tableID==='tableOld'){
-            var xmlPath = 'https://ig-creator.xxxlgroup.com/idm/' + fileName + '.xml';
-            $('#tableNew').empty();
-            $.ajax({
-                type: "GET",
-                url: xmlPath,
-                dataType: "xml",
+            if(noSecondXML){
+                secondXMLDataVersion = firstXMLDataVersion;
+                secondXMLSerieNo = firstXMLSerieNo;
+                secondXMLCatalogID = firstXMLCatalogID;
+                secondXML = firstXML;
+                checkAndCompareTables();
+            } else {
+                var xmlPath = 'https://ig-creator.xxxlgroup.com/idm/' + fileName + '.xml';
+                $('#tableNew').empty();
+                $.ajax({
+                    type: "GET",
+                    url: xmlPath,
+                    dataType: "xml",
 
-                error: function (e) {
-                    alert("An error occurred while processing XML file");
-                    console.log("XML reading Failed: ", e);
-                },
+                    error: function (e) {
+                        alert("An error occurred while processing XML file");
+                        console.log("XML reading Failed: ", e);
+                    },
 
-                success: function (response) {
-                    processXMLs(response, tableID);
-                }
-            })
+                    success: function (response) {
+                        processXMLs(response, tableID);
+                    }
+                })
+            }
         } else {
             var firstXMLContent = multiXMLImport[fileName];
             var parser = new DOMParser();
@@ -542,10 +550,12 @@
         secondXML = [];
         firstSelectedXML = $('#xmlFirstSelect').val();
         $('#xmlSecondSelect').empty();
+        var foundMatch = false;
         $.each(indexAll, function (id, val) {
             var shortVal = val.substring(0, val.length - 3).toLowerCase();
             var shortSelected = firstSelectedXML.substring(0, firstSelectedXML.length - 3).toLowerCase();
             if (shortSelected.indexOf(shortVal) > -1) {
+                foundMatch = true;
                 if (val !== firstSelectedXML) {
                     $('#xmlSecondSelect').append('<option value="' + this + '" onClick="secondXmlSelect()">' + this + '</option>');
                 } else {
@@ -555,6 +565,11 @@
                 }
             }
         })
+        if (!foundMatch) {
+            $('#xmlSecondSelect').append('<option style="background-color: lightyellow" disabled>Keine passende Server XML gefunden f&uuml;r Vergleich.</option>');
+            noSecondXML = true;
+            secondXmlSelect();
+        }
     }
 
     $('#xmlFiles').change(function () {
