@@ -44,8 +44,7 @@
                             <th>3D Domain</th>
                             <th>Herkunft</th>
                             <th>Nummer</th>
-                            <th>Online</th>
-                            <th>Konfig.</th>
+                            <th>In Verwendung</th>
                             <th>Varianten</th>
                             <th>Absp.</th>
                             <th>Schiene</th>
@@ -136,36 +135,41 @@
             excludeHidden: true
         });
     })
-    function formatNameAndCheckDupes(addressName){
-        var entry = addressName.replace('https://ig-creator.xxxlgroup.com/idm/', '').split('*')[0];
-        $.inArray(entry, combinedRegistry) === -1 ? combinedRegistry.push(entry) : null;
-    }
     function combineRegistries(curRegistry, fileName){
         $.each(curRegistry.Domains, function( key, value ) {
+            var marketArray = [];
             if(value.ComService === undefined) return; //skip entries without address
+            var entry = {};
             if(value.ComService.Setups === undefined){
-                formatNameAndCheckDupes(value.ComService.Address);
+                $(value.ComService.Markets).each(function(mIndex, mValue) {
+                    $.each(mValue, function(key, val) {
+                        marketArray.push(key.toLowerCase());
+                    });
+                });
             } else {
                 $.each(value.ComService.Setups, function( setupKey, setupValue ) {
-                    formatNameAndCheckDupes(setupValue.Address);
+                    marketArray = [];
+                    $(setupValue).each(function(mIndex, mValue) {
+                        $.each(mValue.Markets, function(key, val) {
+                            marketArray.push(key.toLowerCase());
+                        });
+                    });
                 });
             }
-        });
+            entry = {
+                ID: value.Scope,
+                FileName: fileName,
+                Markets: marketArray,
+            }
+
+            const isDuplicate = combinedRegistry.some(item => item.ID.toLowerCase() === entry.ID.toLowerCase() && item.FileName !== entry.FileName);
+
+            if (!isDuplicate) {
+                combinedRegistry.push(entry);
+            }
+        })
     }
     function readAndShowJSON(){
-        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moebelix.json", function( data ) {
-            combineRegistries(data, 'moebelix');
-        });
-        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moemax.json", function( data ) {
-            combineRegistries(data, 'moemax');
-        });
-        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-xxxl.json", function( data ) {
-            combineRegistries(data, 'xxxl');
-        });
-        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry.json", function( data ) {
-            combineRegistries(data, 'registry');
-        });
-        console.log('Combined Registry Entries:', combinedRegistry);
         $.getJSON( "https://walm-dc.github.io/WebTools/public/list.json", function( data ) {
             var sortArray = $.map(data, function(value, index) {return [value]});
             sortArray.sort(sortList);
@@ -198,6 +202,13 @@
                     extern++;
                     inOrEx = 'Extern';
                 }
+                // check if catalog is in combined registry
+                var inRegistry = 'Nein', inRegOrNot = 'falseCol';
+                var isInRegistry = combinedRegistry.some(item => item.ID.toLowerCase() === val.catalog.toLowerCase() && item.Markets.includes(val.locale.toLowerCase()));
+                if(isInRegistry){
+                    inRegistry = 'Ja';
+                    inRegOrNot = 'trueCol';
+                }
                 $('#myTable').append(
                     '<tr variants="'+variantCount+'"><td>'+val.catalog.split('.')[0].replace('XXXL', '')+'</td>'+
                     '<td>'+val.brandName+'</td>'+
@@ -205,8 +216,7 @@
                     '<td>'+val.catalog+'</td>'+
                     '<td class="'+inOrEx+'">'+inOrEx+'</td>'+
                     '<td><a href="https://'+storeUrl+'/s/?s='+val.productNumber+'" target="_blank">'+val.productNumber+'</a></td>'+
-                    online+
-                    konfig+
+                    '<td class="'+inRegOrNot+'">'+inRegistry+'</td>'+
                     '<td>'+variants+'</td>'+
                     '<td>'+variantCount+'</td>'+
                     '<td>'+val.brand+'</td>'+
@@ -225,6 +235,21 @@
             jQuery('#myTable').ddTableFilter();
         });
     }
-    readAndShowJSON();
+    function getRegistryJson(){
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moebelix.json", function( data ) {
+            combineRegistries(data, 'moebelix');
+        });
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moemax.json", function( data ) {
+            combineRegistries(data, 'moemax');
+        });
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-xxxl.json", function( data ) {
+            combineRegistries(data, 'xxxl');
+        });
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry.json", function( data ) {
+            combineRegistries(data, 'registry');
+        });
+        readAndShowJSON();
+    }
+    getRegistryJson();
 </script>
 </html>
