@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "\uD83D\uDCCC 1. ProductStatusChecker/1.0.0": {
+        "runtime": {
+          "\uD83D\uDCCC 1. ProductStatusChecker.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "\uD83D\uDCCC 1. ProductStatusChecker/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

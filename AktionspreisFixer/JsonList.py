@@ -1,9 +1,23 @@
+import asyncio
 import os, os.path
 import json
 import csv
+from unittest import case
+import requests
+import xml.etree.ElementTree as ET
+import urllib3
+from concurrent.futures import ThreadPoolExecutor
+import ssl
+
+# Disable SSL verification (corporate proxy)
+ssl_context = ssl.create_default_context()
+ssl_context.check_hostname = False
+ssl_context.verify_mode = ssl.CERT_NONE
 
 headerList = ["Artikelnummer", "live", "konfigurierbar", "Schiene", "Land"]
 onlineList = {}
+api_tasks = []
+BASE_URL = "https://services.ist.lutz.gmbh/HybrisProductDelivery/clients/{}/assortmentLines/{}/productNumbers/{}/{}"
 
 def save_json_file(data):
     # Output file path
@@ -13,17 +27,159 @@ def save_json_file(data):
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
-def read_online_list(search_path, onlineList):
-    with open(r'T:\AT_Datencenter\konfigurierbare_Serien.csv', mode='r') as csvfile:
-        reader = csv.DictReader(csvfile, delimiter=";")
-        for idx, row in enumerate(reader, start=1):
-            filtered_row = {header: row.get(header, '') for header in headerList}
-            onlineList[idx] = filtered_row
-    
-    # print(onlineList)
-    find_all_json(search_path, onlineList)
+def code_from_rail(country: str, rail: str) -> int:
+    country = country.lower()
+    rail = rail.lower()
 
-def find_all_json(root_path, onlineList):
+    match rail:
+        case "lu":
+            if country == "de":
+                return '0Z'
+            return '0L'
+        case "mm":
+            if country == "hu":
+                return '0Y'
+            return '0M'
+        case "mx":
+            if country == "cz" or country == "sk":
+                return '1X'
+            return '0X'
+        case _:
+            return -1
+
+def code_from_country(country: str) -> int:
+    country = country.lower()
+
+    match country:
+        case "at":
+            return 0
+        case "si":
+            return 2
+        case "hr":
+            return 3
+        case "rs":
+            return 6
+        case "pl":
+            return 9
+        case "cz":
+            return 10
+        case "sk":
+            return 11
+        case "hu":
+            return 12
+        case "se":
+            return 13
+        case "ro":
+            return 14
+        case "ch":
+            return 15
+        case "de":
+            return 17
+        case _:
+            return -1      
+
+# def get_api_data(mandant, rail, product_number, product_id):
+def get_api_data(task):
+
+    mandant = task['locale']
+    rail = task['brand']
+    product_number = task['productNumber']
+    variant_id = task['variantId']
+    modelId = task["modelId"]
+
+    mandatNr = code_from_country(mandant)
+    railCode = code_from_rail(mandant, rail)
+
+    url = BASE_URL.format(mandatNr, railCode, product_number, variant_id)
+
+    try:
+        response = requests.get(url, verify=False, timeout=10)
+        text = response.text.strip()
+      
+        try:
+            data = response.json()
+        except:
+            online_status = False
+            cfg_exists = False
+
+        config = data.get("Configuration")
+        config_id = config.get("ConfigurationId", "")
+        system_id = config.get("ConfigurationSystemId", "")
+
+        # CASE 1: Online with valid configuration
+        if config_id or system_id:
+            online_status = True
+            cfg_exists = True
+
+        # CASE 2: Online + config block exists but empty
+        online_status = True
+        cfg_exists = False
+
+    except Exception as e:
+        online_status = False
+        cfg_exists = False
+
+    return {
+        "modelId": modelId,
+        "variantId": variant_id,
+        "productNumber": product_number,
+        "online": online_status,
+        "konfigurable": cfg_exists
+    }
+        # CASE 1 & 2: Online — JSON mode
+    #     try:
+    #         data = response.json()
+    #     except:
+    #         return {
+    #             "online": False,
+    #             "konfigurable": False
+    #         }
+
+    #     config = data.get("Configuration")
+    #     config_id = config.get("ConfigurationId", "")
+    #     system_id = config.get("ConfigurationSystemId", "")
+
+    #     # CASE 1: Online with valid configuration
+    #     if config_id or system_id:
+    #         return {
+    #             "online": True,
+    #             "konfigurable": True
+    #         }
+
+    #     # CASE 2: Online + config block exists but empty
+    #     return {
+    #         "online": True,
+    #         "konfigurable": False
+    #     }
+
+    # except Exception as e:
+    #     return {
+    #         "online": False,
+    #         "konfigurable": False
+    #     }
+    
+async def fetch_all(task_list):
+    loop = asyncio.get_running_loop()
+    results = []
+
+    with ThreadPoolExecutor(max_workers=30) as pool:
+        tasks = [
+            loop.run_in_executor(
+                pool,
+                get_api_data,   # same function as before
+                task                 # pass the entire task object
+            )
+            for task in task_list
+        ]
+
+        for completed in asyncio.as_completed(tasks):
+            results.append(await completed)
+
+    return results
+
+def find_all_json(root_path):
+    # result = get_api_data('si', 'LU', '0005530110', '01')
+    # print(result)
     """
     Walk through all folders starting from root_path, parse JSON files,
     """
@@ -43,9 +199,10 @@ def find_all_json(root_path, onlineList):
                                     'fileName': filename.split('.')[0],
                                     'productNumber': '',
                                     'productVariants': '',
-                                    'online': '',
-                                    'konfig':'',
-                                    'active': '',
+                                    'variantConfig': '',
+                                    'variantOnline': '',
+                                    'online': False,
+                                    'konfig':False,
                                     'modelName': filename.split('@')[0],
                                     'locale': filename.split('@')[1].split('.')[0],
                                     'currency': data.get('currency', ''),  
@@ -78,16 +235,48 @@ def find_all_json(root_path, onlineList):
             if fullConditionsList[modesIdShort] != '':
                 for innerId, conditionEntry in fullConditionsList[modesIdShort].items():
                     fullModelList[modelId]['productNumber'] = conditionEntry.get('productNo')
-                    fullModelList[modelId]['productVariants'] += innerId + ' / '
                     if fullModelList[modelId]['description'] == '':
                         fullModelList[modelId]['description'] = conditionEntry.get('description')
-                    for onlineId, onlineEntry in onlineList.items():
-                        if onlineEntry['Artikelnummer'] != '' and onlineEntry['Artikelnummer'] in fullModelList[modelId]['productNumber'] and onlineEntry['Schiene'] == fullModelList[modelId]['brand'] and onlineEntry['Land'] == fullModelList[modelId]['locale']:
-                            fullModelList[modelId]['online'] = onlineEntry['live']
-                            fullModelList[modelId]['konfig'] = onlineEntry['konfigurierbar']
-
+                    # for onlineId, onlineEntry in onlineList.items():
+                    #     if onlineEntry['Artikelnummer'] != '' and onlineEntry['Artikelnummer'] in fullModelList[modelId]['productNumber'] and onlineEntry['Schiene'] == fullModelList[modelId]['brand'] and onlineEntry['Land'] == fullModelList[modelId]['locale']:
+                    #         fullModelList[modelId]['online'] = onlineEntry['live']
+                    #         fullModelList[modelId]['konfig'] = onlineEntry['konfigurierbar']
+                    api_tasks.append({
+                        "modelId": modelId,
+                        "locale": fullModelList[modelId]['locale'],
+                        "brand": fullModelList[modelId]['brand'],
+                        "productNumber": fullModelList[modelId]['productNumber'],
+                        "variantId": innerId
+                    })
         except KeyError as e:
             print(f'KeyError: {e} not found in conditions.json')
+
+    results = asyncio.run(fetch_all(api_tasks))
+    for r in results:
+        modelId = r["modelId"]
+        variantId = r["variantId"]
+
+        if r["online"] and r["konfigurable"]:
+            fullModelList[modelId]["variantConfig"] += variantId + " / "
+            fullModelList[modelId]["online"] = True
+            fullModelList[modelId]["konfig"] = True
+
+        elif r["online"] and not r["konfigurable"]:
+            fullModelList[modelId]["variantOnline"] += variantId + " / "
+            fullModelList[modelId]["online"] = True
+
+        else:
+            fullModelList[modelId]["productVariants"] += variantId + " / "
+    # variantOnline = asyncio.run(fetch_all(fullModelList[modelId]['locale'], fullModelList[modelId]['brand'], fullModelList[modelId]['productNumber'], innerId))
+    #     if variantOnline['online'] and variantOnline['konfigurable']:
+    #         fullModelList[modelId]['variantConfig'] += innerId + ' / '
+    #         fullModelList[modelId]['online'] = True
+    #         fullModelList[modelId]['konfig'] = True
+    #     elif variantOnline['online'] and not variantOnline['konfigurable']:
+    #         fullModelList[modelId]['variantOnline'] += innerId + ' / '
+    #         fullModelList[modelId]['online'] = True
+    #     else:
+    #         fullModelList[modelId]['productVariants'] += innerId + ' / '
 
     save_json_file(fullModelList)
 
@@ -124,10 +313,7 @@ def contains_target_keys(data, target_keys):
         return any(contains_target_keys(item, target_keys) for item in data)
     return False
 
-# Example usage:
+# set file path and start json search and compile:
 if __name__ == "__main__":
-    # Set your search root path and target values here
-    # search_path = (r"F:\WebTools\AktionspreisFixer\XML-Test")
     search_path = (r"C:\xxxlutz\IG-Creator\XXXLutz\ICOM")
-    read_online_list(search_path, onlineList)
-    # find_all_json(search_path)
+    find_all_json(search_path)

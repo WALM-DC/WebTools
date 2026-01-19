@@ -1,0 +1,15 @@
+F:\WebTools\AktionspreisFixer\ProductStatusChecker\bin\Debug\net6.0\📌 1. ProductStatusChecker.exe
+F:\WebTools\AktionspreisFixer\ProductStatusChecker\bin\Debug\net6.0\📌 1. ProductStatusChecker.deps.json
+F:\WebTools\AktionspreisFixer\ProductStatusChecker\bin\Debug\net6.0\📌 1. ProductStatusChecker.runtimeconfig.json
+F:\WebTools\AktionspreisFixer\ProductStatusChecker\bin\Debug\net6.0\📌 1. ProductStatusChecker.dll
+F:\WebTools\AktionspreisFixer\ProductStatusChecker\bin\Debug\net6.0\📌 1. ProductStatusChecker.pdb
+F:\WebTools\AktionspreisFixer\ProductStatusChecker\obj\Debug\net6.0\📌 1. ProductStatusChecker.GeneratedMSBuildEditorConfig.editorconfig
+F:\WebTools\AktionspreisFixer\ProductStatusChecker\obj\Debug\net6.0\📌 1. ProductStatusChecker.AssemblyInfoInputs.cache
+F:\WebTools\AktionspreisFixer\ProductStatusChecker\obj\Debug\net6.0\📌 1. ProductStatusChecker.AssemblyInfo.cs
+F:\WebTools\AktionspreisFixer\ProductStatusChecker\obj\Debug\net6.0\📌 1. ProductStatusChecker.csproj.CoreCompileInputs.cache
+F:\WebTools\AktionspreisFixer\ProductStatusChecker\obj\Debug\net6.0\📌 1. ProductStatusChecker.sourcelink.json
+F:\WebTools\AktionspreisFixer\ProductStatusChecker\obj\Debug\net6.0\📌 1. ProductStatusChecker.dll
+F:\WebTools\AktionspreisFixer\ProductStatusChecker\obj\Debug\net6.0\refint\📌 1. ProductStatusChecker.dll
+F:\WebTools\AktionspreisFixer\ProductStatusChecker\obj\Debug\net6.0\📌 1. ProductStatusChecker.pdb
+F:\WebTools\AktionspreisFixer\ProductStatusChecker\obj\Debug\net6.0\📌 1. ProductStatusChecker.genruntimeconfig.cache
+F:\WebTools\AktionspreisFixer\ProductStatusChecker\obj\Debug\net6.0\ref\📌 1. ProductStatusChecker.dll

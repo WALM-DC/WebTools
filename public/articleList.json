@@ -1,0 +1,724 @@
+{
+  "XXXL2314.juniorgold@at": {
+    "ModelId": "XXXL2314.juniorgold@at",
+    "FileName": "juniorgold@at",
+    "ProductNumber": "",
+    "ProductVariants": "",
+    "VariantConfig": "",
+    "VariantOnline": "",
+    "Online": false,
+    "Konfig": false,
+    "ModelName": "juniorgold",
+    "Locale": "at",
+    "Currency": "EUR",
+    "Catalog": "XXXL2314.Gold3Junior",
+    "Model": "",
+    "Brand": "MX",
+    "BrandName": "",
+    "ProductGroup": "02",
+    "Description": "Polsterliege Junior Gold",
+    "Preis": "",
+    "Entlastung": "",
+    "Aktion": "",
+    "Pricing": {},
+    "Properties": [
+      {
+        "property": "SET_PM",
+        "name": "Ausführung",
+        "type": "FixChoice",
+        "setIndex": 1,
+        "values": [
+          {
+            "value": "GOLD_1",
+            "name": "Polsterliege mit Kopfteil",
+            "image": "../images/Icons/Schlafsofa-Liege-Kopfteil-links.jpg"
+          },
+          {
+            "value": "GOLD_2",
+            "name": "Polsterliege mit Rückwand",
+            "image": "../images/Icons/Schlafsofa-Liege-Rueckenteil.jpg"
+          },
+          {
+            "value": "GOLD_3",
+            "name": "Polsterliege mit Rückwand und Kopfteil",
+            "image": "../images/Icons/Schlafsofa-Liege-Kopf-Rueckenteil-links.jpg"
+          }
+        ],
+        "default": "GOLD_3",
+        "position": 0
+      },
+      {
+        "property": "1502",
+        "name": "Liegefläche",
+        "type": "FixChoice",
+        "values": [
+          {
+            "value": "80X200",
+            "name": "80 x 200 cm",
+            "image": "../images/Boxspringbetten/Liegeflaeche/80x200.jpg"
+          },
+          {
+            "value": "90X200",
+            "name": "90 x 200 cm",
+            "image": "../images/Boxspringbetten/Liegeflaeche/90x200.jpg"
+          },
+          {
+            "value": "100X200",
+            "name": "100 x 200 cm",
+            "image": "../images/Boxspringbetten/Liegeflaeche/100x200.jpg"
+          },
+          {
+            "value": "120X200",
+            "name": "120 x 200 cm",
+            "image": "../images/Boxspringbetten/Liegeflaeche/120x200.jpg",
+            "price": 11800,
+            "_price": 5000
+          }
+        ],
+        "default": "90X200",
+        "position": 1
+      },
+      {
+        "property": "1573",
+        "name": "Bezugsfarbe Matratze, Rückwand",
+        "valueImage": "Material/{0}.jpg",
+        "type": "FixChoice",
+        "values": [
+          {
+            "value": "ARAGON_70",
+            "name": "Webstoff Hellblau",
+            "fabric": "pe95.pm5",
+            "section": "fabric"
+          },
+          {
+            "value": "ARAGON_03",
+            "name": "Webstoff Creme",
+            "fabric": "pe95.pm5"
+          },
+          {
+            "value": "ARAGON_39",
+            "name": "Webstoff Olivgrün",
+            "fabric": "pe95.pm5"
+          },
+          {
+            "value": "ARAGON_62",
+            "name": "Webstoff Rosafarben",
+            "fabric": "pe95.pm5"
+          },
+          {
+            "value": "ARAGON_72",
+            "name": "Webstoff Graublau",
+            "fabric": "pe95.pm5"
+          },
+          {
+            "value": "ARAGON_74",
+            "name": "Webstoff Blau",
+            "fabric": "pe95.pm5"
+          },
+          {
+            "value": "ARAGON_75",
+            "name": "Webstoff Türkis",
+            "fabric": "pe95.pm5"
+          },
+          {
+            "value": "ARAGON_80",
+            "name": "Webstoff Hellgrau",
+            "fabric": "pe95.pm5"
+          },
+          {
+            "value": "ARAGON_90",
+            "name": "Webstoff Grau",
+            "fabric": "pe95.pm5"
+          }
+        ],
+        "default": "ARAGON_70",
+        "position": 2,
+        "_material": "XXXL2314.Basics"
+      },
+      {
+        "property": "1639",
+        "name": "Bettkastenbezugsfarbe",
+        "valueImage": "Material/{0}.jpg",
+        "type": "FixChoice",
+        "values": [
+          {
+            "value": "SOFT_17",
+            "name": "Lederoptik Weiß",
+            "fabric": "pu100",
+            "section": "fabric"
+          },
+          {
+            "value": "SOFT_29",
+            "name": "Lederoptik Dunkelgrau",
+            "fabric": "pu100"
+          },
+          {
+            "value": "SOFT_11",
+            "name": "Lederoptik Schwarz",
+            "fabric": "pu100"
+          }
+        ],
+        "default": "SOFT_17",
+        "position": 3,
+        "_material": "XXXL2314.Basics"
+      }
+    ]
+  },
+  "Testumgebung.diaderock@de": {
+    "ModelId": "Testumgebung.diaderock@de",
+    "FileName": "diaderock@de",
+    "ProductNumber": "",
+    "ProductVariants": "",
+    "VariantConfig": "",
+    "VariantOnline": "",
+    "Online": false,
+    "Konfig": false,
+    "ModelName": "diaderock",
+    "Locale": "de",
+    "Currency": "",
+    "Catalog": "Testumgebung.Rock",
+    "Model": "",
+    "Brand": "",
+    "BrandName": "",
+    "ProductGroup": "",
+    "Description": "Drehstuhl Diade Rock",
+    "Preis": "",
+    "Entlastung": "",
+    "Aktion": "",
+    "Pricing": {},
+    "Properties": [
+      {
+        "property": "SET",
+        "name": "Ausführung",
+        "type": "FixChoice",
+        "setIndex": 1,
+        "values": [
+          {
+            "value": "DREHSTUHL",
+            "name": "Drehstuhl"
+          }
+        ],
+        "default": "DREHSTUHL",
+        "position": 0
+      },
+      {
+        "property": "113",
+        "name": "Hauptbezugsfarbe",
+        "valueImage": "Material/{0}.jpg",
+        "type": "FixChoice",
+        "values": [
+          {
+            "value": "B01009",
+            "name": "Beige",
+            "section": "fabric"
+          },
+          {
+            "value": "B01010",
+            "name": "Gelb"
+          },
+          {
+            "value": "B01017",
+            "name": "Orange"
+          },
+          {
+            "value": "B01027",
+            "name": "Schwarz"
+          }
+        ],
+        "default": "B01009",
+        "position": 1
+      },
+      {
+        "property": "111",
+        "name": "Stuhlkörperfarbe",
+        "type": "FixChoice",
+        "values": [
+          {
+            "value": "BLACK",
+            "name": "Schwarz",
+            "image": "DiadeRock/Black.jpg"
+          },
+          {
+            "value": "WHITE",
+            "name": "Weiss",
+            "image": "DiadeRock/White.jpg"
+          }
+        ],
+        "default": "BLACK",
+        "position": 2
+      },
+      {
+        "property": "115",
+        "name": "Rückenbezugsfarbe",
+        "type": "FixChoice",
+        "values": [
+          {
+            "value": "BLACK_1",
+            "name": "Schwarz",
+            "image": "DiadeRock/Black.jpg"
+          },
+          {
+            "value": "GRAU_2",
+            "name": "Grau",
+            "image": "DiadeRock/Grau.jpg"
+          }
+        ],
+        "default": "BLACK_1",
+        "position": 3
+      }
+    ]
+  },
+  "XXXLRauch.feldkirch@at": {
+    "ModelId": "XXXLRauch.feldkirch@at",
+    "FileName": "feldkirch@at",
+    "ProductNumber": "",
+    "ProductVariants": "",
+    "VariantConfig": "",
+    "VariantOnline": "",
+    "Online": false,
+    "Konfig": false,
+    "ModelName": "feldkirch",
+    "Locale": "at",
+    "Currency": "",
+    "Catalog": "XXXLRauch.Feldkirch",
+    "Model": "",
+    "Brand": "MX",
+    "BrandName": "",
+    "ProductGroup": "02",
+    "Description": "Schwebetürenschrank Feldkirch",
+    "Preis": "",
+    "Entlastung": "",
+    "Aktion": "",
+    "Pricing": {},
+    "Properties": [
+      {
+        "property": "1500",
+        "type": "FixChoice",
+        "name": "Schrankbreite",
+        "image": "../images/Schraenke/Schrank_Breite.jpg",
+        "setIndex": 1,
+        "values": [
+          {
+            "value": "B136",
+            "name": "136 cm",
+            "image": "../images/Schraenke/Schwebetueren_2_tuerig.jpg"
+          },
+          {
+            "value": "B181",
+            "name": "181 cm",
+            "image": "../images/Schraenke/Schwebetueren_2_tuerig.jpg"
+          },
+          {
+            "value": "B226",
+            "name": "226 cm",
+            "image": "../images/Schraenke/Schwebetueren_2_tuerig.jpg"
+          },
+          {
+            "value": "B271",
+            "name": "271 cm",
+            "image": "../images/Schraenke/Schwebetueren_2_tuerig.jpg"
+          },
+          {
+            "value": "B315",
+            "name": "315 cm",
+            "image": "../images/Schraenke/Schwebetueren_3_tuerig.jpg"
+          }
+        ],
+        "default": "B136",
+        "position": 0
+      },
+      {
+        "property": "1501",
+        "type": "FixChoice",
+        "name": "Schrankhöhe",
+        "image": "../images/Schraenke/Schrank_Hoehe.jpg",
+        "values": [
+          {
+            "value": "KH210",
+            "name": "210 cm",
+            "image": "images/Icons/H_210.png",
+            "prices": [
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B136\u0027 \u0026\u0026 $S[\u0027300\u0027] === \u0027ALU\u0027",
+                "price": 0,
+                "_price": 17444
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B136\u0027 \u0026\u0026 $S[\u0027300\u0027] === \u0027CR\u0027 || $S[\u0027300\u0027] === \u0027KF\u0027",
+                "price": 0,
+                "_price": 20818
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B181\u0027 \u0026\u0026 $S[\u0027300\u0027] === \u0027ALU\u0027",
+                "price": 0,
+                "_price": 21014
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B181\u0027 \u0026\u0026 $S[\u0027300\u0027] === \u0027CR\u0027 || $S[\u0027300\u0027] === \u0027KF\u0027",
+                "price": 0,
+                "_price": 24387
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B226\u0027 \u0026\u0026 $S[\u0027300\u0027] === \u0027ALU\u0027",
+                "price": 0,
+                "_price": 24212
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B226\u0027 \u0026\u0026 $S[\u0027300\u0027] === \u0027CR\u0027 || $S[\u0027300\u0027] === \u0027KF\u0027",
+                "price": 0,
+                "_price": 27524
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B271\u0027 \u0026\u0026 $S[\u0027300\u0027] === \u0027ALU\u0027",
+                "price": 0,
+                "_price": 26615
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B271\u0027 \u0026\u0026 $S[\u0027300\u0027] === \u0027CR\u0027 || $S[\u0027300\u0027] === \u0027KF\u0027",
+                "price": 0,
+                "_price": 29277
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B315\u0027 \u0026\u0026 $S[\u0027300\u0027] === \u0027ALU\u0027",
+                "price": 0,
+                "_price": 29496
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B315\u0027 \u0026\u0026 $S[\u0027300\u0027] === \u0027CR\u0027 || $S[\u0027300\u0027] === \u0027KF\u0027",
+                "price": 0,
+                "_price": 33714
+              }
+            ]
+          },
+          {
+            "value": "KH229",
+            "name": "229 cm",
+            "image": "images/Icons/H_229.png",
+            "prices": [
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B136\u0027 \u0026\u0026 $S[\u0027300\u0027] === \u0027ALU\u0027",
+                "price": 5900,
+                "_price": 19177
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B136\u0027 \u0026\u0026 $S[\u0027300\u0027] === \u0027CR\u0027 || $S[\u0027300\u0027] === \u0027KF\u0027",
+                "price": 5900,
+                "_price": 22906
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B181\u0027 \u0026\u0026 $S[\u0027300\u0027] === \u0027ALU\u0027",
+                "price": 7500,
+                "_price": 23112
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B181\u0027 \u0026\u0026 $S[\u0027300\u0027] === \u0027CR\u0027 || $S[\u0027300\u0027] === \u0027KF\u0027",
+                "price": 7500,
+                "_price": 26830
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B226\u0027 \u0026\u0026 $S[\u0027300\u0027] === \u0027ALU\u0027",
+                "price": 8800,
+                "_price": 26637
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B226\u0027 \u0026\u0026 $S[\u0027300\u0027] === \u0027CR\u0027 || $S[\u0027300\u0027] === \u0027KF\u0027",
+                "price": 8800,
+                "_price": 30279
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B271\u0027 \u0026\u0026 $S[\u0027300\u0027] === \u0027ALU\u0027",
+                "price": 9600,
+                "_price": 29995
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B271\u0027 \u0026\u0026 $S[\u0027300\u0027] === \u0027CR\u0027 || $S[\u0027300\u0027] === \u0027KF\u0027",
+                "price": 9600,
+                "_price": 32982
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B315\u0027 \u0026\u0026 $S[\u0027300\u0027] === \u0027ALU\u0027",
+                "price": 10900,
+                "_price": 32436
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B315\u0027 \u0026\u0026 $S[\u0027300\u0027] === \u0027CR\u0027 || $S[\u0027300\u0027] === \u0027KF\u0027",
+                "price": 10900,
+                "_price": 37503
+              }
+            ]
+          }
+        ],
+        "default": "KH210",
+        "position": 1
+      },
+      {
+        "master": "\u003CKORPUS\u003E",
+        "property": "202",
+        "name": "Korpusfarbe",
+        "type": "FixChoice",
+        "position": 2
+      },
+      {
+        "property": "300",
+        "name": "Griffleisten",
+        "type": "FixChoice",
+        "values": [
+          {
+            "value": "ALU",
+            "name": "Aluminium",
+            "image": "images/Icons/alu_brushed.png"
+          },
+          {
+            "value": "CR",
+            "name": "Chrom",
+            "image": "images/Icons/chrome.png",
+            "prices": [
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B136\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH210\u0027 ",
+                "price": 6200
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B136\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH229\u0027 ",
+                "price": 6800
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B181\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH210\u0027 ",
+                "price": 6200
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B181\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH229\u0027 ",
+                "price": 6800
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B226\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH210\u0027 ",
+                "price": 6100
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B226\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH229\u0027 ",
+                "price": 6700
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B271\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH210\u0027 ",
+                "price": 6200
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B271\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH229\u0027 ",
+                "price": 6800
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B315\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH210\u0027 ",
+                "price": 7700
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B315\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH229\u0027 ",
+                "price": 9300
+              }
+            ]
+          },
+          {
+            "value": "KF",
+            "name": "Korpusfarbe",
+            "image": "images/Icons/corpusmaterial.png",
+            "prices": [
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B136\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH210\u0027 ",
+                "price": 6200
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B136\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH229\u0027 ",
+                "price": 6800
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B181\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH210\u0027 ",
+                "price": 6200
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B181\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH229\u0027 ",
+                "price": 6800
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B226\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH210\u0027 ",
+                "price": 6100
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B226\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH229\u0027 ",
+                "price": 6700
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B271\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH210\u0027 ",
+                "price": 6200
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B271\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH229\u0027 ",
+                "price": 6800
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B315\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH210\u0027 ",
+                "price": 7700
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B315\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH229\u0027 ",
+                "price": 9300
+              }
+            ]
+          }
+        ],
+        "default": "ALU",
+        "position": 3
+      },
+      {
+        "property": "PASSEPARTOUT",
+        "name": "Passepartoutrahmen",
+        "type": "FixChoice",
+        "addOn": true,
+        "values": [
+          {
+            "value": "PP_OHNE",
+            "name": "Ohne Passepartoutrahmen",
+            "image": "../images/Schraenke/kein_Passepartout.jpg"
+          },
+          {
+            "value": "PP_MIT",
+            "name": "inkl. Passepartoutrahmen",
+            "image": "../images/Schraenke/Passpartout.jpg",
+            "prices": [
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B136\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH210\u0027 ",
+                "price": 19900,
+                "_price": 7262
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B136\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH229\u0027 ",
+                "price": 20800,
+                "_price": 7598
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B181\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH210\u0027 ",
+                "price": 20800,
+                "_price": 7598
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B181\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH229\u0027 ",
+                "price": 21700,
+                "_price": 7937
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B226\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH210\u0027 ",
+                "price": 22200,
+                "_price": 8102
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B226\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH229\u0027 ",
+                "price": 23100,
+                "_price": 8443
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B271\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH210\u0027 ",
+                "price": 23100,
+                "_price": 8441
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B271\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH229\u0027 ",
+                "price": 24500,
+                "_price": 8948
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B315\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH210\u0027 ",
+                "price": 24000,
+                "_price": 8441
+              },
+              {
+                "rule": "$S[\u00271500\u0027] === \u0027B315\u0027 \u0026\u0026 $S[\u00271501\u0027] === \u0027KH229\u0027 ",
+                "price": 25000,
+                "_price": 8948
+              }
+            ]
+          }
+        ],
+        "default": "PP_OHNE",
+        "position": 4
+      },
+      {
+        "property": "2500",
+        "type": "FixChoice",
+        "name": "Passepartoutfarbe",
+        "values": [
+          {
+            "value": "AW",
+            "name": "Alpinweiss",
+            "image": "images/Icons/Alpinweiss.png"
+          },
+          {
+            "value": "EA",
+            "name": "Eiche Artisan",
+            "image": "images/Icons/EicheArtisan.png"
+          },
+          {
+            "value": "ES",
+            "name": "Eiche Sonoma",
+            "image": "images/Icons/EicheSonoma.png"
+          },
+          {
+            "value": "ESH",
+            "name": "Eiche Sanremo hell",
+            "image": "images/Icons/EicheSanremohell.png"
+          },
+          {
+            "value": "GRM",
+            "name": "Grau Metallic",
+            "image": "images/Icons/Grau-metallic.png"
+          },
+          {
+            "value": "SDG",
+            "name": "Seidengrau",
+            "image": "images/Icons/Seidengrau.png"
+          },
+          {
+            "value": "NV",
+            "name": "nicht verfügbar"
+          }
+        ],
+        "default": "EA",
+        "position": 5
+      },
+      {
+        "property": "PASSE_BEL",
+        "name": "Passepartout Beleuchtung",
+        "type": "FixChoice",
+        "values": [
+          {
+            "value": "NV",
+            "name": "nicht verfügbar"
+          },
+          {
+            "value": "B-OH",
+            "name": "Ohne Beleuchtung",
+            "image": "../images/Schraenke/Passpartout.jpg"
+          }
+        ],
+        "position": 6
+      },
+      {
+        "property": "DAEMPFER",
+        "name": "Schwebetürendämpfer Easy Slide \nfür Aussentüren",
+        "type": "FixChoice",
+        "values": [
+          {
+            "value": "DAEMPFER_OHNE",
+            "name": "ohne Schwebetürendämpfer",
+            "image": "../images/Schraenke/kein_Zubehoer.jpg"
+          },
+          {
+            "value": "9DC2",
+            "name": "Schwebetürendämpfer-Set\nfür Aussentüren",
+            "image": "../images/Schraenke/Tuerdaempfer.jpg",
+            "price": 6700,
+            "_price": 3686
+          }
+        ],
+        "default": "DAEMPFER_OHNE",
+        "position": 30
+      }
+    ]
+  }
+}
