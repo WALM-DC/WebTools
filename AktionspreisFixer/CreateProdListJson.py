@@ -96,19 +96,25 @@ def get_api_data(task):
             online_status = False
             cfg_exists = False
 
-        config = data.get("Configuration")
-        config_id = config.get("ConfigurationId", "")
-        system_id = config.get("ConfigurationSystemId", "")
+        error = data.get("error")
 
-        if config:
-            online_status = True
-            if config_id or system_id:
-                cfg_exists = True
-            else:
-                cfg_exists = False
-        else:
+        if error:
             online_status = False
             cfg_exists = False
+        else:
+            config = data.get("Configuration")
+            config_id = config.get("ConfigurationId", "")
+            system_id = config.get("ConfigurationSystemId", "")
+
+            if config:
+                online_status = True
+                if config_id or system_id:
+                    cfg_exists = True
+                else:
+                    cfg_exists = False
+            else:
+                online_status = False
+                cfg_exists = False
 
     except Exception as e:
         online_status = False
