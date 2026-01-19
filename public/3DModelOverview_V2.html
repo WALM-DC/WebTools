@@ -166,11 +166,26 @@
                 // })
 
                 var online = '<td class="trueCol">Ja</td>';
-                if(val.online=='false'){online = '<td class="falseCol">Nein</td>'}
-                if(val.online==''){online = '<td></td>'}
+                if(!val.online){online = '<td class="falseCol">Nein</td>'}
+                if(val.online===''){online = '<td></td>'}
                 var konfig = '<td class="trueCol">Ja</td>';
-                if(val.konfig=='false'){konfig = '<td class="falseCol">Nein</td>'}
-                if(val.konfig==''){konfig = '<td></td>'}
+                if(!val.konfig){konfig = '<td class="falseCol">Nein</td>'}
+                if(val.konfig===''){konfig = '<td></td>'}
+
+                var onlineVariantLinks = '';
+                if(val.variantOnline!==''){
+                    onlineVariantLinks = val.variantOnline.split('/').map(function(item) {
+                        return '<a href="https://'+storeUrl+'/s/?s='+val.productNumber+item.trim()+'" target="_blank">'+item.trim()+'</a>';
+                    }).join('/ ');
+                }
+
+                var konfigVariantLinks = '';
+                if(val.variantConfig!==''){
+                    konfigVariantLinks = val.variantConfig.split('/').map(function(item) {
+                        return '<a href="https://'+storeUrl+'/s/?s='+val.productNumber+item.trim()+'" target="_blank">'+item.trim()+'</a>';
+                    }).join('/ ');
+                }
+                
 
                 $('#myTable').append(
                     '<tr><td>'+val.catalog.split('.')[0].replace('XXXL', '')+'</td>'+
@@ -181,8 +196,8 @@
                     '<td><a href="https://'+storeUrl+'/s/?s='+val.productNumber+'" target="_blank">'+val.productNumber+'</a></td>'+
                     online+
                     konfig+
-                    '<td>'+val.variantOnline+'</td>'+
-                    '<td>'+val.variantConfig+'</td>'+
+                    '<td>'+onlineVariantLinks+'</td>'+
+                    '<td>'+konfigVariantLinks+'</td>'+
                     '<td>'+val.productVariants+'</td>'+
                     '<td>'+val.brand+'</td>'+
                     '<td>'+val.locale+'</td>'+
