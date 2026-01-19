@@ -46,9 +46,9 @@
                             <th>Nummer</th>
                             <th>Online</th>
                             <th>Konfig.</th>
-                            <th>Varianten</th>
-                            <th>Var. Konfig.</th>
                             <th>Var. Online.</th>
+                            <th>Var. Konfig.</th>
+                            <th>Varianten</th>
                             <th>Schiene</th>
                             <th>Land</th>
                             <th>W&auml;hrung</th>
@@ -173,7 +173,7 @@
                 if(val.konfig==''){konfig = '<td></td>'}
 
                 $('#myTable').append(
-                    '<tr variants="'+variantCount+'"><td>'+val.catalog.split('.')[0].replace('XXXL', '')+'</td>'+
+                    '<tr><td>'+val.catalog.split('.')[0].replace('XXXL', '')+'</td>'+
                     '<td>'+val.brandName+'</td>'+
                     '<td>'+val.modelName+'</td>'+
                     '<td>'+val.catalog+'</td>'+
@@ -181,14 +181,14 @@
                     '<td><a href="https://'+storeUrl+'/s/?s='+val.productNumber+'" target="_blank">'+val.productNumber+'</a></td>'+
                     online+
                     konfig+
-                    '<td>'+variants+'</td>'+
-                    '<td>'+variantsConfig+'</td>'+
-                    '<td>'+variantsOnline+'</td>'+
+                    '<td>'+val.variantOnline+'</td>'+
+                    '<td>'+val.variantConfig+'</td>'+
+                    '<td>'+val.productVariants+'</td>'+
                     '<td>'+val.brand+'</td>'+
                     '<td>'+val.locale+'</td>'+
                     '<td>'+val.currency+'</td>'+
                     '<td>'+val.preis+'</td>'+
-                    '<td>'+val.entlasgung+'</td>'+
+                    '<td>'+val.entlastung+'</td>'+
                     '<td>'+val.aktion+'</td>'+
                     '<td>'+val.description+'</td>'+
                     '<td>'+val.productGroup+'</td></tr>'
