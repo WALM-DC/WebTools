@@ -23,6 +23,7 @@ def save_json_file(data):
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
+# Mandanten
 def code_from_rail(country: str, rail: str) -> int:
     country = country.lower()
     rail = rail.lower()
@@ -43,6 +44,7 @@ def code_from_rail(country: str, rail: str) -> int:
         case _:
             return -1
 
+# Zielmärkte
 def code_from_country(country: str) -> int:
     country = country.lower()
 
