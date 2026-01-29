@@ -37,13 +37,13 @@ function highlightOccurrences(searchString) {
     removeHighlights();    
     const regex = new RegExp(searchString, "gi");
     $("body *").contents().each(function() {
-        console.log('processing node', this.nodeType, this);
+        // console.log('processing node', this.nodeType, this);
         if (this.nodeType === 3) { // Only process text nodes
             const text = $(this).text();
                 // Case-insensitive search
             // Replace occurrences with <mark>
             const highlightedText = text.replace(regex, function(match) {
-                console.log('highlighting', match);
+                // console.log('highlighting', match);
                 return `<mark>${match}</mark>`;
             });
             $(this).replaceWith(highlightedText);

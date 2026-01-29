@@ -214,7 +214,7 @@
         function alignByKeyWithEmptyOnTop(
             firstObj,
             secondObj,
-            keyOrder = ["ArtikelType", "ArtikelText", "Preise", "Zielmarkt", "VariantenID", "VariantenText"]
+            keyOrder = ["ArtikelType", "ArtikelText", "Preise", "Zielmarkt", "VariantenID", "VariantenText", "OptionID", "OptionText"]
         ) {
             const arr1 = normalizeToArray(firstObj);
             const arr2 = normalizeToArray(secondObj);
@@ -359,7 +359,7 @@
                     }
                     errorLog.ErrorKeys.push(sId);
                 }
-                if (sId !== "ArtikelType" && sId !== "VariantenID" && sId !== "Zielmarkt") {
+                if (sId !== "ArtikelType" && sId !== "VariantenID" && sId !== "Zielmarkt" && sId !== "OptionID") {
                     highlighter += ' subEntry';
                 } else if (sId === "Zielmarkt") {
                     if(firstVal !== '-KEIN EINTRAG-'){
@@ -489,16 +489,19 @@
                 ArtikelText: $(this).find('SHORT_TEXT').find('TEXT').text(),
                 Preise: prices
             }
-            // openXMLData = {
-            //     ArtikelType: $(this).attr('TYPE_NO'),
-            //     ArtikelText: $(this).find('SHORT_TEXT').find('TEXT').text()
-            // }
             dataArrayArticle.push(openXMLData);
         })
         $(response).find('FEATURE').each(function () {
             openXMLData = {
                 VariantenID: $(this).attr('FEATURE_NO'),
                 VariantenText: $(this).find('FEATURE_TEXT').find('TEXT').text()
+            }
+            dataArrayFeature.push(openXMLData);
+        })
+        $(response).find('OPTION').each(function () {
+            openXMLData = {
+                OptionID: $(this).attr('OPTION_KEY'),
+                OptionText: $(this).find('OPTION_TEXT').find('TEXT').text()
             }
             dataArrayFeature.push(openXMLData);
         })
