@@ -214,7 +214,7 @@
         function alignByKeyWithEmptyOnTop(
             firstObj,
             secondObj,
-            keyOrder = ["ArtikelType", "Zielmarkt", "ArtikelText", "VariantenID", "VariantenText"]
+            keyOrder = ["ArtikelType", "ArtikelText", "Preise", "Zielmarkt", "VariantenID", "VariantenText"]
         ) {
             const arr1 = normalizeToArray(firstObj);
             const arr2 = normalizeToArray(secondObj);
@@ -480,19 +480,19 @@
             dataArrayCatalog.push(openXMLData);
         })
         $(response).find('ITEM').each(function () {
-            // var prices = '';
-            // $($(this).find('PRICE')).each(function(){
-            //     prices += $(this).text()+', ';
-            // })
-            // openXMLData = {
-            //     ArtikelType: $(this).attr('TYPE_NO'),
-            //     ArtikelText: $(this).find('SHORT_TEXT').find('TEXT').text(),
-            //     Preise: prices
-            // }
+            var prices = '';
+            $($(this).find('PRICE')).each(function(){
+                prices += $(this).text()+', ';
+            })
             openXMLData = {
                 ArtikelType: $(this).attr('TYPE_NO'),
-                ArtikelText: $(this).find('SHORT_TEXT').find('TEXT').text()
+                ArtikelText: $(this).find('SHORT_TEXT').find('TEXT').text(),
+                Preise: prices
             }
+            // openXMLData = {
+            //     ArtikelType: $(this).attr('TYPE_NO'),
+            //     ArtikelText: $(this).find('SHORT_TEXT').find('TEXT').text()
+            // }
             dataArrayArticle.push(openXMLData);
         })
         $(response).find('FEATURE').each(function () {

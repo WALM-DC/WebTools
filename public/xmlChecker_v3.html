@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>XML-Checker_v3</title>
+    <title>XML-Checker_v4</title>
     <link rel="stylesheet" href="https://walm-dc.github.io/WebTools/public/mattStyle.css">
     <script src="https://walm-dc.github.io/WebTools/public/jquery-3.7.1.min.js"></script>
     <script src="https://walm-dc.github.io/WebTools/public/ddtf.js"></script>
@@ -111,8 +111,8 @@
             font-weight: bold;
         }
         #errorList span.bigError {
-            color: orangered;
-            background-color: black;
+            /* color: orangered; */
+            background-color: #334;
             padding: 0px 1px;
             border-radius: 5px;
         }
@@ -171,7 +171,7 @@
     var langCheck = ['_AT_', '_DE_', '_CH_', '_CZ', '_SK_', '_FR_', '_SE_', '_HU_', '_SI_', '_PL_', '_RO_'];
     var checkTargetCountryID = false;
     var modelListJSON = {};
-    var combinedRegistry = [];
+    var combinedRegistry = [], combinedRegistryNameList = [];
 
     function checkAndCompareTables() {
         // Helper: convert object-with-numeric-keys into a dense array (0..max)
@@ -214,7 +214,7 @@
         function alignByKeyWithEmptyOnTop(
             firstObj,
             secondObj,
-            keyOrder = ["Type_No", "CountryID_TargetID", "Short_Text", "Feature_No", "Feature_Text"]
+            keyOrder = ["ArtikelType", "ArtikelText", "Preise", "Zielmarkt", "VariantenID", "VariantenText"]
         ) {
             const arr1 = normalizeToArray(firstObj);
             const arr2 = normalizeToArray(secondObj);
@@ -311,6 +311,8 @@
         var lineCounter = 1;
         errorLog = {
             Lang: [],
+            MissingLang: [],
+            UsedLang: '',
             Errors: 0,
             ErrorLines: [],
             Empty: 0,
@@ -334,7 +336,7 @@
                         errorLog.Empty++;
                         errorLog.EmptyLines.push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
                         highlighter = 'empty';
-                        if(secondVal !== '-KEIN EINTRAG-' && sId === 'Feature_No'){
+                        if(secondVal !== '-KEIN EINTRAG-' && sId === 'VariantenID'){
                             errorLog.IDsInUseCount++;
                             errorLog.IDsInUse.push(secondVal);
                             $.each(errorLog.IDsInUse, function(id, val){
@@ -342,7 +344,7 @@
                                     if(modelId.indexOf(firmName)>-1 || modelId.indexOf(firmID)>-1){
                                         $.each(modelVal.properties, function(propId, propVal){
                                             if(propVal.property === val){
-                                                matchedIDs.push('!!! ACHTUNG !!! - Die Feature_No '+ val + ' wird im Modell ' + modelId + ' verwendet!');
+                                                matchedIDs.push('!! ACHTUNG !! - VariantenIDs in Verwendung wurden entfernt: <span style="color:white;">Modell: '+modelId+ ' - VariantenID: '+val+'</span>');
                                                 highlighter = 'noMatch';
                                             }
                                         });
@@ -357,12 +359,22 @@
                     }
                     errorLog.ErrorKeys.push(sId);
                 }
-                if (sId !== "Type_No" && sId !== "Feature_No" && sId !== "CountryID_TargetID") {
+                if (sId !== "ArtikelType" && sId !== "VariantenID" && sId !== "Zielmarkt") {
                     highlighter += ' subEntry';
-                } else if (sId === "CountryID_TargetID") {
-                    var langPart = firstVal.split('_')[0].split('-');
-                    if (langPart[0] !== "") {
-                        errorLog.Lang.push(langPart.pop());
+                } else if (sId === "Zielmarkt") {
+                    if(firstVal !== '-KEIN EINTRAG-'){
+                        errorLog.Lang.push(firstVal);
+                    } else if (firstVal === '-KEIN EINTRAG-'){
+                        $(combinedRegistry).each(function(index, registryEntry){
+                            var firstXMLNoNumb = firstSelectedXML.substring(0, firstSelectedXML.lastIndexOf('_')+1);
+                            if($.inArray(firstXMLNoNumb, registryEntry.Filename) > -1){
+                                errorLog.MissingLang.push(secondVal);
+                                if(errorLog.UsedLang.indexOf(secondVal) === -1){
+                                    errorLog.UsedLang = registryEntry.Markets.join(', ');
+                                }
+                                highlighter = 'noMatch';
+                            }
+                        });
                     }
                 }
                 if(noSecondXML){
@@ -375,11 +387,15 @@
 
         })
         var shortXmlName = removeAfterLastUnderscore(firstSelectedXML);
-        if($.inArray(shortXmlName, combinedRegistry) > -1){
+        if($.inArray(shortXmlName, combinedRegistryNameList) > -1){
             $('#errorList').append('<br><br><span class="noErrors">Das 3D Modell zur XML <span style="color:white;">' + firstSelectedXML + '</span> ist Aktiv in Verwendung.</span>');
         } else {
             var prodNumber = firstSelectedXML.split('_')[0];
-            $('#errorList').append('<br><br><span class="bigError">!! ACHTUNG !! - Das 3D Modell zur XML <span style="color:white;">' + firstSelectedXML + '</span> ist nicht in Verwendung.<br><span style="color:white;">Entweder ist es ausgelaufen oder noch nicht aktiv, bitte im Jira pr&uuml;fen ob das Modell bestellt ist oder nicht: </span><a target="_blank" href="https://jira.xxxlgroup.com/browse/DM-3247?filter=40833&jql=project%20%3D%20DM%20AND%20Systeme%20%3D%20%223D%20Konfigurierbar%22%20AND%20summary%20%20~%20%22'+prodNumber+'%22">Jira Link</a></span>');
+            $('#errorList').append('<br><br><span class="bigError">!! INFO !! - Das 3D Modell zur XML <span style="color:white;">' + firstSelectedXML + '</span> ist nicht in Verwendung.<br><span style="color:white;">Entweder ist es ausgelaufen oder noch nicht aktiv, bitte im Jira pr&uuml;fen ob das Modell bestellt ist oder nicht: </span><a target="_blank" href="https://jira.xxxlgroup.com/browse/DM-3247?filter=40833&jql=project%20%3D%20DM%20AND%20Systeme%20%3D%20%223D%20Konfigurierbar%22%20AND%20summary%20%20~%20%22'+prodNumber+'%22">Jira Link</a></span>');
+        }
+        if (errorLog.MissingLang.length > 0) {
+            errorLog.MissingLang = [...new Set(errorLog.MissingLang)];
+            $('#errorList').append('<br><br><span class="bigError">!! ACHTUNG !! - Zielm&auml;rkte in Verwendung wurden entfernt: <span style="color:white;">' + errorLog.MissingLang.join(', ') + '</span></span>');
         }
         if(firstXMLDataVersion<secondXMLDataVersion){
             $('#errorList').append('<br><br>Datenversion:<br>' + secondSelectedXML + ': <span style="color:white;">' + secondXMLDataVersion + '</span><br>' + firstSelectedXML + ': <span class="bigError">' + firstXMLDataVersion + '</span>');
@@ -420,9 +436,12 @@
         });
         if (errorLog.Lang.length > 0) {
             errorLog.Lang = [...new Set(errorLog.Lang)];
-            $('#errorList').append('<br><br><span class="noErrors">Zielm&auml;rkte enthalten im XML:</span> <span style="color:white;">' + errorLog.Lang.join(', ') + '</span>');
+            $('#errorList').append('<br><br><span class="noErrors">Zielm&auml;rkte im XML:</span> <span style="color:white;">' + errorLog.Lang.join(', ') + '</span>');
         } else {
             $('#errorList').append('<br><br><span class="bigError">!! ACHTUNG !! - Keine Zielm&auml;rkte im XML gefunden.</span>');
+        }
+        if (errorLog.UsedLang.length > 0) {
+            $('#errorList').append('<br><br><span class="noErrors">Zielm&auml;rkte im 3D Modell:</span> <span style="color:white;">' + errorLog.UsedLang + '</span>');
         }
         noSecondXML = false;
     }
@@ -448,8 +467,9 @@
         var dataArrayCatalog = [], dataArrayArticle = [], dataArrayFeature = [], openXMLData = {}, openXMLName = '', openXMLTarget = '', openXMLArticle = '';
         // get Target and Country data
         $(response).find('TARGET').each(function () {
+            var countID = $(this).find('NAME').text().split('-');
             openXMLData = {
-                CountryID_TargetID: $(this).find('NAME').text() + '_' + $(this).find('TARGET_ID').text()
+                Zielmarkt: countID[countID.length-1]+ ': ' + $(this).find('TARGET_ID').text()
             }
             dataArrayCatalog.push(openXMLData);
         })
@@ -465,23 +485,27 @@
                 prices += $(this).text()+', ';
             })
             openXMLData = {
-                Type_No: $(this).attr('TYPE_NO'),
-                Short_Text: $(this).find('SHORT_TEXT').find('TEXT').text(),
+                ArtikelType: $(this).attr('TYPE_NO'),
+                ArtikelText: $(this).find('SHORT_TEXT').find('TEXT').text(),
                 Preise: prices
             }
+            // openXMLData = {
+            //     ArtikelType: $(this).attr('TYPE_NO'),
+            //     ArtikelText: $(this).find('SHORT_TEXT').find('TEXT').text()
+            // }
             dataArrayArticle.push(openXMLData);
         })
         $(response).find('FEATURE').each(function () {
             openXMLData = {
-                Feature_No: $(this).attr('FEATURE_NO'),
-                Feature_Text: $(this).find('FEATURE_TEXT').find('TEXT').text()
+                VariantenID: $(this).attr('FEATURE_NO'),
+                VariantenText: $(this).find('FEATURE_TEXT').find('TEXT').text()
             }
             dataArrayFeature.push(openXMLData);
         })
         // sort and compose result XML data for both files
-        dataArrayCatalog.sort(function (a, b) { if (a.CountryID_TargetID < b.CountryID_TargetID) { return -1 } if (a.CountryID_TargetID > b.CountryID_TargetID) { return 1 } return 0 })
-        dataArrayArticle.sort(function (a, b) { if (a.Type_No < b.Type_No) { return -1 } if (a.Type_No > b.Type_No) { return 1 } return 0 })
-        dataArrayFeature.sort(function (a, b) { if (a.Feature_Text < b.Feature_Text) { return -1 } if (a.Feature_Text > b.Feature_Text) { return 1 } return 0 })
+        dataArrayCatalog.sort(function (a, b) { if (a.Zielmarkt < b.Zielmarkt) { return -1 } if (a.Zielmarkt > b.Zielmarkt) { return 1 } return 0 })
+        dataArrayArticle.sort(function (a, b) { if (a.ArtikelType < b.ArtikelType) { return -1 } if (a.ArtikelType > b.ArtikelType) { return 1 } return 0 })
+        dataArrayFeature.sort(function (a, b) { if (a.VariantenText < b.VariantenText) { return -1 } if (a.VariantenText > b.VariantenText) { return 1 } return 0 })
         if (tableID === 'tableOld') {
             secondXMLDataVersion = $(response).find('DATA_VERSION').text();
             secondXMLSerieNo = $(response).find('SERIE').attr('SERIE_NO');
@@ -644,7 +668,6 @@
             });
     });
 
-
     $('#hideFields').click(function () {
         $('tr.match').toggleClass('hideMe');
         if($(this).text().indexOf('ausblenden')>-1){
@@ -656,21 +679,46 @@
 
     function formatNameAndCheckDupes(addressName){
         var entry = addressName.replace('https://ig-creator.xxxlgroup.com/idm/', '').split('*')[0];
-        $.inArray(entry, combinedRegistry) === -1 ? combinedRegistry.push(entry) : null;
+        $.inArray(entry, combinedRegistryNameList) === -1 ? combinedRegistryNameList.push(entry) : null;
     }
     function combineRegistries(curRegistry, fileName){
         $.each(curRegistry.Domains, function( key, value ) {
+            var addressArray = [], marketArray = [], pathArray = [];
             if(value.ComService === undefined) return; //skip entries without address
+            var entry = {};
             if(value.ComService.Setups === undefined){
                 formatNameAndCheckDupes(value.ComService.Address);
+                $(value.ComService.Markets).each(function(mIndex, mValue) {
+                    $.each(mValue, function(key, val) {
+                        marketArray.push(`${key}: ${val}`);
+                    });
+                });
+                addressArray.push(value.ComService.Address.replace('https://ig-creator.xxxlgroup.com/idm/', '').replace('lokal/', '').replace('*.xml', ''));
             } else {
+                addressArray = [];
                 $.each(value.ComService.Setups, function( setupKey, setupValue ) {
                     formatNameAndCheckDupes(setupValue.Address);
+                    marketArray = [];
+                    $(setupValue).each(function(mIndex, mValue) {
+                        $.each(mValue.Markets, function(key, val) {
+                            marketArray.push(`${key}: ${val}`);
+                        });
+                    });
+                    addressArray.push(setupValue.Address.replace('https://ig-creator.xxxlgroup.com/idm/', '').replace('lokal/', '').replace('*.xml', ''));
                 });
             }
-        });
-    }
+            entry = {
+                ID: key,
+                Filename: addressArray,
+                Markets: marketArray
+            }
 
+            const isDuplicate = combinedRegistry.some(item => item.ID.toLowerCase() === entry.ID.toLowerCase());
+            if (!isDuplicate) {
+                combinedRegistry.push(entry);
+            } 
+        })
+    }
     function readModelListJSON() {
         $.getJSON( "https://walm-dc.github.io/WebTools/public/list.json", function( data ) {
             modelListJSON = data;
@@ -689,7 +737,6 @@
             combineRegistries(data, 'registry');
         });
     }
-
     function readAndShowJSON() {
         $.getJSON("https://ig-creator.xxxlgroup.com/idm/index.json", function (data) {
             indexAll = data;
