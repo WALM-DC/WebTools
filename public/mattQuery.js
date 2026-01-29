@@ -51,7 +51,7 @@ function highlightOccurrences(searchString) {
 function filterTable() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
+    filter = input.value.toLowerCase();
     table = document.getElementById("myTable");
     tr = table.getElementsByTagName("tr");
 
@@ -59,7 +59,7 @@ function filterTable() {
         td = tr[i].getElementsByTagName("td");
         for (var j = 0; j < td.length; j++) {
             txtValue = td[j].textContent || td[j].innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            if (txtValue.toLowerCase().indexOf(filter) > -1) {
                 tr[i].style.display = "";
                 break;
             } else {
