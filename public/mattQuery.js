@@ -36,6 +36,7 @@ function highlightOccurrences(searchString) {
     // Loop through all elements on the page
     removeHighlights();    
     const regex = new RegExp(searchString, "gi");
+    console.log(searchString, regex);
     $("body *").contents().each(function() {
         if (this.nodeType === 3) { // Only process text nodes
             const text = $(this).text();
