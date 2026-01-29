@@ -43,6 +43,7 @@ function highlightOccurrences(searchString) {
                 // Case-insensitive search
             // Replace occurrences with <mark>
             const highlightedText = text.replace(regex, function(match) {
+                console.log('highlighting', match);
                 return `<mark>${match}</mark>`;
             });
             $(this).replaceWith(highlightedText);
