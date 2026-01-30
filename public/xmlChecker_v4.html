@@ -319,6 +319,8 @@
             EmptyLines: [],
             IDsInUseCount: 0,
             IDsInUse:[],
+            OptionIDsInUseCount: 0,
+            OptionIDsInUse:[],
             ErrorKeys: [],
             GenErrors: false
         };
@@ -345,6 +347,22 @@
                                         $.each(modelVal.properties, function(propId, propVal){
                                             if(propVal.property === val){
                                                 matchedIDs.push('!! ACHTUNG !! - VariantenIDs in Verwendung wurden entfernt: <span style="color:white;">Modell: '+modelId+ ' - VariantenID: '+val+'</span>');
+                                                highlighter = 'noMatch';
+                                            }
+                                        });
+                                    }
+                                });
+                            });
+                        }
+                        if(secondVal !== '-KEIN EINTRAG-' && sId === 'OptionID'){
+                            errorLog.OptionIDsInUseCount++;
+                            errorLog.OptionIDsInUse.push(secondVal);
+                            $.each(errorLog.OptionIDsInUse, function(id, val){
+                                $.each(modelListJSON, function(modelId, modelVal){
+                                    if(modelId.indexOf(firmName)>-1 || modelId.indexOf(firmID)>-1){
+                                        $.each(modelVal.properties, function(propId, propVal){
+                                            if(propVal.property === val){
+                                                matchedIDs.push('!! ACHTUNG !! - OptionIDs in Verwendung wurden entfernt: <span style="color:white;">Modell: '+modelId+ ' - OptionID: '+val+'</span>');
                                                 highlighter = 'noMatch';
                                             }
                                         });
