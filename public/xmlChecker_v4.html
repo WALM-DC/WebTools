@@ -214,7 +214,7 @@
         function alignByKeyWithEmptyOnTop(
             firstObj,
             secondObj,
-            keyOrder = ["ArtikelType", "ArtikelText", "Preise", "Zielmarkt", "VariantenID", "VariantenText", "OptionID", "OptionText"]
+            keyOrder = ["ArtikelType", "ArtikelText", "Preise", "Dimensionen", "Zielmarkt", "VariantenID", "VariantenText", "OptionID", "OptionText"]
         ) {
             const arr1 = normalizeToArray(firstObj);
             const arr2 = normalizeToArray(secondObj);
@@ -321,6 +321,8 @@
             IDsInUse:[],
             OptionIDsInUseCount: 0,
             OptionIDsInUse:[],
+            MeasuresInUseCount: 0,
+            MeasuresInUse:[],
             ErrorKeys: [],
             GenErrors: false
         };
@@ -370,6 +372,22 @@
                                 });
                             });
                         }
+                        // if(secondVal !== '-KEIN EINTRAG-' && sId === 'Dimensionen'){
+                        //     errorLog.MeasuresInUseCount++;
+                        //     errorLog.MeasuresInUse.push(secondVal);
+                        //     $.each(errorLog.MeasuresInUse, function(id, val){
+                        //         $.each(modelListJSON, function(modelId, modelVal){
+                        //             if(modelId.indexOf(firmName)>-1 || modelId.indexOf(firmID)>-1){
+                        //                 $.each(modelVal.properties, function(propId, propVal){
+                        //                     if(propVal.property === val){
+                        //                         matchedIDs.push('!! ACHTUNG !! - Dimensionen wurden entfernt: <span style="color:white;">Modell: '+modelId+ ' - Maß: '+val+'</span>');
+                        //                         highlighter = 'noMatch';
+                        //                     }
+                        //                 });
+                        //             }
+                        //         });
+                        //     });
+                        // }
                     } else {
                         errorLog.Errors++;
                         errorLog.ErrorLines.push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
@@ -502,10 +520,15 @@
             $($(this).find('PRICE')).each(function(){
                 prices += $(this).text()+', ';
             })
+            var measures = '';
+            $(this).find('BASIC_SHAPE_PARAMETER').each(function(){
+                measures += $(this).attr('BASIC_SHAPE_NAME')+': '+$(this).attr('BASIC_SHAPE_NOMINAL_VALUE')+', ';
+            }) 
             openXMLData = {
                 ArtikelType: $(this).attr('TYPE_NO'),
                 ArtikelText: $(this).find('SHORT_TEXT').find('TEXT').text(),
-                Preise: prices
+                Preise: prices,
+                Dimensionen: measures
             }
             dataArrayArticle.push(openXMLData);
         })
@@ -523,6 +546,15 @@
             }
             dataArrayFeature.push(openXMLData);
         })
+        // $(response).find('BASIC_SHAPE_PARAMETERS').each(function () {
+        //     var measures = '';
+        //     $(this).find('BASIC_SHAPE_PARAMETER').each(function(){
+        //         measures += $(this).attr('BASIC_SHAPE_NAME')+': '+$(this).attr('BASIC_SHAPE_NOMINAL_VALUE')+', ';
+        //     }) 
+        //     dataArrayFeature.push({
+        //         Measures: measures
+        //     }); 
+        // })
         // sort and compose result XML data for both files
         dataArrayCatalog.sort(function (a, b) { if (a.Zielmarkt < b.Zielmarkt) { return -1 } if (a.Zielmarkt > b.Zielmarkt) { return 1 } return 0 })
         dataArrayArticle.sort(function (a, b) { if (a.ArtikelType < b.ArtikelType) { return -1 } if (a.ArtikelType > b.ArtikelType) { return 1 } return 0 })

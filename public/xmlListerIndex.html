@@ -102,7 +102,7 @@
         $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry.json", function( data ) {
             combineRegistries(data, 'registry');
         });
-        $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index.json", function( data ) {
+        $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index-prod.json", function( data ) {
             $.each(data, function(id, val){
                 var land = '', inRegistry = 'Nein', inRegOrNot = 'falseCol';
                 var splitVal = val.split('_');
