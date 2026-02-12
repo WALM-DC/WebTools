@@ -103,8 +103,8 @@
                         //     Country_ID: $(this).find('NAME').text()
                         // }
                         var locale = $(this).find('NAME').text();
-                        locale = locale.substring(locale.lastIndexOf('-')+1, locale.length);
-                        dataArray.push(locale+': '+$(this).find('TARGET_ID').text());
+                        // locale = locale.substring(locale.lastIndexOf('-')+1, locale.length);
+                        dataArray.push($(this).find('TARGET_ID').text()+': '+locale);
                         
                     })
                     dataArray.sort(function(a, b){if(a.Country_ID < b.Country_ID){return -1} if(a.Country_ID > b.Country_ID){return 1} return 0})
