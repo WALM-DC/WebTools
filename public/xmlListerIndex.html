@@ -23,7 +23,8 @@
                 <div class="div_before_table igServer">
                     <table id="myTable" cellspacing="0" cellpadding="0">
                         <tr>
-                            <th>XML-Name</th>
+                            <th>XML-Name Prod</th>
+                            <th>XML-Name QA</th>
                             <th>Land</th>
                             <th>Hersteller</th>
                             <th>Lieferant</th>
@@ -48,7 +49,7 @@
     injectTabs();
 
     var langCheck = ['AT', 'DE', 'CH', 'CZ', 'SK', 'FR', 'SE', 'HU', 'SI', 'PL', 'RO'];
-    var combinedRegistry = [];
+    var combinedRegistry = [], indexQA = [], nameQA = [];
     function countColumns(){
         $('#myCounter').html(($('table tr').length-1)-($('table tr[style="display: none;"]').length));
     }
@@ -102,6 +103,12 @@
         $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry.json", function( data ) {
             combineRegistries(data, 'registry');
         });
+        $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index.json", function( data ) {
+            $.each(data, function(id, val){
+                indexQA.push(val);
+                nameQA.push(val.substring(0, val.lastIndexOf('_')));
+            })
+        });
         $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index-prod.json", function( data ) {
             $.each(data, function(id, val){
                 var land = '', inRegistry = 'Nein', inRegOrNot = 'falseCol';
@@ -110,6 +117,11 @@
 
                 var xmlNameID = val.substring(0, val.lastIndexOf('_'));
                 var registryID = 'registryID'+val.substring(0, val.lastIndexOf('_'));
+
+                var inQA = '', qaIndex = $.inArray(xmlNameID, nameQA);
+                if(qaIndex > -1 && indexQA[qaIndex] !== val){
+                    inQA = indexQA[qaIndex];
+                }
 
                 if(langCheck.indexOf(splitVal[splitVal.length - 2]) > -1){
                     land = splitVal[splitVal.length - 2];
@@ -125,6 +137,7 @@
                 } else {
                     $('#myTable').append(
                         '<tr><td id="'+xmlNameID+'">'+val+'</td>'+
+                        '<td>'+inQA+'</td>'+
                         '<td>'+land+'</td>'+
                         '<td>'+splitVal[0]+'</td>'+
                         '<td>'+splitVal[1]+'</td>'+

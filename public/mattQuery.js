@@ -1,7 +1,7 @@
 function addZero(n) {return (n < 10)? '00' + n : (n < 100)? '0' + n : '' + n;}
 const tabs = {
     'XML Liste': "https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlListerIndex.html",
-    'XML Liste + Country': "https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlListerCountryIndex.html",
+    'XML Liste + Zielmarkt': "https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlListerCountryIndex.html",
     'XML Checker': "https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlChecker_v3.html",
     'Registry Liste': "https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlRegistryLister.html",
     '3D Modell&uuml;bersicht': "https://ig-creator.xxxlgroup.com/idm/XMLLister/3DModelOverview_V2.html",

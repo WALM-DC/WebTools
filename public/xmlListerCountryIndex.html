@@ -32,14 +32,15 @@
                 <div class="div_before_table igServer">
                     <table id="myTable" cellspacing="0" cellpadding="0">
                         <tr>
-                            <th>XML-Name</th>
+                            <th>XML-Name Prod</th>
+                            <th>XML-Name QA</th>
                             <th>Land</th>
                             <th>Hersteller</th>
                             <th>Lieferant</th>
                             <th>Modellname</th>
                             <th>In Registry</th>
-                            <th>Target_ID</th>
-                            <th>Catalog_ID</th>
+                            <!-- <th>Target_ID</th> -->
+                            <th>Zielmarkt</th>
                         </tr>
                     </table>
                 </div>
@@ -59,7 +60,7 @@
     injectTabs();
 
     var langCheck = ['AT', 'DE', 'CH', 'CZ', 'SK', 'FR', 'SE', 'HU', 'SI', 'PL', 'RO'];
-    var combinedRegistry = [];
+    var combinedRegistry = [], indexQA = [], nameQA = [];
     function countColumns(){
         $('#myCounter').html(($('table tr').length-1)-($('table tr[style="display: none;"]').length));
     }
@@ -97,21 +98,19 @@
                 success: function (response) {
                     var dataArray = [], openXMLData = {}, openXMLName = '', openXMLTarget = '';
                     $(response).find('TARGET').each(function () {
-                        openXMLData = {
-                            Target_ID: $(this).find('TARGET_ID').text(),
-                            Country_ID: $(this).find('NAME').text()
-                        }
-                        dataArray.push(openXMLData);
+                        // openXMLData = {
+                        //     Target_ID: $(this).find('TARGET_ID').text(),
+                        //     Country_ID: $(this).find('NAME').text()
+                        // }
+                        var locale = $(this).find('NAME').text();
+                        locale = locale.substring(locale.lastIndexOf('-')+1, locale.length);
+                        dataArray.push(locale+': '+$(this).find('TARGET_ID').text());
                         
                     })
                     dataArray.sort(function(a, b){if(a.Country_ID < b.Country_ID){return -1} if(a.Country_ID > b.Country_ID){return 1} return 0})
                     $.each(dataArray, function(id, val){
-                        openXMLTarget += val.Target_ID+'<br>';
-                        openXMLName += val.Country_ID+'<br>';
-                        // $('#target_'+xmlName).html(val.Target_ID);
-                        // $('#'+xmlName).html(val.Country_ID);
+                        openXMLName += val+'<br>';
                     })
-                    $('#target_'+xmlName).html(openXMLTarget)
                     $('#'+xmlName).html(openXMLName)
                 }
             })
@@ -149,6 +148,12 @@
         $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry.json", function( data ) {
             combineRegistries(data, 'registry');
         });
+        $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index.json", function( data ) {
+            $.each(data, function(id, val){
+                indexQA.push(val);
+                nameQA.push(val.substring(0, val.lastIndexOf('_')));
+            })
+        });
         $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index-prod.json", function( data ) {
             $.each(data, function(id, val){
                 var land = '', inRegistry = 'Nein', inRegOrNot = 'falseCol';
@@ -157,6 +162,11 @@
 
                 var xmlNameID = val.substring(0, val.lastIndexOf('_'));
                 var registryID = 'registryID'+val.substring(0, val.lastIndexOf('_'));
+
+                var inQA = '', qaIndex = $.inArray(xmlNameID, nameQA);
+                if(qaIndex > -1 && indexQA[qaIndex] !== val){
+                    inQA = indexQA[qaIndex];
+                }
 
                 if(langCheck.indexOf(splitVal[splitVal.length - 2]) > -1){
                     land = splitVal[splitVal.length - 2];
@@ -172,12 +182,13 @@
                 } else {
                     $('#myTable').append(
                         '<tr><td id="'+xmlNameID+'">'+val+'</td>'+
+                        '<td>'+inQA+'</td>'+
                         '<td>'+land+'</td>'+
                         '<td>'+splitVal[0]+'</td>'+
                         '<td>'+splitVal[1]+'</td>'+
                         '<td>'+splitVal[2]+'</td>'+
                         '<td class="'+inRegOrNot+'" id="'+registryID+'">'+inRegistry+'</td>'+
-                        '<td id="target_'+val+'" style="width:100px" class="alignRight"></td>'+
+                        // '<td id="target_'+val+'" style="width:100px" class="alignRight"></td>'+
                         '<td id="'+val+'"><div class="clickMe" onClick="openXML(this)" name="'+val+'">Load Country-Data</div></td></tr>'
                     )
                 }
