@@ -5,6 +5,7 @@
     <script src="https://walm-dc.github.io/WebTools/public/jquery-3.7.1.min.js"></script>
     <script src="https://walm-dc.github.io/WebTools/public/ddtf.js"></script>
     <script src="https://walm-dc.github.io/WebTools/public/mattQuery.js"></script>
+    <script src="https://walm-dc.github.io/WebTools/public/jquery.csv.mini.js"></script>
     <!-- <script src="mattQuery.js"></script> -->
     <style>
         
@@ -71,7 +72,7 @@
         readAndShowJSON(true);
     });
     function readAndShowJSON(){
-        $.get('https://xxxlgroup-my.sharepoint.com/:x:/r/personal/in9_lutz_gmbh/Documents/Stoffe.xlsx?d=w8829f0ff7f89460c8826f22edf1811fb&csf=1&web=1&e=69Xswc&nav=MTVfezAwMDAwMDAwLTAwMDEtMDAwMC0wMjAwLTAwMDAwMDAwMDAwMH0', function(data) {
+        $.get('https://walm-dc.github.io/WebTools/public/Stoffe.csv', function(data) {
             console.log('Excel file loaded successfully');
         }).fail(function() {
             console.error('Error loading Excel file');
