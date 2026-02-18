@@ -33,6 +33,7 @@
                             <th>Herkunft</th>
                             <th>Modell</th>
                             <th>Textur</th>
+                            <th>Farbe</th>
                             <th>Zusammensetzung</th>
                         </tr>
                     </table>
@@ -78,7 +79,20 @@
     });
     function readAndShowJSON(){
         $.get('https://walm-dc.github.io/WebTools/public/Stoffe.csv', function(data) {
-            console.log(data.split('\n'));
+            var lines = data.split('\n');
+            $.each(lines, function(id, val){
+                if(val !== ''){
+                    var parts = val.split(',');
+                    stoffList.push({
+                        "lieferantNr": parts[2],
+                        "lieferantName": parts[3],
+                        "modell": parts[5],
+                        "stoff": parts[6],
+                        "farbe": parts[7],
+                        "zusammensetzung": parts[8]
+                    });
+                }
+            });
         });
         $.getJSON( "https://ig-creator.xxxlgroup.com/icom/assets.json", function( data ) {
             $.each(data, function(id, val){
@@ -97,13 +111,22 @@
             });
             fullAssetList.sort(sortList);
             $.each(fullAssetList, function(id, val){
-                var inOrEx = val.inOrExtern === 'Intern' ? 'Intern' : 'Extern';
+                var inOrEx = val.inOrExtern === 'intern' ? 'Intern' : 'Extern';
+                var farbe = '', zusammensetzung = '';
+                $.each(stoffList, function(sId, sVal){
+                    if(sVal.modell.toLowerCase() === val.modell.toLowerCase() && sVal.stoff.toLowerCase() === val.textur.toLowerCase() && (sVal.lieferantNr === val.lieferant||sVal.lieferantName.toLowerCase() === val.lieferant.toLowerCase())){
+                        farbe = sVal.farbe;
+                        zusammensetzung = sVal.zusammensetzung;
+                        return false; // break loop
+                    }
+                })
                 $('#myTable').append(
                     '<tr><td>'+val.lieferant+'</td>'+
                     '<td class="'+inOrEx+'">'+val.inOrExtern+'</td>'+
                     '<td>'+val.modell+'</td>'+
                     '<td>'+val.textur+'</td>'+
-                    '<td>leder</td></tr>'
+                    '<td>'+farbe+'</td>'+
+                    '<td>'+zusammensetzung+'</td></tr>'
                 )
             });
             jQuery('#myTable').ddTableFilter();

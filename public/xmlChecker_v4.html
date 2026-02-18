@@ -172,6 +172,7 @@
     var checkTargetCountryID = false;
     var modelListJSON = {};
     var combinedRegistry = [], combinedRegistryNameList = [];
+    var activeMainEntry = '';
 
     function checkAndCompareTables() {
         // Helper: convert object-with-numeric-keys into a dense array (0..max)
@@ -388,6 +389,22 @@
                         //         });
                         //     });
                         // }
+                        if(sId === 'Preise'){
+                            errorLog.OptionIDsInUseCount++;
+                            errorLog.OptionIDsInUse.push(secondVal);
+                            $.each(errorLog.OptionIDsInUse, function(id, val){
+                                $.each(modelListJSON, function(modelId, modelVal){
+                                    if(modelId.indexOf(firmName)>-1 || modelId.indexOf(firmID)>-1){
+                                        $.each(modelVal.properties, function(propId, propVal){
+                                            if(propVal.property === val){
+                                                matchedIDs.push('!! ACHTUNG !! - OptionIDs in Verwendung wurden entfernt: <span style="color:white;">Modell: '+modelId+ ' - OptionID: '+val+'</span>');
+                                                highlighter = 'noMatch';
+                                            }
+                                        });
+                                    }
+                                });
+                            });
+                        }
                     } else {
                         errorLog.Errors++;
                         errorLog.ErrorLines.push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
@@ -395,6 +412,8 @@
                     }
                     errorLog.ErrorKeys.push(sId);
                 }
+                // save mainEntry ID and add in custom field to subentries
+                // highlight pricer mismatch ArtikleTypes at the top
                 if (sId !== "ArtikelType" && sId !== "VariantenID" && sId !== "Zielmarkt" && sId !== "OptionID") {
                     highlighter += ' subEntry';
                 } else if (sId === "Zielmarkt") {
@@ -412,11 +431,13 @@
                             }
                         });
                     }
+                } else {
+                    activeMainEntry = firstVal;
                 }
                 if(noSecondXML){
-                    $('#resultTable').append('<tr class="' + highlighter + '"><td id="' + lineCounter + '"> ' + lineCounter + '</td><th>' + sId + '</th><td>' + firstVal + '</td></tr>');
+                    $('#resultTable').append('<tr class="' + highlighter + ' activeid="' + activeMainEntry + '"><td id="' + lineCounter + '"> ' + lineCounter + '</td><th>' + sId + '</th><td>' + firstVal + '</td></tr>');
                 } else {
-                    $('#resultTable').append('<tr class="' + highlighter + '"><td id="' + lineCounter + '"> ' + lineCounter + '</td><th>' + sId + '</th><td>' + firstVal + '</td><td>' + secondVal + '</td></tr>');
+                    $('#resultTable').append('<tr class="' + highlighter + ' activeid="' + activeMainEntry + '"><td id="' + lineCounter + '"> ' + lineCounter + '</td><th>' + sId + '</th><td>' + firstVal + '</td><td>' + secondVal + '</td></tr>');
                 }
                 lineCounter++;
             })
