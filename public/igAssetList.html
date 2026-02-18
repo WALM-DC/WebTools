@@ -1,0 +1,127 @@
+<html>
+<head>
+    <title>IG-Asset-Liste</title>
+    <link rel="stylesheet" href="https://walm-dc.github.io/WebTools/public/mattStyle.css">
+    <script src="https://walm-dc.github.io/WebTools/public/jquery-3.7.1.min.js"></script>
+    <script src="https://walm-dc.github.io/WebTools/public/ddtf.js"></script>
+    <script src="https://walm-dc.github.io/WebTools/public/mattQuery.js"></script>
+    <!-- <script src="mattQuery.js"></script> -->
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div id="topDiv"></div>
+    <div class="masterDiv">
+        <!-- <div class="topDiv">
+            <h2>XML-Liste</h2>
+        </div> -->
+        <div>
+            <div class="resultDiv">
+                <h3>Anzahl in der aktuellen Auflistung: <span id="myCounter"></span></h3>
+                <img src="refresh-button.png" class="emptySearch" title="Suche leeren" alt="Suche leeren"><input type="text" id="myInput" placeholder="Allgemeine Suche auf alle Felder...">
+                <div class="div_before_table igServer">
+                    <table id="myTable" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th>Lieferant</th>
+                            <th>Modell</th>
+                            <th>Textur</th>
+                            <th>Graphic</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>    
+        </div>
+    </div>
+</body>
+<script>
+    // $(window).on("blur", function() {
+    //     console.log("Browser window lost focus");
+    // });
+    // $(window).on("focus", function() {
+    //     console.log("Browser window gained focus - refreshing data...");
+    //     readAndShowJSON(true);
+    // });
+
+    injectTabs();
+
+    // var langCheck = ['AT', 'DE', 'CH', 'CZ', 'SK', 'FR', 'SE', 'HU', 'SI', 'PL', 'RO'];
+    // var combinedRegistry = [], indexQA = [], nameQA = [];
+    function countColumns(){
+        $('#myCounter').html(($('table tr').length-1)-($('table tr[style="display: none;"]').length));
+    }
+    $('#myInput').on('keydown', function(e) {
+        if (e.which === 13) { // Check if the Enter key is pressed (key code 13)
+            if($(this).val() === ""){
+                removeHighlights();
+                $('#myTable tr').show();
+            } else {
+                filterTable();
+            }
+        }
+    });
+    $('.emptySearch').on('click', function(){
+        $('#myInput').val('');
+        removeHighlights();
+        $('#myTable tr').show();
+        jQuery('#myTable').ddTableFilter();
+        readAndShowJSON(true);
+    });
+    // function formatNameAndCheckDupes(addressName){
+    //     var entry = addressName.replace('https://ig-creator.xxxlgroup.com/idm/', '').split('*')[0];
+    //     $.inArray(entry, combinedRegistry) === -1 ? combinedRegistry.push(entry) : null;
+    // }
+    // function combineRegistries(curRegistry, fileName){
+    //     $.each(curRegistry.Domains, function( key, value ) {
+    //         if(value.ComService === undefined) return; //skip entries without address
+    //         if(value.ComService.Setups === undefined){
+    //             formatNameAndCheckDupes(value.ComService.Address);
+    //         } else {
+    //             $.each(value.ComService.Setups, function( setupKey, setupValue ) {
+    //                 formatNameAndCheckDupes(setupValue.Address);
+    //             });
+    //         }
+    //     });
+    // }
+    // function removeAfterLastUnderscore(inputString) {
+    //     const lastUnderscoreIndex = inputString.lastIndexOf('_');
+    //     return lastUnderscoreIndex !== -1 ? inputString.substring(0, lastUnderscoreIndex + 1) : inputString;
+    // }
+    function readAndShowJSON(){
+    //     $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moebelix.json", function( data ) {
+    //         combineRegistries(data, 'moebelix');
+    //     });
+    //     $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moemax.json", function( data ) {
+    //         combineRegistries(data, 'moemax');
+    //     });
+    //     $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-xxxl.json", function( data ) {
+    //         combineRegistries(data, 'xxxl');
+    //     });
+    //     $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry.json", function( data ) {
+    //         combineRegistries(data, 'registry');
+    //     });
+    //     $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index.json", function( data ) {
+    //         $.each(data, function(id, val){
+    //             indexQA.push(val);
+    //             nameQA.push(val.substring(0, val.lastIndexOf('_')));
+    //         })
+    //     });
+        $.getJSON( "https://ig-creator.xxxlgroup.com/creator/assets.json", function( data ) {
+            $.each(data, function(id, val){
+                var assetEntry = val.replace('D:\\inetpub\\wwwroot\\creator\\Dynamic\\', '').split('\\');
+                console.log(assetEntry);
+                // $('#myTable').append(
+                // '<tr><td id="'+xmlNameID+'">'+val+'</td>'+
+                //     '<td>'+inQA+'</td>'+
+                //     '<td>'+land+'</td>'+
+                //     '<td>'+splitVal[0]+'</td>'+
+                //     '<td>'+splitVal[1]+'</td>'+
+                //     '<td>'+splitVal[2]+'</td>'+
+                //     '<td class="'+inRegOrNot+'" id="'+registryID+'">'+inRegistry+'</td></tr>'
+                // )
+            });
+        });
+    }
+    readAndShowJSON();
+</script>
+</html>
