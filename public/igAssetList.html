@@ -5,10 +5,15 @@
     <script src="https://walm-dc.github.io/WebTools/public/jquery-3.7.1.min.js"></script>
     <script src="https://walm-dc.github.io/WebTools/public/ddtf.js"></script>
     <script src="https://walm-dc.github.io/WebTools/public/mattQuery.js"></script>
-    <script src="https://walm-dc.github.io/WebTools/public/jquery.csv.mini.js"></script>
     <!-- <script src="mattQuery.js"></script> -->
     <style>
-        
+        .loading {
+            background-image: url(https://walm-dc.github.io/WebTools/public/loading.gif);
+            background-repeat: no-repeat;
+            min-height: 600px;
+            background-position: center;
+            background-size: 600px auto;
+        }
     </style>
 </head>
 <body>
@@ -21,7 +26,7 @@
             <div class="resultDiv">
                 <h3>Anzahl in der aktuellen Auflistung: <span id="myCounter"></span></h3>
                 <img src="refresh-button.png" class="emptySearch" title="Suche leeren" alt="Suche leeren"><input type="text" id="myInput" placeholder="Allgemeine Suche auf alle Felder...">
-                <div class="div_before_table igServer">
+                <div class="div_before_table igServer loading">
                     <table id="myTable" cellspacing="0" cellpadding="0">
                         <tr>
                             <th>Lieferant</th>
@@ -39,7 +44,7 @@
 <script>
     injectTabs();
 
-    var fullAssetList = [];
+    var fullAssetList = [], stoffList = [];
     function countColumns(){
         $('#myCounter').html(($('table tr').length-1)-($('table tr[style="display: none;"]').length));
     }
@@ -73,11 +78,8 @@
     });
     function readAndShowJSON(){
         $.get('https://walm-dc.github.io/WebTools/public/Stoffe.csv', function(data) {
-            console.log('Excel file loaded successfully');
-        }).fail(function() {
-            console.error('Error loading Excel file');
-        }
-)
+            console.log(data.split('\n'));
+        });
         $.getJSON( "https://ig-creator.xxxlgroup.com/icom/assets.json", function( data ) {
             $.each(data, function(id, val){
                 var assetEntry = val.replace('D:\\inetpub\\wwwroot\\icom\\ICOM\\gfx\\', '').split('\\');
