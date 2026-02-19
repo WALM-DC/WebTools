@@ -1,7 +1,7 @@
 import requests
-import certifi
 import csv
 import json
+import operator
 from io import StringIO
 from typing import List, Dict, Any, Optional, Tuple
 
@@ -11,6 +11,7 @@ ASSET_PREFIX = "D:\\inetpub\\wwwroot\\icom\\ICOM\\gfx\\"
 
 STOFFE_CSV_URL = "https://walm-dc.github.io/WebTools/public/Stoffe.csv"
 ASSETS_JSON_URL = "https://ig-creator.xxxlgroup.com/icom/assets.json"
+MODEL_JSON_URL = "https://walm-dc.github.io/WebTools/public/list.json"
 
 
 def fetch_text(url: str) -> str:
@@ -54,7 +55,7 @@ def parse_stoffe_csv(csv_text: str) -> List[Dict[str, str]]:
             "farbe": row[7].strip(),
             "zusammensetzung": row[8].strip(),
         })
-    # print(stoff_list)
+
     return stoff_list
 
 
@@ -73,7 +74,6 @@ def parse_assets(assets_data: Any) -> List[Dict[str, str]]:
         if not isinstance(val, str) or val.strip() == "":
             continue
 
-        # replicate: val.replace(prefix, '').split('\\')
         stripped = val.replace(ASSET_PREFIX, "")
         parts = stripped.split("\\")
 
@@ -107,59 +107,33 @@ def parse_assets(assets_data: Any) -> List[Dict[str, str]]:
 
     return full_asset_list
 
-
-def build_stoff_index(stoff_list: List[Dict[str, str]]) -> Dict[Tuple[str, str], List[Dict[str, str]]]:
-    """
-    Index by (modell_lower, stoff_lower) -> list of stoff entries.
-    Supplier matching is done at lookup time (because it can match by Nr OR Name).
-    """
-    idx: Dict[Tuple[str, str], List[Dict[str, str]]] = {}
-    for s in stoff_list:
-        key = ((s.get("modell") or "").lower(), (s.get("stoff") or "").lower())
-        idx.setdefault(key, []).append(s)
-    return idx
-
-
-def find_match_for_asset(
-    asset: Dict[str, str],
-    stoff_idx: Dict[Tuple[str, str], List[Dict[str, str]]]
-) -> Optional[Dict[str, str]]:
-    key = ((asset.get("modell") or "").lower(), (asset.get("textur") or "").lower())
-    candidates = stoff_idx.get(key, [])
-    if not candidates:
-        return None
-
-    a_lieferant = (asset.get("lieferant") or "").strip()
-    a_lieferant_lower = a_lieferant.lower()
-
-    for s in candidates:
-        if (s.get("lieferantNr") or "").strip() == a_lieferant:
-            return s
-        if (s.get("lieferantName") or "").strip().lower() == a_lieferant_lower:
-            return s
-
-    return None
-
-
-def combine(stoff_list: List[Dict[str, str]], assets_list: List[Dict[str, str]]) -> List[Dict[str, str]]:
-    stoff_idx = build_stoff_index(stoff_list)
-
-    print(stoff_idx)
-
+def combine(stoff_list: List[Dict[str, str]], assets_list: List[Dict[str, str]], model_data: Any) -> List[Dict[str, str]]:
     combined: List[Dict[str, str]] = []
     for a in assets_list:
-        match = find_match_for_asset(a, stoff_idx)
+        for s in stoff_list:
+            if (s.get("stoff") or "").lower() == (a.get("textur") or "").lower():
+                match = s
+                break
+
+        lieferNr = match.get("lieferantNr", "") if match else ""
+        lieferName = match.get("lieferantName", "") if match else ""
         farbe = match.get("farbe", "") if match else ""
-        zusammensetzung = match.get("zusammensetzung", "") if match else ""
+        zusammensetzung = match.get("zusammensetzung", "") if match else ""\
+        
+        texInUse = False
+        if (a.get("texture") or "") in model_data:
+            texInUse = True
 
         combined.append({
-            "lieferant": a.get("lieferant", ""),
+            "lieferantNr": lieferNr,
+            "lieferantName": lieferName,
             "inOrExtern": a.get("inOrExtern", ""),
             "modell": a.get("modell", ""),
             "textur": a.get("textur", ""),
             "fileName": a.get("fileName", ""),
             "farbe": farbe,
             "zusammensetzung": zusammensetzung,
+            "texInUse": "Ja" if texInUse else "Nein",
         })
 
     return combined
@@ -168,10 +142,14 @@ def combine(stoff_list: List[Dict[str, str]], assets_list: List[Dict[str, str]])
 def main(output_path: str = "stoffZusammensetzung.json") -> None:
     stoffe_csv_text = fetch_text(STOFFE_CSV_URL)
     assets_data = fetch_json(ASSETS_JSON_URL)
+    model_data = fetch_json(MODEL_JSON_URL)
 
     stoff_list = parse_stoffe_csv(stoffe_csv_text)
     assets_list = parse_assets(assets_data)
-    combined = combine(stoff_list, assets_list)
+    combined = combine(stoff_list, assets_list, model_data)
+
+    # Sort combined list by lieferantNr, then by modell, then by textur
+    combined.sort(key=operator.itemgetter("lieferantNr", "modell", "textur"))
 
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(combined, f, ensure_ascii=False, indent=2)

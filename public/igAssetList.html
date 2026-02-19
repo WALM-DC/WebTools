@@ -78,55 +78,17 @@
         readAndShowJSON(true);
     });
     function readAndShowJSON(){
-        $.get('https://walm-dc.github.io/WebTools/public/Stoffe.csv', function(data) {
-            var lines = data.split('\n');
-            $.each(lines, function(id, val){
-                if(val !== ''){
-                    var parts = val.split(',');
-                    stoffList.push({
-                        "lieferantNr": parts[2],
-                        "lieferantName": parts[3],
-                        "modell": parts[5],
-                        "stoff": parts[6],
-                        "farbe": parts[7],
-                        "zusammensetzung": parts[8]
-                    });
-                }
-            });
-        });
         $.getJSON( "https://ig-creator.xxxlgroup.com/icom/assets.json", function( data ) {
             $.each(data, function(id, val){
-                var assetEntry = val.replace('D:\\inetpub\\wwwroot\\icom\\ICOM\\gfx\\', '').split('\\');
-                var entry = {
-                        "lieferant": assetEntry[0].replace('XXXL', ''),
-                        "inOrExtern": assetEntry[0].indexOf('XXXL') === -1 ? 'intern' : 'extern',
-                        "modell": assetEntry[1],
-                        "textur": assetEntry[2],
-                        "fileName": assetEntry[3]
-                    }
-                const isDuplicate = fullAssetList.some(item => item.textur.toLowerCase() === entry.textur.toLowerCase());
-                if (!isDuplicate) {
-                    fullAssetList.push(entry)
-                } 
-            });
-            fullAssetList.sort(sortList);
-            $.each(fullAssetList, function(id, val){
-                var inOrEx = val.inOrExtern === 'intern' ? 'Intern' : 'Extern';
-                var farbe = '', zusammensetzung = '';
-                $.each(stoffList, function(sId, sVal){
-                    if(sVal.modell.toLowerCase() === val.modell.toLowerCase() && sVal.stoff.toLowerCase() === val.textur.toLowerCase() && (sVal.lieferantNr === val.lieferant||sVal.lieferantName.toLowerCase() === val.lieferant.toLowerCase())){
-                        farbe = sVal.farbe;
-                        zusammensetzung = sVal.zusammensetzung;
-                        return false; // break loop
-                    }
-                })
+                var inOrEx = val.inOrExtern === "intern" ? "Intern" : "Extern";
                 $('#myTable').append(
-                    '<tr><td>'+val.lieferant+'</td>'+
+                    '<tr><td>'+val.lieferantNr+'</td>'+
+                    '<td>'+val.lieferantName+'</td>'+
                     '<td class="'+inOrEx+'">'+val.inOrExtern+'</td>'+
                     '<td>'+val.modell+'</td>'+
                     '<td>'+val.textur+'</td>'+
-                    '<td>'+farbe+'</td>'+
-                    '<td>'+zusammensetzung+'</td></tr>'
+                    '<td>'+val.farbe+'</td>'+
+                    '<td>'+val.zusammensetzung+'</td></tr>'
                 )
             });
             jQuery('#myTable').ddTableFilter();
