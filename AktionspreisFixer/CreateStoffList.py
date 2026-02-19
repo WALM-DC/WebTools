@@ -133,13 +133,13 @@ def combine(stoff_list: List[Dict[str, str]], assets_list: List[Dict[str, str]],
             "fileName": a.get("fileName", ""),
             "farbe": farbe,
             "zusammensetzung": zusammensetzung,
-            "texInUse": "Ja" if texInUse else "Nein",
+            # "texInUse": "Ja" if texInUse else "Nein",
         })
 
     return combined
 
 
-def main(output_path: str = "stoffZusammensetzung.json") -> None:
+def main(output_path: str = "F:\\WebTools\\public\\stoffZusammensetzung.json") -> None:
     stoffe_csv_text = fetch_text(STOFFE_CSV_URL)
     assets_data = fetch_json(ASSETS_JSON_URL)
     model_data = fetch_json(MODEL_JSON_URL)

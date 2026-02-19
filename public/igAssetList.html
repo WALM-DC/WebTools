@@ -29,7 +29,8 @@
                 <div class="div_before_table igServer loading">
                     <table id="myTable" cellspacing="0" cellpadding="0">
                         <tr>
-                            <th>Lieferant</th>
+                            <th>Lieferanten Nr</th>
+                            <th>Lieferanten Name</th>
                             <th>Herkunft</th>
                             <th>Modell</th>
                             <th>Textur</th>
@@ -49,17 +50,17 @@
     function countColumns(){
         $('#myCounter').html(($('table tr').length-1)-($('table tr[style="display: none;"]').length));
     }
-    function sortList(a, b) {
-        let ca = a.lieferant.toLowerCase();
-        let cb = b.lieferant.toLowerCase();
-        let da = a.modell.toLowerCase();
-        let db = b.modell.toLowerCase(); 
-        let ta = a.textur.toLowerCase();   
-        let tb = b.textur.toLowerCase();
-        if(ca !== cb) return (ca < cb) ? -1 : 1;
-        if(da !== db) return (da < db) ? -1 : 1;
-        if(ta !== tb) return (ta < tb) ? -1 : 1;
-    }
+    // function sortList(a, b) {
+    //     let ca = a.lieferant.toLowerCase();
+    //     let cb = b.lieferant.toLowerCase();
+    //     let da = a.modell.toLowerCase();
+    //     let db = b.modell.toLowerCase(); 
+    //     let ta = a.textur.toLowerCase();   
+    //     let tb = b.textur.toLowerCase();
+    //     if(ca !== cb) return (ca < cb) ? -1 : 1;
+    //     if(da !== db) return (da < db) ? -1 : 1;
+    //     if(ta !== tb) return (ta < tb) ? -1 : 1;
+    // }
     $('#myInput').on('keydown', function(e) {
         if (e.which === 13) { // Check if the Enter key is pressed (key code 13)
             if($(this).val() === ""){
