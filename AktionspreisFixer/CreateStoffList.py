@@ -84,7 +84,7 @@ def parse_assets(assets_data: Any) -> List[Dict[str, str]]:
         supplier_raw = parts[0]
         entry = {
             "lieferant": supplier_raw.replace("XXXL", ""),
-            "inOrExtern": "intern" if ("XXXL" not in supplier_raw) else "extern",
+            "inOrExtern": "Intern" if ("XXXL" not in supplier_raw) else "Extern",
             "modell": parts[1],
             "textur": parts[2].replace(".geo", "").replace(".tex", ""),
             "fileName": parts[3],

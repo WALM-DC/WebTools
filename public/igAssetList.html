@@ -25,7 +25,7 @@
         <div>
             <div class="resultDiv">
                 <h3>Anzahl in der aktuellen Auflistung: <span id="myCounter"></span></h3>
-                <img src="refresh-button.png" class="emptySearch" title="Suche leeren" alt="Suche leeren"><input type="text" id="myInput" placeholder="Allgemeine Suche auf alle Felder...">
+                <img src="refresh-button.png" class="emptySearch" title="Suche leeren" alt="Suche leeren" disabled ><input disabled type="text" id="myInput" placeholder="Allgemeine Suche auf alle Felder...">
                 <div class="div_before_table igServer loading">
                     <table id="myTable" cellspacing="0" cellpadding="0">
                         <tr>
@@ -50,17 +50,6 @@
     function countColumns(){
         $('#myCounter').html(($('table tr').length-1)-($('table tr[style="display: none;"]').length));
     }
-    // function sortList(a, b) {
-    //     let ca = a.lieferant.toLowerCase();
-    //     let cb = b.lieferant.toLowerCase();
-    //     let da = a.modell.toLowerCase();
-    //     let db = b.modell.toLowerCase(); 
-    //     let ta = a.textur.toLowerCase();   
-    //     let tb = b.textur.toLowerCase();
-    //     if(ca !== cb) return (ca < cb) ? -1 : 1;
-    //     if(da !== db) return (da < db) ? -1 : 1;
-    //     if(ta !== tb) return (ta < tb) ? -1 : 1;
-    // }
     $('#myInput').on('keydown', function(e) {
         if (e.which === 13) { // Check if the Enter key is pressed (key code 13)
             if($(this).val() === ""){
@@ -71,15 +60,15 @@
             }
         }
     });
-    $('.emptySearch').on('click', function(){
-        $('#myInput').val('');
-        removeHighlights();
-        $('#myTable tr').show();
-        jQuery('#myTable').ddTableFilter();
-        readAndShowJSON(true);
-    });
+    // $('.emptySearch').on('click', function(){
+    //     $('#myInput').val('');
+    //     removeHighlights();
+    //     $('#myTable tr').show();
+    //     jQuery('#myTable').ddTableFilter();
+    //     readAndShowJSON(true);
+    // });
     function readAndShowJSON(){
-        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/assets.json", function( data ) {
+        $.getJSON( "https://walm-dc.github.io/WebTools/public/stoffZusammensetzung.json", function( data ) {
             $.each(data, function(id, val){
                 var inOrEx = val.inOrExtern === "intern" ? "Intern" : "Extern";
                 $('#myTable').append(
@@ -94,6 +83,7 @@
             });
             jQuery('#myTable').ddTableFilter();
             countColumns();
+            $('.div_before_table').removeClass('loading');
         });
     }
     readAndShowJSON();
