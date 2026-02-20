@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>IG-Asset-Liste</title>
+    <title>IG-Stoff-Zusammensetzungen</title>
     <link rel="stylesheet" href="https://walm-dc.github.io/WebTools/public/mattStyle.css">
     <script src="https://walm-dc.github.io/WebTools/public/jquery-3.7.1.min.js"></script>
     <script src="https://walm-dc.github.io/WebTools/public/ddtf.js"></script>
@@ -14,6 +14,15 @@
             background-position: center;
             background-size: 600px auto;
         }
+        mark.table-find {
+            background-color: yellow;
+            color: black;
+        }
+
+        /* optional: visual cue on the found row (remove if you want ONLY text highlighting) */
+        tr.table-find-active {
+            outline: 2px solid rgba(245, 158, 11, 0.85);
+        }
     </style>
 </head>
 <body>
@@ -25,7 +34,8 @@
         <div>
             <div class="resultDiv">
                 <h3>Anzahl in der aktuellen Auflistung: <span id="myCounter"></span></h3>
-                <img src="refresh-button.png" class="emptySearch" title="Suche leeren" alt="Suche leeren" disabled ><input disabled type="text" id="myInput" placeholder="Allgemeine Suche auf alle Felder...">
+                <!-- <img src="refresh-button.png" class="emptySearch" title="Suche leeren" alt="Suche leeren" disabled > -->
+                <input type="text" id="myInput" placeholder="Allgemeine Suche auf alle Felder...">
                 <div class="div_before_table igServer loading">
                     <table id="myTable" cellspacing="0" cellpadding="0">
                         <tr>
@@ -44,6 +54,217 @@
     </div>
 </body>
 <script>
+  injectTabs();
+
+  var fullAssetList = [], stoffList = [];
+
+  function countColumns(){
+    $('#myCounter').html(($('table tr').length-1)-($('table tr[style="display: none;"]').length));
+  }
+
+  // =========================
+  // Enter-only table search
+  // =========================
+  const TableSearch = (() => {
+    let tableEl, tbodyEl, rows = [];
+    let rowTextIndex = [];         // lowercase searchable text per row
+    let rowCellTexts = [];         // original text per cell [row][col]
+    let lastFoundRow = -1;
+    let lastTerm = "";
+
+    function escapeRegExp(s) {
+      return s.replace(/[.*+?^${}()|[\]\\]/g, "\\__CODE_BLOCK_0__");
+    }
+    function escapeHTML(s) {
+      return (s ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function getTbodyFromMyTable() {
+      const el = document.getElementById("myTable");
+      if (!el) return null;
+
+      if (el.tagName === "TBODY") return el;
+      if (el.tagName === "TABLE") return el.tBodies[0] || el.createTBody();
+
+      // If #myTable is some wrapper div (unlikely), try to find a table inside
+      const nestedTable = el.querySelector("table");
+      if (nestedTable) return nestedTable.tBodies[0] || nestedTable.createTBody();
+
+      return null;
+    }
+
+    function initOrRebuildIndex() {
+      tableEl = document.getElementById("myTable");
+      tbodyEl = getTbodyFromMyTable();
+      if (!tbodyEl) return;
+
+      // IMPORTANT: only tbody rows (data), not thead/filter rows
+      rows = Array.from(tbodyEl.querySelectorAll("tr"));
+
+      rowCellTexts = [];
+      rowTextIndex = [];
+
+      for (const tr of rows) {
+        const tds = Array.from(tr.querySelectorAll("td")); // ONLY td (avoid th/filter controls)
+        const texts = tds.map(td => td.textContent);
+        rowCellTexts.push(texts);
+        rowTextIndex.push(texts.join(" ").toLowerCase());
+      }
+
+      // clear previous pointer
+      lastFoundRow = -1;
+      lastTerm = "";
+    }
+
+    function restoreRow(i) {
+      if (i < 0) return;
+      const tr = rows[i];
+      if (!tr) return;
+
+      tr.classList.remove("table-find-active");
+      const texts = rowCellTexts[i] || [];
+      const tds = tr.querySelectorAll("td");
+
+      for (let c = 0; c < tds.length; c++) {
+        // Restore as plain text safely
+        tds[c].textContent = texts[c] ?? "";
+      }
+    }
+
+    function highlightRow(i, termRaw) {
+      const tr = rows[i];
+      if (!tr) return;
+
+      tr.classList.add("table-find-active");
+      const re = new RegExp(escapeRegExp(termRaw), "ig");
+
+      const texts = rowCellTexts[i] || [];
+      const tds = tr.querySelectorAll("td");
+
+      for (let c = 0; c < tds.length; c++) {
+        const raw = texts[c] ?? "";
+        tds[c].innerHTML = escapeHTML(raw).replace(re, m => `<mark class="table-find">${m}</mark>`);
+      }
+    }
+
+    function isVisible(tr) {
+      // respects ddTableFilter hiding rows via display:none
+      return !!(tr.offsetWidth || tr.offsetHeight || tr.getClientRects().length);
+    }
+
+    function findNextMatch(termLower, startAfter) {
+      const n = rows.length;
+      if (!n) return -1;
+
+      // Prefer visible rows first, then fallback to any row
+      for (let pass = 0; pass < 2; pass++) {
+        for (let step = 1; step <= n; step++) {
+          const i = (startAfter + step) % n;
+          if (!rowTextIndex[i].includes(termLower)) continue;
+          if (pass === 0 && !isVisible(rows[i])) continue;
+          return i;
+        }
+      }
+      return -1;
+    }
+
+    function searchOnEnter(termRaw, direction = 1) {
+      if (!tbodyEl || !rows.length) initOrRebuildIndex();
+      if (!rows.length) return;
+
+      const cleaned = (termRaw || "").trim();
+      if (!cleaned) return;
+
+      const termLower = cleaned.toLowerCase();
+
+      // If same term, continue from last found; else start from beginning
+      let startAfter = -1;
+      if (termLower === lastTerm && lastFoundRow >= 0) startAfter = lastFoundRow;
+
+      // If going backwards, we can simulate by searching forward n-1 steps
+      // (simple + fine for Enter usage)
+      if (direction === -1 && termLower === lastTerm && lastFoundRow >= 0) {
+        // to go "previous", startAfter = lastFoundRow-2 (so next step lands on previous)
+        startAfter = (lastFoundRow - 2 + rows.length) % rows.length;
+      }
+
+      const found = findNextMatch(termLower, startAfter);
+
+      // restore previous highlighted row (only 1 row touched)
+      restoreRow(lastFoundRow);
+
+      if (found >= 0) {
+        highlightRow(found, cleaned);
+        rows[found].scrollIntoView({ behavior: "smooth", block: "center" });
+
+        lastFoundRow = found;
+        lastTerm = termLower;
+      } else {
+        lastFoundRow = -1;
+        lastTerm = termLower;
+      }
+    }
+
+    return {
+      rebuild: initOrRebuildIndex,
+      searchOnEnter
+    };
+  })();
+
+  // Execute search ONLY on Enter (Shift+Enter = previous)
+  $('#myInput').on('keydown', function(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      TableSearch.searchOnEnter(this.value, e.shiftKey ? -1 : 1);
+    }
+  });
+
+  function readAndShowJSON(){
+    $.getJSON("https://walm-dc.github.io/WebTools/public/stoffZusammensetzung.json", function(data) {
+
+      // Append safely without breaking table structure:
+      // if #myTable is <table>, append into <tbody>; if it's <tbody>, append directly
+      const root = document.getElementById("myTable");
+      let appendTarget = root;
+
+      if (root && root.tagName === "TABLE") {
+        appendTarget = root.tBodies[0] || root.createTBody();
+      }
+
+      $.each(data, function(id, val){
+        var inOrEx = val.inOrExtern === "intern" ? "Intern" : "Extern";
+
+        $(appendTarget).append(
+          '<tr><td>' + val.lieferantNr + '</td>' +
+          '<td>' + val.lieferantName + '</td>' +
+          '<td class="' + inOrEx + '">' + val.inOrExtern + '</td>' +
+          '<td>' + val.modell + '</td>' +
+          '<td>' + val.textur + '</td>' +
+          '<td>' + val.farbe + '</td>' +
+          '<td>' + val.zusammensetzung + '</td></tr>'
+        );
+      });
+
+      // Keep your existing filtering
+      jQuery('#myTable').ddTableFilter();
+
+      countColumns();
+      $('.div_before_table').removeClass('loading');
+
+      // Build search index AFTER rows exist
+      TableSearch.rebuild();
+    });
+  }
+
+  readAndShowJSON();
+</script>
+
+<!-- <script>
     injectTabs();
 
     var fullAssetList = [], stoffList = [];
@@ -51,22 +272,8 @@
         $('#myCounter').html(($('table tr').length-1)-($('table tr[style="display: none;"]').length));
     }
     $('#myInput').on('keydown', function(e) {
-        if (e.which === 13) { // Check if the Enter key is pressed (key code 13)
-            if($(this).val() === ""){
-                removeHighlights();
-                $('#myTable tr').show();
-            } else {
-                filterTable();
-            }
-        }
+        
     });
-    // $('.emptySearch').on('click', function(){
-    //     $('#myInput').val('');
-    //     removeHighlights();
-    //     $('#myTable tr').show();
-    //     jQuery('#myTable').ddTableFilter();
-    //     readAndShowJSON(true);
-    // });
     function readAndShowJSON(){
         $.getJSON( "https://walm-dc.github.io/WebTools/public/stoffZusammensetzung.json", function( data ) {
             $.each(data, function(id, val){
@@ -87,5 +294,5 @@
         });
     }
     readAndShowJSON();
-</script>
+</script> -->
 </html>

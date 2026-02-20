@@ -6,6 +6,7 @@ const tabs = {
     'Registry Liste': "https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlRegistryLister.html",
     '3D Modell&uuml;bersicht': "https://ig-creator.xxxlgroup.com/idm/XMLLister/3DModelOverview_V2.html",
     '3D Modell-Details': "https://walm-dc.github.io/WebTools/public/3DModelDetails.html",
+    'Stoff Zusammensetzungen': "https://ig-creator.xxxlgroup.com/icom/igAssetList.html",
     'Link Sammlung': "https://walm-dc.github.io/WebTools/public/LinkSammlung.html"
 };
 function injectTabs(){
