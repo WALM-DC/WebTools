@@ -237,7 +237,7 @@
       }
 
       $.each(data, function(id, val){
-        var inOrEx = val.inOrExtern === "intern" ? "Intern" : "Extern";
+        var inOrEx = val.inOrExtern === "Intern" ? "Intern" : "Extern";
 
         $(appendTarget).append(
           '<tr><td>' + val.lieferantNr + '</td>' +
