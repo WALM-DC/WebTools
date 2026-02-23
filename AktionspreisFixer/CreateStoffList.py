@@ -86,7 +86,7 @@ def parse_assets(assets_data: Any) -> List[Dict[str, str]]:
         entry = {
             "lieferant": supplier_raw.replace("XXXL", ""),
             "inOrExtern": "Intern" if ("XXXL" not in supplier_raw) else "Extern",
-            "modell": parts[1],
+            "ordner": parts[1],
             "textur": parts[2].replace(".geo", "").replace(".tex", ""),
             "fileName": parts[3],
         }
@@ -101,7 +101,7 @@ def parse_assets(assets_data: Any) -> List[Dict[str, str]]:
     full_asset_list.sort(key=lambda x: (
         x.get("inOrExtern", ""),
         (x.get("lieferant") or "").lower(),
-        (x.get("modell") or "").lower(),
+        (x.get("ordner") or "").lower(),
         (x.get("textur") or "").lower(),
         (x.get("fileName") or "").lower(),
     ))
@@ -119,6 +119,7 @@ def combine(stoff_list: List[Dict[str, str]], assets_list: List[Dict[str, str]],
         schiene = match.get("schiene", "") if match else ""
         lieferNr = match.get("lieferantNr", "") if match else ""
         lieferName = match.get("lieferantName", "") if match else ""
+        modell = match.get("modell", "") if match else ""
         farbe = match.get("farbe", "") if match else ""
         zusammensetzung = match.get("zusammensetzung", "") if match else ""\
         
@@ -131,7 +132,8 @@ def combine(stoff_list: List[Dict[str, str]], assets_list: List[Dict[str, str]],
             "lieferantNr": lieferNr,
             "lieferantName": lieferName,
             "inOrExtern": a.get("inOrExtern", ""),
-            "modell": a.get("modell", ""),
+            "ordner": a.get("ordner", ""),
+            "modell": modell,
             "textur": a.get("textur", ""),
             "fileName": a.get("fileName", ""),
             "farbe": farbe,
