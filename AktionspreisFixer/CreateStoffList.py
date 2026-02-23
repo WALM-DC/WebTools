@@ -48,7 +48,7 @@ def parse_stoffe_csv(csv_text: str) -> List[Dict[str, str]]:
             continue
 
         stoff_list.append({
-            "schiene": row[0].strip(),
+            "schiene": row[1].strip(),
             "lieferantNr": row[2].strip(),
             "lieferantName": row[3].strip(),
             "modell": row[5].strip(),
