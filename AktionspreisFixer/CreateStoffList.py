@@ -48,6 +48,7 @@ def parse_stoffe_csv(csv_text: str) -> List[Dict[str, str]]:
             continue
 
         stoff_list.append({
+            "schiene": row[0].strip(),
             "lieferantNr": row[2].strip(),
             "lieferantName": row[3].strip(),
             "modell": row[5].strip(),
@@ -115,16 +116,18 @@ def combine(stoff_list: List[Dict[str, str]], assets_list: List[Dict[str, str]],
                 match = s
                 break
 
+        schiene = match.get("schiene", "") if match else ""
         lieferNr = match.get("lieferantNr", "") if match else ""
         lieferName = match.get("lieferantName", "") if match else ""
         farbe = match.get("farbe", "") if match else ""
         zusammensetzung = match.get("zusammensetzung", "") if match else ""\
         
-        texInUse = False
-        if (a.get("texture") or "") in model_data:
-            texInUse = True
+        # texInUse = False
+        # if (a.get("texture") or "") in model_data:
+        #     texInUse = True
 
         combined.append({
+            "schiene": schiene,
             "lieferantNr": lieferNr,
             "lieferantName": lieferName,
             "inOrExtern": a.get("inOrExtern", ""),

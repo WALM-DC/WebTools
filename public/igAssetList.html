@@ -39,6 +39,7 @@
                 <div class="div_before_table igServer loading">
                     <table id="myTable" cellspacing="0" cellpadding="0">
                         <tr>
+                            <th>Schiene</th>
                             <th>Lieferanten Nr</th>
                             <th>Lieferanten Name</th>
                             <th>Herkunft</th>
@@ -240,7 +241,8 @@
         var inOrEx = val.inOrExtern === "Intern" ? "Intern" : "Extern";
 
         $(appendTarget).append(
-          '<tr><td>' + val.lieferantNr + '</td>' +
+          '<tr><td>' + val.schiene + '</td>' +
+          '<td>' + val.lieferantNr + '</td>' +
           '<td>' + val.lieferantName + '</td>' +
           '<td class="' + inOrEx + '">' + val.inOrExtern + '</td>' +
           '<td>' + val.modell + '</td>' +
