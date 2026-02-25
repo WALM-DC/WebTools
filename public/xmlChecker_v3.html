@@ -54,6 +54,9 @@
         tr.noMatch {
             background-color: darksalmon;
         }
+        tr.belongsToMatch {
+            background-color: khaki;
+        }
         tr.empty {
             background-color: lightblue;
         }
@@ -172,6 +175,7 @@
     var checkTargetCountryID = false;
     var modelListJSON = {};
     var combinedRegistry = [], combinedRegistryNameList = [];
+    var activeMainEntry = '';
 
     function checkAndCompareTables() {
         // Helper: convert object-with-numeric-keys into a dense array (0..max)
@@ -321,6 +325,8 @@
             IDsInUse:[],
             OptionIDsInUseCount: 0,
             OptionIDsInUse:[],
+            PriceChangesCount: 0,
+            PriceChangesArticles: [],
             MeasuresInUseCount: 0,
             MeasuresInUse:[],
             ErrorKeys: [],
@@ -336,7 +342,8 @@
                 if (firstVal === secondVal) {
                     highlighter = 'match';
                 } else {
-                    if (secondVal === '-KEIN EINTRAG-' || firstVal === '-KEIN EINTRAG-') {
+                    // if (secondVal === '-KEIN EINTRAG-' || firstVal === '-KEIN EINTRAG-') {
+                    if (secondVal === '-KEIN EINTRAG-') {
                         errorLog.Empty++;
                         errorLog.EmptyLines.push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
                         highlighter = 'empty';
@@ -393,8 +400,39 @@
                         errorLog.ErrorLines.push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
                         highlighter = 'noMatch';
                     }
+                    if(sId === 'Preise'){
+                        var firstPrices = firstVal.split(', ').filter(p => p.trim() !== '');
+                        var secondPrices = secondVal.split(', ').filter(p => p.trim() !== '');
+                        if((firstPrices.length === secondPrices.length  || firstPrices.length > secondPrices.length) && secondPrices.every(fp => firstPrices.includes(fp))){
+                            // Prices are the same, order doesn't matter
+                            highlighter = 'match';
+                        } else if (secondPrices[0] !== '-KEIN EINTRAG-') {
+                            errorLog.PriceChangesCount++;
+                            errorLog.PriceChangesArticles.push(secondVal);
+
+                            $.each(secondPrices, function(id, val){
+                                if(firstPrices[id] !== val && firstPrices[id] !== undefined && firstPrices[id] !== '-KEIN EINTRAG-'){
+                                    firstPrices[id] = '<span style="font-weight:bold;">'+firstPrices[id]+'</span>';
+                                }
+                            });
+                            
+                            firstVal = firstPrices.join(', ');
+
+                            $.each(errorLog.PriceChangesArticles, function(id, val){
+                                if(activeMainEntry !== ''){
+                                    $('#resultTable tr.match.mainEntry[activeid="'+activeMainEntry+'"], tr.match.subEntry[activeid="'+activeMainEntry+'"]').each(function(){
+                                        if(!$(this).hasClass('noMatch')){
+                                            $(this).removeClass('match').addClass('noMatch belongsToMatch');
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    }
                     errorLog.ErrorKeys.push(sId);
                 }
+                // save mainEntry ID and add in custom field to subentries
+                // highlight pricer mismatch ArtikleTypes at the top
                 if (sId !== "ArtikelType" && sId !== "VariantenID" && sId !== "Zielmarkt" && sId !== "OptionID") {
                     highlighter += ' subEntry';
                 } else if (sId === "Zielmarkt") {
@@ -412,11 +450,14 @@
                             }
                         });
                     }
+                } else {
+                    activeMainEntry = firstVal;
+                    highlighter += ' mainEntry';
                 }
                 if(noSecondXML){
-                    $('#resultTable').append('<tr class="' + highlighter + '"><td id="' + lineCounter + '"> ' + lineCounter + '</td><th>' + sId + '</th><td>' + firstVal + '</td></tr>');
+                    $('#resultTable').append('<tr class="' + highlighter + '" activeid="' + activeMainEntry + '"><td id="' + lineCounter + '"> ' + lineCounter + '</td><th>' + sId + '</th><td>' + firstVal + '</td></tr>');
                 } else {
-                    $('#resultTable').append('<tr class="' + highlighter + '"><td id="' + lineCounter + '"> ' + lineCounter + '</td><th>' + sId + '</th><td>' + firstVal + '</td><td>' + secondVal + '</td></tr>');
+                    $('#resultTable').append('<tr class="' + highlighter + '" activeid="' + activeMainEntry + '"><td id="' + lineCounter + '"> ' + lineCounter + '</td><th>' + sId + '</th><td>' + firstVal + '</td><td>' + secondVal + '</td></tr>');
                 }
                 lineCounter++;
             })
@@ -448,11 +489,11 @@
             errorLog.GenErrors = true;
         }
         if (errorLog.Errors > 0) {
-            $('#errorList').append('<br><br>Unterschiede: <span>' + errorLog.Errors + '</span><br>Unterschiede in Zeile: <span>' + errorLog.ErrorLines.join(', ') + '</span>');
+            $('#errorList').append('<br><br>Abweichungen: <span>' + errorLog.Errors + '</span><br>Abweichungen in Zeilen: <span>' + errorLog.ErrorLines.join(', ') + '</span>');
         }
-        if (errorLog.Empty > 0) {
-            $('#errorList').append('<br><br>Leere Felder: <span>' + errorLog.Empty + '</span><br>Leere Felder in Zeile: <span>' + errorLog.EmptyLines.join(', ') + '</span>');
-        }
+        // if (errorLog.Empty > 0) {
+        //     $('#errorList').append('<br><br>Leere Felder: <span>' + errorLog.Empty + '</span><br>Leere Felder in Zeile: <span>' + errorLog.EmptyLines.join(', ') + '</span>');
+        // }
         if (errorLog.Errors > 0 || errorLog.Empty > 0) {
             $('#errorList').append('<br><br>Betroffene Felder: <span>' + [...new Set(errorLog.ErrorKeys)].join(', ') + '</span>');
         }
@@ -722,7 +763,7 @@
     });
 
     $('#hideFields').click(function () {
-        $('tr.match').toggleClass('hideMe');
+        $('tr.match, tr.empty').toggleClass('hideMe');
         if($(this).text().indexOf('ausblenden')>-1){
             $(this).html('<span>Identische<br>Zeilen einblenden</span>');
         } else {
