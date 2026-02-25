@@ -322,6 +322,8 @@
             IDsInUse:[],
             OptionIDsInUseCount: 0,
             OptionIDsInUse:[],
+            PriceChangesCount: 0,
+            PriceChangesArticles: [],
             MeasuresInUseCount: 0,
             MeasuresInUse:[],
             ErrorKeys: [],
@@ -337,7 +339,8 @@
                 if (firstVal === secondVal) {
                     highlighter = 'match';
                 } else {
-                    if (secondVal === '-KEIN EINTRAG-' || firstVal === '-KEIN EINTRAG-') {
+                    // if (secondVal === '-KEIN EINTRAG-' || firstVal === '-KEIN EINTRAG-') {
+                    if (secondVal === '-KEIN EINTRAG-') {
                         errorLog.Empty++;
                         errorLog.EmptyLines.push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
                         highlighter = 'empty';
@@ -389,23 +392,20 @@
                         //         });
                         //     });
                         // }
+                    } else {
                         if(sId === 'Preise'){
-                            errorLog.OptionIDsInUseCount++;
-                            errorLog.OptionIDsInUse.push(secondVal);
-                            $.each(errorLog.OptionIDsInUse, function(id, val){
-                                $.each(modelListJSON, function(modelId, modelVal){
-                                    if(modelId.indexOf(firmName)>-1 || modelId.indexOf(firmID)>-1){
-                                        $.each(modelVal.properties, function(propId, propVal){
-                                            if(propVal.property === val){
-                                                matchedIDs.push('!! ACHTUNG !! - OptionIDs in Verwendung wurden entfernt: <span style="color:white;">Modell: '+modelId+ ' - OptionID: '+val+'</span>');
-                                                highlighter = 'noMatch';
-                                            }
-                                        });
-                                    }
-                                });
+                            errorLog.PriceChangesCount++;
+                            errorLog.PriceChangesArticles.push(secondVal);
+                            $.each(errorLog.PriceChangesArticles, function(id, val){
+                                if(activeMainEntry !== ''){
+                                    $('#resultTable tr.mainEntry[activeid="'+activeMainEntry+'"]').each(function(){
+                                        if(!$(this).hasClass('noMatch')){
+                                            $(this).removeClass('match').addClass('noMatch');
+                                        }
+                                    });
+                                }
                             });
                         }
-                    } else {
                         errorLog.Errors++;
                         errorLog.ErrorLines.push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
                         highlighter = 'noMatch';
@@ -433,11 +433,12 @@
                     }
                 } else {
                     activeMainEntry = firstVal;
+                    highlighter += ' mainEntry';
                 }
                 if(noSecondXML){
-                    $('#resultTable').append('<tr class="' + highlighter + ' activeid="' + activeMainEntry + '"><td id="' + lineCounter + '"> ' + lineCounter + '</td><th>' + sId + '</th><td>' + firstVal + '</td></tr>');
+                    $('#resultTable').append('<tr class="' + highlighter + '" activeid="' + activeMainEntry + '"><td id="' + lineCounter + '"> ' + lineCounter + '</td><th>' + sId + '</th><td>' + firstVal + '</td></tr>');
                 } else {
-                    $('#resultTable').append('<tr class="' + highlighter + ' activeid="' + activeMainEntry + '"><td id="' + lineCounter + '"> ' + lineCounter + '</td><th>' + sId + '</th><td>' + firstVal + '</td><td>' + secondVal + '</td></tr>');
+                    $('#resultTable').append('<tr class="' + highlighter + '" activeid="' + activeMainEntry + '"><td id="' + lineCounter + '"> ' + lineCounter + '</td><th>' + sId + '</th><td>' + firstVal + '</td><td>' + secondVal + '</td></tr>');
                 }
                 lineCounter++;
             })
@@ -469,11 +470,11 @@
             errorLog.GenErrors = true;
         }
         if (errorLog.Errors > 0) {
-            $('#errorList').append('<br><br>Unterschiede: <span>' + errorLog.Errors + '</span><br>Unterschiede in Zeile: <span>' + errorLog.ErrorLines.join(', ') + '</span>');
+            $('#errorList').append('<br><br>Abweichungen: <span>' + errorLog.Errors + '</span><br>Abweichungen in Zeilen: <span>' + errorLog.ErrorLines.join(', ') + '</span>');
         }
-        if (errorLog.Empty > 0) {
-            $('#errorList').append('<br><br>Leere Felder: <span>' + errorLog.Empty + '</span><br>Leere Felder in Zeile: <span>' + errorLog.EmptyLines.join(', ') + '</span>');
-        }
+        // if (errorLog.Empty > 0) {
+        //     $('#errorList').append('<br><br>Leere Felder: <span>' + errorLog.Empty + '</span><br>Leere Felder in Zeile: <span>' + errorLog.EmptyLines.join(', ') + '</span>');
+        // }
         if (errorLog.Errors > 0 || errorLog.Empty > 0) {
             $('#errorList').append('<br><br>Betroffene Felder: <span>' + [...new Set(errorLog.ErrorKeys)].join(', ') + '</span>');
         }
@@ -743,7 +744,7 @@
     });
 
     $('#hideFields').click(function () {
-        $('tr.match').toggleClass('hideMe');
+        $('tr.match, tr.empty').toggleClass('hideMe');
         if($(this).text().indexOf('ausblenden')>-1){
             $(this).html('<span>Identische<br>Zeilen einblenden</span>');
         } else {
@@ -812,7 +813,7 @@
         });
     }
     function readAndShowJSON() {
-        $.getJSON("https://ig-creator.xxxlgroup.com/idm/index.json", function (data) {
+        $.getJSON("https://ig-creator.xxxlgroup.com/idm/index-prod.json", function (data) {
             indexAll = data;
             readModelListJSON();
         });
