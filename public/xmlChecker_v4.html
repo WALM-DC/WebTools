@@ -18,6 +18,7 @@
             align-items: flex-start;
             justify-content: center;
             padding-top: 14px;
+            min-height: 400px;
         }
         select {
             width: auto;
@@ -54,6 +55,9 @@
         tr.noMatch {
             background-color: darksalmon;
         }
+        tr.belongsToMatch {
+            background-color: khaki;
+        }
         tr.empty {
             background-color: lightblue;
         }
@@ -83,6 +87,7 @@
             background-image: url(loading.gif);
             background-size: contain;
             background-repeat: no-repeat;
+            background-position: center;
         }
         .errorDiv {
             display: flex;
@@ -119,11 +124,50 @@
         input[type=file]{
             display: none;
         }
+        .legende {
+            position: fixed;
+            top: 25%;
+            right: -550px;
+            background-color: cadetblue;
+            color: white;
+            padding: 10px 30px;
+            border-radius: 5px;
+            z-index: 1000;
+            max-width: 500px;
+            cursor: pointer;
+            border: 1px solid white;
+            transition: 0.5s ease;
+        }
+        .legende h3 {
+            background-color: cadetblue;
+            border-radius: 5px;
+            transform: rotate(-90deg);
+            position: absolute;
+            top: 75px;
+            left: -75px;
+            padding: 10px;
+            cursor: pointer;
+            border: 1px solid white;
+        }
+        .legende span {
+            color: black;
+        }
+        .legende.expanded {
+            right: 0px;
+            transition: 0.5s ease;
+        }
     </style>
 </head>
 
 <body>
     <div id="topDiv"></div>
+    <div class="legende" id="legende">
+        <h3>Legende</h3>
+        <p><span style="background-color: darksalmon; font-weight: bold; padding: 0px 1px;">Rot</span>: Abweichung(en) zum Server XML</p>
+        <p><span style="background-color: khaki; font-weight: bold; padding: 0px 1px;">Gelb</span>: Zeile geh&ouml;rt zu einem Artikel mit Abweichung, aber die Zeile selbst stimmt &uuml;berein</p>
+        <p><span style="background-color: lightblue; font-weight: bold; padding: 0px 1px;">Hellblau</span>: Feld ist im Server XML leer, aber im neuen XML gef&uuml;llt</p>
+        <p><span style="background-color: lightgreen; font-weight: bold; padding: 0px 1px;">Gr&uuml;n</span>: Keine Abweichung zum Server XML</p>
+    </div>
     <div class="masterDiv">
         <!-- <div class="topDiv">
             <h2>XML-Checker_v3</h2>
@@ -137,7 +181,7 @@
                             <span>XMLs Ausw&auml;hlen</span>
                         </label>
                             <input type="file" id="xmlFiles" multiple accept=".xml" />
-                        <button type="button" id="hideFields"><span>Identische<br>Zeilen ausblenden</span></button>
+                        <button type="button" id="hideFields"><span>Identische<br>Zeilen einblenden</span></button>
                     </form>
                 </div>
                 <div>
@@ -306,6 +350,7 @@
         $('#resultTable').empty();
         if(noSecondXML){
             $('#resultTable').append('<tr><th>Zeile</th><th>XML Bezeichnung</th><th>XML: ' + firstSelectedXML + '</th></tr>');
+            $('.resultDiv').removeClass('loading');
         } else {
             $('#resultTable').append('<tr><th>Zeile</th><th>XML Bezeichnung</th><th>XML: ' + firstSelectedXML + '</th><th>XML: ' + secondSelectedXML + '</th></tr>');
         }
@@ -335,15 +380,15 @@
             $.each(val, function (sId, sVal) {
                 var firstVal = sVal;
                 var secondVal = secondXML[id][sId];
-                var highlighter = 'empty';
+                var highlighter = 'empty hideMe';
                 if (firstVal === secondVal) {
-                    highlighter = 'match';
+                    highlighter = 'match hideMe';
                 } else {
                     // if (secondVal === '-KEIN EINTRAG-' || firstVal === '-KEIN EINTRAG-') {
                     if (secondVal === '-KEIN EINTRAG-') {
-                        errorLog.Empty++;
-                        errorLog.EmptyLines.push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
-                        highlighter = 'empty';
+                        // errorLog.Empty++;
+                        // errorLog.EmptyLines.push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
+                        highlighter = 'empty hideMe';
                         if(secondVal !== '-KEIN EINTRAG-' && sId === 'VariantenID'){
                             errorLog.IDsInUseCount++;
                             errorLog.IDsInUse.push(secondVal);
@@ -393,22 +438,38 @@
                         //     });
                         // }
                     } else {
-                        if(sId === 'Preise'){
+                        errorLog.Errors++;
+                        errorLog.ErrorLines.push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
+                        highlighter = 'noMatch';
+                    }
+                    if(sId === 'Preise'){
+                        var firstPrices = firstVal.split(', ').filter(p => p.trim() !== '');
+                        var secondPrices = secondVal.split(', ').filter(p => p.trim() !== '');
+                        if((firstPrices.length === secondPrices.length  || firstPrices.length > secondPrices.length) && secondPrices.every(fp => firstPrices.includes(fp))){
+                            // Prices are the same, order doesn't matter
+                            highlighter = 'match hideMe';
+                        } else if (secondPrices[0] !== '-KEIN EINTRAG-') {
                             errorLog.PriceChangesCount++;
                             errorLog.PriceChangesArticles.push(secondVal);
+
+                            $.each(secondPrices, function(id, val){
+                                if(firstPrices[id] !== val && firstPrices[id] !== undefined && firstPrices[id] !== '-KEIN EINTRAG-'){
+                                    firstPrices[id] = '<span style="font-weight:bold;">'+firstPrices[id]+'</span>';
+                                }
+                            });
+                            
+                            firstVal = firstPrices.join(', ');
+
                             $.each(errorLog.PriceChangesArticles, function(id, val){
                                 if(activeMainEntry !== ''){
-                                    $('#resultTable tr.mainEntry[activeid="'+activeMainEntry+'"]').each(function(){
+                                    $('#resultTable tr.match.mainEntry[activeid="'+activeMainEntry+'"], tr.match.subEntry[activeid="'+activeMainEntry+'"]').each(function(){
                                         if(!$(this).hasClass('noMatch')){
-                                            $(this).removeClass('match').addClass('noMatch');
+                                            $(this).removeClass('match').removeClass('hideMe').addClass('noMatch belongsToMatch');
                                         }
                                     });
                                 }
                             });
                         }
-                        errorLog.Errors++;
-                        errorLog.ErrorLines.push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
-                        highlighter = 'noMatch';
                     }
                     errorLog.ErrorKeys.push(sId);
                 }
@@ -432,6 +493,12 @@
                         });
                     }
                 } else {
+                    $(combinedRegistry).each(function(index, registryEntry){
+                        var firstXMLNoNumb = firstSelectedXML.substring(0, firstSelectedXML.lastIndexOf('_')+1);
+                        if($.inArray(firstXMLNoNumb, registryEntry.Filename) > -1){
+                            errorLog.UsedLang = registryEntry.Markets.join(', ');
+                        }
+                    });
                     activeMainEntry = firstVal;
                     highlighter += ' mainEntry';
                 }
@@ -475,10 +542,10 @@
         // if (errorLog.Empty > 0) {
         //     $('#errorList').append('<br><br>Leere Felder: <span>' + errorLog.Empty + '</span><br>Leere Felder in Zeile: <span>' + errorLog.EmptyLines.join(', ') + '</span>');
         // }
-        if (errorLog.Errors > 0 || errorLog.Empty > 0) {
+        if (errorLog.Errors > 0) {
             $('#errorList').append('<br><br>Betroffene Felder: <span>' + [...new Set(errorLog.ErrorKeys)].join(', ') + '</span>');
         }
-        if (errorLog.Errors === 0 && errorLog.Empty === 0 && !errorLog.GenErrors && !noSecondXML) {
+        if (errorLog.Errors === 0 && !errorLog.GenErrors && !noSecondXML) {
             $('#errorList').append('<br><br><span class="noErrors">Keine relevanten Unterschiede gefunden.</span>');
         } firstXMLDataVersion = '', firstXMLCatalogID = "", secondXMLDataVersion = '', secondXMLCatalogID = '';
         langCheck.forEach(function (land) {
@@ -637,6 +704,8 @@
     }
 
     function secondXmlSelect() {
+        $('.resultDiv').addClass('loading');
+
         $('#resultTable').empty();
         $('#errorList').empty();
         secondSelectedXML = $('#xmlSecondSelect').val();
@@ -654,14 +723,16 @@
         secondXML = [];
         firstSelectedXML = $('#xmlFirstSelect').val();
         $('#xmlSecondSelect').empty();
-        var foundMatch = false;
+        var foundMatch = false, compareableXMLs = 0, availableXML = '';
         $.each(indexAll, function (id, val) {
-            var shortVal = val.substring(0, val.length - 3).toLowerCase();
-            var shortSelected = firstSelectedXML.substring(0, firstSelectedXML.length - 3).toLowerCase();
+            var shortVal = val.substring(0, val.lastIndexOf('_')).toLowerCase();
+            var shortSelected = firstSelectedXML.substring(0, firstSelectedXML.lastIndexOf('_')).toLowerCase();
             if (shortSelected.indexOf(shortVal) > -1) {
                 foundMatch = true;
                 if (val !== firstSelectedXML) {
                     $('#xmlSecondSelect').append('<option value="' + this + '" onClick="secondXmlSelect()">' + this + '</option>');
+                    availableXML = this.toString();
+                    compareableXMLs++;
                 } else {
                     $('#xmlSecondSelect').append('<option style="background-color: lightyellow" disabled>Vergleich nicht m&ouml;glich - XML Version Selbe wie Live.</option>');
                     noSecondXML = true;
@@ -674,6 +745,13 @@
             noSecondXML = true;
             secondXmlSelect();
         }
+        // console.log('compareableXMLs: ', compareableXMLs, availableXML);
+        // console.log($('option[value="'+availableXML+'"]'))
+        // if(compareableXMLs === 1){
+        //     // $('option[value="'+availableXML+'"]').prop('selected', true);
+        //     // $('option[value="'+availableXML+'"]').click();
+        //     $('#xmlSecondSelect').val(availableXML).change();
+        // }
     }
 
     $('#xmlFiles').change(function () {
@@ -741,6 +819,10 @@
             .catch(err => {
                 alert(err);
             });
+    });
+
+    $('#legende').click(function () {
+        $(this).toggleClass('expanded');
     });
 
     $('#hideFields').click(function () {
