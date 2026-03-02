@@ -350,6 +350,7 @@
         $('#resultTable').empty();
         if(noSecondXML){
             $('#resultTable').append('<tr><th>Zeile</th><th>XML Bezeichnung</th><th>XML: ' + firstSelectedXML + '</th></tr>');
+            $('.resultDiv').removeClass('loading');
         } else {
             $('#resultTable').append('<tr><th>Zeile</th><th>XML Bezeichnung</th><th>XML: ' + firstSelectedXML + '</th><th>XML: ' + secondSelectedXML + '</th></tr>');
         }
@@ -492,6 +493,12 @@
                         });
                     }
                 } else {
+                    $(combinedRegistry).each(function(index, registryEntry){
+                        var firstXMLNoNumb = firstSelectedXML.substring(0, firstSelectedXML.lastIndexOf('_')+1);
+                        if($.inArray(firstXMLNoNumb, registryEntry.Filename) > -1){
+                            errorLog.UsedLang = registryEntry.Markets.join(', ');
+                        }
+                    });
                     activeMainEntry = firstVal;
                     highlighter += ' mainEntry';
                 }
