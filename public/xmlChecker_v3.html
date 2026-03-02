@@ -181,6 +181,8 @@
                             <span>XMLs Ausw&auml;hlen</span>
                         </label>
                             <input type="file" id="xmlFiles" multiple accept=".xml" />
+                        <button type="button" id="extractArticles"><span>Abweichende<br>Artikel IDs</span></button>                            
+                        <button type="button" id="extractOptionsAndVariants"><span>Abweichende<br>Option &<br>Varianten IDs</span></button>
                         <button type="button" id="hideFields"><span>Identische<br>Zeilen einblenden</span></button>
                     </form>
                 </div>
@@ -823,6 +825,10 @@
 
     $('#legende').click(function () {
         $(this).toggleClass('expanded');
+    });
+
+    $('#extractArticles').click(function () {
+        console.log(errorLog)
     });
 
     $('#hideFields').click(function () {
