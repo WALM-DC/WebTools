@@ -181,6 +181,9 @@
                             <span>XMLs Ausw&auml;hlen</span>
                         </label>
                             <input type="file" id="xmlFiles" multiple accept=".xml" />
+                        <button type="button" id="extractPEHArticles"><span>PEH - Artikel IDs</span></button>
+                        <button type="button" id="extractArticles"><span>Abweichende<br>Artikel IDs</span></button>                            
+                        <button type="button" id="extractOptionsAndVariants"><span>Abweichende<br>Option &<br>Varianten IDs</span></button>
                         <button type="button" id="hideFields"><span>Identische<br>Zeilen einblenden</span></button>
                     </form>
                 </div>
@@ -369,6 +372,7 @@
             OptionIDsInUse:[],
             PriceChangesCount: 0,
             PriceChangesArticles: [],
+            PriceChangesArticleIDs: [],
             MeasuresInUseCount: 0,
             MeasuresInUse:[],
             ErrorKeys: [],
@@ -451,6 +455,9 @@
                         } else if (secondPrices[0] !== '-KEIN EINTRAG-') {
                             errorLog.PriceChangesCount++;
                             errorLog.PriceChangesArticles.push(secondVal);
+                            if(firstPrices[0] !== '-KEIN EINTRAG-'){
+                                errorLog.PriceChangesArticleIDs.push(activeMainEntry);
+                            }
 
                             $.each(secondPrices, function(id, val){
                                 if(firstPrices[id] !== val && firstPrices[id] !== undefined && firstPrices[id] !== '-KEIN EINTRAG-'){
@@ -499,7 +506,11 @@
                             errorLog.UsedLang = registryEntry.Markets.join(', ');
                         }
                     });
-                    activeMainEntry = firstVal;
+                    if(firstVal !== '-KEIN EINTRAG-'){
+                        activeMainEntry = firstVal;
+                    } else {
+                        activeMainEntry = secondVal;
+                    }
                     highlighter += ' mainEntry';
                 }
                 if(noSecondXML){
@@ -823,6 +834,20 @@
 
     $('#legende').click(function () {
         $(this).toggleClass('expanded');
+    });
+
+    $('#extractPEHArticles').click(function () {
+        // console.log(errorLog.PriceChangesArticleIDs);
+        var articleIDs = errorLog.PriceChangesArticleIDs.map(function(val) {
+            return '|ArtikelID|' + val + '|\n';
+        });
+        console.log(articleIDs);
+    });
+    $('#extractArticles').click(function () {
+        console.log(errorLog);
+    });
+    $('#extractOptionsAndVariants').click(function () {
+        console.log(errorLog);
     });
 
     $('#hideFields').click(function () {
