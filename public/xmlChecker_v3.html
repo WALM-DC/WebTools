@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>XML-Checker_v4</title>
+    <title>XML-Checker</title>
     <link rel="stylesheet" href="https://walm-dc.github.io/WebTools/public/mattStyle.css">
     <script src="https://walm-dc.github.io/WebTools/public/jquery-3.7.1.min.js"></script>
     <script src="https://walm-dc.github.io/WebTools/public/ddtf.js"></script>
@@ -216,7 +216,8 @@
     var checkTargetCountryID = false;
     var modelListJSON = {};
     var combinedRegistry = [], combinedRegistryNameList = [];
-    var activeMainEntry = '';
+    var activeMainEntry = '', railText = '';
+    var errorNames = ["ArtikelType", "ArtikelText", "Preise", "Dimensionen", "Zielmarkt", "VariantenID", "OptionID"];
 
     function checkAndCompareTables() {
         // Helper: convert object-with-numeric-keys into a dense array (0..max)
@@ -259,7 +260,8 @@
         function alignByKeyWithEmptyOnTop(
             firstObj,
             secondObj,
-            keyOrder = ["ArtikelType", "ArtikelText", "Preise", "Dimensionen", "Zielmarkt", "VariantenID", "VariantenText", "OptionID", "OptionText"]
+            // keyOrder = ["ArtikelType", "ArtikelText", "Preise", "Dimensionen", "Zielmarkt", "VariantenID", "VariantenText", "OptionID", "OptionText"]
+            keyOrder = ["ArtikelType", "ArtikelText", "Preise", "Dimensionen", "Zielmarkt", "VariantenID", "OptionID"]
         ) {
             const arr1 = normalizeToArray(firstObj);
             const arr2 = normalizeToArray(secondObj);
@@ -373,6 +375,10 @@
             ErrorKeys: [],
             GenErrors: false
         };
+
+        // add logic to find current model in list.json and store it
+        // check sets --> properties --> products --> product against ArtikelTyp price changes
+
         var firmID = secondSelectedXML.split('_')[0], firmName = secondSelectedXML.split('_')[1];
         var matchedIDs = [];
         $.each(firstXML, function (id, val) {
@@ -517,6 +523,7 @@
             var prodNumber = firstSelectedXML.split('_')[0];
             $('#errorList').append('<br><br><span class="bigError">!! INFO !! - Das 3D Modell zur XML <span style="color:white;">' + firstSelectedXML + '</span> ist nicht in Verwendung.<br><span style="color:white;">Entweder ist es ausgelaufen oder noch nicht aktiv, bitte im Jira pr&uuml;fen ob das Modell bestellt ist oder nicht: </span><a target="_blank" href="https://jira.xxxlgroup.com/browse/DM-3247?filter=40833&jql=project%20%3D%20DM%20AND%20Systeme%20%3D%20%223D%20Konfigurierbar%22%20AND%20summary%20%20~%20%22'+prodNumber+'%22">Jira Link</a></span>');
         }
+        $('#errorList').append('<br><br><span class="noErrors">Schiene:</span> <span style="color:white;">' + secondXMLCatalogID + '</span>');
         if (errorLog.MissingLang.length > 0) {
             errorLog.MissingLang = [...new Set(errorLog.MissingLang)];
             $('#errorList').append('<br><br><span class="bigError">!! ACHTUNG !! - Zielm&auml;rkte in Verwendung wurden entfernt: <span style="color:white;">' + errorLog.MissingLang.join(', ') + '</span></span>');
@@ -614,7 +621,7 @@
             }) 
             openXMLData = {
                 ArtikelType: $(this).attr('TYPE_NO'),
-                ArtikelText: $(this).find('SHORT_TEXT').find('TEXT').text(),
+                // ArtikelText: $(this).find('SHORT_TEXT').find('TEXT').text(),
                 Preise: prices,
                 Dimensionen: measures
             }
@@ -622,15 +629,15 @@
         })
         $(response).find('FEATURE').each(function () {
             openXMLData = {
-                VariantenID: $(this).attr('FEATURE_NO'),
-                VariantenText: $(this).find('FEATURE_TEXT').find('TEXT').text()
+                VariantenID: $(this).attr('FEATURE_NO')
+                // VariantenText: $(this).find('FEATURE_TEXT').find('TEXT').text()
             }
             dataArrayFeature.push(openXMLData);
         })
         $(response).find('OPTION').each(function () {
             openXMLData = {
-                OptionID: $(this).attr('OPTION_KEY'),
-                OptionText: $(this).find('OPTION_TEXT').find('TEXT').text()
+                OptionID: $(this).attr('OPTION_KEY')
+                // OptionText: $(this).find('OPTION_TEXT').find('TEXT').text()
             }
             dataArrayFeature.push(openXMLData);
         })
@@ -644,9 +651,13 @@
         //     }); 
         // })
         // sort and compose result XML data for both files
+
         dataArrayCatalog.sort(function (a, b) { if (a.Zielmarkt < b.Zielmarkt) { return -1 } if (a.Zielmarkt > b.Zielmarkt) { return 1 } return 0 })
         dataArrayArticle.sort(function (a, b) { if (a.ArtikelType < b.ArtikelType) { return -1 } if (a.ArtikelType > b.ArtikelType) { return 1 } return 0 })
         dataArrayFeature.sort(function (a, b) { if (a.VariantenText < b.VariantenText) { return -1 } if (a.VariantenText > b.VariantenText) { return 1 } return 0 })
+
+
+
         if (tableID === 'tableOld') {
             secondXMLDataVersion = $(response).find('DATA_VERSION').text();
             secondXMLSerieNo = $(response).find('SERIE').attr('SERIE_NO');

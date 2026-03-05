@@ -183,7 +183,8 @@ def find_all_json(root_path):
                                     'entlastung': data.get('settings',{}).get('entlastung', ''),
                                     'aktion': data.get('settings',{}).get('aktion', ''),
                                     'pricing': data.get('settings', {}).get('pricing', ''),
-                                    'properties': data.get('properties', [])
+                                    'properties': data.get('properties', []),
+                                    'sets': data.get('sets', [])
                                 }
                             }
                             fullModelList.update(model_object)
