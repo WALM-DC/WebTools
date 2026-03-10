@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>XML-Checker_v4</title>
+    <title>XML-Checker</title>
     <link rel="stylesheet" href="https://walm-dc.github.io/WebTools/public/mattStyle.css">
     <script src="https://walm-dc.github.io/WebTools/public/jquery-3.7.1.min.js"></script>
     <script src="https://walm-dc.github.io/WebTools/public/ddtf.js"></script>
@@ -181,9 +181,6 @@
                             <span>XMLs Ausw&auml;hlen</span>
                         </label>
                             <input type="file" id="xmlFiles" multiple accept=".xml" />
-                        <button type="button" id="extractPEHArticles"><span>PEH - Artikel IDs</span></button>
-                        <button type="button" id="extractArticles"><span>Abweichende<br>Artikel IDs</span></button>                            
-                        <button type="button" id="extractOptionsAndVariants"><span>Abweichende<br>Option &<br>Varianten IDs</span></button>
                         <button type="button" id="hideFields"><span>Identische<br>Zeilen einblenden</span></button>
                     </form>
                 </div>
@@ -219,7 +216,8 @@
     var checkTargetCountryID = false;
     var modelListJSON = {};
     var combinedRegistry = [], combinedRegistryNameList = [];
-    var activeMainEntry = '';
+    var activeMainEntry = '', railText = '';
+    var errorNames = ["ArtikelType", "ArtikelText", "Preise", "Dimensionen", "Zielmarkt", "VariantenID", "OptionID"];
 
     function checkAndCompareTables() {
         // Helper: convert object-with-numeric-keys into a dense array (0..max)
@@ -262,7 +260,8 @@
         function alignByKeyWithEmptyOnTop(
             firstObj,
             secondObj,
-            keyOrder = ["ArtikelType", "ArtikelText", "Preise", "Dimensionen", "Zielmarkt", "VariantenID", "VariantenText", "OptionID", "OptionText"]
+            // keyOrder = ["ArtikelType", "ArtikelText", "Preise", "Dimensionen", "Zielmarkt", "VariantenID", "VariantenText", "OptionID", "OptionText"]
+            keyOrder = ["ArtikelType", "ArtikelText", "Preise", "Dimensionen", "Zielmarkt", "VariantenID", "OptionID"]
         ) {
             const arr1 = normalizeToArray(firstObj);
             const arr2 = normalizeToArray(secondObj);
@@ -353,7 +352,6 @@
         $('#resultTable').empty();
         if(noSecondXML){
             $('#resultTable').append('<tr><th>Zeile</th><th>XML Bezeichnung</th><th>XML: ' + firstSelectedXML + '</th></tr>');
-            $('.resultDiv').removeClass('loading');
         } else {
             $('#resultTable').append('<tr><th>Zeile</th><th>XML Bezeichnung</th><th>XML: ' + firstSelectedXML + '</th><th>XML: ' + secondSelectedXML + '</th></tr>');
         }
@@ -372,14 +370,20 @@
             OptionIDsInUse:[],
             PriceChangesCount: 0,
             PriceChangesArticles: [],
-            PriceChangesArticleIDs: [],
             MeasuresInUseCount: 0,
             MeasuresInUse:[],
+            ArticlesInUse:[],
             ErrorKeys: [],
             GenErrors: false
         };
+
         var firmID = secondSelectedXML.split('_')[0], firmName = secondSelectedXML.split('_')[1];
-        var matchedIDs = [];
+        var matchedIDs = [], currentModel = {};
+        $.each(modelListJSON, function(modelId, modelVal){
+            if(modelId.indexOf(firmName)>-1 || modelId.indexOf(firmID)>-1){
+                currentModel = modelVal;
+            }
+        });
         $.each(firstXML, function (id, val) {
             $.each(val, function (sId, sVal) {
                 var firstVal = sVal;
@@ -390,21 +394,15 @@
                 } else {
                     // if (secondVal === '-KEIN EINTRAG-' || firstVal === '-KEIN EINTRAG-') {
                     if (secondVal === '-KEIN EINTRAG-') {
-                        // errorLog.Empty++;
-                        // errorLog.EmptyLines.push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
                         highlighter = 'empty hideMe';
                         if(secondVal !== '-KEIN EINTRAG-' && sId === 'VariantenID'){
                             errorLog.IDsInUseCount++;
                             errorLog.IDsInUse.push(secondVal);
                             $.each(errorLog.IDsInUse, function(id, val){
-                                $.each(modelListJSON, function(modelId, modelVal){
-                                    if(modelId.indexOf(firmName)>-1 || modelId.indexOf(firmID)>-1){
-                                        $.each(modelVal.properties, function(propId, propVal){
-                                            if(propVal.property === val){
-                                                matchedIDs.push('!! ACHTUNG !! - VariantenIDs in Verwendung wurden entfernt: <span style="color:white;">Modell: '+modelId+ ' - VariantenID: '+val+'</span>');
-                                                highlighter = 'noMatch';
-                                            }
-                                        });
+                                $.each(currentModel.properties, function(propId, propVal){
+                                    if(propVal.property === val){
+                                        matchedIDs.push('!! ACHTUNG !! - VariantenIDs in Verwendung wurden entfernt: <span style="color:white;">Modell: '+modelId+ ' - VariantenID: '+val+'</span>');
+                                        highlighter = 'noMatch';
                                     }
                                 });
                             });
@@ -413,14 +411,10 @@
                             errorLog.OptionIDsInUseCount++;
                             errorLog.OptionIDsInUse.push(secondVal);
                             $.each(errorLog.OptionIDsInUse, function(id, val){
-                                $.each(modelListJSON, function(modelId, modelVal){
-                                    if(modelId.indexOf(firmName)>-1 || modelId.indexOf(firmID)>-1){
-                                        $.each(modelVal.properties, function(propId, propVal){
-                                            if(propVal.property === val){
-                                                matchedIDs.push('!! ACHTUNG !! - OptionIDs in Verwendung wurden entfernt: <span style="color:white;">Modell: '+modelId+ ' - OptionID: '+val+'</span>');
-                                                highlighter = 'noMatch';
-                                            }
-                                        });
+                                $.each(currentModel.properties, function(propId, propVal){
+                                    if(propVal.property === val){
+                                        matchedIDs.push('!! ACHTUNG !! - OptionIDs in Verwendung wurden entfernt: <span style="color:white;">Modell: '+modelId+ ' - OptionID: '+val+'</span>');
+                                        highlighter = 'noMatch';
                                     }
                                 });
                             });
@@ -429,16 +423,12 @@
                         //     errorLog.MeasuresInUseCount++;
                         //     errorLog.MeasuresInUse.push(secondVal);
                         //     $.each(errorLog.MeasuresInUse, function(id, val){
-                        //         $.each(modelListJSON, function(modelId, modelVal){
-                        //             if(modelId.indexOf(firmName)>-1 || modelId.indexOf(firmID)>-1){
-                        //                 $.each(modelVal.properties, function(propId, propVal){
-                        //                     if(propVal.property === val){
-                        //                         matchedIDs.push('!! ACHTUNG !! - Dimensionen wurden entfernt: <span style="color:white;">Modell: '+modelId+ ' - Maß: '+val+'</span>');
-                        //                         highlighter = 'noMatch';
-                        //                     }
-                        //                 });
-                        //             }
-                        //         });
+                //                 $.each(modelVal.properties, function(propId, propVal){
+                //                     if(propVal.property === val){
+                //                         matchedIDs.push('!! ACHTUNG !! - Dimensionen wurden entfernt: <span style="color:white;">Modell: '+modelId+ ' - Maß: '+val+'</span>');
+                //                         highlighter = 'noMatch';
+                //                     }
+                //                 });
                         //     });
                         // }
                     } else {
@@ -449,33 +439,44 @@
                     if(sId === 'Preise'){
                         var firstPrices = firstVal.split(', ').filter(p => p.trim() !== '');
                         var secondPrices = secondVal.split(', ').filter(p => p.trim() !== '');
+                        var changedArticleInUse = false;
                         if((firstPrices.length === secondPrices.length  || firstPrices.length > secondPrices.length) && secondPrices.every(fp => firstPrices.includes(fp))){
                             // Prices are the same, order doesn't matter
                             highlighter = 'match hideMe';
                         } else if (secondPrices[0] !== '-KEIN EINTRAG-') {
-                            errorLog.PriceChangesCount++;
-                            errorLog.PriceChangesArticles.push(secondVal);
-                            if(firstPrices[0] !== '-KEIN EINTRAG-'){
-                                errorLog.PriceChangesArticleIDs.push(activeMainEntry);
-                            }
-
-                            $.each(secondPrices, function(id, val){
-                                if(firstPrices[id] !== val && firstPrices[id] !== undefined && firstPrices[id] !== '-KEIN EINTRAG-'){
-                                    firstPrices[id] = '<span style="font-weight:bold;">'+firstPrices[id]+'</span>';
-                                }
+                            $.each(currentModel.sets, function(setId, setVal){
+                                $.each(setVal.set.products, function(prodId, prodVal){
+                                    if(prodVal.product.indexOf(activeMainEntry) > -1){
+                                        changedArticleInUse = true;
+                                        if($.inArray(activeMainEntry, errorLog.ArticlesInUse) === -1){
+                                            errorLog.ArticlesInUse.push(activeMainEntry);
+                                        }
+                                    }
+                                });
                             });
                             
-                            firstVal = firstPrices.join(', ');
+                            if(changedArticleInUse){
+                                errorLog.PriceChangesCount++;
+                                errorLog.PriceChangesArticles.push(secondVal);
+                                
+                                $.each(secondPrices, function(id, val){
+                                    if(firstPrices[id] !== val && firstPrices[id] !== undefined && firstPrices[id] !== '-KEIN EINTRAG-'){
+                                        firstPrices[id] = '<span style="font-weight:bold;">'+firstPrices[id]+'</span>';
+                                    }
+                                });
+                                
+                                firstVal = firstPrices.join(', ');
 
-                            $.each(errorLog.PriceChangesArticles, function(id, val){
-                                if(activeMainEntry !== ''){
-                                    $('#resultTable tr.match.mainEntry[activeid="'+activeMainEntry+'"], tr.match.subEntry[activeid="'+activeMainEntry+'"]').each(function(){
-                                        if(!$(this).hasClass('noMatch')){
-                                            $(this).removeClass('match').removeClass('hideMe').addClass('noMatch belongsToMatch');
-                                        }
-                                    });
-                                }
-                            });
+                                $.each(errorLog.PriceChangesArticles, function(id, val){
+                                    if(activeMainEntry !== ''){
+                                        $('#resultTable tr.match.mainEntry[activeid="'+activeMainEntry+'"], tr.match.subEntry[activeid="'+activeMainEntry+'"]').each(function(){
+                                            if(!$(this).hasClass('noMatch')){
+                                                $(this).removeClass('match').removeClass('hideMe').addClass('noMatch belongsToMatch');
+                                            }
+                                        });
+                                    }
+                                });
+                            }
                         }
                     }
                     errorLog.ErrorKeys.push(sId);
@@ -506,11 +507,7 @@
                             errorLog.UsedLang = registryEntry.Markets.join(', ');
                         }
                     });
-                    if(firstVal !== '-KEIN EINTRAG-'){
-                        activeMainEntry = firstVal;
-                    } else {
-                        activeMainEntry = secondVal;
-                    }
+                    activeMainEntry = firstVal;
                     highlighter += ' mainEntry';
                 }
                 if(noSecondXML){
@@ -529,9 +526,14 @@
             var prodNumber = firstSelectedXML.split('_')[0];
             $('#errorList').append('<br><br><span class="bigError">!! INFO !! - Das 3D Modell zur XML <span style="color:white;">' + firstSelectedXML + '</span> ist nicht in Verwendung.<br><span style="color:white;">Entweder ist es ausgelaufen oder noch nicht aktiv, bitte im Jira pr&uuml;fen ob das Modell bestellt ist oder nicht: </span><a target="_blank" href="https://jira.xxxlgroup.com/browse/DM-3247?filter=40833&jql=project%20%3D%20DM%20AND%20Systeme%20%3D%20%223D%20Konfigurierbar%22%20AND%20summary%20%20~%20%22'+prodNumber+'%22">Jira Link</a></span>');
         }
+        $('#errorList').append('<br><br><span class="noErrors">Schiene:</span> <span style="color:white;">' + secondXMLCatalogID + '</span>');
         if (errorLog.MissingLang.length > 0) {
             errorLog.MissingLang = [...new Set(errorLog.MissingLang)];
             $('#errorList').append('<br><br><span class="bigError">!! ACHTUNG !! - Zielm&auml;rkte in Verwendung wurden entfernt: <span style="color:white;">' + errorLog.MissingLang.join(', ') + '</span></span>');
+        }
+        if (errorLog.ArticlesInUse.length > 0) {
+            var firstFive = errorLog.ArticlesInUse.slice(0, 5), remainingCount = errorLog.ArticlesInUse.length - firstFive.length;
+            $('#errorList').append('<br><br><span class="bigError">Artikel in Verwendung mit PEH: <span style="color:white;">' + firstFive.join(', ') + (remainingCount > 0 ? ' und ' + remainingCount + ' weitere' : '') + '</span></span>');
         }
         if(firstXMLDataVersion<secondXMLDataVersion){
             $('#errorList').append('<br><br>Datenversion:<br>' + secondSelectedXML + ': <span style="color:white;">' + secondXMLDataVersion + '</span><br>' + firstSelectedXML + ': <span class="bigError">' + firstXMLDataVersion + '</span>');
@@ -626,7 +628,7 @@
             }) 
             openXMLData = {
                 ArtikelType: $(this).attr('TYPE_NO'),
-                ArtikelText: $(this).find('SHORT_TEXT').find('TEXT').text(),
+                // ArtikelText: $(this).find('SHORT_TEXT').find('TEXT').text(),
                 Preise: prices,
                 Dimensionen: measures
             }
@@ -634,15 +636,15 @@
         })
         $(response).find('FEATURE').each(function () {
             openXMLData = {
-                VariantenID: $(this).attr('FEATURE_NO'),
-                VariantenText: $(this).find('FEATURE_TEXT').find('TEXT').text()
+                VariantenID: $(this).attr('FEATURE_NO')
+                // VariantenText: $(this).find('FEATURE_TEXT').find('TEXT').text()
             }
             dataArrayFeature.push(openXMLData);
         })
         $(response).find('OPTION').each(function () {
             openXMLData = {
-                OptionID: $(this).attr('OPTION_KEY'),
-                OptionText: $(this).find('OPTION_TEXT').find('TEXT').text()
+                OptionID: $(this).attr('OPTION_KEY')
+                // OptionText: $(this).find('OPTION_TEXT').find('TEXT').text()
             }
             dataArrayFeature.push(openXMLData);
         })
@@ -656,9 +658,13 @@
         //     }); 
         // })
         // sort and compose result XML data for both files
+
         dataArrayCatalog.sort(function (a, b) { if (a.Zielmarkt < b.Zielmarkt) { return -1 } if (a.Zielmarkt > b.Zielmarkt) { return 1 } return 0 })
         dataArrayArticle.sort(function (a, b) { if (a.ArtikelType < b.ArtikelType) { return -1 } if (a.ArtikelType > b.ArtikelType) { return 1 } return 0 })
         dataArrayFeature.sort(function (a, b) { if (a.VariantenText < b.VariantenText) { return -1 } if (a.VariantenText > b.VariantenText) { return 1 } return 0 })
+
+
+
         if (tableID === 'tableOld') {
             secondXMLDataVersion = $(response).find('DATA_VERSION').text();
             secondXMLSerieNo = $(response).find('SERIE').attr('SERIE_NO');
@@ -834,20 +840,6 @@
 
     $('#legende').click(function () {
         $(this).toggleClass('expanded');
-    });
-
-    $('#extractPEHArticles').click(function () {
-        // console.log(errorLog.PriceChangesArticleIDs);
-        var articleIDs = errorLog.PriceChangesArticleIDs.map(function(val) {
-            return '|ArtikelID|' + val + '|\n';
-        });
-        console.log(articleIDs);
-    });
-    $('#extractArticles').click(function () {
-        console.log(errorLog);
-    });
-    $('#extractOptionsAndVariants').click(function () {
-        console.log(errorLog);
     });
 
     $('#hideFields').click(function () {
