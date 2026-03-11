@@ -379,6 +379,7 @@
 
         var firmID = secondSelectedXML.split('_')[0], firmName = secondSelectedXML.split('_')[1];
         var matchedIDs = [], currentModel = {};
+        var firstXMLNoNumb = firstSelectedXML.substring(0, firstSelectedXML.lastIndexOf('_')+1);
         $.each(modelListJSON, function(modelId, modelVal){
             if(modelId.indexOf(firmName)>-1 || modelId.indexOf(firmID)>-1){
                 currentModel = modelVal;
@@ -490,8 +491,8 @@
                         errorLog.Lang.push(firstVal);
                     } else if (firstVal === '-KEIN EINTRAG-'){
                         $(combinedRegistry).each(function(index, registryEntry){
-                            var firstXMLNoNumb = firstSelectedXML.substring(0, firstSelectedXML.lastIndexOf('_')+1);
                             if($.inArray(firstXMLNoNumb, registryEntry.Filename) > -1){
+                                console.log(firstXMLNoNumb, registryEntry);
                                 errorLog.MissingLang.push(secondVal);
                                 if(errorLog.UsedLang.indexOf(secondVal) === -1){
                                     errorLog.UsedLang = registryEntry.Markets.join(', ');
@@ -502,8 +503,8 @@
                     }
                 } else {
                     $(combinedRegistry).each(function(index, registryEntry){
-                        var firstXMLNoNumb = firstSelectedXML.substring(0, firstSelectedXML.lastIndexOf('_')+1);
                         if($.inArray(firstXMLNoNumb, registryEntry.Filename) > -1){
+                            console.log(firstXMLNoNumb, registryEntry);
                             errorLog.UsedLang = registryEntry.Markets.join(', ');
                         }
                     });

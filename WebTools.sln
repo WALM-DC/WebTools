@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AktionspreisFixer", "AktionspreisFixer", "{A63FF6CC-4965-3433-11C1-9CEDEAF3F9D2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProductStatusChecker", "ProductStatusChecker", "{3BBC809E-412A-8A78-EB49-09EAD5087CE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "📌 1. ProductStatusChecker", "AktionspreisFixer\ProductStatusChecker\📌 1. ProductStatusChecker.csproj", "{74E087A3-6BBB-300D-4817-D55F6ECAC37B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{74E087A3-6BBB-300D-4817-D55F6ECAC37B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74E087A3-6BBB-300D-4817-D55F6ECAC37B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74E087A3-6BBB-300D-4817-D55F6ECAC37B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74E087A3-6BBB-300D-4817-D55F6ECAC37B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3BBC809E-412A-8A78-EB49-09EAD5087CE1} = {A63FF6CC-4965-3433-11C1-9CEDEAF3F9D2}
+		{74E087A3-6BBB-300D-4817-D55F6ECAC37B} = {3BBC809E-412A-8A78-EB49-09EAD5087CE1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B693CFC5-33A2-4FB6-BABA-0309E55D4D22}
+	EndGlobalSection
+EndGlobal
