@@ -491,14 +491,16 @@
                         errorLog.Lang.push(firstVal);
                     } else if (firstVal === '-KEIN EINTRAG-'){
                         $(combinedRegistry).each(function(index, registryEntry){
-                            if($.inArray(firstXMLNoNumb, registryEntry.Filename) > -1){
-                                console.log(firstXMLNoNumb, registryEntry);
-                                errorLog.MissingLang.push(secondVal);
-                                if(errorLog.UsedLang.indexOf(secondVal) === -1){
-                                    errorLog.UsedLang = registryEntry.Markets.join(', ');
-                                }
-                                highlighter = 'noMatch';
-                            }
+                            $.each(registryEntry.Filename, function(fIndex, fValue){
+                                console.log(firstXMLNoNumb, fIndex, fValue); 
+                                // if(fValue[0].indexOf(firstXMLNoNumb) > -1){
+                                //     errorLog.MissingLang.push(secondVal);
+                                //     if(errorLog.UsedLang.indexOf(secondVal) === -1){
+                                //         errorLog.UsedLang = registryEntry.Markets.join(', ');
+                                //     }
+                                //     highlighter = 'noMatch';
+                                // }
+                            });
                         });
                     }
                 } else {
@@ -858,17 +860,20 @@
     }
     function combineRegistries(curRegistry, fileName){
         $.each(curRegistry.Domains, function( key, value ) {
-            var addressArray = [], marketArray = [], pathArray = [];
-            if(value.ComService === undefined) return; //skip entries without address
+            var addressArray = [], marketArray = [], addressID = '';
+            if(typeof value.ComService === 'undefined') return; //skip entries without address
             var entry = {};
-            if(value.ComService.Setups === undefined){
+            if(typeof value.ComService.Setups === 'undefined'){ //if no setups, take address and markets from comservice level
                 formatNameAndCheckDupes(value.ComService.Address);
                 $(value.ComService.Markets).each(function(mIndex, mValue) {
                     $.each(mValue, function(key, val) {
                         marketArray.push(`${key}: ${val}`);
                     });
                 });
-                addressArray.push(value.ComService.Address.replace('https://ig-creator.xxxlgroup.com/idm/', '').replace('lokal/', '').replace('*.xml', ''));
+                addressID = value.ComService.Address.replace('https://ig-creator.xxxlgroup.com/idm/', '').replace('lokal/', '').replace('*.xml', '');
+                addressArray.push(
+                    {[addressID]: marketArray}
+                );
             } else {
                 addressArray = [];
                 $.each(value.ComService.Setups, function( setupKey, setupValue ) {
@@ -879,15 +884,16 @@
                             marketArray.push(`${key}: ${val}`);
                         });
                     });
-                    addressArray.push(setupValue.Address.replace('https://ig-creator.xxxlgroup.com/idm/', '').replace('lokal/', '').replace('*.xml', ''));
+                    addressID = setupValue.Address.replace('https://ig-creator.xxxlgroup.com/idm/', '').replace('lokal/', '').replace('*.xml', '');
+                    addressArray.push(
+                        {[addressID]: marketArray}
+                    );
                 });
             }
             entry = {
                 ID: key,
-                Filename: addressArray,
-                Markets: marketArray
+                Filename: addressArray
             }
-
             const isDuplicate = combinedRegistry.some(item => item.ID.toLowerCase() === entry.ID.toLowerCase());
             if (!isDuplicate) {
                 combinedRegistry.push(entry);

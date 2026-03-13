@@ -857,10 +857,10 @@
     }
     function combineRegistries(curRegistry, fileName){
         $.each(curRegistry.Domains, function( key, value ) {
-            var addressArray = [], marketArray = [], pathArray = [];
-            if(value.ComService === undefined) return; //skip entries without address
+            var addressArray = [], marketArray = [];
+            if(typeof value.ComService === 'undefined') return; //skip entries without address
             var entry = {};
-            if(value.ComService.Setups === undefined){
+            if(typeof value.ComService.Setups === 'undefined'){ //if no setups, take address and markets from comservice level
                 formatNameAndCheckDupes(value.ComService.Address);
                 $(value.ComService.Markets).each(function(mIndex, mValue) {
                     $.each(mValue, function(key, val) {
