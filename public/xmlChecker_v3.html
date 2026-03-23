@@ -492,7 +492,16 @@
                     } else if (firstVal === '-KEIN EINTRAG-'){
                         $(combinedRegistry).each(function(index, registryEntry){
                             $.each(registryEntry.Filename, function(fIndex, fValue){
-                                console.log(firstXMLNoNumb, fIndex, fValue); 
+                                if(fValue[firstXMLNoNumb] !== undefined){
+                                    console.log(fValue[firstXMLNoNumb]); 
+                                    return;
+                                    // errorLog.MissingLang.push(secondVal);
+                                    // if(errorLog.UsedLang.indexOf(secondVal) === -1){
+                                    //     errorLog.UsedLang = registryEntry.Markets.join(', ');
+                                    // }
+                                    // highlighter = 'noMatch';
+                                }
+                                
                                 // if(fValue[0].indexOf(firstXMLNoNumb) > -1){
                                 //     errorLog.MissingLang.push(secondVal);
                                 //     if(errorLog.UsedLang.indexOf(secondVal) === -1){
