@@ -223,40 +223,44 @@ def combine(stoff_list: List[Dict[str, str]],
     combined: List[Dict[str, str]] = []
     misses = 0
 
+    print(assets_list[:10])
+
     for a in assets_list:
         match = find_match(a, stoff_idx)
 
-        print(f"Asset: lieferant='{a.get('lieferant')}', modell='{a.get('modell')}', textur='{a.get('textur')}' -> Match: {bool(match)}")
+        print(match)
 
-        if not match and misses < debug_limit:
-            misses += 1
-            print("NO MATCH:",
-                  "lieferant=", repr(a.get("lieferant")),
-                  "modell=", repr(a.get("modell")),
-                  "textur=", repr(a.get("textur")),
-                  "file=", repr(a.get("fileName")),
-                  "ordner=", repr(a.get("ordner")))
+        # print(f"Asset: lieferant='{a.get('lieferant')}', modell='{a.get('modell')}', textur='{a.get('textur')}' -> Match: {bool(match)}")
 
-        combined.append({
-            # stoff fields (if found)
-            "schiene": match.get("schiene", "") if match else "",
-            "lieferantNr": match.get("lieferantNr", "") if match else "",
-            "lieferantName": match.get("lieferantName", "") if match else "",
-            "modell": match.get("modell", "") if match else norm(a.get("modell")),
-            "stoff": match.get("stoff", "") if match else "",  # optional; keep if you want
-            "farbe": match.get("farbe", "") if match else "",
-            "zusammensetzung": match.get("zusammensetzung", "") if match else "",
+        # if not match and misses < debug_limit:
+        #     misses += 1
+        #     print("NO MATCH:",
+        #           "lieferant=", repr(a.get("lieferant")),
+        #           "modell=", repr(a.get("modell")),
+        #           "textur=", repr(a.get("textur")),
+        #           "file=", repr(a.get("fileName")),
+        #           "ordner=", repr(a.get("ordner")))
 
-            # asset fields (always)
-            "inOrExtern": norm(a.get("inOrExtern")),
-            "ordner": norm(a.get("ordner")),
-            "textur": norm(a.get("textur")),
-            "fileName": norm(a.get("fileName")),
-            "lieferant": norm(a.get("lieferant")),
-            "rawPath": norm(a.get("rawPath")),
-        })
+    #     combined.append({
+    #         # stoff fields (if found)
+    #         "schiene": match.get("schiene", "") if match else "",
+    #         "lieferantNr": match.get("lieferantNr", "") if match else "",
+    #         "lieferantName": match.get("lieferantName", "") if match else "",
+    #         "modell": match.get("modell", "") if match else norm(a.get("modell")),
+    #         "stoff": match.get("stoff", "") if match else "",  # optional; keep if you want
+    #         "farbe": match.get("farbe", "") if match else "",
+    #         "zusammensetzung": match.get("zusammensetzung", "") if match else "",
 
-    return combined
+    #         # asset fields (always)
+    #         "inOrExtern": norm(a.get("inOrExtern")),
+    #         "ordner": norm(a.get("ordner")),
+    #         "textur": norm(a.get("textur")),
+    #         "fileName": norm(a.get("fileName")),
+    #         "lieferant": norm(a.get("lieferant")),
+    #         "rawPath": norm(a.get("rawPath")),
+    #     })
+
+    # return combined
 
 # def combine(stoff_list: List[Dict[str, str]], assets_list: List[Dict[str, str]], model_data: Any) -> List[Dict[str, str]]:
 #     combined: List[Dict[str, str]] = []
