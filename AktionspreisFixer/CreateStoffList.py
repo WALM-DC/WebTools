@@ -49,7 +49,6 @@ def read_text(source: str) -> str:
     r.raise_for_status()
     return r.content.decode("utf-8-sig", errors="replace")
 
-
 def read_json(source: str):
     return json.loads(read_text(source).lstrip("\ufeff"))
 
@@ -64,7 +63,6 @@ def fetch_text(url: str) -> str:
         req = Request(url, headers={"User-Agent": "python"})
         with urlopen(req, timeout=60) as resp:
             return resp.read().decode("utf-8", errors="replace")
-
 
 def fetch_json(url: str) -> Any:
     text = fetch_text(url)
@@ -111,36 +109,6 @@ def parse_stoffe_csv(csv_text: str) -> List[Dict[str, str]]:
         })
 
     return stoff_list
-
-
-# def parse_stoffe_csv(csv_text: str) -> List[Dict[str, str]]:
-#     """
-#     Mirrors the JS indices:
-#       parts[2]=lieferantNr, [3]=lieferantName, [5]=modell, [6]=stoff, [7]=farbe, [8]=zusammensetzung
-#     Uses csv.reader (safer than split(',')).
-#     """
-#     stoff_list: List[Dict[str, str]] = []
-
-#     reader = csv.reader(StringIO(csv_text))
-#     for row in reader:
-#         if not row or all((c.strip() == "" for c in row)):
-#             continue
-#         # Guard for short lines
-#         if len(row) <= 8:
-#             continue
-
-#         stoff_list.append({
-#             "schiene": row[1].strip(),
-#             "lieferantNr": row[2].strip(),
-#             "lieferantName": row[3].strip(),
-#             "modell": row[5].strip(),
-#             "stoff": row[6].strip().replace(" ", "_"),
-#             "farbe": row[7].strip(),
-#             "zusammensetzung": row[8].strip(),
-#         })
-
-#     return stoff_list
-
 
 def parse_assets(assets_data: Any) -> List[Dict[str, str]]:
     """
@@ -194,13 +162,13 @@ def find_match(asset: Dict[str, str],
                stoff_idx: Dict[Tuple[str, str], List[Dict[str, str]]],
                allow_fallback_unique_stoff: bool = False) -> Optional[Dict[str, str]]:
 
-    a_modell = low(asset.get("modell"))
+    # a_modell = low(asset.get("modell"))
     a_textur = low(asset.get("textur"))
     a_liefer = norm(asset.get("lieferant"))
     a_liefer_l = a_liefer.lower()
 
     # 1) Strong match: modell + stoff/textur + supplier
-    candidates = stoff_idx.get((a_modell, a_textur), [])
+    candidates = stoff_idx.get((a_textur), [])
     for s in candidates:
         if norm(s.get("lieferantNr")) == a_liefer:
             return s
@@ -214,101 +182,45 @@ def find_match(asset: Dict[str, str],
 
     return None
 
-def combine(stoff_list: List[Dict[str, str]],
-            assets_list: List[Dict[str, str]],
-            debug_limit: int = 20) -> List[Dict[str, str]]:
-
-    stoff_idx = build_stoff_index(stoff_list)
-
+def combine(stoff_list: List[Dict[str, str]], assets_list: List[Dict[str, str]]) -> List[Dict[str, str]]:
     combined: List[Dict[str, str]] = []
-    misses = 0
-
-    print(assets_list[:10])
-
+    match: Optional[Dict[str, str]] = None
     for a in assets_list:
-        match = find_match(a, stoff_idx)
+        for s in stoff_list:
+            if s.get("stoff").lower() == a.get("textur").lower():
+                match = s
+                break
 
-        print(match)
+            schiene = match.get("schiene", "") if match else ""
+            lieferNr = match.get("lieferantNr", "") if match else ""
+            lieferName = match.get("lieferantName", "") if match else ""
+            modell = match.get("modell", "") if match else ""
+            farbe = match.get("farbe", "") if match else ""
+            zusammensetzung = match.get("zusammensetzung", "") if match else ""
+                
+        combined.append({
+            "schiene": schiene,
+            "lieferantNr": lieferNr,
+            "lieferantName": lieferName,
+            "inOrExtern": a.get("inOrExtern", ""),
+            "ordner": a.get("ordner", ""),
+            "modell": modell,
+            "textur": a.get("textur", ""),
+            "fileName": a.get("fileName", ""),
+            "farbe": farbe,
+            "zusammensetzung": zusammensetzung,
+        })
 
-        # print(f"Asset: lieferant='{a.get('lieferant')}', modell='{a.get('modell')}', textur='{a.get('textur')}' -> Match: {bool(match)}")
-
-        # if not match and misses < debug_limit:
-        #     misses += 1
-        #     print("NO MATCH:",
-        #           "lieferant=", repr(a.get("lieferant")),
-        #           "modell=", repr(a.get("modell")),
-        #           "textur=", repr(a.get("textur")),
-        #           "file=", repr(a.get("fileName")),
-        #           "ordner=", repr(a.get("ordner")))
-
-    #     combined.append({
-    #         # stoff fields (if found)
-    #         "schiene": match.get("schiene", "") if match else "",
-    #         "lieferantNr": match.get("lieferantNr", "") if match else "",
-    #         "lieferantName": match.get("lieferantName", "") if match else "",
-    #         "modell": match.get("modell", "") if match else norm(a.get("modell")),
-    #         "stoff": match.get("stoff", "") if match else "",  # optional; keep if you want
-    #         "farbe": match.get("farbe", "") if match else "",
-    #         "zusammensetzung": match.get("zusammensetzung", "") if match else "",
-
-    #         # asset fields (always)
-    #         "inOrExtern": norm(a.get("inOrExtern")),
-    #         "ordner": norm(a.get("ordner")),
-    #         "textur": norm(a.get("textur")),
-    #         "fileName": norm(a.get("fileName")),
-    #         "lieferant": norm(a.get("lieferant")),
-    #         "rawPath": norm(a.get("rawPath")),
-    #     })
-
-    # return combined
-
-# def combine(stoff_list: List[Dict[str, str]], assets_list: List[Dict[str, str]], model_data: Any) -> List[Dict[str, str]]:
-#     combined: List[Dict[str, str]] = []
-#     for a in assets_list:
-#         match = None
-#         for s in stoff_list:
-#             # print(f"Comparing asset textur '{a.get('textur', '')}' with stoff '{s.get('stoff', '')}'")
-#             if (s.get("stoff") or "").lower() == (a.get("textur") or "").lower():
-#                 match = s
-#                 break
-
-#         schiene = match.get("schiene", "") if match else ""
-#         lieferNr = match.get("lieferantNr", "") if match else ""
-#         lieferName = match.get("lieferantName", "") if match else ""
-#         modell = match.get("modell", "") if match else ""
-#         farbe = match.get("farbe", "") if match else ""
-#         zusammensetzung = match.get("zusammensetzung", "") if match else ""\
-        
-#         # texInUse = False
-#         # if (a.get("texture") or "") in model_data:
-#         #     texInUse = True
-
-#         combined.append({
-#             "schiene": schiene,
-#             "lieferantNr": lieferNr,
-#             "lieferantName": lieferName,
-#             "inOrExtern": a.get("inOrExtern", ""),
-#             "ordner": a.get("ordner", ""),
-#             "modell": modell,
-#             "textur": a.get("textur", ""),
-#             "fileName": a.get("fileName", ""),
-#             "farbe": farbe,
-#             "zusammensetzung": zusammensetzung,
-#             # "texInUse": "Ja" if texInUse else "Nein",
-#         })
-
-#     return combined
-
+    return combined
 
 def main(output_path: str = "F:\\WebTools\\public\\stoffZusammensetzung.json") -> None:
     stoffe_csv_text = read_text(STOFFE_CSV_URL)
     assets_data = fetch_json(ASSETS_JSON_URL)
-    # model_data = fetch_json(MODEL_JSON_URL)
 
     stoff_list = parse_stoffe_csv(stoffe_csv_text)
     assets_list = parse_assets(assets_data)
+
     combined = combine(stoff_list, assets_list)
-    # combined = combine(stoff_list, assets_list, model_data=model_data)
 
     # Sort combined list by lieferantNr, then by modell, then by textur
     combined.sort(key=operator.itemgetter("lieferantNr", "modell", "textur"))
@@ -317,7 +229,6 @@ def main(output_path: str = "F:\\WebTools\\public\\stoffZusammensetzung.json") -
         json.dump(combined, f, ensure_ascii=False, indent=2)
 
     print(f"Wrote {len(combined)} records to {output_path}")
-
 
 if __name__ == "__main__":
     main()
