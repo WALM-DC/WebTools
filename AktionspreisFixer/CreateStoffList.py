@@ -12,7 +12,7 @@ ASSET_PREFIX = "D:\\inetpub\\wwwroot\\icom\\ICOM\\gfx\\"
 # Das doppelte Backslash am Ende in ASSET_PREFIX ist Absicht, damit wir robust strippen.
 
 STOFFE_CSV_URL = "F:\\WebTools\\public\\Stoffe.csv"
-ASSETS_JSON_URL = "https://ig-creator.xxxlgroup.com/icom/assets.json"
+ASSETS_JSON_URL = "https://ig-creator.xxxlgroup.com/idm/XMLLister/assets.json"
 MODEL_JSON_URL = "https://walm-dc.github.io/WebTools/public/list.json"
 
 EXPECTED_HEADERS = {"Schiene", "Lieferant", "Modell", "Stoffname", "Farbe", "Zusammensetzung"}
