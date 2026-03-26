@@ -60,6 +60,7 @@ def filter_and_save_modellist(fullModelList, prodGroups, ausLieferanten, maxDisc
         json.dump(removeDiscountList, f, indent=2, ensure_ascii=False)
     
     # needs calculation from entlastung and aktion to get correct percentage
+    # calcuation only needed if Aktion > Entlasgung, otherwise we can just set it to 0
 
     # EKP = 10000
     # kaa1 = 310
