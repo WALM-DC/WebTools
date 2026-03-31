@@ -433,53 +433,59 @@
                         //     });
                         // }
                     } else {
-                        errorLog.Errors++;
-                        errorLog.ErrorLines.push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
-                        highlighter = 'noMatch';
-                    }
-                    if(sId === 'Preise'){
-                        var firstPrices = firstVal.split(', ').filter(p => p.trim() !== '');
-                        var secondPrices = secondVal.split(', ').filter(p => p.trim() !== '');
-                        var changedArticleInUse = false;
-                        if((firstPrices.length === secondPrices.length  || firstPrices.length > secondPrices.length) && secondPrices.every(fp => firstPrices.includes(fp))){
-                            // Prices are the same, order doesn't matter
-                            highlighter = 'match hideMe';
-                        } else if (secondPrices[0] !== '-KEIN EINTRAG-') {
-                            $.each(currentModel.sets, function(setId, setVal){
-                                $.each(setVal.set.products, function(prodId, prodVal){
-                                    if(prodVal.product.indexOf(activeMainEntry) > -1){
-                                        changedArticleInUse = true;
-                                        if($.inArray(activeMainEntry, errorLog.ArticlesInUse) === -1){
-                                            errorLog.ArticlesInUse.push(activeMainEntry);
-                                        }
-                                    }
-                                });
-                            });
-                            
-                            if(changedArticleInUse){
-                                errorLog.PriceChangesCount++;
-                                errorLog.PriceChangesArticles.push(secondVal);
-                                
-                                $.each(secondPrices, function(id, val){
-                                    if(firstPrices[id] !== val && firstPrices[id] !== undefined && firstPrices[id] !== '-KEIN EINTRAG-'){
-                                        firstPrices[id] = '<span style="font-weight:bold;">'+firstPrices[id]+'</span>';
-                                    }
-                                });
-                                
-                                firstVal = firstPrices.join(', ');
-
-                                $.each(errorLog.PriceChangesArticles, function(id, val){
-                                    if(activeMainEntry !== ''){
-                                        $('#resultTable tr.match.mainEntry[activeid="'+activeMainEntry+'"], tr.match.subEntry[activeid="'+activeMainEntry+'"]').each(function(){
-                                            if(!$(this).hasClass('noMatch')){
-                                                $(this).removeClass('match').removeClass('hideMe').addClass('noMatch belongsToMatch');
+                        if(sId === 'Preise'){
+                            var firstPrices = firstVal.split(', ').filter(p => p.trim() !== '');
+                            var secondPrices = secondVal.split(', ').filter(p => p.trim() !== '');
+                            var changedArticleInUse = false;
+                            if((firstPrices.length === secondPrices.length  || firstPrices.length > secondPrices.length) && secondPrices.every(fp => firstPrices.includes(fp))){
+                                // Prices are the same, new prices have been added, the order doesn't matter
+                                highlighter = 'match hideMe';
+                            } else if (secondPrices[0] !== '-KEIN EINTRAG-') {
+                                $.each(currentModel.sets, function(setId, setVal){
+                                    $.each(setVal.set.products, function(prodId, prodVal){
+                                        if(prodVal.product.indexOf(activeMainEntry) > -1){
+                                            changedArticleInUse = true;
+                                            if($.inArray(activeMainEntry, errorLog.ArticlesInUse) === -1){
+                                                errorLog.ArticlesInUse.push(activeMainEntry);
                                             }
-                                        });
-                                    }
+                                        }
+                                    });
                                 });
+                                
+                                if(changedArticleInUse){
+                                    errorLog.Errors++;
+                                    errorLog.ErrorLines.push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
+                                    highlighter = 'noMatch';
+                                    
+                                    errorLog.PriceChangesCount++;
+                                    errorLog.PriceChangesArticles.push(secondVal);
+
+                                    $.each(secondPrices, function(id, val){
+                                        if(firstPrices[id] !== val && firstPrices[id] !== undefined && firstPrices[id] !== '-KEIN EINTRAG-'){
+                                            firstPrices[id] = '<span style="font-weight:bold;">'+firstPrices[id]+'</span>';
+                                        }
+                                    });
+                                    
+                                    firstVal = firstPrices.join(', ');
+
+                                    $.each(errorLog.PriceChangesArticles, function(id, val){
+                                        if(activeMainEntry !== ''){
+                                            $('#resultTable tr.match.mainEntry[activeid="'+activeMainEntry+'"], tr.match.subEntry[activeid="'+activeMainEntry+'"]').each(function(){
+                                                if(!$(this).hasClass('noMatch')){
+                                                    $(this).removeClass('match').removeClass('hideMe').addClass('noMatch belongsToMatch');
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
                             }
+                        } else {
+                            errorLog.Errors++;
+                            errorLog.ErrorLines.push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
+                            highlighter = 'noMatch';
                         }
                     }
+                    
                     errorLog.ErrorKeys.push(sId);
                 }
                 // save mainEntry ID and add in custom field to subentries
@@ -536,7 +542,8 @@
             $('#errorList').append('<br><br><span class="noErrors">Das 3D Modell zur XML <span style="color:white;">' + firstSelectedXML + '</span> ist Aktiv in Verwendung.</span>');
         } else {
             var prodNumber = firstSelectedXML.split('_')[0];
-            $('#errorList').append('<br><br><span class="bigError">!! INFO !! - Das 3D Modell zur XML <span style="color:white;">' + firstSelectedXML + '</span> ist nicht in Verwendung.<br><span style="color:white;">Entweder ist es ausgelaufen oder noch nicht aktiv, bitte im Jira pr&uuml;fen ob das Modell bestellt ist oder nicht: </span><a target="_blank" href="https://jira.xxxlgroup.com/browse/DM-3247?filter=40833&jql=project%20%3D%20DM%20AND%20Systeme%20%3D%20%223D%20Konfigurierbar%22%20AND%20summary%20%20~%20%22'+prodNumber+'%22">Jira Link</a></span>');
+            $('#errorList').append('<br><br><span class="bigError">!! INFO !! - Das 3D Modell zur XML <span style="color:white;">' + firstSelectedXML + '</span> ist nicht in Verwendung.<br><span style="color:white;">Entweder ist es ausgelaufen oder noch nicht aktiv, bitte im Jira pr&uuml;fen ob das Modell bestellt ist oder nicht: </span><a target="_blank" href="https://jira.xxxlgroup.com/browse/DM-1968?filter=40833&jql=project%20%3D%20DM%20AND%20Systeme%20%3D%20%223D%20Konfigurierbar%22%20AND%20summary%20%20~%20%22'+prodNumber+'%22%20ORDER%20BY%20summary%20ASC">Jira Link</a></span>');
+            // https://jira.xxxlgroup.com/browse/DM-3247?filter=40833&jql=project%20%3D%20DM%20AND%20Systeme%20%3D%20%223D%20Konfigurierbar%22%20AND%20summary%20%20~%20%22'+prodNumber+'%22         
         }
         $('#errorList').append('<br><br><span class="noErrors">Schiene:</span> <span style="color:white;">' + secondXMLCatalogID + '</span>');
         if (errorLog.MissingLang.length > 0) {
