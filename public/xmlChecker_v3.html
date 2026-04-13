@@ -15,7 +15,7 @@
         .resultDiv {
             width: 100%;
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             justify-content: center;
             padding-top: 14px;
             min-height: 400px;
@@ -201,13 +201,15 @@
                     </select>
                 </div>
             </div>
-            <div class="errorDiv">
-                <h3 id="errorList"></h3>
-            </div>
-            <div class="resultDiv">
-                <table id="resultTable">
+            <div id="exportDiv">
+                <div class="errorDiv">
+                    <h3 id="errorList"></h3>
+                </div>
+                <div class="resultDiv">
+                    <table id="resultTable">
 
-                </table>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -503,7 +505,7 @@
                 } else {
                     $(combinedRegistry).each(function(index, registryEntry){
                         if($.inArray(firstXMLNoNumb, registryEntry.Filename) > -1){
-                            console.log(firstXMLNoNumb, registryEntry);
+                            // console.log(firstXMLNoNumb, registryEntry);
                             errorLog.UsedLang = registryEntry.Markets.join(', ');
                         }
                     });
@@ -518,7 +520,7 @@
                 lineCounter++;
             })
         })
-        console.log(errorLog.Lang);
+        // console.log(errorLog.Lang);
         $(combinedRegistry).each(function(index, registryEntry){
             var lieferantXMLSelected = firstXMLNoNumb.split('_')[0];
             var modellXMLSelected = firstXMLNoNumb.split('_')[2];
@@ -866,6 +868,19 @@
             $(this).html('<span>Identische<br>Zeilen ausblenden</span>');
         }
     });
+
+    $('#saveReport').click(function () {
+        const reportContent = '<html>' + $('head').html() + '<body>' + $('#exportDiv').html() + '</body></html>';
+        const blob = new Blob([reportContent], { type: "text/html" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `XML_Comparison_Report_${new Date().toISOString()}.html`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    });    
 
     function formatNameAndCheckDupes(addressName){
         var entry = addressName.replace('https://ig-creator.xxxlgroup.com/idm/', '').split('*')[0];
