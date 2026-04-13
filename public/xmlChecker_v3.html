@@ -156,6 +156,9 @@
             right: 0px;
             transition: 0.5s ease;
         }
+        .custom-file-upload{
+            margin-bottom: 158px;
+        }
     </style>
 </head>
 
@@ -180,8 +183,9 @@
                         <label for="xmlFiles" class="custom-file-upload">
                             <span>XMLs Ausw&auml;hlen</span>
                         </label>
-                            <input type="file" id="xmlFiles" multiple accept=".xml" />
+                        <input type="file" id="xmlFiles" multiple accept=".xml" />
                         <button type="button" id="hideFields"><span>Identische<br>Zeilen einblenden</span></button>
+                        <button type="button" style="margin-top: 14px;" id="saveReport"><span>Bericht<br>exportieren</span></button>
                     </form>
                 </div>
                 <div>
@@ -495,28 +499,6 @@
                 } else if (sId === "Zielmarkt") {
                     if(firstVal !== '-KEIN EINTRAG-'){
                         errorLog.Lang.push(firstVal);
-                    } else if (firstVal === '-KEIN EINTRAG-'){
-                        $(combinedRegistry).each(function(index, registryEntry){
-                            $.each(registryEntry.Filename, function(fIndex, fValue){
-                                if(fValue[firstXMLNoNumb] !== undefined){
-                                    console.log(fValue[firstXMLNoNumb]); 
-                                    return;
-                                    // errorLog.MissingLang.push(secondVal);
-                                    // if(errorLog.UsedLang.indexOf(secondVal) === -1){
-                                    //     errorLog.UsedLang = registryEntry.Markets.join(', ');
-                                    // }
-                                    // highlighter = 'noMatch';
-                                }
-                                
-                                // if(fValue[0].indexOf(firstXMLNoNumb) > -1){
-                                //     errorLog.MissingLang.push(secondVal);
-                                //     if(errorLog.UsedLang.indexOf(secondVal) === -1){
-                                //         errorLog.UsedLang = registryEntry.Markets.join(', ');
-                                //     }
-                                //     highlighter = 'noMatch';
-                                // }
-                            });
-                        });
                     }
                 } else {
                     $(combinedRegistry).each(function(index, registryEntry){
@@ -535,8 +517,23 @@
                 }
                 lineCounter++;
             })
-
         })
+        console.log(errorLog.Lang);
+        $(combinedRegistry).each(function(index, registryEntry){
+            var lieferantXMLSelected = firstXMLNoNumb.split('_')[0];
+            var modellXMLSelected = firstXMLNoNumb.split('_')[2];
+            if(lieferantXMLSelected === registryEntry.Lieferant && modellXMLSelected === registryEntry.Modell){
+                errorLog.UsedLang = registryEntry.Filename[firstXMLNoNumb].join(', ');
+                if(errorLog.UsedLang !== ''){
+                    var usedLangArr = errorLog.UsedLang.split(', ');
+                    $.each(usedLangArr, function(lIndex, lValue){
+                        if(errorLog.Lang.indexOf(lValue) === -1){
+                            errorLog.MissingLang.push(lValue);
+                        }
+                    });
+                }
+            }
+        });
         var shortXmlName = removeAfterLastUnderscore(firstSelectedXML);
         if($.inArray(shortXmlName, combinedRegistryNameList) > -1){
             $('#errorList').append('<br><br><span class="noErrors">Das 3D Modell zur XML <span style="color:white;">' + firstSelectedXML + '</span> ist Aktiv in Verwendung.</span>');
@@ -876,7 +873,7 @@
     }
     function combineRegistries(curRegistry, fileName){
         $.each(curRegistry.Domains, function( key, value ) {
-            var addressArray = [], marketArray = [], addressID = '';
+            var addressArray = [], marketArray = [], addressID = '', lieferant = '', modell = '';
             if(typeof value.ComService === 'undefined') return; //skip entries without address
             var entry = {};
             if(typeof value.ComService.Setups === 'undefined'){ //if no setups, take address and markets from comservice level
@@ -887,9 +884,11 @@
                     });
                 });
                 addressID = value.ComService.Address.replace('https://ig-creator.xxxlgroup.com/idm/', '').replace('lokal/', '').replace('*.xml', '');
-                addressArray.push(
-                    {[addressID]: marketArray}
-                );
+                addressArray[addressID] = marketArray;
+                if(lieferant === '') {
+                    lieferant = addressID.split('_')[0];
+                    modell = addressID.split('_')[2];
+                }
             } else {
                 addressArray = [];
                 $.each(value.ComService.Setups, function( setupKey, setupValue ) {
@@ -901,13 +900,17 @@
                         });
                     });
                     addressID = setupValue.Address.replace('https://ig-creator.xxxlgroup.com/idm/', '').replace('lokal/', '').replace('*.xml', '');
-                    addressArray.push(
-                        {[addressID]: marketArray}
-                    );
+                    addressArray[addressID] = marketArray;
+                    if(lieferant === '') {
+                        lieferant = addressID.split('_')[0];
+                        modell = addressID.split('_')[2];
+                    }
                 });
             }
             entry = {
                 ID: key,
+                Lieferant: lieferant,
+                Modell: modell,
                 Filename: addressArray
             }
             const isDuplicate = combinedRegistry.some(item => item.ID.toLowerCase() === entry.ID.toLowerCase());
