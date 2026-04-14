@@ -267,7 +267,7 @@
             firstObj,
             secondObj,
             // keyOrder = ["ArtikelType", "ArtikelText", "Preise", "Dimensionen", "Zielmarkt", "VariantenID", "VariantenText", "OptionID", "OptionText"]
-            keyOrder = ["ArtikelType", "ArtikelText", "Preise", "Dimensionen", "Zielmarkt", "VariantenID", "OptionID"]
+            keyOrder = errorNames
         ) {
             const arr1 = normalizeToArray(firstObj);
             const arr2 = normalizeToArray(secondObj);
@@ -485,7 +485,7 @@
                                     });
                                 }
                             }
-                        } else {
+                        } else if ($.inArray(sId, errorNames) > -1) {
                             errorLog.Errors++;
                             errorLog.ErrorLines.push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
                             highlighter = 'noMatch';
@@ -780,13 +780,6 @@
             noSecondXML = true;
             secondXmlSelect();
         }
-        // console.log('compareableXMLs: ', compareableXMLs, availableXML);
-        // console.log($('option[value="'+availableXML+'"]'))
-        // if(compareableXMLs === 1){
-        //     // $('option[value="'+availableXML+'"]').prop('selected', true);
-        //     // $('option[value="'+availableXML+'"]').click();
-        //     $('#xmlSecondSelect').val(availableXML).change();
-        // }
     }
 
     $('#xmlFiles').change(function () {
@@ -875,7 +868,7 @@
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = `XML_Comparison_Report_${new Date().toISOString()}.html`;
+        a.download = `XML_CheckerReport_${firstSelectedXML}_${new Date().toISOString()}.html`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
