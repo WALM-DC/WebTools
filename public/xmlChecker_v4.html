@@ -486,6 +486,7 @@
                 if (sId !== "ArtikelType" && sId !== "VariantenID" && sId !== "Zielmarkt" && sId !== "OptionID") {
                     highlighter += ' subEntry';
                 } else if (sId === "Zielmarkt") {
+                    errorLog.Lang.push(firstVal);
                     if(firstVal !== '-KEIN EINTRAG-'){
                         errorLog.Lang.push(firstVal);
                     } else if (firstVal === '-KEIN EINTRAG-'){
