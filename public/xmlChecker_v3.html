@@ -531,7 +531,7 @@
         $(combinedRegistry).each(function(index, registryEntry){
             var lieferantXMLSelected = firstXMLNoNumb.split('_')[0];
             var modellXMLSelected = firstXMLNoNumb.split('_')[2];
-            if(lieferantXMLSelected === registryEntry.Lieferant && modellXMLSelected === registryEntry.Modell){
+            if(lieferantXMLSelected === registryEntry.Lieferant && modellXMLSelected === registryEntry.Modell && registryEntry.Filename[firstXMLNoNumb] !== undefined){
                 errorLog.UsedLang = registryEntry.Filename[firstXMLNoNumb].join(', ');
                 if(errorLog.UsedLang !== ''){
                     var usedLangArr = errorLog.UsedLang.split(', ');
