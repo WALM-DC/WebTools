@@ -32,7 +32,6 @@ textarea{
 table{
     border-collapse: collapse;
     width: 100%;
-    max-width: 1920px;
     background-color: white;
     font-size: 14px;
 }
