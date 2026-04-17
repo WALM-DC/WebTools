@@ -15,7 +15,7 @@
         .resultDiv {
             width: 100%;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
             padding-top: 14px;
             min-height: 400px;
@@ -127,7 +127,7 @@
         input[type=file]{
             display: none;
         }
-        .legende {
+        .legende, .berichte {
             position: fixed;
             top: 25%;
             right: -550px;
@@ -141,7 +141,29 @@
             border: 1px solid white;
             transition: 0.5s ease;
         }
-        .legende h3 {
+        .berichte {
+            cursor: default;
+            top: 44%;
+            right: -550px;
+            min-width: 500px;
+            min-height: 200px;
+        }
+        .berichte p {
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .berichte p::before {
+            content: " ";
+            background-image: url(copy-icon-4779.png);
+            width: 30px;
+            height: 30px;
+            margin-right: 7px;
+            display: block;
+            float: left;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        .legende h3, .berichte h3 {
             background-color: cadetblue;
             border-radius: 5px;
             transform: rotate(-90deg);
@@ -152,10 +174,13 @@
             cursor: pointer;
             border: 1px solid white;
         }
+        .berichte h3 {
+            cursor: pointer;
+        }
         .legende span {
             color: black;
         }
-        .legende.expanded {
+        .legende.expanded, .berichte.expanded {
             right: 0px;
             transition: 0.5s ease;
         }
@@ -167,6 +192,10 @@
 
 <body>
     <div id="topDiv"></div>
+    <div class="berichte" id="berichte">
+        <h3>Berichte</h3>
+        
+    </div>
     <div class="legende" id="legende">
         <h3>Legende</h3>
         <p><span style="background-color: darksalmon; font-weight: bold; padding: 0px 1px;">Rot</span>: Abweichung(en) zum Server XML</p>
@@ -870,6 +899,9 @@
     $('#legende').click(function () {
         $(this).toggleClass('expanded');
     });
+    $('.berichte>h3').click(function () {
+        $('#berichte').toggleClass('expanded');
+    });
 
     $('#hideFields').click(function () {
         $('tr.match, tr.empty').toggleClass('hideMe');
@@ -880,13 +912,32 @@
         }
     });
 
+    function copyLink(element) {
+        const link = element.getAttribute('href');
+        navigator.clipboard.writeText(link);
+
+        $(element).fadeOut(100, function(){
+            $(element).css("color", "green").text('Link kopiert!');
+                $(element).fadeIn(100,function(){
+                    $(element).fadeOut(500,function(){
+                        $(element).css("color", "white").text(element.getAttribute('href'));
+                        $(element).fadeIn(100);
+                    });
+            });
+        }); 
+    }
+
     $('#saveReport').click(function () {
         const reportContent = '<html>' + $('head').html() + '<body>' + $('#exportDiv').html() + '</body></html>';
         const blob = new Blob([reportContent], { type: "text/html" });
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = `XML_CheckerReport_${firstSelectedXML}_${new Date().toISOString()}.html`;
+        const now = new Date();
+        const timestamp = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}-${now.getHours()}${String(now.getMinutes()).padStart(2, '0')}`;
+        a.download = `XML_CheckerReport_${firstSelectedXML}_${timestamp}.html`;
+        // a.download = `XML_CheckerReport_${firstSelectedXML}_${new Date().toISOString()}.html`;
+        $('#berichte').append('<p onclick="copyLink(this)" title="Link kopieren" href="https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlCheckerReports/' + a.download + '">' + a.download + '</p>');
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
