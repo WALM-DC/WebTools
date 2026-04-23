@@ -83,6 +83,7 @@ def get_api_data(task):
     mandant = task['locale']
     rail = task['brand']
     product_number = task['productNumber']
+    kkbm = task['KkBm']
     variant_id = task['variantId']
     modelId = task["modelId"]
 
@@ -93,13 +94,10 @@ def get_api_data(task):
 
     try:
         response = requests.get(url, verify=False, timeout=10)
-      
-        if product_number == "0002230010":
-            print(url)
-            print(response)
 
         try:
             data = response.json()
+
         except:
             online_status = False
             cfg_exists = False
@@ -113,6 +111,9 @@ def get_api_data(task):
             config = data.get("Configuration")
             config_id = config.get("ConfigurationId", "")
             system_id = config.get("ConfigurationSystemId", "")
+
+            prices = data.get("Prices")
+            kkbm = prices['Price'][0]['KkBm']
 
             if config:
                 online_status = True
@@ -132,6 +133,7 @@ def get_api_data(task):
         "modelId": modelId,
         "variantId": variant_id,
         "productNumber": product_number,
+        "KkBm": kkbm,
         "online": online_status,
         "konfigurable": cfg_exists
     }
@@ -174,6 +176,7 @@ def find_all_json(root_path):
                                     'productVariants': '',
                                     'variantConfig': '',
                                     'variantOnline': '',
+                                    'KkBm': '',
                                     'online': False,
                                     'konfig':False,
                                     'modelName': filename.split('@')[0],
@@ -215,6 +218,7 @@ def find_all_json(root_path):
                         "locale": fullModelList[modelId]['locale'],
                         "brand": fullModelList[modelId]['brand'],
                         "productNumber": fullModelList[modelId]['productNumber'],
+                        "KkBm": fullModelList[modelId]['KkBm'],
                         "variantId": innerId
                     })
         except KeyError as e:
@@ -224,6 +228,8 @@ def find_all_json(root_path):
     for r in results:
         modelId = r["modelId"]
         variantId = r["variantId"]
+
+        fullModelList[modelId]["KkBm"] = r["KkBm"]  # Update KkBm for the model
 
         if r["online"] and r["konfigurable"]:
             fullModelList[modelId]["variantConfig"] += variantId + " / "

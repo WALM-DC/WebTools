@@ -48,7 +48,7 @@
                             <th>3D Domain</th>
                             <th>Herkunft</th>
                             <th>Nummer</th>
-                            <th>Online</th>
+                            <th>KkBm</th>
                             <th>Konfig.</th>
                             <th>Var. Online.</th>
                             <th>Var. Konfig.</th>
@@ -169,9 +169,12 @@
                 //     console.log(apiData);
                 // })
 
-                var online = '<td class="trueCol">Ja</td>';
-                if(!val.online){online = '<td class="falseCol">Nein</td>'}
-                if(val.online===''){online = '<td></td>'}
+                // var online = '<td class="trueCol">Ja</td>';
+                // if(val.online=='false'){online = '<td class="falseCol">Nein</td>'}
+                // if(val.online==''){online = '<td></td>'}
+                var kkbm = '<td class="trueCol">'+val.KkBm+'</td>';
+                if(val.KkBm=='L1'){kkbm = '<td class="falseCol">'+val.KkBm+'</td>'}
+                if(val.KkBm==''){kkbm = '<td></td>'}
                 var konfig = '<td class="trueCol">Ja</td>';
                 if(!val.konfig){konfig = '<td class="falseCol">Nein</td>'}
                 if(val.konfig===''){konfig = '<td></td>'}
@@ -198,7 +201,7 @@
                     '<td>'+val.catalog+'</td>'+
                     '<td class="'+inOrEx+'">'+inOrEx+'</td>'+
                     '<td><a href="https://'+storeUrl+'/s/?s='+val.productNumber+'" target="_blank">'+val.productNumber+'</a></td>'+
-                    online+
+                    kkbm+
                     konfig+
                     '<td>'+onlineVariantLinks+'</td>'+
                     '<td>'+konfigVariantLinks+'</td>'+

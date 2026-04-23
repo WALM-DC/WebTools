@@ -17,6 +17,36 @@
             color: white;
             background-color: darkcyan;
         }
+        #refreshTimer{
+            position: absolute;
+            left: 10px;
+            color: white;
+        }
+        #refreshNow{
+            cursor: pointer;
+            background-color: darkorange;
+            padding: 5px 5px;
+            border-radius: 5px;
+            margin-left: 10px;
+            margin-top: 10px;
+            line-height: 50px;
+            color: black;
+        }
+        #refreshNow .refresherIcon{
+            filter: none;
+            width: 16px;
+            height: 16px;
+            margin-top: -15px;
+            vertical-align: middle;
+        }
+        #refresherInfo{
+            display: none;
+            color: lightgreen;
+            line-height: 55px;
+            position: absolute;
+            left: 40%;
+            font-size: 25px;
+        }
     </style>
 </head>
 <body>
@@ -27,6 +57,8 @@
         </div> -->
         <div>
             <div class="resultDiv">
+                <div id="refreshTimer">Daten aktualisieren sich automatisch alle 20 Sekunden.<br><span id="refreshNow">Jetzt aktualisieren <img src="refresh-button.png" class="emptySearch refresherIcon"></span></div>
+                <h3 id="refresherInfo">Daten aktualisiert :)</h3>
                 <h3>Anzahl in der aktuellen Auflistung: <span id="myCounter"></span></h3>
                 <img src="refresh-button.png" class="emptySearch" title="Suche leeren" alt="Suche leeren"><input type="text" id="myInput" placeholder="Allgemeine Suche auf alle Felder...">
                 <div class="div_before_table igServer">
@@ -39,7 +71,6 @@
                             <th>Lieferant</th>
                             <th>Modellname</th>
                             <th>In Registry</th>
-                            <!-- <th>Target_ID</th> -->
                             <th>Zielmarkt</th>
                         </tr>
                     </table>
@@ -141,57 +172,69 @@
         $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry.json", function( data ) {
             combineRegistries(data, 'registry');
         });
-        $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index.json", function( data ) {
-            $.each(data, function(id, val){
-                indexQA.push(val);
-                nameQA.push(val.substring(0, val.lastIndexOf('_')));
-            })
-        });
-        $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index-prod.json", function( data ) {
-            $.each(data, function(id, val){
-                var land = '', inRegistry = 'Nein', inRegOrNot = 'falseCol';
-                var splitVal = val.split('_');
-                var shortXmlName = removeAfterLastUnderscore(val);
+        setTimeout(function(){
+            $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index.json", function( data ) {
+                $.each(data, function(id, val){
+                    indexQA.push(val);
+                    nameQA.push(val.substring(0, val.lastIndexOf('_')));
+                })
+            });
+            $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index-prod.json", function( data ) {
+                $.each(data, function(id, val){
+                    var land = '', inRegistry = 'Nein', inRegOrNot = 'falseCol';
+                    var splitVal = val.split('_');
+                    var shortXmlName = removeAfterLastUnderscore(val);
 
-                var xmlNameID = val.substring(0, val.lastIndexOf('_'));
-                var registryID = 'registryID'+val.substring(0, val.lastIndexOf('_'));
+                    var xmlNameID = val.substring(0, val.lastIndexOf('_'));
+                    var registryID = 'registryID'+val.substring(0, val.lastIndexOf('_'));
 
-                var inQA = '', qaIndex = $.inArray(xmlNameID, nameQA);
-                if(qaIndex > -1 && indexQA[qaIndex] !== val){
-                    inQA = indexQA[qaIndex];
-                }
+                    var inQA = '', qaIndex = $.inArray(xmlNameID, nameQA);
+                    if(qaIndex > -1 && indexQA[qaIndex] !== val){
+                        inQA = indexQA[qaIndex];
+                    }
 
-                if(langCheck.indexOf(splitVal[splitVal.length - 2]) > -1){
-                    land = splitVal[splitVal.length - 2];
+                    if(langCheck.indexOf(splitVal[splitVal.length - 2]) > -1){
+                        land = splitVal[splitVal.length - 2];
+                    }
+                    if($.inArray(shortXmlName, combinedRegistry) > -1){
+                        inRegistry = 'Ja';
+                        inRegOrNot = 'trueCol';
+                    }
+                    if(refresher){
+                        $('#'+xmlNameID).html(val);
+                        $('#'+registryID).html(inRegistry);
+                        $('#'+registryID).removeClass('trueCol falseCol').addClass(inRegOrNot);
+                    } else {
+                        $('#myTable').append(
+                            '<tr><td id="'+xmlNameID+'">'+val+'</td>'+
+                            '<td>'+inQA+'</td>'+
+                            '<td>'+land+'</td>'+
+                            '<td>'+splitVal[0]+'</td>'+
+                            '<td>'+splitVal[1]+'</td>'+
+                            '<td>'+splitVal[2]+'</td>'+
+                            '<td class="'+inRegOrNot+'" id="'+registryID+'">'+inRegistry+'</td>'+
+                            // '<td id="target_'+val+'" style="width:100px" class="alignRight"></td>'+
+                            '<td id="'+val+'"><div class="clickMe" onClick="openXML(this)" name="'+val+'">Load Country-Data</div></td></tr>'
+                        )
+                    }
+                })
+                if(!refresher){
+                    filterTable();
+                    jQuery('#myTable').ddTableFilter();
                 }
-                if($.inArray(shortXmlName, combinedRegistry) > -1){
-                    inRegistry = 'Ja';
-                    inRegOrNot = 'trueCol';
-                }
-                if(refresher){
-                    $('#'+xmlNameID).html(val);
-                    $('#'+registryID).html(inRegistry);
-                    $('#'+registryID).removeClass('trueCol falseCol').addClass(inRegOrNot);
-                } else {
-                    $('#myTable').append(
-                        '<tr><td id="'+xmlNameID+'">'+val+'</td>'+
-                        '<td>'+inQA+'</td>'+
-                        '<td>'+land+'</td>'+
-                        '<td>'+splitVal[0]+'</td>'+
-                        '<td>'+splitVal[1]+'</td>'+
-                        '<td>'+splitVal[2]+'</td>'+
-                        '<td class="'+inRegOrNot+'" id="'+registryID+'">'+inRegistry+'</td>'+
-                        // '<td id="target_'+val+'" style="width:100px" class="alignRight"></td>'+
-                        '<td id="'+val+'"><div class="clickMe" onClick="openXML(this)" name="'+val+'">Load Country-Data</div></td></tr>'
-                    )
-                }
-            })
-            if(!refresher){
-                filterTable();
-                jQuery('#myTable').ddTableFilter();
-            }
+            }, 20000);
         });
     }
     readAndShowJSON(false);
+    function quickRefresh(){
+        readAndShowJSON(true);
+        $('#refresherInfo').fadeIn(500).delay(1000).fadeOut(500);
+    }
+    setInterval(function(){
+        quickRefresh();
+    }, 20000);
+    $('#refreshNow').on('click', function(){
+        quickRefresh();
+    });
 </script>
 </html>

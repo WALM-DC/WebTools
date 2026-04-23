@@ -4,6 +4,11 @@
             "path": "AktionspreisFixer/CreateStoffList.py",
             "envManager": "ms-python.python:venv",
             "packageManager": "ms-python.python:pip"
+        },
+        {
+            "path": "AktionspreisFixer/CreateProdListJson.py",
+            "envManager": "ms-python.python:venv",
+            "packageManager": "ms-python.python:pip"
         }
     ]
 }
