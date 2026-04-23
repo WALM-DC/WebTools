@@ -63,21 +63,29 @@ def filter_and_save_modellist(fullModelList, prodGroups, ausLieferanten, maxDisc
     # calcuation only needed if Aktion > Entlasgung, otherwise we can just set it to 0
 
     # EKP = 10000
-    # kaa1 = 310
-    # Entlastung = 29
-    # Aktion = 33
+    # kaa1 = 300
+    # Entlastung = 7
+    # Aktion = 10
     
     # # EKP * kaa1 - Entlastung - Aktion
-    # 100 * 3,1 * 0,93 * 0,9 = 259,47
+    # 100 * 3,1 * 0,71 * 0,67 = 46,7
+    # 232 * 3,1 * 0,71 * 0,67 = 110,8
+    # 100 * 3,1 * 0,67 = 20,7
 
     # # EK * kaa1 - Entlastung
     # 100 * 3,1 * 0,71 = 220,1
+    # 232 * 3,1 * 0,71 = 509,9
+    # 100 * 3 * 0,93 = 279
 
     # # EK * kaa1 - Aktion (komplett) 
     # 100 * 3,1 * 0,67 = 207,7
+    # 232 * 3,1 * 0,9 = 481,2
+    # 100 * 3 * 0,9 = 270
 
     # # finale Berechnung für Aktions Prozent wenn Entlastung angegeben
     # (220,1 - 207,7) * 100 / 220,1 = 5,63
+    # (509,9 - 481,2) * 100 / 509,9 = 5,63
+    # (279 - 270) * 100 / 279 = 3,22
 
     # # needs final price preview file
     

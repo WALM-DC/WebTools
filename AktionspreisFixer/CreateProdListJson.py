@@ -18,6 +18,8 @@ onlineList = {}
 api_tasks = []
 BASE_URL = "https://services.ist.lutz.gmbh/HybrisProductDelivery/clients/{}/assortmentLines/{}/productNumbers/{}/{}"
 
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 def save_json_file(data):
     output_path = "F:\WebTools\public\list.json"
     with open(output_path, 'w', encoding='utf-8') as f:
@@ -92,6 +94,10 @@ def get_api_data(task):
     try:
         response = requests.get(url, verify=False, timeout=10)
       
+        if product_number == "0002230010":
+            print(url)
+            print(response)
+
         try:
             data = response.json()
         except:
