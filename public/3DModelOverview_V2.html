@@ -50,7 +50,7 @@
                             <th>Nummer</th>
                             <th>KkBm</th>
                             <th>Konfig.</th>
-                            <th>Var. Online.</th>
+                            <!-- <th>Var. Online.</th> -->
                             <th>Var. Konfig.</th>
                             <th>Varianten</th>
                             <th>Schiene</th>
@@ -172,9 +172,14 @@
                 // var online = '<td class="trueCol">Ja</td>';
                 // if(val.online=='false'){online = '<td class="falseCol">Nein</td>'}
                 // if(val.online==''){online = '<td></td>'}
+
+                if(val.KkBm==''){
+                    console.log(val);
+                }
+
                 var kkbm = '<td class="trueCol">'+val.KkBm+'</td>';
-                if(val.KkBm=='L1'){kkbm = '<td class="falseCol">'+val.KkBm+'</td>'}
-                if(val.KkBm==''){kkbm = '<td></td>'}
+                if(val.KkBm=='1L'){kkbm = '<td class="falseCol" style="font-weight: bold;">'+val.KkBm+'</td>'}
+                // if(val.KkBm==''){kkbm = '<td>'+val.KkBm+'</td>'}
                 var konfig = '<td class="trueCol">Ja</td>';
                 if(!val.konfig){konfig = '<td class="falseCol">Nein</td>'}
                 if(val.konfig===''){konfig = '<td></td>'}
@@ -203,7 +208,7 @@
                     '<td><a href="https://'+storeUrl+'/s/?s='+val.productNumber+'" target="_blank">'+val.productNumber+'</a></td>'+
                     kkbm+
                     konfig+
-                    '<td>'+onlineVariantLinks+'</td>'+
+                    // '<td>'+onlineVariantLinks+'</td>'+
                     '<td>'+konfigVariantLinks+'</td>'+
                     '<td>'+val.productVariants+'</td>'+
                     '<td>'+val.brand+'</td>'+

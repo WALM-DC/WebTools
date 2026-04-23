@@ -112,8 +112,10 @@ def get_api_data(task):
             config_id = config.get("ConfigurationId", "")
             system_id = config.get("ConfigurationSystemId", "")
 
-            prices = data.get("Prices")
-            kkbm = prices['Price'][0]['KkBm']
+            kkbm = data.get("Prices")['Price'][0]['KkBm']
+
+            if kkbm == '':
+                print(modelId, url)
 
             if config:
                 online_status = True
