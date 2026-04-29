@@ -48,7 +48,7 @@
                             <th>3D Domain</th>
                             <th>Herkunft</th>
                             <th>Nummer</th>
-                            <th>KkBm</th>
+                            <th>Online</th>
                             <th>Konfig.</th>
                             <!-- <th>Var. Online.</th> -->
                             <th>Var. Konfig.</th>
@@ -142,7 +142,8 @@
         });
     })
     function readAndShowJSON(){
-        $.getJSON( "https://walm-dc.github.io/WebTools/public/list.json", function( data ) {
+        // $.getJSON( "https://walm-dc.github.io/WebTools/public/list.json", function( data ) {
+        $.getJSON( "https://ig-creator.xxxlgroup.com/idm/XMLLister/test/list.json", function( data ) {
             var sortArray = $.map(data, function(value, index) {return [value]});
             sortArray.sort(sortList);
             $.each(sortArray, function(id, val){
@@ -169,17 +170,15 @@
                 //     console.log(apiData);
                 // })
 
-                // var online = '<td class="trueCol">Ja</td>';
-                // if(val.online=='false'){online = '<td class="falseCol">Nein</td>'}
-                // if(val.online==''){online = '<td></td>'}
-
-                if(val.KkBm==''){
-                    console.log(val);
-                }
+                var online = '<td class="trueCol">Ja</td>';
+                if(!val.online){online = '<td class="falseCol">Nein</td>'}
+                if(val.online===''){online = '<td></td>'}
+                console.log(val.online, online);
 
                 var kkbm = '<td class="trueCol">'+val.KkBm+'</td>';
-                if(val.KkBm=='1L'){kkbm = '<td class="falseCol" style="font-weight: bold;">'+val.KkBm+'</td>'}
-                // if(val.KkBm==''){kkbm = '<td>'+val.KkBm+'</td>'}
+                if(val.KkBm==='1L'){kkbm = '<td class="falseCol" style="font-weight: bold;">'+val.KkBm+'</td>'}
+                if(val.KkBm===''){kkbm = '<td class="falseCol">Offline</td>'}
+
                 var konfig = '<td class="trueCol">Ja</td>';
                 if(!val.konfig){konfig = '<td class="falseCol">Nein</td>'}
                 if(val.konfig===''){konfig = '<td></td>'}
@@ -206,7 +205,8 @@
                     '<td>'+val.catalog+'</td>'+
                     '<td class="'+inOrEx+'">'+inOrEx+'</td>'+
                     '<td><a href="https://'+storeUrl+'/s/?s='+val.productNumber+'" target="_blank">'+val.productNumber+'</a></td>'+
-                    kkbm+
+                    // kkbm+
+                    online+
                     konfig+
                     // '<td>'+onlineVariantLinks+'</td>'+
                     '<td>'+konfigVariantLinks+'</td>'+

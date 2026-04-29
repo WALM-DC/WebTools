@@ -8,6 +8,8 @@ import xml.etree.ElementTree as ET
 import urllib3
 from concurrent.futures import ThreadPoolExecutor
 import ssl
+import shutil
+from datetime import datetime
 
 ssl_context = ssl.create_default_context()
 ssl_context.check_hostname = False
@@ -20,10 +22,37 @@ BASE_URL = "https://services.ist.lutz.gmbh/HybrisProductDelivery/clients/{}/asso
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+
 def save_json_file(data):
-    output_path = "F:\WebTools\public\list.json"
-    with open(output_path, 'w', encoding='utf-8') as f:
+    output_path = r"F:\WebTools\public\list.json"
+    archive_dir = os.path.join(os.path.dirname(output_path), "listArchive")
+
+    # ensure archive folder exists
+    os.makedirs(archive_dir, exist_ok=True)
+
+    # archive existing file (if any)
+    if os.path.isfile(output_path):
+        stamp = datetime.now().strftime("%Y%m%d")  # e.g. 20260424
+        base, ext = os.path.splitext(os.path.basename(output_path))  # list, .json
+        archived_name = f"{base}_{stamp}{ext}"  # list_20260424.json
+        archived_path = os.path.join(archive_dir, archived_name)
+
+        # if same-day file already exists, avoid overwrite
+        if os.path.exists(archived_path):
+            tstamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            archived_name = f"{base}_{tstamp}{ext}"
+            archived_path = os.path.join(archive_dir, archived_name)
+
+        shutil.move(output_path, archived_path)
+
+    # write new file
+    with open(output_path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
+
+# def save_json_file(data):
+#     output_path = "F:\WebTools\public\list.json"
+#     with open(output_path, 'w', encoding='utf-8') as f:
+#         json.dump(data, f, indent=2, ensure_ascii=False)
 
 # Mandanten
 def code_from_rail(country: str, rail: str) -> int:
@@ -95,27 +124,31 @@ def get_api_data(task):
     try:
         response = requests.get(url, verify=False, timeout=10)
 
+        online_status = False
+        cfg_exists = False
+
         try:
             data = response.json()
 
         except:
-            online_status = False
-            cfg_exists = False
+            print(f"[ERROR] Failed to parse JSON for {product_number} variant {variant_id}. Response content: {response.text}")
 
-        error = data.get("error")
+        # error = data.get("error")
+        export_action = data.get("ExportAction", "ERROR")
 
-        if error:
-            online_status = False
-            cfg_exists = False
-        else:
+        # if product_number == '0023100028':
+        #     print(variant_id, export_action, url)
+
+        if export_action == "ERROR":
+            # online_status = False
+            # cfg_exists = False
+            kkbm = "NO"
+        elif export_action != "OFFLINE":
             config = data.get("Configuration")
             config_id = config.get("ConfigurationId", "")
             system_id = config.get("ConfigurationSystemId", "")
 
             kkbm = data.get("Prices")['Price'][0]['KkBm']
-
-            if kkbm == '':
-                print(modelId, url)
 
             if config:
                 online_status = True
@@ -123,13 +156,14 @@ def get_api_data(task):
                     cfg_exists = True
                 else:
                     cfg_exists = False
-            else:
-                online_status = False
-                cfg_exists = False
+            # else:
+            #     online_status = False
+            #     cfg_exists = False
 
     except Exception as e:
-        online_status = False
-        cfg_exists = False
+        # online_status = False
+        # cfg_exists = False
+        print(f"[ERROR] API request failed for {product_number} variant {variant_id}: {e}")
 
     return {
         "modelId": modelId,
@@ -178,7 +212,7 @@ def find_all_json(root_path):
                                     'productVariants': '',
                                     'variantConfig': '',
                                     'variantOnline': '',
-                                    'KkBm': '',
+                                    'KkBm': [],
                                     'online': False,
                                     'konfig':False,
                                     'modelName': filename.split('@')[0],
@@ -231,9 +265,19 @@ def find_all_json(root_path):
         modelId = r["modelId"]
         variantId = r["variantId"]
 
-        fullModelList[modelId]["KkBm"] = r["KkBm"]  # Update KkBm for the model
+        # ensure KkBm container is a dict
+        if not isinstance(fullModelList[modelId].get("KkBm"), dict):
+            fullModelList[modelId]["KkBm"] = {}
 
-        if r["online"] and r["konfigurable"]:
+        raw = r.get("KkBm")
+
+        # normalize: "11" -> "11", []/None -> ""
+        kkbm = raw if isinstance(raw, str) else ""
+
+        fullModelList[modelId]["KkBm"].setdefault(kkbm, [])
+        fullModelList[modelId]["KkBm"][kkbm].append(variantId)
+
+        if r["online"] and r["konfigurable"] and (kkbm != "1L" and kkbm != ""):
             fullModelList[modelId]["variantConfig"] += variantId + " / "
             fullModelList[modelId]["online"] = True
             fullModelList[modelId]["konfig"] = True
