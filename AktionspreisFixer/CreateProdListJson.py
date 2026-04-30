@@ -22,37 +22,46 @@ BASE_URL = "https://services.ist.lutz.gmbh/HybrisProductDelivery/clients/{}/asso
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+# def create_archive_list():
+#     archive_dir = r"F:\WebTools\public\listArchive"
+#     archive_list = []
+
+#     if os.path.isdir(archive_dir):
+#         for filename in os.listdir(archive_dir):
+#             if filename.endswith('.json') and filename.startswith('list_'):
+#                 archive_list.append(filename)
+
+#     # write new file
+#     with open(archive_dir+'\\archiveList.json', "w", encoding="utf-8") as f:
+#         json.dump(archive_list, f, indent=2, ensure_ascii=False)
 
 def save_json_file(data):
     output_path = r"F:\WebTools\public\list.json"
-    archive_dir = os.path.join(os.path.dirname(output_path), "listArchive")
+    # archive_dir = os.path.join(os.path.dirname(output_path), "listArchive")
 
-    # ensure archive folder exists
-    os.makedirs(archive_dir, exist_ok=True)
+    # # ensure archive folder exists
+    # os.makedirs(archive_dir, exist_ok=True)
 
-    # archive existing file (if any)
-    if os.path.isfile(output_path):
-        stamp = datetime.now().strftime("%Y%m%d")  # e.g. 20260424
-        base, ext = os.path.splitext(os.path.basename(output_path))  # list, .json
-        archived_name = f"{base}_{stamp}{ext}"  # list_20260424.json
-        archived_path = os.path.join(archive_dir, archived_name)
+    # # archive existing file (if any)
+    # if os.path.isfile(output_path):
+    #     stamp = datetime.now().strftime("%Y%m%d")  # e.g. 20260424
+    #     base, ext = os.path.splitext(os.path.basename(output_path))  # list, .json
+    #     archived_name = f"{base}_{stamp}{ext}"  # list_20260424.json
+    #     archived_path = os.path.join(archive_dir, archived_name)
 
-        # if same-day file already exists, avoid overwrite
-        if os.path.exists(archived_path):
-            tstamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            archived_name = f"{base}_{tstamp}{ext}"
-            archived_path = os.path.join(archive_dir, archived_name)
+    #     # if same-day file already exists, avoid overwrite
+    #     if os.path.exists(archived_path):
+    #         tstamp = datetime.now().strftime("%Y%m%d")
+    #         archived_name = f"{base}_{tstamp}{ext}"
+    #         archived_path = os.path.join(archive_dir, archived_name)
 
-        shutil.move(output_path, archived_path)
+    #     shutil.move(output_path, archived_path)
 
     # write new file
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
-# def save_json_file(data):
-#     output_path = "F:\WebTools\public\list.json"
-#     with open(output_path, 'w', encoding='utf-8') as f:
-#         json.dump(data, f, indent=2, ensure_ascii=False)
+    # create_archive_list()
 
 # Mandanten
 def code_from_rail(country: str, rail: str) -> int:
@@ -121,11 +130,11 @@ def get_api_data(task):
 
     url = BASE_URL.format(mandatNr, railCode, product_number, variant_id)
 
-    try:
-        response = requests.get(url, verify=False, timeout=10)
+    online_status = False
+    cfg_exists = False
 
-        online_status = False
-        cfg_exists = False
+    try:
+        response = requests.get(url, verify=False, timeout=20)
 
         try:
             data = response.json()

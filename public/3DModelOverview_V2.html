@@ -18,6 +18,17 @@
             width: 210px;
             margin-left: 14px;
         }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        .kkBmli {
+            font-weight: bold;
+        }
+        .l1Highlither {
+            color: #ff0000;
+        }
     </style>
 </head>
 <body>
@@ -46,15 +57,15 @@
                             <th>Marke</th>
                             <th>Modellname</th>
                             <th>3D Domain</th>
-                            <th>Herkunft</th>
                             <th>Nummer</th>
-                            <th>Online</th>
-                            <th>Konfig.</th>
-                            <!-- <th>Var. Online.</th> -->
-                            <th>Var. Konfig.</th>
-                            <th>Varianten</th>
                             <th>Schiene</th>
                             <th>Land</th>
+                            <th>Herkunft</th>
+                            <th>Online</th>
+                            <th>Konfig.</th>
+                            <th>Var. Konfig.</th>
+                            <th>KkBm 1L</th>
+                            <th>KkBm & Varianten</th>
                             <th>W&auml;hrung</th>
                             <th>kaa1</th>
                             <th>entlastung</th>
@@ -142,8 +153,7 @@
         });
     })
     function readAndShowJSON(){
-        // $.getJSON( "https://walm-dc.github.io/WebTools/public/list.json", function( data ) {
-        $.getJSON( "https://ig-creator.xxxlgroup.com/idm/XMLLister/test/list.json", function( data ) {
+        $.getJSON( "list.json", function( data ) {
             var sortArray = $.map(data, function(value, index) {return [value]});
             sortArray.sort(sortList);
             $.each(sortArray, function(id, val){
@@ -152,9 +162,9 @@
                     storeUrl = 'xxxlesnina'+'.'+val.locale;
                 }
 
-                var variants = val.productVariants.split('/').map(function(item) {
-                    return item.trim();
-                }).join(', ').slice(0, -2);
+                // var variants = val.productVariants.split('/').map(function(item) {
+                //     return item.trim();
+                // }).join(', ').slice(0, -2);
                 
                 var inOrEx = 'Intern';
                 if(val.catalog.split('.')[0].indexOf('XXXL')>-1){
@@ -164,55 +174,79 @@
                     inOrEx = 'Extern';
                 }
 
-                // check against API if product is online and or 3D configurable
-                
-                // $.get('https://services.ist.lutz.gmbh/HybrisProductDelivery/clients/2/assortmentLines/0L/productNumbers/0005530110/01', function(apiData){
-                //     console.log(apiData);
-                // })
-
                 var online = '<td class="trueCol">Ja</td>';
                 if(!val.online){online = '<td class="falseCol">Nein</td>'}
                 if(val.online===''){online = '<td></td>'}
-                console.log(val.online, online);
-
-                var kkbm = '<td class="trueCol">'+val.KkBm+'</td>';
-                if(val.KkBm==='1L'){kkbm = '<td class="falseCol" style="font-weight: bold;">'+val.KkBm+'</td>'}
-                if(val.KkBm===''){kkbm = '<td class="falseCol">Offline</td>'}
 
                 var konfig = '<td class="trueCol">Ja</td>';
                 if(!val.konfig){konfig = '<td class="falseCol">Nein</td>'}
                 if(val.konfig===''){konfig = '<td></td>'}
 
-                var onlineVariantLinks = '';
-                if(val.variantOnline!==''){
-                    onlineVariantLinks = val.variantOnline.split('/').map(function(item) {
-                        return '<a href="https://'+storeUrl+'/s/?s='+val.productNumber+item.trim()+'" target="_blank">'+item.trim()+'</a>';
-                    }).join('/ ');
+                // var onlineVariantLinks = '';
+                // if(val.variantOnline!==''){
+                //     onlineVariantLinks = val.variantOnline.split('/').map(function(item) {
+                //         return '<a href="https://'+storeUrl+'/s/?s='+val.productNumber+item.trim()+'" target="_blank">'+item.trim()+'</a>';
+                //     }).join('/ ');
+                // }
+
+                let konfigVariantLinks = '';
+                const variantConfig = (val.variantConfig || '').trim();
+                if (variantConfig) {
+                    konfigVariantLinks = variantConfig
+                        .split('/')
+                        .map(item => item.trim())
+                        .filter(Boolean)
+                        .sort((a, b) => {
+                            const numA = parseInt(a.replace(/\D/g, ''), 10) || 0;
+                            const numB = parseInt(b.replace(/\D/g, ''), 10) || 0;
+                            return numA - numB;
+                        })
+                        .map(item => `<a href="https://${storeUrl}/s/?s=${val.productNumber}${item}" target="_blank">${item}</a>`)
+                        .join('/ ');
                 }
 
-                var konfigVariantLinks = '';
-                if(val.variantConfig!==''){
-                    konfigVariantLinks = val.variantConfig.split('/').map(function(item) {
-                        return '<a href="https://'+storeUrl+'/s/?s='+val.productNumber+item.trim()+'" target="_blank">'+item.trim()+'</a>';
-                    }).join('/ ');
-                }
-                
+
+
+                var auslaufVarianten = '', KkBmL1 = false, kkbmTable = '<td></td>';
+                var list1L = '', listRef = '', listRest = '';
+                $.each(val.KkBm, function(index, value){
+                    var isL1 = '', kkBmRef = index.trim();
+                    var tempList = value.sort((a, b) => {
+                        const numA = parseInt(a.replace(/\D/g, ''), 10) || 0;
+                        const numB = parseInt(b.replace(/\D/g, ''), 10) || 0;
+                        return numA - numB;
+                    });
+                    if(kkBmRef === '1L'){
+                        isL1 = 'l1Highlither';
+                        if(!KkBmL1){
+                            kkbmTable = '<td class="falseCol">1L</td>'; 
+                            KkBmL1 = true;
+                        }
+                        list1L += '<li><span class="kkBmli l1Highlither">' + kkBmRef + '</span>: ' + tempList.join('/ ') + '</li>';
+                    } else if(kkBmRef === ''){
+                        kkBmRef = 'REF';
+                        listRef += '<li><span class="kkBmli">' + kkBmRef + '</span>: ' + tempList.join('/ ') + '</li>';
+                    } else {
+                        listRest += '<li><span class="kkBmli">' + kkBmRef + '</span>: ' + tempList.join('/ ') + '</li>';
+                    }
+                })
+                auslaufVarianten += list1L + listRest + listRef;
 
                 $('#myTable').append(
                     '<tr><td>'+val.catalog.split('.')[0].replace('XXXL', '')+'</td>'+
                     '<td>'+val.brandName+'</td>'+
                     '<td>'+val.modelName+'</td>'+
                     '<td>'+val.catalog+'</td>'+
-                    '<td class="'+inOrEx+'">'+inOrEx+'</td>'+
                     '<td><a href="https://'+storeUrl+'/s/?s='+val.productNumber+'" target="_blank">'+val.productNumber+'</a></td>'+
-                    // kkbm+
-                    online+
-                    konfig+
-                    // '<td>'+onlineVariantLinks+'</td>'+
-                    '<td>'+konfigVariantLinks+'</td>'+
-                    '<td>'+val.productVariants+'</td>'+
                     '<td>'+val.brand+'</td>'+
                     '<td>'+val.locale+'</td>'+
+                    '<td class="'+inOrEx+'">'+inOrEx+'</td>'+
+                    online+
+                    konfig+
+                    '<td>'+konfigVariantLinks+'</td>'+
+                    // '<td>'+val.productVariants+'</td>'+
+                    kkbmTable+
+                    '<td><ul>'+auslaufVarianten+'</ul></td>'+
                     '<td>'+val.currency+'</td>'+
                     '<td>'+val.preis+'</td>'+
                     '<td>'+val.entlastung+'</td>'+
