@@ -576,10 +576,10 @@
             }
         });
         var shortXmlName = removeAfterLastUnderscore(firstSelectedXML);
+        var prodNumber = firstSelectedXML.split('_')[0];
         if($.inArray(shortXmlName, combinedRegistryNameList) > -1){
-            $('#errorList').append('<br><br><span class="noErrors">Das 3D Modell zur XML <span style="color:white;">' + firstSelectedXML + '</span> ist Aktiv in Verwendung.</span>');
+            $('#errorList').append('<br><br><span class="noErrors">Das 3D Modell zur XML <span style="color:white;">' + firstSelectedXML + '</span> ist Aktiv in Verwendung. <a target="_blank" href="https://jira.xxxlgroup.com/browse/DM-1968?filter=40833&jql=project%20%3D%20DM%20AND%20Systeme%20%3D%20%223D%20Konfigurierbar%22%20AND%20summary%20%20~%20%22'+prodNumber+'%22%20ORDER%20BY%20summary%20ASC">Jira Link</a></span>');
         } else {
-            var prodNumber = firstSelectedXML.split('_')[0];
             $('#errorList').append('<br><br><span class="bigError">!! INFO !! - Das 3D Modell zur XML <span style="color:white;">' + firstSelectedXML + '</span> ist nicht in Verwendung.<br><span style="color:white;">Entweder ist es ausgelaufen oder noch nicht aktiv, bitte im Jira pr&uuml;fen ob das Modell bestellt ist oder nicht: </span><a target="_blank" href="https://jira.xxxlgroup.com/browse/DM-1968?filter=40833&jql=project%20%3D%20DM%20AND%20Systeme%20%3D%20%223D%20Konfigurierbar%22%20AND%20summary%20%20~%20%22'+prodNumber+'%22%20ORDER%20BY%20summary%20ASC">Jira Link</a></span>');
             // https://jira.xxxlgroup.com/browse/DM-3247?filter=40833&jql=project%20%3D%20DM%20AND%20Systeme%20%3D%20%223D%20Konfigurierbar%22%20AND%20summary%20%20~%20%22'+prodNumber+'%22         
         }

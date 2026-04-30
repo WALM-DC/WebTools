@@ -1,0 +1,260 @@
+<html>
+<head>
+    <title>PIM-Api-Checker</title>
+    <link rel="stylesheet" href="https://walm-dc.github.io/WebTools/public/mattStyle.css">
+    <script src="https://walm-dc.github.io/WebTools/public/jquery-3.7.1.min.js"></script>
+    <script src="https://walm-dc.github.io/WebTools/public/table2csv.js"></script>
+    <script src="https://walm-dc.github.io/WebTools/public/ddtf.js"></script>
+    <script src="https://walm-dc.github.io/WebTools/public/mattQuery.js"></script>
+    <style>
+        button{
+            width: 210px;
+            margin-left: 14px;
+        }
+        select{
+            cursor: pointer;
+        }
+        .resultDiv.upperDiv{
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+            margin-top: 30px;
+        }
+        .resultDiv.upperDiv select, .resultDiv.upperDiv input{
+            margin: 10px;
+        }
+        .resultDiv.upperDiv button {
+            margin: 7px;
+        }
+        .kkBmli {
+            font-weight: bold;
+        }
+        .l1Highlither {
+            color: #ff0000;
+        }
+        .resultDiv.lowerDiv{
+            text-align: left;
+            padding-top: 20px;
+            max-width: 1260px;
+            align-self: center;
+            margin: auto;
+            height: calc(100% - 315px);
+            overflow-y: auto;
+        }
+        .resultDiv.lowerDiv>div{
+            text-align: left;
+            max-width: 49%;
+            display: inline-block;
+            padding: 12px;
+            background-color: rgba(255, 255, 255, 0.6);
+            margin:2px;
+            vertical-align: top;
+            width: 283px;
+            animation: 0.7s ease-in-out;
+        }
+        .resultDiv.lowerDiv>div:hover{
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+        .resultDiv.lowerDiv>div p{
+            margin: 4px;
+        }
+        #refreshTimer{
+            position: absolute;
+            right: 10px;
+            color: white;
+            top: 70px;
+            text-align: left;
+            width: 500px;
+        }
+        button.btnDisabled span{
+            background-image: linear-gradient(144deg, #eee, #888 50%, #00DDEB);
+            box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+            color: #777;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div id="topDiv"></div>
+    <div class="masterDiv">
+        <div>
+            <div class="resultDiv upperDiv">
+                <div id="refreshTimer">
+                    <h3>Anleitung:</h3>
+                    <ul>
+                        <li>Schiene und Land ausw&auml;hlen</li>
+                        <li>Artikelnummern mit Variante eingeben (z.B. 0012345678XX)</li>
+                        <li>Sonderzeichen wie Bindestrich, Schr&auml;gstrich, Punkt, Komma, Leerzeichen oder Semikolon werden automatisch entfernt</li>
+                        <li>Die f&uuml;hrenden Nullen werden automatisch erg&auml;nzt, falls die Nummer weniger als 12 Stellen hat</li>
+                        <li>Enter dr&uuml;cken oder Button klicken f&uuml;r PIM-Check</li>
+                    </ul>
+                </div>
+                <select id="land" size="12">
+                    <option value="at">AT</option>
+                    <option value="ch">CH</option>
+                    <option value="cz">CZ</option>
+                    <option value="de">DE</option>
+                    <option value="hr">HR</option>
+                    <option value="hu">HU</option>
+                    <option value="pl">PL</option>
+                    <option value="ro">RO</option>
+                    <option value="rs">RS</option>
+                    <option value="se">SE</option>
+                    <option value="si">SI</option>
+                    <option value="sk">SK</option>                   
+                </select>
+                <select id="schiene" size="3">
+                    <option value="lu">XXXL</option>
+                    <option value="mm">MMX</option>
+                    <option value="mx">MBX</option>
+                </select>
+                <input type="text" id="productNumber" placeholder="Artikelnummer mit Variante">
+                <button id="checkPim" class="pushable btnDisabled" disabled="true">
+                    <span class="front">PIM-Check</span>
+                </button>  
+            </div>
+            <div class="resultDiv lowerDiv" id="resultDiv">    
+
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    injectTabs();
+
+    getRailandCode = (rail, country) => {
+        switch (rail) {
+            case "lu":
+                if (country == "de") {
+                    return '0Z'
+                }
+                return '0L'
+            case "mm":
+                if (country == "hu") {  
+                    return '0Y'
+                }
+                return '0M'
+            case "mx":
+                if (country == "cz" || country == "sk") {
+                    return '1X'
+                }
+                return '0X'
+            case "":
+                return -1
+        }
+    };
+    getCountryCode = (country) => {
+        switch (country) {  
+            case "at":
+                return 0
+            case "si":
+                return 2
+            case "hr":
+                return 3
+            case "rs":
+                return 6
+            case "pl":
+                return 9
+            case "cz":
+                return 10
+            case "sk":
+                return 11
+            case "hu":
+                return 12
+            case "se":
+                return 13
+            case "ro":
+                return 14
+            case "ch":
+                return 15
+            case "de":
+                return 17
+            case "":
+                return -1  
+        }
+    };  
+
+    var landSelected = false, schieneSelected = false, artikelSelected = false;
+    function checkIfSelected(){
+        if($('#land').val() !== null){
+            landSelected = true;
+        } else {
+            landSelected = false;
+        }
+        if($('#schiene').val() !== null){
+            schieneSelected = true;
+        } else {
+            schieneSelected = false;
+        }
+        if($('#productNumber').val().trim() !== ''){
+            artikelSelected = true;
+        } else {
+            artikelSelected = false;
+        }
+        if(landSelected && schieneSelected && artikelSelected){
+            $('#checkPim').removeClass('btnDisabled').prop('disabled', false);
+        } else {
+            $('#checkPim').addClass('btnDisabled').prop('disabled', true);
+        }
+    }
+
+    function getPimData(){
+        var productNumber = $('#productNumber').val().replace(/[-\/\.,; ]+/g, "").trim();
+        if(productNumber.length<12 && productNumber.length>=10){
+            productNumber.length===11?productNumber='0'+productNumber:productNumber='00'+productNumber;
+        } else {
+            $('#resultDiv').prepend(
+                '<div><table><tr><td>Artikel:</td><td style="font-weight: bold;">' + productNumber + '</td></tr>'+
+                '<tr><td>Fehler:</td><td style="font-weight: bold;" class="l1Highlither">Ung&uuml;ltige Artikelnummer.</td></tr></table></div>');
+            return;
+        }
+        var productVariant = productNumber.slice(-2), productBaseNumber = productNumber.slice(0, -2);
+        var url = 'https://services.ist.lutz.gmbh/HybrisProductDelivery/clients/'+getCountryCode($('#land').val())+'/assortmentLines/'+getRailandCode($('#schiene').val(), $('#land').val())+'/productNumbers/'+productBaseNumber+'/'+productVariant;
+
+        $.get(url).done(function(data){
+            if(data.ExportAction === 'OFFLINE'){
+                $('#resultDiv').prepend(
+                    '<div><table><tr><td>Artikel:</td><td style="font-weight: bold;">' + data.Number + '</td></tr>'+
+                    '<tr><td>Status:</td><td style="font-weight: bold;">' + data.ExportAction + '</td></tr>'+
+                    '<tr><td>Updated:</td><td>' + data.SentDate.substring(0, 10) + '</td></tr></table></div>');
+            } else {
+                var konfig = 'Ja';
+                if(data.Configuration == null){
+                    konfig = 'Nein';
+                }
+                var is1L = '';
+                if(data.Prices.Price[0].KkBm === '1L'){
+                    is1L = 'l1Highlither';
+                }
+                $('#resultDiv').prepend(
+                    '<div><table><tr><td>Artikel:</td><td style="font-weight: bold;">' + data.Number + '</td></tr>'+
+                    '<tr><td>Modell:</td><td>' + data.Head.Name + '</td></tr>'+
+                    '<tr><td>Erstellt:</td><td>' + data.Head.CreationDate.substring(0, 10) + '</td></tr>'+
+                    '<tr><td>Updated:</td><td>' + data.SentDate.substring(0, 10) + '</td></tr>'+
+                    '<tr><td>KkBm:</td><td style="font-weight: bold;" class="' + is1L + '">' + data.Prices.Price[0].KkBm + '</td></tr>'+
+                    '<tr><td>Kategorie:</td><td>' + data.Properties.CategoryName +' - '+ data.Properties.CategoryId + '</td></tr>'+
+                    '<tr><td>Konfigurierbar:</td><td style="font-weight: bold;">' + konfig + '</td></tr>'+
+                    '<tr><td>Sellable:</td><td>' + data.Marketing.Sellable + '</td></tr>'+
+                    '<tr><td>ExportAction:</td><td>' + data.ExportAction + '</td></tr></table></div>');
+            }
+        }).fail(function(error){
+            console.error('Error fetching data:', error);
+            $('#resultDiv').prepend(
+                '<div><table><tr><td>Artikel:</td><td style="font-weight: bold;">' + productNumber + '</td></tr>'+
+                '<tr><td>Fehler:</td><td style="font-weight: bold;" class="l1Highlither">Artikel nicht gefunden.</td></tr></table></div>');
+        });
+    }
+    $('select, input').on('change keyup', function(){
+        checkIfSelected();
+    });
+    checkIfSelected($('#land'));
+    $(document).on('keypress',function(e) {
+        if(e.which == 13) {
+            getPimData();
+        }
+    });
+    $('#checkPim').click(function(){
+        getPimData();
+    })
+</script>
+</html>
