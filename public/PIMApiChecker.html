@@ -19,6 +19,7 @@
             flex-direction: row;
             align-items: flex-end;
             margin-top: 30px;
+            position: relative;
         }
         .resultDiv.upperDiv select, .resultDiv.upperDiv input{
             margin: 10px;
@@ -62,7 +63,7 @@
             position: absolute;
             right: 10px;
             color: white;
-            top: 70px;
+            top: -10px;
             text-align: left;
             width: 500px;
         }
@@ -199,14 +200,14 @@
     }
 
     function getPimData(){
+        console.log('Fetching PIM data...');
         var productNumber = $('#productNumber').val().replace(/[-\/\.,; ]+/g, "").trim();
         if(productNumber.length<12 && productNumber.length>=10){
-            productNumber.length===11?productNumber='0'+productNumber:productNumber='00'+productNumber;
-        } else {
+            productNumber.length===11?productNumber='0'+productNumber:productNumber.length===10?productNumber='00'+productNumber:productNumber;
+        } else if (productNumber.length<10 || productNumber.length>12){
             $('#resultDiv').prepend(
                 '<div><table><tr><td>Artikel:</td><td style="font-weight: bold;">' + productNumber + '</td></tr>'+
                 '<tr><td>Fehler:</td><td style="font-weight: bold;" class="l1Highlither">Ung&uuml;ltige Artikelnummer.</td></tr></table></div>');
-            return;
         }
         var productVariant = productNumber.slice(-2), productBaseNumber = productNumber.slice(0, -2);
         var url = 'https://services.ist.lutz.gmbh/HybrisProductDelivery/clients/'+getCountryCode($('#land').val())+'/assortmentLines/'+getRailandCode($('#schiene').val(), $('#land').val())+'/productNumbers/'+productBaseNumber+'/'+productVariant;
@@ -250,8 +251,9 @@
     $('select, input').on('change keyup', function(){
         checkIfSelected();
     });
-    checkIfSelected($('#land'));
+    // checkIfSelected($('#land'));
     $(document).on('keypress',function(e) {
+        console.log(e.which);
         if(e.which == 13) {
             checkIfSelected();
             if(landSelected && schieneSelected && artikelSelected){
@@ -260,6 +262,7 @@
         }
     });
     $('#checkPim').click(function(){
+        console.log('Button clicked');
         getPimData();
     })
 </script>
