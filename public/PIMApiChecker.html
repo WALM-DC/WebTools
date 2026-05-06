@@ -220,7 +220,7 @@
                     '<tr><td>Updated:</td><td>' + data.SentDate.substring(0, 10) + '</td></tr></table></div>');
             } else {
                 var konfig = 'Ja';
-                if(data.Configuration == null){
+                if(data.ConfigurationId == null || typeof data.ConfigurationId === 'undefined' || data.ConfigurationId === ''){
                     konfig = 'Nein';
                 }
                 var is1L = '';
@@ -228,17 +228,21 @@
                     is1L = 'l1Highlither';
                 }
                 $('#resultDiv').prepend(
-                    '<div><table><tr><td>Artikel:</td><td style="font-weight: bold;">' + data.Number + '</td></tr>'+
-                    '<tr><td>Modell:</td><td>' + data.Head.ModelName +' - '+ data.Head.Brand.Name + '</td></tr>'+
+                    '<div><table><tr><td>Artikel:</td><td style="font-weight: bold;"><a href="'+url+'" target="_blank">' + data.Number + '</a></td></tr>'+
+                    '<tr><td>Modell:</td><td>' + data.Head.ModelName +'</td></tr>'+
                     '<tr><td>Produkt:</td><td>' + data.Head.Name + '</td></tr>'+
-                    '<tr><td>Erstellt:</td><td>' + data.Head.CreationDate.substring(0, 10) + '</td></tr>'+
-                    '<tr><td>Updated:</td><td>' + data.SentDate.substring(0, 10) + '</td></tr>'+
                     '<tr><td>KkBm:</td><td style="font-weight: bold;" class="' + is1L + '">' + data.Prices.Price[0].KkBm + '</td></tr>'+
+                    '<tr><td>Warengruppe:</td><td>' + data.Head.ProductGroup.substring(0, 2) + '</td></tr>'+
+                    '<tr><td>U-Warengruppe:</td><td>' + data.Head.ProductGroup.substring(2, 4) + '</td></tr>'+
+                    '<tr><td>OnlineOnly:</td><td>' + data.Head.OnlineOnly + '</td></tr>'+
                     '<tr><td>Kategorie:</td><td>' + data.Properties.CategoryName +' - '+ data.Properties.CategoryId + '</td></tr>'+
                     '<tr><td>Konfigurierbar:</td><td style="font-weight: bold;">' + konfig + '</td></tr>'+
                     '<tr><td>Dimensionen:</td><td>' + data.Head.Measure.Name +' - '+ data.Head.Measure.Value + '</td></tr>'+
                     '<tr><td>Sellable:</td><td>' + data.Marketing.Sellable + '</td></tr>'+
+                    '<tr><td>OnlineOnly:</td><td>' + data.Head.Brand.OnlineOnly + '</td></tr>'+
                     '<tr><td>AugmentedReality:</td><td>' + data.Head.AugmentedReality + '</td></tr>'+
+                    '<tr><td>Erstellt:</td><td>' + data.Head.CreationDate.substring(0, 10) + '</td></tr>'+
+                    '<tr><td>Updated:</td><td>' + data.SentDate.substring(0, 10) + '</td></tr>'+
                     '<tr><td>ExportAction:</td><td>' + data.ExportAction + '</td></tr></table></div>');
             }
         }).fail(function(error){
