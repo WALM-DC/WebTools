@@ -64,8 +64,9 @@
             right: 10px;
             color: white;
             top: -10px;
-            text-align: left;
+            text-align: right;
             width: 500px;
+            font-size:18px;
         }
         button.btnDisabled span{
             background-image: linear-gradient(144deg, #eee, #888 50%, #00DDEB);
@@ -73,22 +74,79 @@
             color: #777;
             cursor: not-allowed;
         }
+        #refresherInfo{
+            display: none;
+            color: red;
+            line-height: 55px;
+            position: absolute;
+            left: 40%;
+            font-size: 25px;
+            top: 28%;
+            background-color: white;
+            border: 5px solid white;
+            border-radius: 15px;
+        }  
+        .legende {
+            position: fixed;
+            top: 25%;
+            right: -794px;
+            background-color: cadetblue;
+            color: white;
+            padding: 10px 30px;
+            border-radius: 5px;
+            z-index: 1000;
+            max-width: 750px;
+            cursor: pointer;
+            border: 1px solid white;
+            transition: 0.5s ease;
+        }
+        .legende h3 {
+            background-color: cadetblue;
+            border-radius: 5px;
+            transform: rotate(-90deg);
+            position: absolute;
+            top: 75px;
+            left: -75px;
+            padding: 10px;
+            cursor: pointer;
+            border: 1px solid white;
+        }
+        .legende span {
+            color: black;
+        }
+        .legende.expanded {
+            right: 0px;
+            transition: 0.5s ease;
+        }         
     </style>
 </head>
 <body>
     <div id="topDiv"></div>
+    <div class="legende" id="legende">
+        <h3>Anleitung</h3>
+        <p><ul>
+            <li>Schiene und Land ausw&auml;hlen</li>
+            <li>Artikelnummern mit Variante eingeben (z.B. 0012345678XX)</li>
+            <li>Artikelnummern k&ouml;nnen mit Bindestrich und Komma kombiniert werden, um mehrere Varianten gleichzeitig zu pr&uuml;fen:</li>
+            <ul>
+                <li><b>Bindestrich (001234567801-20):</b> pr&uuml;ft alle Varianten von 01 und 20</li>
+                <li><b>Komma (001234567801,C4,C5):</b> pr&uuml;ft die Varianten 01, C4 und C5</li>
+                <li><b>Bindestrich und Komma (001234567801-20,C4,C5):</b> pr&uuml;ft alle Varianten von 01 und 20 sowie die Varianten C4 und C5</li>
+            </ul>
+            <li>Sonderzeichen wie Schr&auml;gstrich, Punkt, Leerzeichen oder Semikolon werden automatisch entfernt</li>
+            <li>Die f&uuml;hrenden Nullen werden automatisch erg&auml;nzt</li>
+            <li>Enter dr&uuml;cken oder Button klicken f&uuml;r PIM-Check</li>
+        </ul></p>
+    </div>`
     <div class="masterDiv">
         <div>
             <div class="resultDiv upperDiv">
+                <h3 id="refresherInfo">Artikel nicht gefunden.</h3>
                 <div id="refreshTimer">
-                    <h3>Anleitung:</h3>
-                    <ul>
-                        <li>Schiene und Land ausw&auml;hlen</li>
-                        <li>Artikelnummern mit Variante eingeben (z.B. 0012345678XX)</li>
-                        <li>Sonderzeichen wie Bindestrich, Schr&auml;gstrich, Punkt, Komma, Leerzeichen oder Semikolon werden automatisch entfernt</li>
-                        <li>Die f&uuml;hrenden Nullen werden automatisch erg&auml;nzt, falls die Nummer weniger als 12 Stellen hat</li>
-                        <li>Enter dr&uuml;cken oder Button klicken f&uuml;r PIM-Check</li>
-                    </ul>
+                    Gefundene Artikel: <span id="resultCounter">0</span>
+                    <br>Auslaufartikel: <span id="auslaufCounter">0</span>
+                    <br>Offline Artikel: <span id="offlineCounter">0</span>
+                    <br>Nicht gefunden: <span id="notFoundCounter">0</span>
                 </div>
                 <select id="land" size="12">
                     <option value="at">AT</option>
@@ -176,6 +234,7 @@
     };  
 
     var landSelected = false, schieneSelected = false, artikelSelected = false;
+    var resultCounter = 0, auslaufCounter = 0, offlineCounter = 0, notFoundCounter = 0;
     function checkIfSelected(){
         if($('#land').val() !== null){
             landSelected = true;
@@ -199,65 +258,99 @@
         }
     }
 
-    function getPimData(){
-        console.log('Fetching PIM data...');
-        var productNumber = $('#productNumber').val().replace(/[-\/\.,; ]+/g, "").trim();
-        if(productNumber.length<12 && productNumber.length>=10){
-            productNumber.length===11?productNumber='0'+productNumber:productNumber.length===10?productNumber='00'+productNumber:productNumber;
-        } else if (productNumber.length<10 || productNumber.length>12){
-            $('#resultDiv').prepend(
-                '<div><table><tr><td>Artikel:</td><td style="font-weight: bold;">' + productNumber + '</td></tr>'+
-                '<tr><td>Fehler:</td><td style="font-weight: bold;" class="l1Highlither">Ung&uuml;ltige Artikelnummer.</td></tr></table></div>');
-        }
-        var productVariant = productNumber.slice(-2), productBaseNumber = productNumber.slice(0, -2);
-        var url = 'https://services.ist.lutz.gmbh/HybrisProductDelivery/clients/'+getCountryCode($('#land').val())+'/assortmentLines/'+getRailandCode($('#schiene').val(), $('#land').val())+'/productNumbers/'+productBaseNumber+'/'+productVariant;
+    function pad (str, max) {
+        str = str.toString();
+        return str.length < max ? pad("0" + str, max) : str;
+    }
 
-        $.get(url).done(function(data){
-            if(data.ExportAction === 'OFFLINE'){
-                $('#resultDiv').prepend(
-                    '<div><table><tr><td>Artikel:</td><td style="font-weight: bold;">' + data.Number + '</td></tr>'+
-                    '<tr><td>Status:</td><td style="font-weight: bold;">' + data.ExportAction + '</td></tr>'+
-                    '<tr><td>Updated:</td><td>' + data.SentDate.substring(0, 10) + '</td></tr></table></div>');
-            } else {
-                var konfig = 'Ja';
-                if(data.ConfigurationId == null || typeof data.ConfigurationId === 'undefined' || data.ConfigurationId === ''){
-                    konfig = 'Nein';
-                }
-                var is1L = '';
-                if(data.Prices.Price[0].KkBm === '1L'){
-                    is1L = 'l1Highlither';
-                }
-                $('#resultDiv').prepend(
-                    '<div><table><tr><td>Artikel:</td><td style="font-weight: bold;"><a href="'+url+'" target="_blank">' + data.Number + '</a></td></tr>'+
-                    '<tr><td>Modell:</td><td>' + data.Head.ModelName +'</td></tr>'+
-                    '<tr><td>Produkt:</td><td>' + data.Head.Name + '</td></tr>'+
-                    '<tr><td>KkBm:</td><td style="font-weight: bold;" class="' + is1L + '">' + data.Prices.Price[0].KkBm + '</td></tr>'+
-                    '<tr><td>Warengruppe:</td><td>' + data.Head.ProductGroup.substring(0, 2) + '</td></tr>'+
-                    '<tr><td>U-Warengruppe:</td><td>' + data.Head.ProductGroup.substring(2, 4) + '</td></tr>'+
-                    '<tr><td>OnlineOnly:</td><td>' + data.Head.OnlineOnly + '</td></tr>'+
-                    '<tr><td>Kategorie:</td><td>' + data.Properties.CategoryName +' - '+ data.Properties.CategoryId + '</td></tr>'+
-                    '<tr><td>Konfigurierbar:</td><td style="font-weight: bold;">' + konfig + '</td></tr>'+
-                    '<tr><td>Dimensionen:</td><td>' + data.Head.Measure.Name +' - '+ data.Head.Measure.Value + '</td></tr>'+
-                    '<tr><td>Sellable:</td><td>' + data.Marketing.Sellable + '</td></tr>'+
-                    '<tr><td>OnlineOnly:</td><td>' + data.Head.Brand.OnlineOnly + '</td></tr>'+
-                    '<tr><td>AugmentedReality:</td><td>' + data.Head.AugmentedReality + '</td></tr>'+
-                    '<tr><td>Erstellt:</td><td>' + data.Head.CreationDate.substring(0, 10) + '</td></tr>'+
-                    '<tr><td>Updated:</td><td>' + data.SentDate.substring(0, 10) + '</td></tr>'+
-                    '<tr><td>ExportAction:</td><td>' + data.ExportAction + '</td></tr></table></div>');
+    function getPimData(){
+        $('#refresherInfo').fadeOut(500);
+        console.log('Fetching PIM data...');
+        var prodNumberList = [], commaNumberList = [], countUpTo = 0, productNumber = $('#productNumber').val().replace(/[\/\.; ]+/g, "").trim();
+
+        if(productNumber.indexOf(',')>-1){
+            prodNumberList = productNumber.split(',');
+        } else {
+            prodNumberList.push(pad(productNumber, 12));
+        }
+
+        if(prodNumberList[0].indexOf('-')>-1){
+            countUpTo = prodNumberList[0].split('-')[1];
+            prodNumberList[0] = pad(prodNumberList[0].split('-')[0], 12);
+            let countStart = parseInt(prodNumberList[0].slice(-2))+1;
+            for(let i=countStart; i<=countUpTo; i++){
+                commaNumberList.push(prodNumberList[0].slice(0, -2) + pad(i, 2));
             }
-        }).fail(function(error){
-            console.error('Error fetching data:', error);
-            $('#resultDiv').prepend(
-                '<div><table><tr><td>Artikel:</td><td style="font-weight: bold;">' + productNumber + '</td></tr>'+
-                '<tr><td>Fehler:</td><td style="font-weight: bold;" class="l1Highlither">Artikel nicht gefunden.</td></tr></table></div>');
+        } else {
+            prodNumberList[0] = pad(prodNumberList[0], 12);
+        }
+
+        prodNumberList = prodNumberList.concat(commaNumberList);
+
+        $.each(prodNumberList, function(index, value){
+            if(value.length<3){
+                prodNumberList[index] = prodNumberList[0].slice(0, -2) + value;
+            }
+            let currentProdNum = prodNumberList[index];
+            var productVariant = currentProdNum.slice(-2), productBaseNumber = currentProdNum.slice(0, -2);
+            var url = 'https://services.ist.lutz.gmbh/HybrisProductDelivery/clients/'+getCountryCode($('#land').val())+'/assortmentLines/'+getRailandCode($('#schiene').val(), $('#land').val())+'/productNumbers/'+productBaseNumber+'/'+productVariant;
+
+            $.get(url).done(function(data){
+                resultCounter++;
+                if(data.ExportAction === 'OFFLINE'){
+                    offlineCounter++;
+                    $('#resultDiv').prepend(
+                        '<div><table><tr><td>Artikel:</td><td style="font-weight: bold;">' + data.Number + '</td></tr>'+
+                        '<tr><td>Status:</td><td style="font-weight: bold;">' + data.ExportAction + '</td></tr>'+
+                        '<tr><td>Updated:</td><td>' + data.SentDate.substring(0, 10) + '</td></tr></table></div>');
+                } else {
+                    var konfig = 'Ja';
+                    if(data.ConfigurationId == null || typeof data.ConfigurationId === 'undefined' || data.ConfigurationId === ''){
+                        konfig = 'Nein';
+                    }
+                    var is1L = '';
+                    if(data.Prices.Price[0].KkBm === '1L'){
+                        is1L = 'l1Highlither';
+                        auslaufCounter++;
+                    }
+                    $('#resultDiv').prepend(
+                        '<div><table><tr><td>Artikel:</td><td style="font-weight: bold;"><a href="'+url+'" target="_blank">' + data.Number + '</a></td></tr>'+
+                        '<tr><td>Modell:</td><td>' + data.Head.ModelName +'</td></tr>'+
+                        '<tr><td>Produkt:</td><td>' + data.Head.Name + '</td></tr>'+
+                        '<tr><td>KkBm:</td><td style="font-weight: bold;" class="' + is1L + '">' + data.Prices.Price[0].KkBm + '</td></tr>'+
+                        '<tr><td>Warengruppe:</td><td>' + data.Head.ProductGroup.substring(0, 2) + '</td></tr>'+
+                        '<tr><td>U-Warengruppe:</td><td>' + data.Head.ProductGroup.substring(2, 4) + '</td></tr>'+
+                        '<tr><td>OnlineOnly:</td><td>' + data.Head.OnlineOnly + '</td></tr>'+
+                        '<tr><td>Kategorie:</td><td>' + data.Properties.CategoryName +' - '+ data.Properties.CategoryId + '</td></tr>'+
+                        '<tr><td>Konfigurierbar:</td><td style="font-weight: bold;">' + konfig + '</td></tr>'+
+                        '<tr><td>Dimensionen:</td><td>' + data.Head.Measure.Name +' - '+ data.Head.Measure.Value + '</td></tr>'+
+                        '<tr><td>Sellable:</td><td>' + data.Marketing.Sellable + '</td></tr>'+
+                        '<tr><td>OnlineOnly:</td><td>' + data.Head.Brand.OnlineOnly + '</td></tr>'+
+                        '<tr><td>AugmentedReality:</td><td>' + data.Head.AugmentedReality + '</td></tr>'+
+                        '<tr><td>Erstellt:</td><td>' + data.Head.CreationDate.substring(0, 10) + '</td></tr>'+
+                        '<tr><td>Updated:</td><td>' + data.SentDate.substring(0, 10) + '</td></tr>'+
+                        '<tr><td>ExportAction:</td><td>' + data.ExportAction + '</td></tr></table></div>');
+                }
+                $('#resultCounter').text(resultCounter);
+                $('#offlineCounter').text(offlineCounter);
+                $('#auslaufCounter').text(auslaufCounter);
+                $('#notFoundCounter').text(notFoundCounter);
+            }).fail(function(error){
+                notFoundCounter++;
+                console.error('Error fetching data:', error);
+            });
         });
     }
+
+     $('#legende').click(function () {
+        $(this).toggleClass('expanded');
+    });
+
     $('select, input').on('change keyup', function(){
         checkIfSelected();
     });
     // checkIfSelected($('#land'));
     $(document).on('keypress',function(e) {
-        console.log(e.which);
         if(e.which == 13) {
             checkIfSelected();
             if(landSelected && schieneSelected && artikelSelected){
