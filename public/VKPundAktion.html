@@ -1,0 +1,369 @@
+<html>
+<head>
+    <title>PIM-Api-Checker</title>
+    <link rel="stylesheet" href="https://walm-dc.github.io/WebTools/public/mattStyle.css">
+    <script src="https://walm-dc.github.io/WebTools/public/jquery-3.7.1.min.js"></script>
+    <script src="https://walm-dc.github.io/WebTools/public/table2csv.js"></script>
+    <script src="https://walm-dc.github.io/WebTools/public/ddtf.js"></script>
+    <script src="https://walm-dc.github.io/WebTools/public/mattQuery.js"></script>
+    <style>
+        button{
+            width: 210px;
+            margin-left: 14px;
+        }
+        select{
+            cursor: pointer;
+        }
+        .masterDiv{
+            position: relative;
+        }
+        .resultDiv.upperDiv{
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+            margin-top: 30px;
+            position: relative;
+        }
+        .resultDiv.upperDiv select, .resultDiv.upperDiv input{
+            margin: 10px;
+        }
+        .resultDiv.upperDiv button {
+            margin: 7px;
+        }
+        .kkBmli {
+            font-weight: bold;
+        }
+        .l1Highlither {
+            color: #ff0000;
+        }
+        .resultDiv.lowerDiv{
+            text-align: left;
+            padding-top: 65px;
+            max-width: 1260px;
+            align-self: center;
+            margin: auto;
+            height: calc(100% - 25px);
+            overflow-y: auto;
+        }
+        .resultDiv.lowerDiv input{
+            text-align: right;
+            width: 100px;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            border: 1px solid darkgray;
+            font-size: 16px;
+            font-weight: 600;
+            background-color: rgba(255,255,255,0.6);
+            border-radius: 0;
+            line-height: 22px;
+            cursor: text;
+        }   
+        .resultDiv.lowerDiv input:focus{
+            outline: none;
+            background-color: rgba(255, 255, 255, 1);
+            border-color: black;
+        }
+        .resultDiv.lowerDiv input:disabled{
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+        .resultDiv.lowerDiv table{
+            font-size: 16px;
+        }
+        .resultDiv.lowerDiv table td{
+            border: 2px solid white
+        }
+        .resultDiv.lowerDiv>div{
+            position: relative;
+            text-align: left;
+            max-width: 49%;
+            display: inline-block;
+            padding: 12px;
+            background-color: rgba(255, 255, 255, 0.6);
+            margin:2px 0;
+            vertical-align: top;
+            width: 283px;
+            animation: 0.7s ease-in-out;
+        }
+        .resultDiv.lowerDiv>div p{
+            margin: 4px;
+        }
+        #refreshTimer{
+            position: absolute;
+            right: 10px;
+            color: white;
+            top: -10px;
+            text-align: right;
+            width: 500px;
+            font-size:18px;
+        }
+        #refresherInfo{
+            display: none;
+            color: red;
+            line-height: 55px;
+            position: absolute;
+            left: 40%;
+            font-size: 25px;
+            top: 28%;
+            background-color: white;
+            border: 5px solid white;
+            border-radius: 15px;
+        }  
+        .legende {
+            position: fixed;
+            top: 25%;
+            right: -794px;
+            background-color: cadetblue;
+            color: white;
+            padding: 10px 30px;
+            border-radius: 5px;
+            z-index: 1000;
+            max-width: 750px;
+            cursor: pointer;
+            border: 1px solid white;
+            transition: 0.5s ease;
+        }
+        .legende h3 {
+            background-color: cadetblue;
+            border-radius: 5px;
+            transform: rotate(-90deg);
+            position: absolute;
+            top: 75px;
+            left: -75px;
+            padding: 10px;
+            cursor: pointer;
+            border: 1px solid white;
+        }
+        .legende span {
+            color: black;
+        }
+        .legende.expanded {
+            right: 0px;
+            transition: 0.5s ease;
+        } 
+        .calcTable tr th{
+                text-align: center;
+                background-color: transparent;
+                padding: 9px;
+                border-bottom: 6px solid white;
+        }
+        .calcTable tr{
+            background-color: white;
+        }
+        /* .calcTable tr:first-child{
+            background-color: orange;
+        }  */
+        .calcTable tr:nth-child(1){
+            background-color: lightcyan;
+        } 
+        .calcTable tr:nth-child(2){
+            background-color: lightgoldenrodyellow;
+        } 
+        .calcTable tr:nth-child(3){
+            background-color: palegreen;
+        }    
+        .calcTable tr:nth-child(4), .calcTable tr:nth-child(8){
+            background-color: lightpink;
+        }
+        .calcTable tr:nth-child(6), .calcTable tr:nth-child(7){
+            background-color: lightsteelblue;
+        }
+        .resultDiv.lowerDiv table tr:nth-child(5):hover{
+            background-color: white;
+        }
+        .addVKP{
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: ruby;
+        }
+        .removeBtn{
+            position: absolute;
+            right: -2px;
+            top: -7px;
+            background-color: darkorange;
+            color: black;
+            width: 25px;
+            height: 25px;
+            border-radius: 7px;
+            text-align: center;
+            line-height: 25px;
+            cursor: pointer;
+            animation: 0.7s ease-in-out;
+            -webkit-touch-callout: none; 
+            -webkit-user-select: none; 
+            -khtml-user-select: none; 
+            -moz-user-select: none; 
+                -ms-user-select: none; 
+                    user-select: none; 
+        }
+        .removeBtn:hover{
+            background-color: red;
+            color: white;
+        }
+        .removeBtn:active{
+            transform: scale(0.85);
+        }
+    </style>
+</head>
+<body>
+    <div id="topDiv"></div>
+    <!-- <div class="legende" id="legende">
+        <h3>Anleitung</h3>
+        <p><ul>
+            <li>Schiene und Land ausw&auml;hlen</li>
+            <li>Artikelnummern mit Variante eingeben (z.B. 0012345678XX)</li>
+            <li>Artikelnummern k&ouml;nnen mit Bindestrich und Komma kombiniert werden, um mehrere Varianten gleichzeitig zu pr&uuml;fen:</li>
+            <ul>
+                <li><b>Bindestrich (001234567801-20):</b> pr&uuml;ft alle Varianten von 01 und 20</li>
+                <li><b>Komma (001234567801,C4,C5):</b> pr&uuml;ft die Varianten 01, C4 und C5</li>
+                <li><b>Bindestrich und Komma (001234567801-20,C4,C5):</b> pr&uuml;ft alle Varianten von 01 und 20 sowie die Varianten C4 und C5</li>
+            </ul>
+            <li>Sonderzeichen wie Schr&auml;gstrich, Punkt, Leerzeichen oder Semikolon werden automatisch entfernt</li>
+            <li>Die f&uuml;hrenden Nullen werden automatisch erg&auml;nzt</li>
+            <li>Enter dr&uuml;cken oder Button klicken f&uuml;r PIM-Check</li>
+        </ul></p>
+    </div> -->
+    <div class="masterDiv">
+        <div class="addVKP">
+            <button id="addVKP" class="pushable">
+                <span class="front">+ VKP</span>
+            </button>
+            <button id="removeAll" class="pushable">
+                <span class="front">Alles zur&uuml;cksetzen</span>
+            </button> 
+        </div>
+        <div>
+            <div class="resultDiv lowerDiv">
+
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    injectTabs();
+
+    var vkpsAdded = 1, index = 1;
+    var storedVKPs = localStorage.getItem('vkpsAdded');
+    var storedTablesData = JSON.parse(localStorage.getItem('tablesData'));
+
+    function addAmountToLocalStorage(){
+        localStorage.setItem('vkpsAdded', vkpsAdded);
+    }
+    function addDataToLocalStorage(){
+        var tablesData = [], activeContainers = $(`[finder='tableContainer']`);
+        $.each(activeContainers, function(i, container){
+            let tableData = [], findNumber = $(container).attr('finderNumber');
+            tableData.push($(`[finder='ekp${findNumber}']`).val());
+            tableData.push($(`[finder='kaa${findNumber}']`).val());
+            tableData.push($(`[finder='entlastung${findNumber}']`).val());
+            tableData.push($(`[finder='aktion${findNumber}']`).val());
+            tablesData.push(tableData);
+        });
+        localStorage.setItem('tablesData', JSON.stringify(tablesData));
+    }
+    function calculateVKP(finderNumber){
+        let ekp = parseFloat($(`[finder='ekp${finderNumber}']`).val()) || 0;
+        let kaa = parseFloat($(`[finder='kaa${finderNumber}']`).val()) || 0;
+        let entlastung = parseFloat($(`[finder='entlastung${finderNumber}']`).val()) || 0;
+        let aktion = parseFloat($(`[finder='aktion${finderNumber}']`).val()) || 0;
+        let entlastungCalc = (100-entlastung)/100;
+        let aktionCalc = (100-aktion)/100;
+        let ekpCalc = ekp/100;
+        let kaaCalc = kaa/100;
+
+        let vkp = ekpCalc*kaaCalc*entlastungCalc*aktionCalc;
+        let ekEntlastung = ekpCalc*kaaCalc*entlastungCalc;
+        let ekAktion = ekpCalc*kaaCalc*aktionCalc;
+
+        let aktionCalcDisplay = ((ekEntlastung - ekAktion) * 100) / ekEntlastung;
+
+        $(`[finder='vkp${finderNumber}']`).val(vkp.toFixed(2));
+        $(`[finder='vkpround${finderNumber}']`).val(Math.round(vkp));
+        $(`[finder='aktioncalc${finderNumber}']`).val(aktionCalcDisplay.toFixed(2));
+        addDataToLocalStorage();
+    }
+
+    function injectTables(){
+        for (index; index <= vkpsAdded; index++) {
+            $('.resultDiv').append(`
+                <div finder="tableContainer" finderNumber="${index}" id="tableContainer${index}"><div id="removeBtn${index}" class="removeBtn" onclick="removeTable(${index})">X</div><table class="calcTable" id="calcTable${index}">
+                        <tbody>
+                            <tr>
+                                <td>EKP:</td>
+                                <td><input type="number" finder="ekp${index}" finderNumber="${index}" placeholder="1701"></td>
+                            </tr>
+                            <tr>
+                                <td>kaa1:</td>
+                                <td><input type="number" finder="kaa${index}" finderNumber="${index}" placeholder="350"></td>
+                            </tr>
+                            <tr>
+                                <td>Entlastung:</td>
+                                <td><input type="number" finder="entlastung${index}" finderNumber="${index}" placeholder="30"></td>
+                            </tr>
+                            <tr>
+                                <td>Aktion:</td>
+                                <td><input type="number" finder="aktion${index}" finderNumber="${index}" placeholder="33"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>VKP:</td>
+                                <td><input type="text" finder="vkp${index}" disabled></td>
+                            </tr>
+                            <tr>
+                                <td>VKP gerundet:</td>
+                                <td><input type="text" finder="vkpround${index}" disabled></td>
+                            </tr>
+                            <tr>
+                                <td>Aktionsberechnung:</td>
+                                <td><input type="text" finder="aktioncalc${index}" disabled></td>
+                            </tr>
+                        </tbody>
+                    </table></div>
+            `);
+        }
+        addAmountToLocalStorage();
+    }
+    function innitPage(){
+        if(storedVKPs && storedVKPs > vkpsAdded){
+            vkpsAdded = parseInt(storedVKPs);
+        }
+        injectTables();
+        if(storedTablesData && storedTablesData.length > 0){
+            for (let i = 0; i < storedTablesData.length; i++){
+                let tableData = storedTablesData[i];
+                if(tableData[0] != '' && tableData[0] != null){
+                    $(`[finder='ekp${i+1}']`).val(tableData[0]);
+                    $(`[finder='kaa${i+1}']`).val(tableData[1]);
+                    $(`[finder='entlastung${i+1}']`).val(tableData[2]);
+                    $(`[finder='aktion${i+1}']`).val(tableData[3]);
+                    calculateVKP(i+1);
+                }
+            }
+        }
+    }
+    $('#addVKP').click(function(){
+        vkpsAdded++;
+        injectTables();
+    });
+    $('#removeAll').click(function(){
+        vkpsAdded = 1, index = 1;
+        $('.resultDiv').empty();
+        localStorage.setItem('tablesData', '');
+        injectTables();
+    });
+    $('body').on('input', 'input[type="number"]', function(){
+        calculateVKP($(this).attr('finderNumber'));
+    });
+    function removeTable(index){
+        $('#tableContainer' + index).remove();
+        vkpsAdded--, index--;
+        injectTables();
+    }
+    
+    innitPage();
+</script>
+</html>

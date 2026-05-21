@@ -559,22 +559,16 @@
                 lineCounter++;
             })
         })
-        // console.log(errorLog.Lang);
-        $(combinedRegistry).each(function(index, registryEntry){
-            var lieferantXMLSelected = firstXMLNoNumb.split('_')[0];
-            var modellXMLSelected = firstXMLNoNumb.split('_')[2];
-            if(lieferantXMLSelected === registryEntry.Lieferant && modellXMLSelected === registryEntry.Modell && registryEntry.Filename[firstXMLNoNumb] !== undefined){
-                errorLog.UsedLang = registryEntry.Filename[firstXMLNoNumb].join(', ');
-                if(errorLog.UsedLang !== ''){
-                    var usedLangArr = errorLog.UsedLang.split(', ');
-                    $.each(usedLangArr, function(lIndex, lValue){
-                        if(errorLog.Lang.indexOf(lValue) === -1){
-                            errorLog.MissingLang.push(lValue);
-                        }
-                    });
+        var activeRegistryEntry = combinedRegistry[firstXMLNoNumb];
+        errorLog.UsedLang = activeRegistryEntry ? activeRegistryEntry.Markets.join(', ') : '';
+        if(errorLog.UsedLang !== ''){
+            var usedLangArr = errorLog.UsedLang.split(', ');
+            $.each(usedLangArr, function(lIndex, lValue){
+                if(errorLog.Lang.indexOf(lValue) === -1){
+                    errorLog.MissingLang.push(lValue);
                 }
-            }
-        });
+            });
+        }
         var shortXmlName = removeAfterLastUnderscore(firstSelectedXML);
         var prodNumber = firstSelectedXML.split('_')[0];
         if($.inArray(shortXmlName, combinedRegistryNameList) > -1){
@@ -949,8 +943,9 @@
         $.inArray(entry, combinedRegistryNameList) === -1 ? combinedRegistryNameList.push(entry) : null;
     }
     function combineRegistries(curRegistry, fileName){
+        let addressArray = {};
         $.each(curRegistry.Domains, function( key, value ) {
-            var addressArray = [], marketArray = [], addressID = '', lieferant = '', modell = '';
+            let marketArray = [], addressID = '', lieferant = '', modell = '';
             if(typeof value.ComService === 'undefined') return; //skip entries without address
             var entry = {};
             if(typeof value.ComService.Setups === 'undefined'){ //if no setups, take address and markets from comservice level
@@ -967,7 +962,6 @@
                     modell = addressID.split('_')[2];
                 }
             } else {
-                addressArray = [];
                 $.each(value.ComService.Setups, function( setupKey, setupValue ) {
                     formatNameAndCheckDupes(setupValue.Address);
                     marketArray = [];
@@ -984,17 +978,12 @@
                     }
                 });
             }
-            entry = {
-                ID: key,
-                Lieferant: lieferant,
-                Modell: modell,
-                Filename: addressArray
-            }
-            const isDuplicate = combinedRegistry.some(item => item.ID.toLowerCase() === entry.ID.toLowerCase());
-            if (!isDuplicate) {
-                combinedRegistry.push(entry);
-            } 
         })
+        $.each(addressArray, function(aIndex, aValue){
+            combinedRegistry[aIndex] = {
+                Markets: aValue
+            };
+        });
     }
     function readModelListJSON() {
         $.getJSON( "https://walm-dc.github.io/WebTools/public/list.json", function( data ) {
