@@ -8,7 +8,7 @@ const tabs = {
     '3D Modell-Details': "https://walm-dc.github.io/WebTools/public/3DModelDetails.html",
     'Stoff Zusammensetzungen': "https://ig-creator.xxxlgroup.com/idm/XMLLister/igAssetList.html",
     'PIM API Checker': "https://ig-creator.xxxlgroup.com/idm/XMLLister/PIMApiChecker.html",
-    'VKP & Aktion': "https://walm-dc.github.io/WebTools/public/VKPundAktion.html",
+    'VKP & Aktion': "https://ig-creator.xxxlgroup.com/idm/XMLLister/VKPundAktion.html",
     'Link Sammlung': "https://walm-dc.github.io/WebTools/public/LinkSammlung.html"
 };
 function injectTabs(){
