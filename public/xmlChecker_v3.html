@@ -485,17 +485,18 @@
                                 // Prices are the same, new prices have been added, the order doesn't matter
                                 highlighter = 'match hideMe';
                             } else if (secondPrices[0] !== '-KEIN EINTRAG-') {
-                                $.each(currentModel.sets, function(setId, setVal){
-                                    $.each(setVal.set.products, function(prodId, prodVal){
-                                        if(prodVal.product.indexOf(activeMainEntry) > -1){
-                                            changedArticleInUse = true;
-                                            if($.inArray(activeMainEntry, errorLog.ArticlesInUse) === -1){
-                                                errorLog.ArticlesInUse.push(activeMainEntry);
-                                            }
-                                        }
-                                    });
-                                });
-                                if(changedArticleInUse){
+                                // console.log(currentModel.sets);
+                                // $.each(currentModel.sets, function(setId, setVal){
+                                //     $.each(setVal.set.products, function(prodId, prodVal){
+                                //         if(prodVal.product.indexOf(activeMainEntry) > -1){
+                                //             changedArticleInUse = true;
+                                //             if($.inArray(activeMainEntry, errorLog.ArticlesInUse) === -1){
+                                //                 errorLog.ArticlesInUse.push(activeMainEntry);
+                                //             }
+                                //         }
+                                //     });
+                                // });
+                                // if(changedArticleInUse){
                                     // errorLog.ErrorLines.push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
                                     highlighter = 'noMatch';
                                     errorLog.PriceChangesCount++;
@@ -519,7 +520,7 @@
                                             });
                                         }
                                     });
-                                }
+                                // }
                             }
                         }
                         if (sId === "Zielmarkt") {
@@ -582,9 +583,13 @@
             errorLog.MissingLang = [...new Set(errorLog.MissingLang)];
             $('#errorList').append('<br><br><span class="bigError">!! ACHTUNG !! - Zielm&auml;rkte in Verwendung wurden entfernt: <span style="color:white;">' + errorLog.MissingLang.join(', ') + '</span></span>');
         }
-        if (errorLog.ArticlesInUse.length > 0) {
-            var firstFive = errorLog.ArticlesInUse.slice(0, 5), remainingCount = errorLog.ArticlesInUse.length - firstFive.length;
-            $('#errorList').append('<br><br><span class="bigError">Artikel in Verwendung mit PEH: <span style="color:white;">' + firstFive.join(', ') + (remainingCount > 0 ? ' und ' + remainingCount + ' weitere' : '') + '</span></span>');
+        // if (errorLog.ArticlesInUse.length > 0) {
+        //     var firstFive = errorLog.ArticlesInUse.slice(0, 5), remainingCount = errorLog.ArticlesInUse.length - firstFive.length;
+        //     $('#errorList').append('<br><br><span class="bigError">Artikel in Verwendung mit PEH: <span style="color:white;">' + firstFive.join(', ') + (remainingCount > 0 ? ' und ' + remainingCount + ' weitere' : '') + '</span></span>');
+        // }
+        if (errorLog.PriceChangesArticles.length > 0) {
+            // var firstFive = errorLog.ArticlesInUse.slice(0, 5), remainingCount = errorLog.ArticlesInUse.length - firstFive.length;
+            $('#errorList').append('<br><br><span class="bigError">' + errorLog.PriceChangesCount+ ' PEHs gefunden</span>');
         }
         if(firstXMLDataVersion<secondXMLDataVersion){
             $('#errorList').append('<br><br>Datenversion:<br>' + secondSelectedXML + ': <span style="color:white;">' + secondXMLDataVersion + '</span><br>' + firstSelectedXML + ': <span class="bigError">' + firstXMLDataVersion + '</span>');
