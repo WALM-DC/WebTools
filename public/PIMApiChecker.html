@@ -305,7 +305,7 @@
                         '<tr><td>Updated:</td><td>' + data.SentDate.substring(0, 10) + '</td></tr></table></div>');
                 } else {
                     var konfig = 'Ja';
-                    if(data.ConfigurationId == null || typeof data.ConfigurationId === 'undefined' || data.ConfigurationId === ''){
+                    if(data.Configuration.ConfigurationId == null || typeof data.Configuration.ConfigurationId === 'undefined' || data.Configuration.ConfigurationId === ''){
                         konfig = 'Nein';
                     }
                     var is1L = '';
@@ -324,7 +324,7 @@
                         '<tr><td>Kategorie:</td><td>' + data.Properties.CategoryName +' - '+ data.Properties.CategoryId + '</td></tr>'+
                         '<tr><td>Konfigurierbar:</td><td style="font-weight: bold;">' + konfig + '</td></tr>'+
                         '<tr><td>Dimensionen:</td><td>' + data.Head.Measure.Name +' - '+ data.Head.Measure.Value + '</td></tr>'+
-                        '<tr><td>Sellable:</td><td>' + data.Marketing.Sellable + '</td></tr>'+
+                        '<tr><td>Verkaufbar:</td><td>' + data.Marketing.Sellable + '</td></tr>'+
                         '<tr><td>AugmentedReality:</td><td>' + data.Head.AugmentedReality + '</td></tr>'+
                         '<tr><td>Erstellt:</td><td>' + data.Head.CreationDate.substring(0, 10) + '</td></tr>'+
                         '<tr><td>Updated:</td><td>' + data.SentDate.substring(0, 10) + '</td></tr>'+

@@ -5,7 +5,7 @@ const tabs = {
     'XML Checker': "https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlChecker_v3.html",
     'Registry Liste': "https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlRegistryLister.html",
     '3D Modell&uuml;bersicht': "https://ig-creator.xxxlgroup.com/idm/XMLLister/3DModelOverview_V2.html",
-    '3D Modell-Details': "https://walm-dc.github.io/WebTools/public/3DModelDetails.html",
+    '3D Modell-Details': "https://ig-creator.xxxlgroup.com/idm/XMLLister/3DModelDetails.html",
     'Stoff Zusammensetzungen': "https://ig-creator.xxxlgroup.com/idm/XMLLister/igAssetList.html",
     'PIM API Checker': "https://ig-creator.xxxlgroup.com/idm/XMLLister/PIMApiChecker.html",
     'VKP & Aktion': "https://ig-creator.xxxlgroup.com/idm/XMLLister/VKPundAktion.html",

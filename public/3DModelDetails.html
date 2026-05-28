@@ -18,6 +18,17 @@
             width: 210px;
             margin-left: 14px;
         }
+        ul.kkBmUl {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        .kkBmli {
+            font-weight: bold;
+        }
+        .l1Highlither {
+            color: #ff0000;
+        }
     </style>
 </head>
 <body>
@@ -50,9 +61,13 @@
                             <th>Nummer</th>
                             <th>Online</th>
                             <th>Konfig.</th>
+                            <th>Var. Konfig.</th>
+                            <th>KkBm 1L</th>
+                            <th>KkBm & Varianten</th>
                             <th>Schiene</th>
                             <th>Land</th>
                             <th>Properties</th>
+                            <th>MinusPreise</th>
                         </tr>
                     </table>
                 </div>
@@ -133,16 +148,10 @@
         });
     })
     function readAndShowJSON(){
-        $.getJSON( "https://walm-dc.github.io/WebTools/public/list.json", function( data ) {
+        $.getJSON( "list.json", function( data ) {
             var sortArray = $.map(data, function(value, index) {return [value]});
             sortArray.sort(sortList);
             $.each(sortArray, function(id, val){
-                var online = '<td class="trueCol">Ja</td>';
-                if(!val.online){online = '<td class="falseCol">Nein</td>'}
-                if(val.online==''){online = '<td></td>'}
-                var konfig = '<td class="trueCol">Ja</td>';
-                if(!val.konfig){konfig = '<td class="falseCol">Nein</td>'}
-                if(val.konfig==''){konfig = '<td></td>'}
                 var storeUrl = countryShorts[val.brand]+'.'+val.locale;
                 if(countryShorts[val.brand] === 'xxxlutz' && val.locale === 'si'){
                     storeUrl = 'xxxlesnina'+'.'+val.locale;
@@ -157,6 +166,7 @@
                 if(variants.indexOf('YN')>-1){variantCount--}
                 if(variants.indexOf('YK')>-1){variantCount--}
                 if(variants.trim()===""){variantCount=0}
+
                 var inOrEx = 'Intern';
                 if(val.catalog.split('.')[0].indexOf('XXXL')>-1){
                     intern++;
@@ -164,14 +174,81 @@
                     extern++;
                     inOrEx = 'Extern';
                 }
-                var propTable = '';
+
+                var online = '<td class="trueCol">Ja</td>';
+                if(!val.online){online = '<td class="falseCol">Nein</td>'}
+                if(val.online===''){online = '<td></td>'}
+
+                var konfig = '<td class="trueCol">Ja</td>';
+                if(!val.konfig){konfig = '<td class="falseCol">Nein</td>'}
+                if(val.konfig===''){konfig = '<td></td>'}
+
+                let konfigVariantLinks = '';
+                const variantConfig = (val.variantConfig || '').trim();
+                if (variantConfig) {
+                    konfigVariantLinks = variantConfig
+                        .split('/')
+                        .map(item => item.trim())
+                        .filter(Boolean)
+                        .sort((a, b) => {
+                            const numA = parseInt(a.replace(/\D/g, ''), 10) || 0;
+                            const numB = parseInt(b.replace(/\D/g, ''), 10) || 0;
+                            return numA - numB;
+                        })
+                        .map(item => `<a href="https://${storeUrl}/s/?s=${val.productNumber}${item}" target="_blank">${item}</a>`)
+                        .join('/ ');
+                }
+
+                var auslaufVarianten = '', KkBmL1 = false, kkbmTable = '<td></td>';
+                var list1L = '', listRef = '', listRest = '';
+                $.each(val.KkBm, function(index, value){
+                    var isL1 = '', kkBmRef = index.trim();
+                    var tempList = value.sort((a, b) => {
+                        const numA = parseInt(a.replace(/\D/g, ''), 10) || 0;
+                        const numB = parseInt(b.replace(/\D/g, ''), 10) || 0;
+                        return numA - numB;
+                    });
+                    if(kkBmRef === '1L'){
+                        isL1 = 'l1Highlither';
+                        if(!KkBmL1){
+                            kkbmTable = '<td class="falseCol">1L</td>'; 
+                            KkBmL1 = true;
+                        }
+                        list1L += '<li><span class="kkBmli l1Highlither">' + kkBmRef + '</span>: ' + tempList.join('/ ') + '</li>';
+                    } else if(kkBmRef === ''){
+                        kkBmRef = 'REF';
+                        listRef += '<li><span class="kkBmli">' + kkBmRef + '</span>: ' + tempList.join('/ ') + '</li>';
+                    } else {
+                        listRest += '<li><span class="kkBmli">' + kkBmRef + '</span>: ' + tempList.join('/ ') + '</li>';
+                    }
+                })
+                auslaufVarianten += list1L + listRest + listRef;
+
+                var propTable = '', minusPreis = 'Nein';
                 $.each(val.properties, function(propId, propVal){
                     propTable += propVal.name+': <ul>';
                     $.each(propVal.values, function(valuesId, valuesVal){
-                        propTable += '<li>'+valuesVal.name+'-'+valuesVal.value+'</li>';
+                        propTable += '<li>'+valuesVal.name+' - '+valuesVal.value+'</li>';
+                        $.each(propVal.values, function(valuesId, valuesVal){
+                            if(typeof valuesVal.prices !== 'undefined'){
+                                propTable += '<ul>';
+                                $.each(valuesVal.prices, function(priceId, priceVal){
+                                    if(priceVal._price<0){
+                                        minusPreis = 'Ja';
+                                        propTable += '<li style="background-color: yellow;">'+priceVal.rule+': '+priceVal._price+'</li>';
+                                        // console.log(propVal.name, valuesVal.name, priceVal.rule, priceVal._price);
+                                    }
+                                 })
+                                 propTable += '</ul>';
+                            }
+                        })
                     })
                     propTable += '</ul>';
                 })
+                var minPreisColor = 'trueCol';
+                if(minusPreis === 'Ja'){
+                    minPreisColor = 'falseCol';
+                }
                 $('#myTable').append(
                     '<tr variants="'+variantCount+'"><td>'+val.catalog.split('.')[0].replace('XXXL', '')+'</td>'+
                     '<td>'+val.brandName+'</td>'+
@@ -181,9 +258,13 @@
                     '<td><a href="https://'+storeUrl+'/s/?s='+val.productNumber+'" target="_blank">'+val.productNumber+'</a></td>'+
                     online+
                     konfig+
+                    '<td>'+konfigVariantLinks+'</td>'+
+                    kkbmTable+
+                    '<td><ul class="kkBmUl">'+auslaufVarianten+'</ul></td>'+
                     '<td>'+val.brand+'</td>'+
                     '<td>'+val.locale+'</td>'+
-                    '<td>'+propTable+'</td>'
+                    '<td>'+propTable+'</td>'+
+                    '<td class="'+minPreisColor+'">'+minusPreis+'</td>'
                 )
             })
             $('.loading').removeClass('loading');

@@ -126,7 +126,7 @@ button{
 }
 .div_before_table {
     overflow: auto;
-    height: calc(100% - 230px);
+    height: calc(100% - 18%);
 }
 .div_before_table.igServer {
     height: calc(100% - 150px);
