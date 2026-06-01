@@ -148,7 +148,7 @@
                     <br>Offline Artikel: <span id="offlineCounter">0</span>
                     <br>Nicht gefunden: <span id="notFoundCounter">0</span>
                 </div>
-                <select id="land" size="12">
+                <select id="land" size="12" multiple>
                     <option value="at">AT</option>
                     <option value="ch">CH</option>
                     <option value="cz">CZ</option>
@@ -180,6 +180,12 @@
 </body>
 <script>
     injectTabs();
+
+    // make country select a multiple select
+    // show cuntries in which the model and variants are available
+    // xtract ModelText1 and ModelText2 from the API - compare them with each other and combine if equal
+    // add links to shop items in country names
+    // correct all true and false to Ja und Nein
 
     getRailandCode = (rail, country) => {
         switch (rail) {
@@ -299,10 +305,10 @@
                 resultCounter++;
                 if(data.ExportAction === 'OFFLINE'){
                     offlineCounter++;
-                    $('#resultDiv').prepend(
-                        '<div><table><tr><td>Artikel:</td><td style="font-weight: bold;">' + data.Number + '</td></tr>'+
-                        '<tr><td>Status:</td><td style="font-weight: bold;">' + data.ExportAction + '</td></tr>'+
-                        '<tr><td>Updated:</td><td>' + data.SentDate.substring(0, 10) + '</td></tr></table></div>');
+                    // $('#resultDiv').prepend(
+                    //     '<div><table><tr><td>Artikel:</td><td style="font-weight: bold;">' + data.Number + '</td></tr>'+
+                    //     '<tr><td>Status:</td><td style="font-weight: bold;">' + data.ExportAction + '</td></tr>'+
+                    //     '<tr><td>Updated:</td><td>' + data.SentDate.substring(0, 10) + '</td></tr></table></div>');
                 } else {
                     var konfig = 'Ja';
                     if(data.Configuration.ConfigurationId == null || typeof data.Configuration.ConfigurationId === 'undefined' || data.Configuration.ConfigurationId === ''){
@@ -327,9 +333,10 @@
                         '<tr><td>Verkaufbar:</td><td>' + data.Marketing.Sellable + '</td></tr>'+
                         '<tr><td>AugmentedReality:</td><td>' + data.Head.AugmentedReality + '</td></tr>'+
                         '<tr><td>Erstellt:</td><td>' + data.Head.CreationDate.substring(0, 10) + '</td></tr>'+
-                        '<tr><td>Updated:</td><td>' + data.SentDate.substring(0, 10) + '</td></tr>'+
-                        '<tr><td>ExportAction:</td><td>' + data.ExportAction + '</td></tr></table></div>');
+                        '<tr><td>Updated:</td><td>' + data.SentDate.substring(0, 10) + '</td></tr>');
+                        // '<tr><td>ExportAction:</td><td>' + data.ExportAction + '</td></tr></table></div>');
                 }
+                // remove offline articles from not found results
                 $('#resultCounter').text(resultCounter);
                 $('#offlineCounter').text(offlineCounter);
                 $('#auslaufCounter').text(auslaufCounter);

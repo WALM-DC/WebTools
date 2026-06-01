@@ -78,6 +78,8 @@
 <script>
     injectTabs();
 
+    // enable horizontal scrolling for smaller displays
+
     var intern = 0, extern = 0, propTableHeader = [];
     var countryShorts = {
         "LU": "xxxlutz",
@@ -224,6 +226,7 @@
                 })
                 auslaufVarianten += list1L + listRest + listRef;
 
+                // check for lowest price and only display the lowest negative price
                 var propTable = '', minusPreis = 'Nein';
                 $.each(val.properties, function(propId, propVal){
                     propTable += propVal.name+': <ul>';
