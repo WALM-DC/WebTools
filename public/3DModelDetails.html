@@ -66,6 +66,7 @@
                             <th>KkBm & Varianten</th>
                             <th>Schiene</th>
                             <th>Land</th>
+                            <th>Preisdaten</th>
                             <th>Properties</th>
                             <th>MinusPreise</th>
                         </tr>
@@ -227,24 +228,27 @@
                 auslaufVarianten += list1L + listRest + listRef;
 
                 // check for lowest price and only display the lowest negative price
-                var propTable = '', minusPreis = 'Nein';
+                var propTable = '', minusPreis = 'Nein', lowestNegativePrice = 0;
                 $.each(val.properties, function(propId, propVal){
                     propTable += propVal.name+': <ul>';
                     $.each(propVal.values, function(valuesId, valuesVal){
                         propTable += '<li>'+valuesVal.name+' - '+valuesVal.value+'</li>';
+                        lowestNegativePrice = 0;
                         $.each(propVal.values, function(valuesId, valuesVal){
                             if(typeof valuesVal.prices !== 'undefined'){
-                                propTable += '<ul>';
                                 $.each(valuesVal.prices, function(priceId, priceVal){
                                     if(priceVal._price<0){
                                         minusPreis = 'Ja';
-                                        propTable += '<li style="background-color: yellow;">'+priceVal.rule+': '+priceVal._price+'</li>';
-                                        // console.log(propVal.name, valuesVal.name, priceVal.rule, priceVal._price);
+                                        if(lowestNegativePrice === 0 || priceVal._price < lowestNegativePrice){
+                                            lowestNegativePrice = priceVal._price;
+                                        }
                                     }
                                  })
-                                 propTable += '</ul>';
                             }
                         })
+                        if(lowestNegativePrice < 0){
+                            propTable += '<ul><li style="background-color: yellow;">'+lowestNegativePrice+'</li></ul>';
+                        }
                     })
                     propTable += '</ul>';
                 })
@@ -266,6 +270,7 @@
                     '<td><ul class="kkBmUl">'+auslaufVarianten+'</ul></td>'+
                     '<td>'+val.brand+'</td>'+
                     '<td>'+val.locale+'</td>'+
+                    '<td><ul><li>'+val.currency+'</li><li>kaa1: '+val.preis+'</li><li>Entl.: '+val.entlastung+'</li><li>Aktion: '+val.aktion+'</li></ul></td>'+
                     '<td>'+propTable+'</td>'+
                     '<td class="'+minPreisColor+'">'+minusPreis+'</td>'
                 )
