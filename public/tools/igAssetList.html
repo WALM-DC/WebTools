@@ -1,14 +1,15 @@
 <html>
 <head>
     <title>IG-Stoff-Zusammensetzungen</title>
-    <link rel="stylesheet" href="https://walm-dc.github.io/WebTools/public/mattStyle.css">
+    <link rel="stylesheet" href="data/mattStyle.css">
     <script src="https://walm-dc.github.io/WebTools/public/jquery-3.7.1.min.js"></script>
+    <script src="https://walm-dc.github.io/WebTools/public/jquery.cookie.js"></script>
     <script src="https://walm-dc.github.io/WebTools/public/ddtf.js"></script>
-    <script src="https://walm-dc.github.io/WebTools/public/mattQuery.js"></script>
+    <script src="data/mattQuery.js"></script>
     <!-- <script src="mattQuery.js"></script> -->
     <style>
         .loading {
-            background-image: url(https://walm-dc.github.io/WebTools/public/loading.gif);
+            background-image: url(loading.gif);
             background-repeat: no-repeat;
             min-height: 600px;
             background-position: center;
@@ -23,6 +24,28 @@
         tr.table-find-active {
             outline: 2px solid rgba(245, 158, 11, 0.85);
         }
+        #refreshTimer{
+            position: absolute;
+            left: 10px;
+            color: white;
+        }
+        #refreshNow{
+            cursor: pointer;
+            background-color: darkorange;
+            padding: 5px 5px;
+            border-radius: 5px;
+            margin-left: 10px;
+            margin-top: 10px;
+            line-height: 50px;
+            color: black;
+        }
+        #refreshNow .refresherIcon{
+            filter: none;
+            width: 16px;
+            height: 16px;
+            margin-top: -15px;
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
@@ -33,8 +56,8 @@
         </div> -->
         <div>
             <div class="resultDiv">
+              <!-- <div id="refreshTimer"><span id="refreshNow">Daten aktualisieren <img src="refresh-button.png" class="emptySearch refresherIcon"></span></div> -->
                 <h3>Anzahl in der aktuellen Auflistung: <span id="myCounter"></span></h3>
-                <!-- <img src="refresh-button.png" class="emptySearch" title="Suche leeren" alt="Suche leeren" disabled > -->
                 <input type="text" id="myInput" placeholder="Allgemeine Suche auf alle Felder...">
                 <div class="div_before_table igServer loading">
                     <table id="myTable" cellspacing="0" cellpadding="0">
@@ -58,7 +81,8 @@
 <script>
   injectTabs();
 
-  var fullAssetList = [], stoffList = [];
+  var fullAssetList = [], stoffList = [], masterData = [];
+  var today = new Date().getFullYear() + '' + (new Date().getMonth() + 1) + '' + new Date().getDate();
 
   function countColumns(){
     $('#myCounter').html(($('table tr').length-1)-($('table tr[style="display: none;"]').length));
@@ -225,78 +249,75 @@
       TableSearch.searchOnEnter(this.value, e.shiftKey ? -1 : 1);
     }
   });
-
+  function fillResultTable(entry){
+      $('#myTable').append(
+          '<tr><td>' + entry.schiene + '</td>' +
+          '<td>' + entry.lieferantNr + '</td>' +
+          '<td>' + entry.lieferantName + '</td>' +
+          '<td class="' + entry.inOrEx + '">' + entry.inOrExtern + '</td>' +
+          '<td>' + entry.ordner + '</td>' +
+          '<td>' + entry.modell + '</td>' +
+          '<td>' + entry.textur + '</td>' +
+          '<td>' + entry.farbe + '</td>' +
+          '<td>' + entry.zusammensetzung + '</td></tr>'
+      );
+  }
   function readAndShowJSON(){
     $.getJSON("https://walm-dc.github.io/WebTools/public/stoffZusammensetzung.json", function(data) {
 
-      // Append safely without breaking table structure:
-      // if #myTable is <table>, append into <tbody>; if it's <tbody>, append directly
-      const root = document.getElementById("myTable");
-      let appendTarget = root;
-
-      if (root && root.tagName === "TABLE") {
-        appendTarget = root.tBodies[0] || root.createTBody();
-      }
-
+      // const root = document.getElementById("myTable");
+      // let appendTarget = root;
+      // if (root && root.tagName === "TABLE") {
+      //   appendTarget = root.tBodies[0] || root.createTBody();
+      // }
       $.each(data, function(id, val){
         var inOrEx = val.inOrExtern === "Intern" ? "Intern" : "Extern";
-
-        $(appendTarget).append(
-          '<tr><td>' + val.schiene + '</td>' +
-          '<td>' + val.lieferantNr + '</td>' +
-          '<td>' + val.lieferantName + '</td>' +
-          '<td class="' + inOrEx + '">' + val.inOrExtern + '</td>' +
-          '<td>' + val.ordner + '</td>' +
-          '<td>' + val.modell + '</td>' +
-          '<td>' + val.textur + '</td>' +
-          '<td>' + val.farbe + '</td>' +
-          '<td>' + val.zusammensetzung + '</td></tr>'
-        );
+        var entry = {
+          schiene: val.schiene,
+          lieferantNr: val.lieferantNr,
+          lieferantName: val.lieferantName,
+          inOrEx: inOrEx,
+          ordner: val.ordner,
+          modell: val.modell,
+          textur: val.textur,
+          farbe: val.farbe,
+          zusammensetzung: val.zusammensetzung
+        };
+        fillResultTable(entry);
+        masterData.push(entry);
       });
 
-      // Keep your existing filtering
       jQuery('#myTable').ddTableFilter();
-
       countColumns();
       $('.div_before_table').removeClass('loading');
-
-      // Build search index AFTER rows exist
       TableSearch.rebuild();
+      // localStorage.setItem('lastUpdateStoffe', new Date().getFullYear() + '' + (new Date().getMonth() + 1) + '' + new Date().getDate());
+      // // localStorage.setItem('dataTableStoffe', JSON.stringify(masterData));
+      // $.cookie('dataTableStoffe', masterData, { secure: true });
+      // document.cookie = "dataTableStoffe=" + JSON.stringify(masterData) + "; secure; path=/; max-age=" + 60*60*24*7; // expires in 7 days 
+      // sessionStorage.setItem('dataTableStoffe', JSON.stringify(masterData));
+      
     });
   }
-
-  readAndShowJSON();
+  // $('#refreshNow').on('click', function(){
+  //     localStorage.setItem('lastUpdateStoffe', null);
+  //     $.removeCookie('dataTableStoffe', { secure: true });
+  //     window.location.reload(true);
+  // });
+  function checkLocalStorage(){
+      // var lastUpdate = localStorage.getItem('lastUpdateStoffe');
+      // if(lastUpdate == today && typeof $.cookie('dataTableStoffe') !== "undefined"){
+      //     // masterData = JSON.parse(localStorage.getItem('dataTableStoffe'));
+      //     masterData = JSON.parse($.cookie('dataTableStoffe'));
+      //     $.each(masterData, function(id, val){
+      //         fillResultTable(val);
+      //     })
+      //     countColumns();
+      //     jQuery('#myTable').ddTableFilter();
+      // } else {
+          readAndShowJSON();    
+      // }
+  }
+  checkLocalStorage();
 </script>
-
-<!-- <script>
-    injectTabs();
-
-    var fullAssetList = [], stoffList = [];
-    function countColumns(){
-        $('#myCounter').html(($('table tr').length-1)-($('table tr[style="display: none;"]').length));
-    }
-    $('#myInput').on('keydown', function(e) {
-        
-    });
-    function readAndShowJSON(){
-        $.getJSON( "https://walm-dc.github.io/WebTools/public/stoffZusammensetzung.json", function( data ) {
-            $.each(data, function(id, val){
-                var inOrEx = val.inOrExtern === "intern" ? "Intern" : "Extern";
-                $('#myTable').append(
-                    '<tr><td>'+val.lieferantNr+'</td>'+
-                    '<td>'+val.lieferantName+'</td>'+
-                    '<td class="'+inOrEx+'">'+val.inOrExtern+'</td>'+
-                    '<td>'+val.modell+'</td>'+
-                    '<td>'+val.textur+'</td>'+
-                    '<td>'+val.farbe+'</td>'+
-                    '<td>'+val.zusammensetzung+'</td></tr>'
-                )
-            });
-            jQuery('#myTable').ddTableFilter();
-            countColumns();
-            $('.div_before_table').removeClass('loading');
-        });
-    }
-    readAndShowJSON();
-</script> -->
 </html>

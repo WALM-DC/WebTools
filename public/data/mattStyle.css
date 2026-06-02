@@ -103,6 +103,9 @@ button{
 .tab h2{
     font-size: 15px;
 }
+.tab{
+    text-decoration: none;
+}
 
 /* global */
 .front{
@@ -128,7 +131,7 @@ button{
     overflow: auto;
     position: absolute;
     bottom: 0;
-    height: 78%;
+    height: 79%;
     width: 100%;
 }
 .div_before_table.igServer {

@@ -2,14 +2,14 @@ function addZero(n) {return (n < 10)? '00' + n : (n < 100)? '0' + n : '' + n;}
 const tabs = {
     'XML Liste': "https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlListerIndex.html",
     'XML Liste + Zielmarkt': "https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlListerCountryIndex.html",
-    'XML Checker': "https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlChecker_v3.html",
+    'XML Checker': "https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlChecker.html",
     'Registry Liste': "https://ig-creator.xxxlgroup.com/idm/XMLLister/xmlRegistryLister.html",
-    '3D Modell&uuml;bersicht': "https://ig-creator.xxxlgroup.com/idm/XMLLister/3DModelOverview_V2.html",
+    '3D Modell&uuml;bersicht': "https://ig-creator.xxxlgroup.com/idm/XMLLister/3DModelOverview.html",
     '3D Modell-Details': "https://ig-creator.xxxlgroup.com/idm/XMLLister/3DModelDetails.html",
     'Stoff Zusammensetzungen': "https://ig-creator.xxxlgroup.com/idm/XMLLister/igAssetList.html",
     'PIM API Checker': "https://ig-creator.xxxlgroup.com/idm/XMLLister/PIMApiChecker.html",
     'VKP & Aktion': "https://ig-creator.xxxlgroup.com/idm/XMLLister/VKPundAktion.html",
-    'Link Sammlung': "https://walm-dc.github.io/WebTools/public/LinkSammlung.html"
+    'Link Sammlung': "https://ig-creator.xxxlgroup.com/idm/XMLLister/LinkSammlung.html"
 };
 function injectTabs(){
     const tabListDiv = document.createElement("div");
@@ -17,36 +17,26 @@ function injectTabs(){
     tabListDiv.className = "tabList";
     document.getElementById('topDiv').appendChild(tabListDiv);
     Object.entries(tabs).forEach(([name, link]) => {
-        const tabDiv = document.createElement("div");
-        tabDiv.className = "tab";
-        tabDiv.setAttribute("link", link);
-        tabDiv.innerHTML = `<h2>${name}</h2>`;
-
-        tabDiv.addEventListener("click", () => {
-            window.location.href = link;
-        });
-        document.getElementById('tabList').appendChild(tabDiv);
+        const tabA = document.createElement("a");
+        tabA.className = "tab";
+        tabA.href = link;
+        tabA.innerHTML = `<h2>${name}</h2>`;
+        document.getElementById('tabList').appendChild(tabA);
     });
     $('.tab[link="'+window.location.href+'"]').addClass('active');
 }
 function removeHighlights() {
     $("mark").each(function() {
-        // Replace the <mark> tag with its inner text
         $(this).replaceWith($(this).text());
     });
 }
 function highlightOccurrences(searchString) {
-    // Loop through all elements on the page
     removeHighlights();    
     const regex = new RegExp(searchString, "gi");
     $("body *").contents().each(function() {
-        // console.log('processing node', this.nodeType, this);
         if (this.nodeType === 3) { // Only process text nodes
             const text = $(this).text();
-                // Case-insensitive search
-            // Replace occurrences with <mark>
             const highlightedText = text.replace(regex, function(match) {
-                // console.log('highlighting', match);
                 return `<mark>${match}</mark>`;
             });
             $(this).replaceWith(highlightedText);
