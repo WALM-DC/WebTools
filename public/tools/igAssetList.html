@@ -254,7 +254,7 @@
           '<tr><td>' + entry.schiene + '</td>' +
           '<td>' + entry.lieferantNr + '</td>' +
           '<td>' + entry.lieferantName + '</td>' +
-          '<td class="' + entry.inOrEx + '">' + entry.inOrExtern + '</td>' +
+          '<td class="' + entry.inOrEx + '">' + entry.inOrEx + '</td>' +
           '<td>' + entry.ordner + '</td>' +
           '<td>' + entry.modell + '</td>' +
           '<td>' + entry.textur + '</td>' +
@@ -263,7 +263,7 @@
       );
   }
   function readAndShowJSON(){
-    $.getJSON("https://walm-dc.github.io/WebTools/public/stoffZusammensetzung.json", function(data) {
+    $.getJSON("stoffZusammensetzung.json", function(data) {
 
       // const root = document.getElementById("myTable");
       // let appendTarget = root;
