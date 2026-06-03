@@ -23,7 +23,7 @@ function injectTabs(){
         tabA.innerHTML = `<h2>${name}</h2>`;
         document.getElementById('tabList').appendChild(tabA);
     });
-    $('.tab[link="'+window.location.href+'"]').addClass('active');
+    $('.tab[href="'+window.location.href+'"]').addClass('active');
 }
 function removeHighlights() {
     $("mark").each(function() {

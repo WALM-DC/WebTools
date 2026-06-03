@@ -33,32 +33,6 @@
         .l1Highlither {
             color: #ff0000;
         }
-        .resultDiv.lowerDiv{
-            text-align: left;
-            padding-top: 20px;
-            max-width: 1260px;
-            align-self: center;
-            margin: auto;
-            height: calc(100% - 315px);
-            overflow-y: auto;
-        }
-        .resultDiv.lowerDiv>div{
-            text-align: left;
-            max-width: 49%;
-            display: inline-block;
-            padding: 12px;
-            background-color: rgba(255, 255, 255, 0.6);
-            margin:2px;
-            vertical-align: top;
-            width: 283px;
-            animation: 0.7s ease-in-out;
-        }
-        .resultDiv.lowerDiv>div:hover{
-            background-color: rgba(255, 255, 255, 0.9);
-        }
-        .resultDiv.lowerDiv>div p{
-            margin: 4px;
-        }
         #refreshTimer{
             position: absolute;
             right: 10px;
@@ -117,7 +91,10 @@
         .legende.expanded {
             right: 0px;
             transition: 0.5s ease;
-        }         
+        }    
+        .div_before_table {     
+            height: 74%;
+        }
     </style>
 </head>
 <body>
@@ -150,9 +127,9 @@
                 </div>
                 <select id="land" size="12" multiple>
                     <option value="at">AT</option>
+                    <option value="de">DE</option>
                     <option value="ch">CH</option>
                     <option value="cz">CZ</option>
-                    <option value="de">DE</option>
                     <option value="hr">HR</option>
                     <option value="hu">HU</option>
                     <option value="pl">PL</option>
@@ -173,7 +150,28 @@
                 </button>  
             </div>
             <div class="resultDiv lowerDiv" id="resultDiv">    
-
+                <div class="div_before_table loading">
+                    <table id="myTable" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th>Nummer</th>
+                            <th>Land: Modell</th>
+                            <!-- <th>Modell</th> -->
+                            <th>Produkt</th>
+                            <th>Land: Aufbau</th>
+                            <th>KkBm</th>
+                            <th>WG</th>
+                            <th>U-WG</th>
+                            <th>OnlineOnly</th>
+                            <th>Kategorie</th>
+                            <th>Konfig.</th>
+                            <th>Domensionen</th>
+                            <th>Verkaufbar</th>
+                            <th>AR</th>
+                            <th>Erstellt</th>
+                            <th>Updated</th>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -181,7 +179,6 @@
 <script>
     injectTabs();
 
-    // make country select a multiple select
     // show cuntries in which the model and variants are available
     // xtract ModelText1 and ModelText2 from the API - compare them with each other and combine if equal
     // add links to shop items in country names
@@ -269,6 +266,28 @@
         return str.length < max ? pad("0" + str, max) : str;
     }
 
+    function fillResultTable(dataSets){
+        $(dataSets).each(function(index, entry){
+            console.log(index, entry);
+            $('#myTable').append(
+                '<tr><td style="font-weight: bold;"><a href="'+entry.url+'" target="_blank">' + entry.Number + '</a></td>'+
+                '<td>' + entry.Land + '</td>'+
+                '<td>' + entry.Head.Name + '</td>'+
+                '<td>' + entry.ModelText + '</td>'+
+                '<td style="font-weight: bold;" class="' + entry.is1L + '">' + entry.Prices.Price[0].KkBm + '</td>'+
+                '<td>' + entry.Head.ProductGroup.substring(0, 2) + '</td>'+
+                'td><td>' + entry.Head.ProductGroup.substring(2, 4) + '</td>'+
+                '<td>' + entry.Head.OnlineOnly + '</td>'+
+                '<td>' + entry.Properties.CategoryName +' - '+ entry.Properties.CategoryId + '</td>'+
+                '<td style="font-weight: bold;">' + entry.konfig + '</td>'+
+                '<td>' + entry.Head.Measure.Name +' - '+ entry.Head.Measure.Value + '</td>'+
+                '<td>' + entry.Marketing.Sellable + '</td>'+
+                '<td>' + entry.Head.AugmentedReality + '</td>'+
+                '<td>' + entry.Head.CreationDate.substring(0, 10) + '</td>'+
+                '<td>' + entry.SentDate + '</td></tr>'
+            )
+        });
+    }
     function getPimData(){
         $('#refresherInfo').fadeOut(500);
         console.log('Fetching PIM data...');
@@ -293,59 +312,82 @@
 
         prodNumberList = prodNumberList.concat(commaNumberList);
 
+        var dataSets = [];
+
         $.each(prodNumberList, function(index, value){
             if(value.length<3){
                 prodNumberList[index] = prodNumberList[0].slice(0, -2) + value;
             }
             let currentProdNum = prodNumberList[index];
             var productVariant = currentProdNum.slice(-2), productBaseNumber = currentProdNum.slice(0, -2);
-            var url = 'https://services.ist.lutz.gmbh/HybrisProductDelivery/clients/'+getCountryCode($('#land').val())+'/assortmentLines/'+getRailandCode($('#schiene').val(), $('#land').val())+'/productNumbers/'+productBaseNumber+'/'+productVariant;
+            var entry = {}, country = '', modelText = '';
+            $.each($('#land').val(), function(index, land){
+                var url = 'https://services.ist.lutz.gmbh/HybrisProductDelivery/clients/'+getCountryCode(land)+'/assortmentLines/'+getRailandCode($('#schiene').val(), land)+'/productNumbers/'+productBaseNumber+'/'+productVariant;
 
-            $.get(url).done(function(data){
-                resultCounter++;
-                if(data.ExportAction === 'OFFLINE'){
-                    offlineCounter++;
-                    // $('#resultDiv').prepend(
-                    //     '<div><table><tr><td>Artikel:</td><td style="font-weight: bold;">' + data.Number + '</td></tr>'+
-                    //     '<tr><td>Status:</td><td style="font-weight: bold;">' + data.ExportAction + '</td></tr>'+
-                    //     '<tr><td>Updated:</td><td>' + data.SentDate.substring(0, 10) + '</td></tr></table></div>');
-                } else {
-                    var konfig = 'Ja';
-                    if(data.Configuration.ConfigurationId == null || typeof data.Configuration.ConfigurationId === 'undefined' || data.Configuration.ConfigurationId === ''){
-                        konfig = 'Nein';
+                $.get(url).done(function(data){
+                    resultCounter++;
+                    if(data.ExportAction === 'OFFLINE'){
+                        offlineCounter++;
+                    } else {
+                        var konfig = 'Ja';
+                        if(data.Configuration.ConfigurationId == null || typeof data.Configuration.ConfigurationId === 'undefined' || data.Configuration.ConfigurationId === ''){
+                            konfig = 'Nein';
+                        }
+                        var is1L = '';
+                        if(data.Prices.Price[0].KkBm === '1L'){
+                            is1L = 'l1Highlither';
+                            auslaufCounter++;
+                        }
+
+                        entry = {
+                            url: url,
+                            Number: data.Number,
+                            Land: country+=land.toUpperCase()+': '+data.Head.ModelName+'<br>',
+                            ModelText: modelText+=land.toUpperCase()+': '+data.Head.ModelText1+' - '+data.Head.ModelText2+'<br>',
+                            Head: {
+                                ModelName: data.Head.ModelName,
+                                Name: data.Head.Name,
+                                ProductGroup: data.Head.ProductGroup,
+                                OnlineOnly: data.Head.OnlineOnly,
+                                ModelText1: data.Head.ModelText1,
+                                ModelText2: data.Head.ModelText2,
+                                Measure: {
+                                    Name: data.Head.Measure.Name,
+                                    Value: data.Head.Measure.Value
+                                },
+                                AugmentedReality: data.Head.AugmentedReality,
+                                CreationDate: data.Head.CreationDate
+                            },
+                            Prices: {
+                                Price: data.Prices.Price
+                            },
+                            Marketing: {
+                                Sellable: data.Marketing.Sellable
+                            },
+                            Properties: {
+                                CategoryName: data.Properties.CategoryName,
+                                CategoryId: data.Properties.CategoryId
+                            },
+                            is1L: is1L,
+                            konfig: konfig,
+                            SendDate: data.SentDate.substring(0, 10)
+                        };   
                     }
-                    var is1L = '';
-                    if(data.Prices.Price[0].KkBm === '1L'){
-                        is1L = 'l1Highlither';
-                        auslaufCounter++;
+                }).fail(function(){
+                    notFoundCounter++;
+                }).always(function(){
+                    $('#resultCounter').text(resultCounter);
+                    $('#offlineCounter').text(offlineCounter);
+                    $('#auslaufCounter').text(auslaufCounter);
+                    $('#notFoundCounter').text(notFoundCounter-offlineCounter);
+                    if(typeof entry !== 'undefined' && Object.keys(entry).length !== 0){
+                        dataSets[currentProdNum] = entry;
                     }
-                    $('#resultDiv').prepend(
-                        '<div><table><tr><td>Artikel:</td><td style="font-weight: bold;"><a href="'+url+'" target="_blank">' + data.Number + '</a></td></tr>'+
-                        '<tr><td>Modell:</td><td>' + data.Head.ModelName +'</td></tr>'+
-                        '<tr><td>Produkt:</td><td>' + data.Head.Name + '</td></tr>'+
-                        '<tr><td>KkBm:</td><td style="font-weight: bold;" class="' + is1L + '">' + data.Prices.Price[0].KkBm + '</td></tr>'+
-                        '<tr><td>Warengruppe:</td><td>' + data.Head.ProductGroup.substring(0, 2) + '</td></tr>'+
-                        '<tr><td>U-Warengruppe:</td><td>' + data.Head.ProductGroup.substring(2, 4) + '</td></tr>'+
-                        '<tr><td>OnlineOnly:</td><td>' + data.Head.OnlineOnly + '</td></tr>'+
-                        '<tr><td>Kategorie:</td><td>' + data.Properties.CategoryName +' - '+ data.Properties.CategoryId + '</td></tr>'+
-                        '<tr><td>Konfigurierbar:</td><td style="font-weight: bold;">' + konfig + '</td></tr>'+
-                        '<tr><td>Dimensionen:</td><td>' + data.Head.Measure.Name +' - '+ data.Head.Measure.Value + '</td></tr>'+
-                        '<tr><td>Verkaufbar:</td><td>' + data.Marketing.Sellable + '</td></tr>'+
-                        '<tr><td>AugmentedReality:</td><td>' + data.Head.AugmentedReality + '</td></tr>'+
-                        '<tr><td>Erstellt:</td><td>' + data.Head.CreationDate.substring(0, 10) + '</td></tr>'+
-                        '<tr><td>Updated:</td><td>' + data.SentDate.substring(0, 10) + '</td></tr>');
-                        // '<tr><td>ExportAction:</td><td>' + data.ExportAction + '</td></tr></table></div>');
-                }
-                // remove offline articles from not found results
-                $('#resultCounter').text(resultCounter);
-                $('#offlineCounter').text(offlineCounter);
-                $('#auslaufCounter').text(auslaufCounter);
-                $('#notFoundCounter').text(notFoundCounter);
-            }).fail(function(error){
-                notFoundCounter++;
-                console.error('Error fetching data:', error);
-            });
+                })
+            })
         });
+        console.log(dataSets);
+        fillResultTable(dataSets);
     }
 
      $('#legende').click(function () {
