@@ -245,7 +245,7 @@
 
     var vkpsAdded = 1, index = 1;
     var storedVKPs = localStorage.getItem('vkpsAdded');
-    var storedTablesData = JSON.parse(localStorage.getItem('tablesData'));
+    var storedTablesData = (localStorage.getItem('tablesData')!=='')?JSON.parse(localStorage.getItem('tablesData')):'';
 
     function addAmountToLocalStorage(){
         localStorage.setItem('vkpsAdded', vkpsAdded);

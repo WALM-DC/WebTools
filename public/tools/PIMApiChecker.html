@@ -110,8 +110,7 @@
         #myTable .matchingModelText{
             color: rgb(135, 178, 59);
         }
-        #myTable .matchingModelText span, #myTable .mismatchModelText span{
-            font-weight: bold;
+        #myTable .matchingModelText b, #myTable .mismatchModelText b{
             color: rgb(0, 0, 0);
         }
     </style>
@@ -184,9 +183,7 @@
                             <th>OnlineOnly</th>
                             <th>Verkaufbar</th>
                             <th>Konfig.</th>
-                            <th>AR</th>
-                            <!-- <th>Erstellt</th> -->
-                            <!-- <th>Updated</th> -->
+                            <th>Aug. Reality</th>
                         </tr>
                     </table>
                 </div>
@@ -280,40 +277,42 @@
         }
     }
 
-    function pad (str, max) {
+    function pad(str, max) {
         str = str.toString();
         return str.length < max ? pad("0" + str, max) : str;
     }
-    function checkForDuplicates(array, keyName) {
-       return $.grep(array, function(item){ return item === keyName; }).length > 1;
+    function checkAndRemoveEqualLangEntries(cleanArray){
+        if(cleanArray.length===1){
+            cleanArray[0] = cleanArray[0].substring(cleanArray[0].indexOf(':')+2, cleanArray[0].length);
+        }
+        return cleanArray;
     }
     function fillResultTable(){
          $.each(dataSets, function(index, entry){
-            var modelTextMatch = 'noMatch', finalModelText = [];
+            var finalModelText = [];
             $.each(entry.ModelText, function(i, text){
-                if(checkForDuplicates(entry.ModelText, text)){
-                    finalModelText.push('<span class="matchingModelText"><span>'+entry.ModelLand[i]+'</span>: '+text+'</span>');
+                if(text.split(':')[0].indexOf(',')>-1){
+                    finalModelText.push('<span class="matchingModelText">'+text+'</span>');
+                } else if(entry.ModelText.length===1){
+                    finalModelText.push(text);
                 } else {
-                    finalModelText.push('<span class="mismatchModelText"><span>'+entry.ModelLand[i]+'</span>: '+text+'</span>');
+                    finalModelText.push('<span class="mismatchModelText">'+text+'</span>');
                 }
             })
             $('#myTable').append(
-                '<tr><td style="font-weight: bold;">' + index + '<br><span style="font-weight:normal">'+entry.url.join(', ')+'</span></td>'+
-                '<td style="font-weight: bold;">' + entry.kkbms.join('<br>') + '</td>'+
-                '<td>' + entry.Land + '</td>'+
-                '<td>' + finalModelText.join('<hr>') + '</td>'+
-                '<td>' + entry.Head.Name + '</td>'+
-                '<td>' + entry.Head.ProductGroup.substring(0, 2) + '</td>'+
-                'td><td>' + entry.Head.ProductGroup.substring(2, 4) + '</td>'+
-                '<td>' + entry.Properties.CategoryName +' - '+ entry.Properties.CategoryId + '</td>'+
-                '<td>' + entry.Head.Measure.Name +' - '+ entry.Head.Measure.Value + '</td>'+
-                '<td>' + entry.OnlineOnly + '</td>'+
-                '<td>' + entry.Sellable + '</td>'+
-                '<td style="font-weight: bold;">' + entry.konfig + '</td>'+
-                '<td>' + entry.AugmentedReality + '</td>'
-                // '<td>' + entry.Head.CreationDate.substring(0, 10) + '</td>'+
-                // '<td>' + entry.SentDate + '</td></tr>'
-                // <a href="'+entry.url+'" target="_blank"></a>
+                '<tr><td style="font-weight: bold;">' + index + '<br><span style="font-weight:normal">'+entry.url.sort().join(', ')+'</span></td>'+
+                '<td style="font-weight: bold;">' + entry.kkbms.sort().join('<br>') + '</td>'+
+                '<td>' + entry.Land.sort().join('<br>') + '</td>'+
+                '<td>' + checkAndRemoveEqualLangEntries(finalModelText).sort().join('<hr>') + '</td>'+
+                '<td>' + checkAndRemoveEqualLangEntries(entry.Head.Name).sort().join('<hr>') + '</td>'+
+                '<td>' + checkAndRemoveEqualLangEntries(entry.ProdGroup).sort().join('<hr>') + '</td>'+
+                '<td>' + checkAndRemoveEqualLangEntries(entry.SubProdGroup).sort().join('<hr>') + '</td>'+
+                '<td>' + checkAndRemoveEqualLangEntries(entry.Category).sort().join('<hr>') + '</td>'+
+                '<td>' + checkAndRemoveEqualLangEntries(entry.Measurements).sort().join('<hr>') + '</td>'+
+                '<td>' + checkAndRemoveEqualLangEntries(entry.OnlineOnly).sort().join('<hr>') + '</td>'+
+                '<td>' + checkAndRemoveEqualLangEntries(entry.Sellable).sort().join('<hr>') + '</td>'+
+                '<td>' + checkAndRemoveEqualLangEntries(entry.konfig).sort().join('<hr>') + '</td>'+
+                '<td>' + checkAndRemoveEqualLangEntries(entry.AugmentedReality).sort().join('<hr>') + '</td>'
             )
          });
         
@@ -327,11 +326,22 @@
                 console.log('Objects is filled. Stopping interval.');
                 clearInterval(intervalId);
                 fillResultTable();
-                // $('.resultDiv').removeClass('loading');
             } else {
                 console.log('Waiting... dataSets filled:', isFilled(dataSets));
             }
         }, 1000);
+    }
+    function checkAndCombineLangEntries(returnArray, checkArray, checkVal, land){
+        var inArray = $.inArray(checkVal, checkArray);
+        if(inArray > -1){
+            returnArray[inArray] = returnArray[inArray].split(':')[0] += ',<b>'+land.toUpperCase()+'</b>: '+checkVal;
+            var sortedLand = returnArray[inArray].substring(0, returnArray[inArray].indexOf(':')).split(',').sort().join(', ');
+            returnArray[inArray] = sortedLand+': '+checkVal;
+        } else {
+            checkArray.push(checkVal);
+            returnArray.push('<b>'+land.toUpperCase()+'</b>: '+checkVal);
+        }
+        return [returnArray, checkArray];
     }
     function getPimData(){
         $('#refresherInfo').fadeOut(500);
@@ -360,7 +370,7 @@
             }
             let currentProdNum = prodNumberList[index];
             var productVariant = currentProdNum.slice(-2), productBaseNumber = currentProdNum.slice(0, -2);
-            var entry = null, country = '', modelLand = [], modelText = [], urls = [], kkbms = [];
+            var entry = null, country = [], modelTextCheck = [], modelText = [], urls = [], kkbms = [], namesCheck = [], names = [], catCheck = [], categorys = [], dimCheck = [], dimensions = [], onlineCheck = [], onlineOnlyArr = [], sellCheck = [], sellableArr = [], konfigCheck = [], konfigArr = [], augCheck = [], augArr = [], wgCheck = [], wg = [], uwgCheck = [], uwg = [], landArr = [];
             $.each($('#land').val(), function(index, land){
                 var url = 'https://services.ist.lutz.gmbh/HybrisProductDelivery/clients/'+getCountryCode(land)+'/assortmentLines/'+getRailandCode($('#schiene').val(), land)+'/productNumbers/'+productBaseNumber+'/'+productVariant;
                 $.get(url).done(function(data){
@@ -389,45 +399,50 @@
                             is1L = 'l1Highlither';
                             auslaufCounter++;
                         }
-
                         var storeUrl = countryShorts[$('#schiene').val()]+'.'+land;
                         if(countryShorts[$('#schiene').val()] === 'xxxlutz' && land === 'si'){
                             storeUrl = 'xxxlesnina'+'.'+land;
                         }
-                        country += '<a href="https://'+storeUrl+'/s/?s='+currentProdNum+'" target="_blank">'+ land.toUpperCase()+': '+data.Head.ModelName+'</a><br>';
-                        modelLand.push(land.toUpperCase());
-                        modelText.push(data.Head.ModelText1+'<br>&nbsp;&nbsp;&nbsp;'+data.Head.ModelText2);
-                        urls.push('<a href="'+url+'" target="_blank">'+land.toUpperCase()+'</a>');
-                        kkbms.push('<span class="'+is1L+'">'+land.toUpperCase()+': '+ data.Prices.Price[0].KkBm+'</span>');
+                        // checking and splitting all fields for descrepancies between languages and separeting them accordingly
+                            country.push('<a href="https://'+storeUrl+'/s/?s='+currentProdNum+'" target="_blank">'+ land.toUpperCase()+': '+data.Head.ModelName+'</a>');
+                            urls.push('<a href="'+url+'" target="_blank">'+land.toUpperCase()+'</a>');
+                            kkbms.push('<span class="'+is1L+'">'+land.toUpperCase()+': '+ data.Prices.Price[0].KkBm+'</span>');
+
+                            [modelText, modelTextCheck] = checkAndCombineLangEntries(modelText, modelTextCheck, data.Head.ModelText1+'<br>&nbsp;&nbsp;&nbsp;'+data.Head.ModelText2, land);
+                            [names, namesCheck] = checkAndCombineLangEntries(names, namesCheck, data.Head.Name, land);
+                            [wg, wgCheck] = checkAndCombineLangEntries(wg, wgCheck, data.Head.ProductGroup.substring(0, 2), land);
+                            [uwg, uwgCheck] = checkAndCombineLangEntries(uwg, uwgCheck, data.Head.ProductGroup.substring(2, 4), land);
+                            [categorys, catCheck] = checkAndCombineLangEntries(categorys, catCheck, data.Properties.CategoryName +' - '+ data.Properties.CategoryId, land);
+                            [dimensions, dimCheck] = checkAndCombineLangEntries(dimensions, dimCheck, data.Head.Measure.Name +' - '+ data.Head.Measure.Value, land);
+                            [onlineOnlyArr, onlineCheck] = checkAndCombineLangEntries(onlineOnlyArr, onlineCheck, onlineOnly, land);
+                            [sellableArr, sellCheck] = checkAndCombineLangEntries(sellableArr, sellCheck, sellable, land);
+                            [konfigArr, konfigCheck] = checkAndCombineLangEntries(konfigArr, konfigCheck, konfig, land);
+                            [augArr, augCheck] = checkAndCombineLangEntries(augArr, augCheck, augmented, land);
+                        // --------
                         entry = {
                             url: urls,
                             Number: currentProdNum,
                             Land: country,
-                            ModelLand: modelLand,
                             ModelText: modelText,
                             Head: {
                                 ModelName: data.Head.ModelName,
-                                Name: data.Head.Name,
+                                Name: names,
                                 ProductGroup: data.Head.ProductGroup,
-                                Measure: {
-                                    Name: data.Head.Measure.Name,
-                                    Value: data.Head.Measure.Value
-                                },
                                 CreationDate: data.Head.CreationDate
                             },
                             Prices: {
                                 Price: data.Prices.Price
                             },
-                            Properties: {
-                                CategoryName: data.Properties.CategoryName,
-                                CategoryId: data.Properties.CategoryId
-                            },
+                            ProdGroup: wg,
+                            SubProdGroup: uwg,
+                            Measurements: dimensions,
+                            Category: categorys,
                             is1L: is1L,
                             kkbms: kkbms,
-                            konfig: konfig,
-                            OnlineOnly: onlineOnly,
-                            Sellable: sellable,
-                            AugmentedReality: augmented,
+                            konfig: konfigArr,
+                            OnlineOnly: onlineOnlyArr,
+                            Sellable: sellableArr,
+                            AugmentedReality: augArr,
                             SentDate: data.SentDate.substring(0, 10)
                         };   
                     }
@@ -462,7 +477,6 @@
         }
     });
     $('#checkPim').click(function(){
-        console.log('Button clicked');
         getPimData();
     })
 </script>
