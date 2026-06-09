@@ -433,9 +433,12 @@
                 } else {
                     var showInList = false;
                     // if (secondVal === '-KEIN EINTRAG-' || firstVal === '-KEIN EINTRAG-') {
-                    if (secondVal === '-KEIN EINTRAG-') {
+                    console.log(sId, firstVal, secondVal);
+                    if(firstVal === '-KEIN EINTRAG-' && $.inArray(sId, ['Preise', 'Dimensionen', 'Zielmarkt', 'ArtikelType', 'VariantenID', 'OptionID'])){
+                        highlighter = 'noMatch';
+                    } else if (secondVal === '-KEIN EINTRAG-') {
                         highlighter = 'empty hideMe';
-                    } else if (secondVal !== '-KEIN EINTRAG-') {
+                    } else if (firstVal !== '-KEIN EINTRAG-' && secondVal !== '-KEIN EINTRAG-') {
                         if(sId === 'VariantenID'){
                             errorLog.IDsInUseCount++;
                             errorLog.IDsInUse.push(secondVal);
@@ -512,7 +515,7 @@
                                     firstVal = firstPrices.join(', ');
 
                                     $.each(errorLog.PriceChangesArticles, function(id, val){
-                                        if(activeMainEntry !== ''){
+                                        if(activeMainEntry !== '' && activeMainEntry !== '-KEIN EINTRAG-'){
                                             $('#resultTable tr.match.mainEntry[activeid="'+activeMainEntry+'"], tr.match.subEntry[activeid="'+activeMainEntry+'"]').each(function(){
                                                 if(!$(this).hasClass('noMatch')){
                                                     $(this).removeClass('match').removeClass('hideMe').addClass('noMatch belongsToMatch');
