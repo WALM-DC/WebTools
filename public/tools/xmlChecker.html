@@ -438,7 +438,7 @@
                         highlighter = 'noMatch';
                     } else if (secondVal === '-KEIN EINTRAG-') {
                         highlighter = 'empty hideMe';
-                    } else if (firstVal !== '-KEIN EINTRAG-' && secondVal !== '-KEIN EINTRAG-') {
+                    } else if (secondVal !== '-KEIN EINTRAG-') {
                         if(sId === 'VariantenID'){
                             errorLog.IDsInUseCount++;
                             errorLog.IDsInUse.push(secondVal);

@@ -35,7 +35,7 @@
         }
         #refreshTimer{
             position: absolute;
-            right: 10px;
+            right: 25px;
             color: white;
             top: -10px;
             text-align: right;
@@ -113,6 +113,22 @@
         #myTable .matchingModelText b, #myTable .mismatchModelText b{
             color: rgb(0, 0, 0);
         }
+        #historyTags{
+            display: flex;
+            top: 20px;
+            width: 140px;
+            text-align: right;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+        #historyTags span{
+            background-color: #ccc;
+            border-radius: 5px;
+            padding: 2px 7px;
+            margin-top: 3px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -136,7 +152,7 @@
     <div class="masterDiv">
         <div>
             <div class="resultDiv upperDiv">
-                <h3 id="refresherInfo">Artikel nicht gefunden.</h3>
+                <!-- <h3 id="refresherInfo">Artikel nicht gefunden.</h3> -->
                 <div id="refreshTimer">
                     Gefundene Artikel: <span id="resultCounter">0</span>
                     <br>Auslaufartikel: <span id="auslaufCounter">0</span>
@@ -166,6 +182,7 @@
                 <button id="checkPim" class="pushable btnDisabled" disabled="true">
                     <span class="front">PIM-Check</span>
                 </button>  
+                <div id="historyTags"></div>
             </div>
             <div class="resultDiv lowerDiv" id="resultDiv">    
                 <div class="div_before_table loading">
@@ -253,7 +270,30 @@
 
     var landSelected = false, schieneSelected = false, artikelSelected = false;
     var resultCounter = 0, auslaufCounter = 0, offlineCounter = 0, notFoundCounter = 0;
-    var dataSets = {};
+    var dataSets = {}, checkHistory = [];
+    function fillHistory(addEntry){
+        if(addEntry){
+            var landJoined = $('#land').val().join('_');
+            var lsID = landJoined+':'+$('#schiene').val()+':'+$('#productNumber').val();
+            if(!$('#historyTags span[searchInfo="'+lsID+'"]').length){
+                $('#historyTags').append('<span searchInfo="'+lsID+'">'+$('#productNumber').val()+'</span>');
+                if(checkHistory.length===5){
+                    checkHistory.shift();
+                    $('#historyTags span').first().remove();
+                }
+                checkHistory.push(lsID);
+                localStorage.setItem('pimCheckerHistory', checkHistory.join(','));
+            }
+        } else {
+            $(checkHistory).each(function(){
+                $('#historyTags').append('<span searchInfo="'+this+'">'+this.split(':')[2]+'</span>');
+            });
+        }
+    }
+    if(localStorage.getItem('pimCheckerHistory')!==null){
+        checkHistory = localStorage.getItem('pimCheckerHistory').split(',');
+        fillHistory(false);
+    }
     function checkIfSelected(){
         if($('#land').val() !== null){
             landSelected = true;
@@ -296,7 +336,11 @@
                 } else if(entry.ModelText.length===1){
                     finalModelText.push(text);
                 } else {
+                    var textSplit = text.split(':');
+                    textSplit.shift();
+                    textSplit = textSplit.join('').split(',').join('').split('**').join('').split(' ');
                     finalModelText.push('<span class="mismatchModelText">'+text+'</span>');
+                    console.log(textSplit[2], $.inArray(finalModelText, textSplit[2]));
                 }
             })
             $('#myTable').append(
@@ -314,8 +358,8 @@
                 '<td>' + checkAndRemoveEqualLangEntries(entry.konfig).sort().join('<hr>') + '</td>'+
                 '<td>' + checkAndRemoveEqualLangEntries(entry.AugmentedReality).sort().join('<hr>') + '</td>'
             )
-         });
-        
+        });
+        fillHistory(true);
     }
     function waitForAPIToLoad() {
         function isFilled(obj) {
@@ -461,12 +505,22 @@
         });
         waitForAPIToLoad();
     }
-    $('#legende').click(function () {
+    $('#legende').click(function (){
         $(this).toggleClass('expanded');
     });
     $('select, input').on('change keyup', function(){
         checkIfSelected();
     });
+    $('#historyTags>span').click(function(){
+        var countries = $(this).attr('searchInfo').split(':')[0].split('_');
+        var rail = $(this).attr('searchInfo').split(':')[1];
+        var article = $(this).attr('searchInfo').split(':')[2];
+
+        $('#land').val(countries);
+        $('#schiene').val(rail);
+        $('#productNumber').val(article);
+        checkIfSelected();
+    })
     // checkIfSelected($('#land'));
     $(document).on('keypress',function(e) {
         if(e.which == 13) {
