@@ -189,9 +189,9 @@
                     <table id="myTable" cellspacing="0" cellpadding="0">
                         <tr>
                             <th>Nummer</th>
-                            <th>KkBm</th>
+                            <th>Land: KkBm</th>
                             <th>Land: Modell</th>
-                            <th>Land: Aufbau</th>
+                            <th>Aufbau</th>
                             <th>Produkt</th>
                             <th>WG</th>
                             <th>U-WG</th>
@@ -356,7 +356,7 @@
                 '<td>' + checkAndRemoveEqualLangEntries(entry.OnlineOnly).sort().join('<hr>') + '</td>'+
                 '<td>' + checkAndRemoveEqualLangEntries(entry.Sellable).sort().join('<hr>') + '</td>'+
                 '<td>' + checkAndRemoveEqualLangEntries(entry.konfig).sort().join('<hr>') + '</td>'+
-                '<td>' + checkAndRemoveEqualLangEntries(entry.AugmentedReality).sort().join('<hr>') + '</td>'
+                '<td>' + checkAndRemoveEqualLangEntries(entry.AugmentedReality).sort().join('<hr>') + '</td></tr>'
             )
         });
         fillHistory(true);
