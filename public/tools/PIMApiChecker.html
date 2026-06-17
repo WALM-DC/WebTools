@@ -351,7 +351,7 @@
                 $.each(tempText, function(tId, tVal){
                     if(text.split(':')[0].indexOf(',')===-1){
                         wordMatcher = 'modelText';
-                        if($.inArray(tVal, textSplit)===-1 && tVal.length>4 && checkIfMoreThanOnce(entry.ModelText.join(','), tVal)){
+                        if($.inArray(tVal, textSplit)===-1 && tVal.length>3 && checkIfMoreThanOnce(entry.ModelText.join(','), tVal)){
                             textSplit.push(tVal);
                         }
                     }
