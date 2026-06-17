@@ -433,9 +433,10 @@
                 } else {
                     var showInList = false;
                     // if (secondVal === '-KEIN EINTRAG-' || firstVal === '-KEIN EINTRAG-') {
-                    console.log(sId, firstVal, secondVal);
+                    // console.log(sId, firstVal, secondVal);
                     if(firstVal === '-KEIN EINTRAG-' && $.inArray(sId, ['Preise', 'Dimensionen', 'Zielmarkt', 'ArtikelType', 'VariantenID', 'OptionID'])){
                         highlighter = 'noMatch';
+                        showInList = true;
                     } else if (secondVal === '-KEIN EINTRAG-') {
                         highlighter = 'empty hideMe';
                     } else if (secondVal !== '-KEIN EINTRAG-') {
@@ -533,16 +534,16 @@
                                     showInList = true;
                                 }
                             });
-                        }
-                        if(showInList){
-                            errorLog.Errors++;
-                            errorLog.ErrorLines[sId].push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
-                            highlighter = 'noMatch';
-                            if($.inArray(sId, errorLog.ErrorKeys) === -1 && $.inArray(sId, errorNames) > -1){
-                                errorLog.ErrorKeys.push(sId);
-                            }
-                        }
+                        }  
                     } 
+                    if(showInList){
+                        errorLog.Errors++;
+                        errorLog.ErrorLines[sId].push('<a href="#' + lineCounter + '">' + lineCounter + '</a>');
+                        highlighter = 'noMatch';
+                        if($.inArray(sId, errorLog.ErrorKeys) === -1 && $.inArray(sId, errorNames) > -1){
+                            errorLog.ErrorKeys.push(sId);
+                        }
+                    }
                 }
                 // save mainEntry ID and add in custom field to subentries
                 // highlight pricer mismatch ArtikleTypes at the top
@@ -617,7 +618,7 @@
                     linesPerErrorKey += '<br><span style="color:white;">'+val+': </span><span>' + errorLog.ErrorLines[val].join(', ') + '</span>';
                 // }
             });
-            $('#errorList').append('<br><br>Betroffene Felder: ' + linesPerErrorKey);
+            $('#errorList').append('<br><br><span class="bigError">ABWEICHUNGEN GEFUNDEN!</span><br>Betroffene Felder: ' + linesPerErrorKey);
         }
         // if (errorLog.Errors > 0) {
         //     $('#errorList').append('<br><br>Abweichungen: <span>' + errorLog.Errors + '</span><br>Abweichungen in Zeilen: <span>' + errorLog.ErrorLines.join(', ') + '</span>');
@@ -734,14 +735,14 @@
 
         if (tableID === 'tableOld') {
             secondXMLDataVersion = $(response).find('DATA_VERSION').text();
-            secondXMLSerieNo = $(response).find('SERIE').attr('SERIE_NO');
+            secondXMLSerieNo = typeof($(response).find('SERIE').attr('SERIE_NO')) === 'undefined' ? $(response).find('SERIE').attr('SERIE_ID') : $(response).find('SERIE').attr('SERIE_NO');
             secondXMLCatalogID = $(response).find('CATALOG').find('CATALOG_ID_INTERN').text();
             secondXML = $.merge(dataArrayArticle, dataArrayFeature);
             secondXML = $.merge(secondXML, dataArrayCatalog);
             waitForXMLToLoad();
         } else {
             firstXMLDataVersion = $(response).find('DATA_VERSION').text();
-            firstXMLSerieNo = $(response).find('SERIE').attr('SERIE_NO');
+            firstXMLSerieNo = typeof($(response).find('SERIE').attr('SERIE_NO')) === 'undefined' ? $(response).find('SERIE').attr('SERIE_ID') : $(response).find('SERIE').attr('SERIE_NO');
             firstXMLCatalogID = $(response).find('CATALOG').find('CATALOG_ID_INTERN').text();
             firstXML = $.merge(dataArrayArticle, dataArrayFeature);
             firstXML = $.merge(firstXML, dataArrayCatalog);
@@ -789,7 +790,6 @@
 
     function secondXmlSelect() {
         $('.resultDiv').addClass('loading');
-
         $('#resultTable').empty();
         $('#errorList').empty();
         secondSelectedXML = $('#xmlSecondSelect').val();

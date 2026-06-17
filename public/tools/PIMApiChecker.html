@@ -6,6 +6,7 @@
     <script src="https://walm-dc.github.io/WebTools/public/table2csv.js"></script>
     <script src="https://walm-dc.github.io/WebTools/public/ddtf.js"></script>
     <script src="data/mattQuery.js"></script>
+    <script src="data/jquery.highlight.js"></script>
     <style>
         button{
             width: 210px;
@@ -129,6 +130,7 @@
             margin-top: 3px;
             cursor: pointer;
         }
+        .highlight {background: palegreen;color:#222; border-radius: 3px;}
     </style>
 </head>
 <body>
@@ -271,13 +273,15 @@
     var landSelected = false, schieneSelected = false, artikelSelected = false;
     var resultCounter = 0, auslaufCounter = 0, offlineCounter = 0, notFoundCounter = 0;
     var dataSets = {}, checkHistory = [];
+    // defines the amount of historic entries
+    var historyLength = 7;
     function fillHistory(addEntry){
         if(addEntry){
             var landJoined = $('#land').val().join('_');
             var lsID = landJoined+':'+$('#schiene').val()+':'+$('#productNumber').val();
             if(!$('#historyTags span[searchInfo="'+lsID+'"]').length){
                 $('#historyTags').append('<span searchInfo="'+lsID+'">'+$('#productNumber').val()+'</span>');
-                if(checkHistory.length===5){
+                if(checkHistory.length===historyLength){
                     checkHistory.shift();
                     $('#historyTags span').first().remove();
                 }
@@ -327,27 +331,37 @@
         }
         return cleanArray;
     }
+    function checkIfMoreThanOnce(haystack, needle){
+        var result = [], pos = 0;
+        while (haystack.indexOf(needle, pos) != -1) {
+            result.push(haystack.indexOf(needle , pos));
+            pos = haystack.indexOf(needle , pos) + 1;
+        }
+        if(result.length>1){
+            return true;
+        }
+        return false;
+    }
     function fillResultTable(){
+        var textSplit = [];
          $.each(dataSets, function(index, entry){
-            var finalModelText = [];
+            var finalModelText = [], wordMatcher = '';
             $.each(entry.ModelText, function(i, text){
-                if(text.split(':')[0].indexOf(',')>-1){
-                    finalModelText.push('<span class="matchingModelText">'+text+'</span>');
-                } else if(entry.ModelText.length===1){
-                    finalModelText.push(text);
-                } else {
-                    var textSplit = text.split(':');
-                    textSplit.shift();
-                    textSplit = textSplit.join('').split(',').join('').split('**').join('').split(' ');
-                    finalModelText.push('<span class="mismatchModelText">'+text+'</span>');
-                    console.log(textSplit[2], $.inArray(finalModelText, textSplit[2]));
-                }
+                var tempText = text.replace('<br>&nbsp;&nbsp;&nbsp;','').match(/\b(\w+)\b/g);
+                $.each(tempText, function(tId, tVal){
+                    if(text.split(':')[0].indexOf(',')===-1){
+                        wordMatcher = 'modelText';
+                        if($.inArray(tVal, textSplit)===-1 && tVal.length>4 && checkIfMoreThanOnce(entry.ModelText.join(','), tVal)){
+                            textSplit.push(tVal);
+                        }
+                    }
+                });
             })
             $('#myTable').append(
                 '<tr><td style="font-weight: bold;">' + index + '<br><span style="font-weight:normal">'+entry.url.sort().join(', ')+'</span></td>'+
                 '<td style="font-weight: bold;">' + entry.kkbms.sort().join('<br>') + '</td>'+
                 '<td>' + entry.Land.sort().join('<br>') + '</td>'+
-                '<td>' + checkAndRemoveEqualLangEntries(finalModelText).sort().join('<hr>') + '</td>'+
+                '<td class="'+wordMatcher+'">' + checkAndRemoveEqualLangEntries(entry.ModelText).sort().join('<hr>') + '</td>'+
                 '<td>' + checkAndRemoveEqualLangEntries(entry.Head.Name).sort().join('<hr>') + '</td>'+
                 '<td>' + checkAndRemoveEqualLangEntries(entry.ProdGroup).sort().join('<hr>') + '</td>'+
                 '<td>' + checkAndRemoveEqualLangEntries(entry.SubProdGroup).sort().join('<hr>') + '</td>'+
@@ -360,6 +374,7 @@
             )
         });
         fillHistory(true);
+        $('.modelText').highlight(textSplit);
     }
     function waitForAPIToLoad() {
         function isFilled(obj) {
