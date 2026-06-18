@@ -434,12 +434,12 @@
                     var showInList = false;
                     // if (secondVal === '-KEIN EINTRAG-' || firstVal === '-KEIN EINTRAG-') {
                     // console.log(sId, firstVal, secondVal);
-                    if(firstVal === '-KEIN EINTRAG-' && $.inArray(sId, ['Preise', 'Dimensionen', 'Zielmarkt', 'ArtikelType', 'VariantenID', 'OptionID'])){
+                    if(firstVal === '-KEIN EINTRAG-' && $.inArray(sId, ['Preise', 'Dimensionen', 'ArtikelType', 'VariantenID', 'OptionID'])>-1){
                         highlighter = 'noMatch';
                         showInList = true;
                     } else if (secondVal === '-KEIN EINTRAG-') {
                         highlighter = 'empty hideMe';
-                    } else if (secondVal !== '-KEIN EINTRAG-') {
+                    } else {
                         if(sId === 'VariantenID'){
                             errorLog.IDsInUseCount++;
                             errorLog.IDsInUse.push(secondVal);

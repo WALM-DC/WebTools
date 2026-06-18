@@ -191,7 +191,7 @@
                     <table id="myTable" cellspacing="0" cellpadding="0">
                         <tr>
                             <th>Nummer</th>
-                            <th>Land: KkBm</th>
+                            <th>Land: KkBm - Mand./Fil.</th>
                             <th>Land: Modell</th>
                             <th>Aufbau</th>
                             <th>Produkt</th>
@@ -465,7 +465,8 @@
                         // checking and splitting all fields for descrepancies between languages and separeting them accordingly
                             country.push('<a href="https://'+storeUrl+'/s/?s='+currentProdNum+'" target="_blank">'+ land.toUpperCase()+': '+data.Head.ModelName+'</a>');
                             urls.push('<a href="'+url+'" target="_blank">'+land.toUpperCase()+'</a>');
-                            kkbms.push('<span class="'+is1L+'">'+land.toUpperCase()+': '+ data.Prices.Price[0].KkBm+'</span>');
+                            var clientLength = data.Client.length;
+                            kkbms.push('<span class="'+is1L+'">'+land.toUpperCase()+': '+ data.Prices.Price[0].KkBm+' - '+data.Client.substring(0,clientLength-2)+' / '+data.Client.substring(clientLength-2,clientLength)+'</span>');
 
                             [modelText, modelTextCheck] = checkAndCombineLangEntries(modelText, modelTextCheck, data.Head.ModelText1+'<br>&nbsp;&nbsp;&nbsp;'+data.Head.ModelText2, land);
                             [names, namesCheck] = checkAndCombineLangEntries(names, namesCheck, data.Head.Name, land);
