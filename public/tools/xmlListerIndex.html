@@ -54,13 +54,13 @@
                 <div class="div_before_table igServer">
                     <table id="myTable" cellspacing="0" cellpadding="0">
                         <tr>
-                            <th>XML-Name Prod</th>
-                            <th>XML-Name QA</th>
-                            <th>Land</th>
-                            <th>Hersteller</th>
-                            <th>Lieferant</th>
-                            <th>Modellname</th>
-                            <th>In Registry</th>
+                            <th id="xmlName">XML-Name Prod</th>
+                            <th id="xmlNameQA">XML-Name QA</th>
+                            <th id="land">Land</th>
+                            <th id="hersteller">Hersteller</th>
+                            <th id="lieferant">Lieferant</th>
+                            <th id="modellname">Modellname</th>
+                            <th id="inRegistry">In Registry</th>
                         </tr>
                     </table>
                 </div>
@@ -122,26 +122,27 @@
         return lastUnderscoreIndex !== -1 ? inputString.substring(0, lastUnderscoreIndex + 1) : inputString;
     }
     function readAndShowJSON(refresher){
-        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moebelix.json", function( data ) {
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moebelix.json?v="+Math.floor((Math.random() * 10000) + 1), function( data ) {
             combineRegistries(data, 'moebelix');
         });
-        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moemax.json", function( data ) {
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moemax.json?v="+Math.floor((Math.random() * 10000) + 1), function( data ) {
             combineRegistries(data, 'moemax');
         });
-        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-xxxl.json", function( data ) {
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-xxxl.json?v="+Math.floor((Math.random() * 10000) + 1), function( data ) {
             combineRegistries(data, 'xxxl');
         });
-        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry.json", function( data ) {
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry.json?v="+Math.floor((Math.random() * 10000) + 1), function( data ) {
             combineRegistries(data, 'registry');
         });
         setTimeout(function(){
-            $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index.json", function( data ) {
+            $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index.json?v="+Math.floor((Math.random() * 10000) + 1), function( data ) {
                 $.each(data, function(id, val){
                     indexQA.push(val);
                     nameQA.push(val.substring(0, val.lastIndexOf('_')));
                 })
             });
-            $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index-prod.json", function( data ) {
+            $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index-prod.json?v="+Math.floor((Math.random() * 10000) + 1), function( data ) {
+                var prevXmlNameID = '', prefLieferand = '';
                 $.each(data, function(id, val){
                     var land = '', inRegistry = 'Nein', inRegOrNot = 'falseCol';
                     var splitVal = val.split('_');
@@ -162,22 +163,55 @@
                         inRegistry = 'Ja';
                         inRegOrNot = 'trueCol';
                     }
+                    var appendValue = '<tr><td id="'+xmlNameID+'">'+val+'</td>'+
+                        '<td>'+inQA+'</td>'+
+                        '<td>'+land+'</td>'+
+                        '<td>'+splitVal[0]+'</td>'+
+                        '<td>'+splitVal[1]+'</td>'+
+                        '<td>'+splitVal[2]+'</td>'+
+                        '<td class="'+inRegOrNot+'" id="'+registryID+'">'+inRegistry+'</td></tr>'
                     if(refresher){
+                        if($('#'+xmlNameID).length===0){
+                            var fHersteller = $('#hersteller select').val();
+                            var fLieferant = $('#lieferant select').val();
+                            var fModellname = $('#modellname select').val();
+                            var fLand = $('#land select').val();
+                            var fInRegistry = $('#inRegistry select').val();
+                            var fxmlName = $('#xmlName select').val();
+                            var fInQA = $('#xmlNameQA select').val();
+
+                            if(prevXmlNameID === ''){
+                                $('#myTable tr:first-child').after(appendValue);
+                            } else {
+                                $('#'+prevXmlNameID).parent().after(appendValue);
+                            }
+                            $('#myTable').removeClass('ddtf-processed');
+                            $('select').remove();
+                            jQuery('#myTable').ddTableFilter();
+
+                            $('#hersteller select').val(fHersteller);
+                            $('#lieferant select').val(fLieferant);
+                            $('#modellname select').val(fModellname);
+                            $('#land select').val(fLand);
+                            $('#inRegistry select').val(fInRegistry);
+                            $('#xmlName select').val(fxmlName);
+                            $('#xmlNameQA select').val(fInQA);
+
+                            $('.form-control').change();
+
+                            if($('#myInput').val() !== ""){
+                                filterTable();
+                            }
+                        }
                         $('#'+xmlNameID).html(val);
                         $('#'+registryID).html(inRegistry);
                         $('#'+registryID).removeClass('trueCol falseCol').addClass(inRegOrNot);
                     } else {
-                        $('#myTable').append(
-                            '<tr><td id="'+xmlNameID+'">'+val+'</td>'+
-                            '<td>'+inQA+'</td>'+
-                            '<td>'+land+'</td>'+
-                            '<td>'+splitVal[0]+'</td>'+
-                            '<td>'+splitVal[1]+'</td>'+
-                            '<td>'+splitVal[2]+'</td>'+
-                            '<td class="'+inRegOrNot+'" id="'+registryID+'">'+inRegistry+'</td></tr>'
-                        )
+                        $('#myTable').append(appendValue);
                     }
-                })
+                    prevXmlNameID = xmlNameID;
+                    prefLieferand = splitVal[0];
+                })  
                 if(!refresher){
                     filterTable();
                     jQuery('#myTable').ddTableFilter();
