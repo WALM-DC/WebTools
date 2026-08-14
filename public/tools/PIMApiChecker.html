@@ -231,13 +231,13 @@
                 }
                 return '0L'
             case "mm":
-                if (country == "hu") {  
+                if (country == "hu" ||country == "cz" || country == "sk") {  
                     return '0Y'
                 }
                 return '0M'
             case "mx":
                 if (country == "cz" || country == "sk") {
-                    return '1X'
+                    return '0Y'
                 }
                 return '0X'
             case "":

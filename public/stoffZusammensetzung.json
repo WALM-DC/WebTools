@@ -266392,18 +266392,6 @@
     "lieferantNr": "0696",
     "lieferantName": "Ada",
     "inOrExtern": "Extern",
-    "ordner": "Basics",
-    "modell": "Ben",
-    "textur": "8-1004",
-    "fileName": "normals_standard.jpeg",
-    "farbe": "mausgrau",
-    "zusammensetzung": "90% Polyester, 10% Polyamide"
-  },
-  {
-    "schiene": "Mömax",
-    "lieferantNr": "0696",
-    "lieferantName": "Ada",
-    "inOrExtern": "Extern",
     "ordner": "Tarragona",
     "modell": "Ben",
     "textur": "Backcushion_twoseater",
@@ -279861,6 +279849,18 @@
     "textur": "D100",
     "fileName": "normals_standard.jpeg",
     "farbe": "chremeweiß",
+    "zusammensetzung": "100% PES"
+  },
+  {
+    "schiene": "XXXLutz",
+    "lieferantNr": "1280",
+    "lieferantName": "Bali",
+    "inOrExtern": "Extern",
+    "ordner": "Basics",
+    "modell": "Flexa",
+    "textur": "8-1004",
+    "fileName": "normals_standard.jpeg",
+    "farbe": "Flachgewebe Beige",
     "zusammensetzung": "100% PES"
   },
   {

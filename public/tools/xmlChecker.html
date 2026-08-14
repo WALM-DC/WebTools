@@ -124,6 +124,12 @@
             padding: 0px 1px;
             border-radius: 5px;
         }
+        #errorList .targetComparison {
+            display: flex;
+        }
+        #errorList .targetComparison table {
+            margin-bottom: auto;
+        }
         input[type=file]{
             display: none;
         }
@@ -396,6 +402,8 @@
         var lineCounter = 1;
         errorLog = {
             Lang: [],
+            Lang2: [],
+            LangID: [],
             MissingLang: [],
             UsedLang: '',
             Errors: 0,
@@ -549,6 +557,10 @@
                 // highlight pricer mismatch ArtikleTypes at the top
                 if(sId === 'Zielmarkt' && firstVal !== '-KEIN EINTRAG-'){
                     errorLog.Lang.push(firstVal);
+                    errorLog.Lang2.push(secondVal);
+                }
+                if(sId === 'ZielmarktID' && firstVal !== '-KEIN EINTRAG-'){
+                    errorLog.LangID.push(firstVal);
                 }
                 if (sId !== "ArtikelType" && sId !== "VariantenID" && sId !== "Zielmarkt" && sId !== "OptionID") {
                     highlighter += ' subEntry';
@@ -568,8 +580,9 @@
         errorLog.UsedLang = activeRegistryEntry ? activeRegistryEntry.Markets.join(', ') : '';
         if(errorLog.UsedLang !== ''){
             var usedLangArr = errorLog.UsedLang.split(', ');
+            console.log('usedLangArr', usedLangArr, errorLog.Lang);
             $.each(usedLangArr, function(lIndex, lValue){
-                if(errorLog.Lang.indexOf(lValue) === -1){
+                if(errorLog.LangID.indexOf(lValue) === -1){
                     errorLog.MissingLang.push(lValue);
                 }
             });
@@ -585,7 +598,7 @@
         // $('#errorList').append('<br><br><span class="noErrors">Schiene:</span> <span style="color:white;">' + secondXMLCatalogID + '</span>');
         if (errorLog.MissingLang.length > 0) {
             errorLog.MissingLang = [...new Set(errorLog.MissingLang)];
-            $('#errorList').append('<br><br><span class="bigError">!! ACHTUNG !! - Zielm&auml;rkte in Verwendung wurden entfernt: <span style="color:white;">' + errorLog.MissingLang.join(', ') + '</span></span>');
+            $('#errorList').append('<br><br><span class="bigError">!! ACHTUNG !! - XML-Zielm&auml;rkte stimmen nicht mit der registry &uuml;berein: <span style="color:white;">' + errorLog.MissingLang.join(', ') + '</span></span>');
         }
         // if (errorLog.ArticlesInUse.length > 0) {
         //     var firstFive = errorLog.ArticlesInUse.slice(0, 5), remainingCount = errorLog.ArticlesInUse.length - firstFive.length;
@@ -605,14 +618,8 @@
             $('#errorList').append('<br><br>Unterschied bei Seriennummer:<br>' + secondSelectedXML + ': <span style="color:white">' + secondXMLSerieNo + '</span><br>' + firstSelectedXML + ': <span class="bigError">' + firstXMLSerieNo + '</span>');
             errorLog.GenErrors = true;
         }
-        // if (firstXMLCatalogID !== secondXMLCatalogID) {
-        //     $('#errorList').append('<br><br>Unterschied bei Schiene:<br>' + secondSelectedXML + ': <span style="color:white">' + secondXMLCatalogID + '</span><br>' + firstSelectedXML + ': <span class="bigError">' + firstXMLCatalogID + '</span>');
-        //     errorLog.GenErrors = true;
-        // }
         if (errorLog.Errors > 0) {
             var linesPerErrorKey = '';
-            // console.log(errorLog.ErrorKeys);
-            // console.log(errorLog.ErrorLines);
             $.each(errorLog.ErrorKeys, function(key, val){
                 // if(val === 'Preise' || val === 'Dimensionen' || val === 'Zielmarkt' || val === 'ArtikelType' || val === 'VariantenID' || val === 'OptionID'){
                     linesPerErrorKey += '<br><span style="color:white;">'+val+': </span><span>' + errorLog.ErrorLines[val].join(', ') + '</span>';
@@ -620,13 +627,7 @@
             });
             $('#errorList').append('<br><br><span class="bigError">ABWEICHUNGEN GEFUNDEN!</span><br>Betroffene Felder: ' + linesPerErrorKey);
         }
-        // if (errorLog.Errors > 0) {
-        //     $('#errorList').append('<br><br>Abweichungen: <span>' + errorLog.Errors + '</span><br>Abweichungen in Zeilen: <span>' + errorLog.ErrorLines.join(', ') + '</span>');
-        // }
-        // if (errorLog.Empty > 0) {
-        //     $('#errorList').append('<br><br>Leere Felder: <span>' + errorLog.Empty + '</span><br>Leere Felder in Zeile: <span>' + errorLog.EmptyLines.join(', ') + '</span>');
-        // }
-                if (errorLog.Errors === 0 && !errorLog.GenErrors && !noSecondXML) {
+        if (errorLog.Errors === 0 && !errorLog.GenErrors && !noSecondXML && errorLog.Lang.length === 0) {
             $('#errorList').append('<br><br><span class="noErrors">Keine relevanten Unterschiede gefunden.</span>');
         } firstXMLDataVersion = '', firstXMLCatalogID = "", secondXMLDataVersion = '', secondXMLCatalogID = '';
         langCheck.forEach(function (land) {
@@ -642,12 +643,16 @@
         });
         if (errorLog.Lang.length > 0) {
             errorLog.Lang = [...new Set(errorLog.Lang)];
-            $('#errorList').append('<br><br><span class="noErrors">Zielm&auml;rkte im XML:</span> <span style="color:white;">' + errorLog.Lang.join(', ') + '</span>');
+            errorLog.Lang2 = [...new Set(errorLog.Lang2)];
+
+            $('#errorList').append('<br><br><span class="noErrors">Zielm&auml;rkte:</span><br><div class="targetComparison">'+
+            '<table><tr><th>'+firstSelectedXML+'</th></tr><tr><td>' + errorLog.Lang.join('</td></tr><tr><td>') + '</td></tr></table>'+
+            '<table><tr><th>'+secondSelectedXML+'</th></tr><tr><td>' + errorLog.Lang2.join('</td></tr><tr><td>') + '</td></tr></table>'+'</div>');
         } else {
             $('#errorList').append('<br><br><span class="bigError">!! ACHTUNG !! - Keine Zielm&auml;rkte im XML gefunden.</span>');
         }
         if (errorLog.UsedLang.length > 0) {
-            $('#errorList').append('<br><br><span class="noErrors">Zielm&auml;rkte im 3D Modell:</span> <span style="color:white;">' + errorLog.UsedLang + '</span>');
+            $('#errorList').append('<br><br><span class="noErrors">Zielm&auml;rkte in der registry:</span> <span style="color:white;">' + errorLog.UsedLang + '</span>');
         }
         noSecondXML = false;
     }
@@ -674,8 +679,10 @@
         // get Target and Country data
         $(response).find('TARGET').each(function () {
             var countID = $(this).find('NAME').text().split('-');
+            var targetName = $(this).find('NAME').text();
             openXMLData = {
-                Zielmarkt: countID[countID.length-1]+ ': ' + $(this).find('TARGET_ID').text()
+                Zielmarkt: countID[countID.length-1]+ ': ' + $(this).find('TARGET_ID').text() + ' - ' + targetName,
+                ZielmarktID: countID[countID.length-1]+ ': ' + $(this).find('TARGET_ID').text()
             }
             dataArrayCatalog.push(openXMLData);
         })
