@@ -36,7 +36,11 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 #         json.dump(archive_list, f, indent=2, ensure_ascii=False)
 
 def save_json_file(data):
+    # local
     output_path = r"F:\WebTools\public\list.json"
+    # server
+    # output_path = r"D:\inetpub\wwwroot\idm\XMLLister"
+      
     # archive_dir = os.path.join(os.path.dirname(output_path), "listArchive")
 
     # # ensure archive folder exists
@@ -335,4 +339,5 @@ def contains_target_keys(data, target_keys):
 
 if __name__ == "__main__":
     search_path = (r"C:\xxxlutz\IG-Creator\XXXLutz\ICOM")
+    # search_path = (r"D:\inetpub\wwwroot\idm\XMLLister")
     find_all_json(search_path)

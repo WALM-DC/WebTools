@@ -81,6 +81,16 @@
         .resultDiv.upperDiv .filterDiv{
             display: flex;
             align-items: flex-end;
+            position: relative;
+            padding-top: 12px;
+        }
+        .resultDiv.upperDiv .filterDiv label{
+            position: absolute;
+            top: 2px;
+            color: white;
+        }
+        .resultDiv.upperDiv .filterDiv label.landOut{
+            left: 70px;
         }
         .resultDiv.upperDiv select, .resultDiv.upperDiv input{
             margin: 10px;
@@ -179,6 +189,10 @@
         #myTable .locales{
             text-transform: uppercase;
         }
+        #myTable span{
+            width: 100%;
+            display: inline-block;
+        }
         .highlight {background: palegreen;color:#222; border-radius: 3px;}
     </style>
 </head>
@@ -188,7 +202,23 @@
         <div>
             <div class="resultDiv upperDiv">
                 <div class="filterDiv">   
+                    <label for="land">In Land:</label>
                     <select id="land" size="12">
+                        <option value="at">AT</option>
+                        <option value="de">DE</option>
+                        <option value="ch">CH</option>
+                        <option value="cz">CZ</option>
+                        <option value="hr">HR</option>
+                        <option value="hu">HU</option>
+                        <option value="pl">PL</option>
+                        <option value="ro">RO</option>
+                        <option value="rs">RS</option>
+                        <option value="se">SE</option>
+                        <option value="si">SI</option>
+                        <option value="sk">SK</option>                   
+                    </select>
+                    <label for="landOut" class="landOut">Nicht in Land:</label>
+                    <select id="landOut" size="12">
                         <option value="at">AT</option>
                         <option value="de">DE</option>
                         <option value="ch">CH</option>
@@ -208,15 +238,17 @@
                         <option value="mx">MX</option>
                     </select> -->
                     <!-- <input type="text" id="productNumber" placeholder="Artikelnummer mit Variante"> -->
-                     <button id="resetFilter" class="pushable">
-                        <span class="front">Filter l&ouml;schen</span>
-                    </button> 
-                    <button id="filterMyList" class="pushable">
-                        <span class="front">Filter</span>
-                    </button>  
+                    <div>
+                        <button id="resetFilter" class="pushable">
+                            <span class="front">Filter l&ouml;schen</span>
+                        </button> 
+                        <button id="filterMyList" class="pushable">
+                            <span class="front">Filter aktivieren</span>
+                        </button>  
+                    </div>
                     <!-- <div id="historyTags"></div> -->
                 </div>
-                <!-- <div id="refreshTimer"><span id="refreshNow">Daten aktualisieren <img src="refresh-button.png" class="emptySearch refresherIcon"></span></div> -->
+                <div id="refreshTimer"><span id="refreshNow">Daten aktualisieren <img src="refresh-button.png" class="emptySearch refresherIcon"></span></div>
                 <div>
                     <h3>Anzahl der gefilterten Artikel: <span id="myCounter"></span></h3>
                     <h3>Anzahl der Varianten / Absprungpunkte: <span id="myVariantCounter"></span></h3>
@@ -304,7 +336,7 @@
 <script>
     injectTabs();
 
-    var masterData = [], combinedData = {};
+    var combinedData = {};
     var intern = 0, extern = 0, today = new Date().getFullYear() + '' + (new Date().getMonth() + 1) + '' + new Date().getDate();
     var combinedRegistry = [];
     var countryShorts = {
@@ -494,28 +526,27 @@
                     combinedData[val.catalog] = [];
                 }
                 combinedData[val.catalog].push(entry);
-                masterData.push(entry);
-                // fillResultTable(entry);
             })
-            // filterTable();
             $('.loading').removeClass('loading');
-            // countColumns()
-            // localStorage.setItem('lastUpdateModel', new Date().getFullYear() + '' + (new Date().getMonth() + 1) + '' + new Date().getDate());
-            // localStorage.setItem('dataTableModel', JSON.stringify(masterData));
             fillResultTable();
             countColumns();
             jQuery('#myTable').ddTableFilter();
+            localStorage.setItem('lastUpdateModelReport', new Date().getFullYear() + '' + (new Date().getMonth() + 1) + '' + new Date().getDate());
+            localStorage.setItem('dataTableModelReport', JSON.stringify(combinedData));
         });
     }
 
     $("#resetFilter").on('click', function(){
         $('.filtered').show();
         $('.filtered').removeClass('filtered');
+        $('#land, #landOut').val('')
+        countColumns();
     })
     $("#filterMyList").on('click', function(){
         var input, filter, table, tr, td, i, txtValue;
         input = document.getElementById("land");
         filter = input.value.toLowerCase();
+        filterExclusion = document.getElementById("landOut").value.toLowerCase();
         table = document.getElementById("myTable");
         tr = table.getElementsByTagName("tr");
 
@@ -523,10 +554,13 @@
             td = tr[i].getElementsByClassName("locales");
             for (var j = 0; j < td.length; j++) {
                 txtValue = td[j].textContent || td[j].innerText;
-                if (txtValue.toLowerCase().indexOf(filter) > -1) {
-                    // tr[i].style.display = "";
-                    break;
-                } else {
+                if (txtValue.toLowerCase().indexOf(filter) === -1) {
+                    if(tr[i].style.display !== "none"){
+                        tr[i].style.display = "none";
+                        tr[i].classList.add('filtered');
+                    }
+                }
+                if(filterExclusion != '' && txtValue.toLowerCase().indexOf(filterExclusion) > -1){
                     if(tr[i].style.display !== "none"){
                         tr[i].style.display = "none";
                         tr[i].classList.add('filtered');
@@ -535,28 +569,23 @@
             }
         }
         countColumns();
-        // if(filter.length > 0){
-        //     highlightOccurrences(filter);
-        // }
     })
     $('#refreshNow').on('click', function(){
-        localStorage.setItem('lastUpdateModel', null);
-        localStorage.setItem('dataTableModel', null);
+        localStorage.setItem('lastUpdateModelReport', null);
+        localStorage.setItem('dataTableModelReport', null);
         window.location.reload(true);
     });
     function checkLocalStorage(){
-        // var lastUpdate = localStorage.getItem('lastUpdateModel');
-        // if(lastUpdate == today && localStorage.getItem('dataTableModel') !== null){
-        //     masterData = JSON.parse(localStorage.getItem('dataTableModel'));
-        //     $.each(masterData, function(id, val){
-        //         fillResultTable(val);
-        //     })
-        //     countColumns();
-        //     // jQuery('#myTable').ddTableFilter();
-        // } else {
-        //     readAndShowJSON();    
-        // }
-        readAndShowJSON(); 
+        var lastUpdate = localStorage.getItem('lastUpdateModelReport');
+        if(lastUpdate == today && localStorage.getItem('dataTableModelReport') !== null){
+            combinedData = JSON.parse(localStorage.getItem('dataTableModelReport'));
+            $('.loading').removeClass('loading');
+            fillResultTable();
+            countColumns();
+            jQuery('#myTable').ddTableFilter();
+        } else {
+            readAndShowJSON();    
+        }
     }
     checkLocalStorage();
 </script>
