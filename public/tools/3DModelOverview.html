@@ -191,7 +191,7 @@
     })
     function fillResultTable(entry){
         $('#myTable').append(
-            '<tr><td>'+entry.catalog.split('.')[0].replace('XXXL', '')+'</td>'+
+            '<tr variants="'+entry.variantCount+'"><td>'+entry.catalog.split('.')[0].replace('XXXL', '')+'</td>'+
             '<td>'+entry.brandName+'</td>'+
             '<td>'+entry.modelName+'</td>'+
             '<td>'+entry.catalog+'</td>'+
@@ -221,7 +221,18 @@
                 var storeUrl = countryShorts[val.brand]+'.'+val.locale;
                 if(countryShorts[val.brand] === 'xxxlutz' && val.locale === 'si'){
                     storeUrl = 'xxxlesnina'+'.'+val.locale;
-                }                
+                }
+                var variantCount = val.productVariants.split("/").length;
+                var variants = val.productVariants.split('/').map(function(item) {
+                    return item.trim();
+                }).join(', ').slice(0, -2);
+                                    if(variants.indexOf(98)>-1){variantCount--}
+                if(variants.indexOf(99)>-1){variantCount--}
+                if(variants.indexOf('YY')>-1){variantCount--}
+                if(variants.indexOf('YN')>-1){variantCount--}
+                if(variants.indexOf('YK')>-1){variantCount--}
+                if(variants.trim()===""){variantCount=0}     
+
                 var inOrEx = 'Intern';
                 if(val.catalog.split('.')[0].indexOf('XXXL')>-1){
                     intern++;
@@ -277,6 +288,7 @@
                 })
                 auslaufVarianten += list1L + listRest + listRef;
                 var entry = {
+                    variantCount: variantCount,
                     catalog: val.catalog,
                     brandName: val.brandName,
                     modelName: val.modelName,

@@ -129,11 +129,12 @@
         #historyTags{
             display: flex;
             top: 20px;
-            width: 170px;
+            max-width: 180px;
             text-align: right;
-            justify-content: flex-end;
+            justify-content: flex-start;
             flex-wrap: wrap;
             margin-bottom: 8px;
+            overflow: hidden;
         }
         #historyTags span{
             background-color: #ccc;
@@ -298,7 +299,7 @@
                     $('#historyTags span').first().remove();
                 }
                 checkHistory.push(lsID);
-                localStorage.setItem('pimCheckerHistory', checkHistory.join(','));
+                localStorage.setItem('pimCheckerHistory', checkHistory.join(';'));
             }
         } else {
             $(checkHistory).each(function(){
@@ -307,7 +308,7 @@
         }
     }
     if(localStorage.getItem('pimCheckerHistory')!==null){
-        checkHistory = localStorage.getItem('pimCheckerHistory').split(',');
+        checkHistory = localStorage.getItem('pimCheckerHistory').split(';');
         fillHistory(false);
     }
     function checkIfSelected(){
