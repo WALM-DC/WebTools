@@ -18,54 +18,21 @@ ssl_context.verify_mode = ssl.CERT_NONE
 headerList = ["Artikelnummer", "live", "konfigurierbar", "Schiene", "Land"]
 onlineList = {}
 api_tasks = []
-BASE_URL = "https://services.ist.lutz.gmbh/HybrisProductDelivery/clients/{}/assortmentLines/{}/productNumbers/{}/{}"
+search_path = (r"C:\xxxlutz\IG-Creator\XXXLutz\ICOM")
+output_pathArchive = r"F:\WebTools\public\kkbmArchive.json"
+output_pathList = r"F:\WebTools\public\list.json"
 
+BASE_URL = "https://services.ist.lutz.gmbh/HybrisProductDelivery/clients/{}/assortmentLines/{}/productNumbers/{}/{}"
+####
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-# def create_archive_list():
-#     archive_dir = r"F:\WebTools\public\listArchive"
-#     archive_list = []
-
-#     if os.path.isdir(archive_dir):
-#         for filename in os.listdir(archive_dir):
-#             if filename.endswith('.json') and filename.startswith('list_'):
-#                 archive_list.append(filename)
-
-#     # write new file
-#     with open(archive_dir+'\\archiveList.json', "w", encoding="utf-8") as f:
-#         json.dump(archive_list, f, indent=2, ensure_ascii=False)
-
-def save_json_file(data):
-    # local
-    output_path = r"F:\WebTools\public\list.json"
-    # server
-    # output_path = r"D:\inetpub\wwwroot\idm\XMLLister"
-      
-    # archive_dir = os.path.join(os.path.dirname(output_path), "listArchive")
-
-    # # ensure archive folder exists
-    # os.makedirs(archive_dir, exist_ok=True)
-
-    # # archive existing file (if any)
-    # if os.path.isfile(output_path):
-    #     stamp = datetime.now().strftime("%Y%m%d")  # e.g. 20260424
-    #     base, ext = os.path.splitext(os.path.basename(output_path))  # list, .json
-    #     archived_name = f"{base}_{stamp}{ext}"  # list_20260424.json
-    #     archived_path = os.path.join(archive_dir, archived_name)
-
-    #     # if same-day file already exists, avoid overwrite
-    #     if os.path.exists(archived_path):
-    #         tstamp = datetime.now().strftime("%Y%m%d")
-    #         archived_name = f"{base}_{tstamp}{ext}"
-    #         archived_path = os.path.join(archive_dir, archived_name)
-
-    #     shutil.move(output_path, archived_path)
-
-    # write new file
-    with open(output_path, "w", encoding="utf-8") as f:
+def save_kkbmArchive_file(data):
+    with open(output_pathArchive, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
-    # create_archive_list()
+def save_json_file(data):
+    with open(output_pathList, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
 
 # Mandanten
 def code_from_rail(country: str, rail: str) -> int:
@@ -208,6 +175,7 @@ async def fetch_all(task_list):
 
 def find_all_json(root_path):
     fullModelList = {}
+    kkbmArchiveList = {}
     fullConditionsList = {}
     for dirpath, _, filenames in os.walk(root_path):
         for filename in filenames:
@@ -302,6 +270,16 @@ def find_all_json(root_path):
         else:
             fullModelList[modelId]["productVariants"] += variantId + " / "
 
+        kkbmArchiveList[modelId] = {
+            "productNumber": fullModelList[modelId]["productNumber"],
+            "brand": fullModelList[modelId]["brand"],
+            "locale": fullModelList[modelId]["locale"],
+            datetime.now().strftime("%Y-%m-%d"): {
+                "KkBm": fullModelList[modelId]["KkBm"]
+            }
+        }
+        
+    save_kkbmArchive_file(kkbmArchiveList)
     save_json_file(fullModelList)
 
 def contains_target_values(data, target_values):
@@ -338,6 +316,4 @@ def contains_target_keys(data, target_keys):
     return False
 
 if __name__ == "__main__":
-    search_path = (r"C:\xxxlutz\IG-Creator\XXXLutz\ICOM")
-    # search_path = (r"D:\inetpub\wwwroot\idm\XMLLister")
     find_all_json(search_path)

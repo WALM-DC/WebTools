@@ -200,6 +200,7 @@ def combine(stoff_list: List[Dict[str, str]], assets_list: List[Dict[str, str]])
                 
         combined.append({
             "schiene": schiene,
+            "lieferantIG": a.get("lieferant", ""),
             "lieferantNr": lieferNr,
             "lieferantName": lieferName,
             "inOrExtern": a.get("inOrExtern", ""),
@@ -223,7 +224,7 @@ def main(output_path: str = "F:\\WebTools\\public\\stoffZusammensetzung.json") -
     combined = combine(stoff_list, assets_list)
 
     # Sort combined list by lieferantNr, then by modell, then by textur
-    combined.sort(key=operator.itemgetter("lieferantNr", "modell", "textur"))
+    combined.sort(key=operator.itemgetter("textur", "lieferantNr", "modell"))
 
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(combined, f, ensure_ascii=False, indent=2)

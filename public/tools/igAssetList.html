@@ -62,15 +62,16 @@
                 <div class="div_before_table igServer loading">
                     <table id="myTable" cellspacing="0" cellpadding="0">
                         <tr>
-                            <th>Schiene</th>
-                            <th>Lieferanten Nr</th>
-                            <th>Lieferanten Name</th>
-                            <th>Herkunft</th>
-                            <th>Ordner</th>
-                            <th>Modell</th>
-                            <th>Textur</th>
-                            <th>Farbe</th>
-                            <th>Zusammensetzung</th>
+                            <th class="skip-filter">Schiene</th>
+                            <th>Lieferant IG</th>
+                            <th>Lieferant Nr</th>
+                            <th>Lieferant Name</th>
+                            <th class="skip-filter">Herkunft</th>
+                            <th class="skip-filter">Ordner</th>
+                            <th class="skip-filter">Modell</th>
+                            <th class="skip-filter">Textur</th>
+                            <th class="skip-filter">Farbe</th>
+                            <th class="skip-filter">Zusammensetzung</th>
                         </tr>
                     </table>
                 </div>
@@ -252,6 +253,7 @@
   function fillResultTable(entry){
       $('#myTable').append(
           '<tr><td>' + entry.schiene + '</td>' +
+          '<td>' + entry.lieferantIG + '</td>' +
           '<td>' + entry.lieferantNr + '</td>' +
           '<td>' + entry.lieferantName + '</td>' +
           '<td class="' + entry.inOrEx + '">' + entry.inOrEx + '</td>' +
@@ -265,11 +267,6 @@
   function readAndShowJSON(){
     $.getJSON("stoffZusammensetzung.json", function(data) {
 
-      // const root = document.getElementById("myTable");
-      // let appendTarget = root;
-      // if (root && root.tagName === "TABLE") {
-      //   appendTarget = root.tBodies[0] || root.createTBody();
-      // }
       $.each(data, function(id, val){
         var inOrEx = val.inOrExtern === "Intern" ? "Intern" : "Extern";
         var entry = {
@@ -290,33 +287,11 @@
       jQuery('#myTable').ddTableFilter();
       countColumns();
       $('.div_before_table').removeClass('loading');
-      TableSearch.rebuild();
-      // localStorage.setItem('lastUpdateStoffe', new Date().getFullYear() + '' + (new Date().getMonth() + 1) + '' + new Date().getDate());
-      // // localStorage.setItem('dataTableStoffe', JSON.stringify(masterData));
-      // $.cookie('dataTableStoffe', masterData, { secure: true });
-      // document.cookie = "dataTableStoffe=" + JSON.stringify(masterData) + "; secure; path=/; max-age=" + 60*60*24*7; // expires in 7 days 
-      // sessionStorage.setItem('dataTableStoffe', JSON.stringify(masterData));
-      
+      TableSearch.rebuild();     
     });
   }
-  // $('#refreshNow').on('click', function(){
-  //     localStorage.setItem('lastUpdateStoffe', null);
-  //     $.removeCookie('dataTableStoffe', { secure: true });
-  //     window.location.reload(true);
-  // });
   function checkLocalStorage(){
-      // var lastUpdate = localStorage.getItem('lastUpdateStoffe');
-      // if(lastUpdate == today && typeof $.cookie('dataTableStoffe') !== "undefined"){
-      //     // masterData = JSON.parse(localStorage.getItem('dataTableStoffe'));
-      //     masterData = JSON.parse($.cookie('dataTableStoffe'));
-      //     $.each(masterData, function(id, val){
-      //         fillResultTable(val);
-      //     })
-      //     countColumns();
-      //     jQuery('#myTable').ddTableFilter();
-      // } else {
-          readAndShowJSON();    
-      // }
+      readAndShowJSON();    
   }
   checkLocalStorage();
 </script>

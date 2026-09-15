@@ -89,6 +89,7 @@
                 <div class="div_before_table loading">
                     <table id="myTable" cellspacing="0" cellpadding="0">
                         <tr>
+                            <th>Lieferant</th>
                             <th>Hersteller</th>
                             <th>Marke</th>
                             <th>Modellname</th>
@@ -191,7 +192,8 @@
     })
     function fillResultTable(entry){
         $('#myTable').append(
-            '<tr variants="'+entry.variantCount+'"><td>'+entry.catalog.split('.')[0].replace('XXXL', '')+'</td>'+
+            '<tr variants="'+entry.variantCount+'"><td>'+entry.productNumber.substring(2,6)+'</td>'+
+            '<td>'+entry.catalog.split('.')[0].replace('XXXL', '')+'</td>'+
             '<td>'+entry.brandName+'</td>'+
             '<td>'+entry.modelName+'</td>'+
             '<td>'+entry.catalog+'</td>'+

@@ -7,7 +7,7 @@ const tabs = {
     '3D Modell-Report': "https://ig-creator.xxxlgroup.com/idm/XMLLister/3DModelReport.html",
     '3D Modell&uuml;bersicht': "https://ig-creator.xxxlgroup.com/idm/XMLLister/3DModelOverview.html",
     '3D Modell-Details': "https://ig-creator.xxxlgroup.com/idm/XMLLister/3DModelDetails.html",
-    'Stoff Zusammensetzungen': "https://ig-creator.xxxlgroup.com/idm/XMLLister/igAssetList.html",
+    'Stoffe IG': "https://ig-creator.xxxlgroup.com/idm/XMLLister/igAssetList.html",
     'PIM API Checker': "https://ig-creator.xxxlgroup.com/idm/XMLLister/PIMApiChecker.html",
     // 'VKP & Aktion': "https://ig-creator.xxxlgroup.com/idm/XMLLister/VKPundAktion.html",
     'Link Sammlung': "https://ig-creator.xxxlgroup.com/idm/XMLLister/LinkSammlung.html"
