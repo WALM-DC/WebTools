@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>IG-Stoff-Zusammensetzungen</title>
+    <title>Stoffe IG</title>
     <link rel="stylesheet" href="data/mattStyle.css">
     <script src="https://walm-dc.github.io/WebTools/public/jquery-3.7.1.min.js"></script>
     <script src="https://walm-dc.github.io/WebTools/public/jquery.cookie.js"></script>
@@ -62,16 +62,16 @@
                 <div class="div_before_table igServer loading">
                     <table id="myTable" cellspacing="0" cellpadding="0">
                         <tr>
-                            <th class="skip-filter">Schiene</th>
-                            <th>Lieferant IG</th>
-                            <th>Lieferant Nr</th>
-                            <th>Lieferant Name</th>
-                            <th class="skip-filter">Herkunft</th>
-                            <th class="skip-filter">Ordner</th>
-                            <th class="skip-filter">Modell</th>
+                            <!-- <th class="skip-filter">Schiene</th> -->
+                            <!-- <th>Lieferant Nr</th> -->
+                            <!-- <th>Lieferant Name</th> -->
+                            <!-- <th class="skip-filter">Herkunft</th> -->
                             <th class="skip-filter">Textur</th>
-                            <th class="skip-filter">Farbe</th>
-                            <th class="skip-filter">Zusammensetzung</th>
+                            <th class="skip-filter">Ordner</th>
+                            <!-- <th class="skip-filter">Modell</th> -->
+                            <!-- <th class="skip-filter">Farbe</th> -->
+                            <!-- <th class="skip-filter">Zusammensetzung</th> -->
+                            <th>Lieferant IG</th>
                         </tr>
                     </table>
                 </div>
@@ -251,34 +251,25 @@
     }
   });
   function fillResultTable(entry){
-      $('#myTable').append(
-          '<tr><td>' + entry.schiene + '</td>' +
-          '<td>' + entry.lieferantIG + '</td>' +
-          '<td>' + entry.lieferantNr + '</td>' +
-          '<td>' + entry.lieferantName + '</td>' +
-          '<td class="' + entry.inOrEx + '">' + entry.inOrEx + '</td>' +
-          '<td>' + entry.ordner + '</td>' +
-          '<td>' + entry.modell + '</td>' +
-          '<td>' + entry.textur + '</td>' +
-          '<td>' + entry.farbe + '</td>' +
-          '<td>' + entry.zusammensetzung + '</td></tr>'
-      );
+    $('#myTable').append(
+      '<tr><td>' + entry.textur + '</td>' +
+      '<td>' + entry.ordner + '</td>' +
+      '<td>' + entry.lieferant.replace('XXXL', '') + '</td></tr>'
+    );  
   }
   function readAndShowJSON(){
-    $.getJSON("stoffZusammensetzung.json", function(data) {
-
-      $.each(data, function(id, val){
-        var inOrEx = val.inOrExtern === "Intern" ? "Intern" : "Extern";
+    $.getJSON("stoffeIG.json", function(data) {
+      const sortedArray = data.sort(function (a, b) {
+          return a.textur.localeCompare(b.textur, undefined, {
+              sensitivity: "base"
+          });
+      });
+      // console.log(data);
+      $.each(sortedArray, function(id, val){
         var entry = {
-          schiene: val.schiene,
-          lieferantNr: val.lieferantNr,
-          lieferantName: val.lieferantName,
-          inOrEx: inOrEx,
+          lieferant: val.lieferant,
           ordner: val.ordner,
-          modell: val.modell,
-          textur: val.textur,
-          farbe: val.farbe,
-          zusammensetzung: val.zusammensetzung
+          textur: val.textur
         };
         fillResultTable(entry);
         masterData.push(entry);
