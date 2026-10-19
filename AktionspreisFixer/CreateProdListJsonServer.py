@@ -6,6 +6,7 @@ from unittest import case
 import requests
 import xml.etree.ElementTree as ET
 import urllib3
+from copy import deepcopy
 from concurrent.futures import ThreadPoolExecutor
 import ssl
 import shutil
@@ -173,6 +174,124 @@ async def fetch_all(task_list):
 
     return results
 
+
+def load_json_file(file_path, default_value):
+    try:
+        with open(file_path, "r", encoding="utf-8") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return default_value
+    except json.JSONDecodeError:
+        print(f"Warning: Could not read valid JSON from {file_path}")
+        return default_value
+
+
+def normalize_kkbm(kkbm_data):
+    """
+    Normalizes KkBm data for comparison.
+
+    The order of variant IDs inside the lists is ignored, so a different
+    processing order does not incorrectly create a new archive entry.
+    """
+    if not isinstance(kkbm_data, dict):
+        return {}
+
+    normalized = {}
+
+    for key, value in kkbm_data.items():
+        if isinstance(value, list):
+            normalized[str(key)] = sorted(value, key=str)
+        else:
+            normalized[str(key)] = value
+
+    return dict(sorted(normalized.items()))
+
+
+def get_kkbm_history_entries(archive_record):
+    """
+    Returns all timestamped KkBm entries from one archive record.
+
+    This also supports older entries using only YYYY-MM-DD as the key.
+    """
+    history_entries = {}
+
+    if not isinstance(archive_record, dict):
+        return history_entries
+
+    metadata_keys = {
+        "productNumber",
+        "brand",
+        "locale",
+    }
+
+    for key, value in archive_record.items():
+        if (
+            key not in metadata_keys
+            and isinstance(value, dict)
+            and "KkBm" in value
+        ):
+            history_entries[key] = value
+
+    return history_entries
+
+def update_kkbm_archive(full_model_list, output_path):
+    """
+    Compares the current KkBm data with the latest archived KkBm data.
+
+    A new timestamped archive entry is created only when KkBm changed.
+    Existing timestamped entries are preserved.
+    """
+    kkbm_archive_list = load_json_file(output_path, {})
+
+    for model_id, model_data in full_model_list.items():
+        current_kkbm = deepcopy(model_data.get("KkBm", {}))
+
+        archive_record = kkbm_archive_list.get(model_id)
+
+        if not isinstance(archive_record, dict):
+            archive_record = {}
+
+        # Keep the current model metadata up to date.
+        archive_record["productNumber"] = model_data.get("productNumber")
+        archive_record["brand"] = model_data.get("brand")
+        archive_record["locale"] = model_data.get("locale")
+
+        history_entries = get_kkbm_history_entries(archive_record)
+
+        should_add_new_entry = False
+
+        if not history_entries:
+            # No previous archive exists for this model.
+            should_add_new_entry = True
+        else:
+            # Timestamp format sorts correctly chronologically.
+            latest_timestamp = max(history_entries.keys())
+            latest_kkbm = history_entries[latest_timestamp].get("KkBm", {})
+
+            if normalize_kkbm(latest_kkbm) != normalize_kkbm(current_kkbm):
+                should_add_new_entry = True
+
+        if should_add_new_entry:
+            timestamp = datetime.now().strftime("%Y-%m-%d")
+
+            archive_record[timestamp] = {
+                "KkBm": current_kkbm
+            }
+
+            print(
+                f"KkBm changed for model {model_id}. "
+                f"Added archive entry {timestamp}."
+            )
+        else:
+            print(
+                f"No KkBm change for model {model_id}. "
+                f"Archive remains unchanged."
+            )
+
+        kkbm_archive_list[model_id] = archive_record
+
+    save_kkbmArchive_file(kkbm_archive_list)
+
 def find_all_json(root_path):
     fullModelList = {}
     kkbmArchiveList = {}
@@ -270,16 +389,21 @@ def find_all_json(root_path):
         else:
             fullModelList[modelId]["productVariants"] += variantId + " / "
 
-        kkbmArchiveList[modelId] = {
-            "productNumber": fullModelList[modelId]["productNumber"],
-            "brand": fullModelList[modelId]["brand"],
-            "locale": fullModelList[modelId]["locale"],
-            datetime.now().strftime("%Y-%m-%d"): {
-                "KkBm": fullModelList[modelId]["KkBm"]
-            }
-        }
+        # kkbmArchiveList[modelId] = {
+        #     "productNumber": fullModelList[modelId]["productNumber"],
+        #     "brand": fullModelList[modelId]["brand"],
+        #     "locale": fullModelList[modelId]["locale"],
+        #     datetime.now().strftime("%Y-%m-%d"): {
+        #         "KkBm": fullModelList[modelId]["KkBm"]
+        #     }
+        # }
+
+    update_kkbm_archive(
+        full_model_list=fullModelList,
+        output_path=output_pathArchive
+    )
         
-    save_kkbmArchive_file(kkbmArchiveList)
+    # save_kkbmArchive_file(kkbmArchiveList)
     save_json_file(fullModelList)
 
 def contains_target_values(data, target_values):

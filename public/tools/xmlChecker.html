@@ -199,8 +199,7 @@
 <body>
     <div id="topDiv"></div>
     <div class="berichte" id="berichte">
-        <h3>Berichte</h3>
-        
+        <h3>Berichte</h3>       
     </div>
     <div class="legende" id="legende">
         <h3>Legende</h3>
@@ -238,6 +237,10 @@
 
                     </select>
                 </div>
+                <div>
+                    <h3 for="xmlTested">Gepr&uuml;fte XMLs:</h3>
+                    <span id="xmlTested"></span>
+                </div>
             </div>
             <div id="exportDiv">
                 <div class="errorDiv">
@@ -255,7 +258,7 @@
 <script>
     injectTabs();
 
-    var indexAll = {}, multiXMLImport = {}, firstXML = [], secondXML = [], firstSelectedXML = '', secondSelectedXML = '', errorLog = {}, xmlDataVersion = '', firstXMLSerieNo = "", secondXMLSerieNo = '', firstXMLDataVersion = "", secondXMLDataVersion = '', firstXMLCatalogID = '', secondXMLCatalogID = '', noSecondXML = false;
+    var indexAll = {}, multiXMLImport = {}, firstXML = [], secondXML = [], firstSelectedXML = '', secondSelectedXML = '', errorLog = {}, xmlDataVersion = '', firstXMLSerieNo = "", secondXMLSerieNo = '', firstXMLDataVersion = "", secondXMLDataVersion = '', firstXMLCatalogID = '', secondXMLCatalogID = '', noSecondXML = false, firstXMLISOLANG = '', secondXMLISOLANG = '', firstXMLISOLANGID = '', secondXMLISOLANGID = '';
     var langCheck = ['_AT_', '_DE_', '_CH_', '_CZ', '_SK_', '_FR_', '_SE_', '_HU_', '_SI_', '_PL_', '_RO_'];
     var checkTargetCountryID = false;
     var modelListJSON = {};
@@ -580,7 +583,7 @@
         errorLog.UsedLang = activeRegistryEntry ? activeRegistryEntry.Markets.join(', ') : '';
         if(errorLog.UsedLang !== ''){
             var usedLangArr = errorLog.UsedLang.split(', ');
-            console.log('usedLangArr', usedLangArr, errorLog.Lang);
+            // console.log('usedLangArr', usedLangArr, errorLog.Lang);
             $.each(usedLangArr, function(lIndex, lValue){
                 if(errorLog.LangID.indexOf(lValue) === -1){
                     errorLog.MissingLang.push(lValue);
@@ -589,6 +592,13 @@
         }
         var shortXmlName = removeAfterLastUnderscore(firstSelectedXML);
         var prodNumber = firstSelectedXML.split('_')[0], jiraLink = '<a target="_blank" href="https://xxxlgroup.atlassian.net/issues?filter=17549&jql=project%20%3D%20DM%20AND%20%20%22Systeme%5BCheckboxes%5D%22%20%3D%20%223D%20Konfigurierbar%22%20AND%20summary%20%20~%20%22'+prodNumber+'%22%20ORDER%20BY%20summary%20ASC">Jira Link</a>';
+
+        $('#xmlTested').append('<div style="color:white;">' + firstSelectedXML + '</div>');
+
+        if(firstXMLISOLANG !== "DE"){
+            $('#errorList').append('<br><br><span class="noErrors">Sprache im Neuen XML: <span style="color:white;">' + firstXMLISOLANG + ' - <span class="bigError">!! ACHTUNG !! - Sprache im XML muss DE sein!</span></span></span>');
+        }
+
         if($.inArray(shortXmlName, combinedRegistryNameList) > -1){
             $('#errorList').append('<br><br><span class="noErrors">Das 3D Modell zur XML <span style="color:white;">' + firstSelectedXML + '</span> ist Aktiv in Verwendung. '+jiraLink+'</span>');
         } else {
@@ -677,6 +687,13 @@
     function processXMLs(response, tableID) {
         var dataArrayCatalog = [], dataArrayArticle = [], dataArrayFeature = [], openXMLData = {}, openXMLName = '', openXMLTarget = '', openXMLArticle = '';
         // get Target and Country data
+        $(response).find('ISO_LANGUAGE_ID').each(function () {
+            openXMLData = {
+                ISO_LANGUAGE_ID: $(this).find('ISO_LANGUAGE_ID').text(),
+                LANGUAGE: $(this).find('LANGUAGE').attr('ISO_LANGUAGE_ID')
+            }
+            dataArrayCatalog.push(openXMLData);
+        })
         $(response).find('TARGET').each(function () {
             var countID = $(this).find('NAME').text().split('-');
             var targetName = $(this).find('NAME').text();
@@ -738,9 +755,9 @@
         dataArrayArticle.sort(function (a, b) { if (a.ArtikelType < b.ArtikelType) { return -1 } if (a.ArtikelType > b.ArtikelType) { return 1 } return 0 })
         dataArrayFeature.sort(function (a, b) { if (a.VariantenText < b.VariantenText) { return -1 } if (a.VariantenText > b.VariantenText) { return 1 } return 0 })
 
-
-
         if (tableID === 'tableOld') {
+            secondXMLISOLANGID = $(response).find('ISO_LANGUAGE_ID').text(),
+            secondXMLISOLANG = $(response).find('LANGUAGE').attr('ISO_LANGUAGE_ID'),
             secondXMLDataVersion = $(response).find('DATA_VERSION').text();
             secondXMLSerieNo = typeof($(response).find('SERIE').attr('SERIE_NO')) === 'undefined' ? $(response).find('SERIE').attr('SERIE_ID') : $(response).find('SERIE').attr('SERIE_NO');
             secondXMLCatalogID = $(response).find('CATALOG').find('CATALOG_ID_INTERN').text();
@@ -748,6 +765,8 @@
             secondXML = $.merge(secondXML, dataArrayCatalog);
             waitForXMLToLoad();
         } else {
+            firstXMLISOLANGID = $(response).find('ISO_LANGUAGE_ID').text(),
+            firstXMLISOLANG = $(response).find('LANGUAGE').attr('ISO_LANGUAGE_ID'),
             firstXMLDataVersion = $(response).find('DATA_VERSION').text();
             firstXMLSerieNo = typeof($(response).find('SERIE').attr('SERIE_NO')) === 'undefined' ? $(response).find('SERIE').attr('SERIE_ID') : $(response).find('SERIE').attr('SERIE_NO');
             firstXMLCatalogID = $(response).find('CATALOG').find('CATALOG_ID_INTERN').text();
