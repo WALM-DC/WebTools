@@ -37,6 +37,9 @@
             left: 40%;
             font-size: 25px;
         }
+        a{
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -54,12 +57,13 @@
                 <div class="div_before_table igServer">
                     <table id="myTable" cellspacing="0" cellpadding="0">
                         <tr>
-                            <th id="xmlName">XML-Name Prod</th>
-                            <th id="xmlNameQA">XML-Name QA</th>
+                            <th id="xmlName" class="skip-filter">XML-Name Prod</th>
+                            <th id="xmlLink" class="skip-filter"></th>
+                            <th id="xmlLastModDate" class="skip-filter">Aktualisiert</th>
                             <th id="land">Land</th>
                             <th id="hersteller">Hersteller</th>
                             <th id="lieferant">Lieferant</th>
-                            <th id="modellname">Modellname</th>
+                            <th id="modellname" class="skip-filter">Modellname</th>
                             <th id="inRegistry">In Registry</th>
                         </tr>
                     </table>
@@ -141,7 +145,7 @@
                     nameQA.push(val.substring(0, val.lastIndexOf('_')));
                 })
             });
-            $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index-prod.json?v="+Math.floor((Math.random() * 10000) + 1), function( data ) {
+            $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index-prod-lastmoddate.json?v="+Math.floor((Math.random() * 10000) + 1), function( data ) {
                 var prevXmlNameID = '', prefLieferand = '';
                 $.each(data, function(id, val){
                     var land = '', inRegistry = 'Nein', inRegOrNot = 'falseCol';
@@ -149,12 +153,10 @@
                     var shortXmlName = removeAfterLastUnderscore(val);
 
                     var xmlNameID = val.substring(0, val.lastIndexOf('_'));
+                    var xmlName = val.split(' ')[0];
+                    var xmlLink = '<a target="_blank" href="https://ig-creator.xxxlgroup.com/idm/'+val.split(' ')[0]+'.xml">></a>';
+                    var lastModDate = val.split(' ')[1];
                     var registryID = 'registryID'+val.substring(0, val.lastIndexOf('_'));
-
-                    var inQA = '', qaIndex = $.inArray(xmlNameID, nameQA);
-                    if(qaIndex > -1 && indexQA[qaIndex] !== val){
-                        inQA = indexQA[qaIndex];
-                    }
 
                     if(langCheck.indexOf(splitVal[splitVal.length - 2]) > -1){
                         land = splitVal[splitVal.length - 2];
@@ -163,8 +165,9 @@
                         inRegistry = 'Ja';
                         inRegOrNot = 'trueCol';
                     }
-                    var appendValue = '<tr><td id="'+xmlNameID+'">'+val+'</td>'+
-                        '<td>'+inQA+'</td>'+
+                    var appendValue = '<tr><td id="'+xmlNameID+'">'+xmlName+'</td>'+
+                        '<td id="linkID'+xmlNameID+'">'+xmlLink+'</td>'+
+                        '<td id="lastModID'+xmlNameID+'">'+lastModDate+'</td>'+
                         '<td>'+land+'</td>'+
                         '<td>'+splitVal[0]+'</td>'+
                         '<td>'+splitVal[1]+'</td>'+
@@ -178,7 +181,8 @@
                             var fLand = $('#land select').val();
                             var fInRegistry = $('#inRegistry select').val();
                             var fxmlName = $('#xmlName select').val();
-                            var fInQA = $('#xmlNameQA select').val();
+                            var fxmlLink = $('#xmlLink select').val();
+                            var flastModDate = $('#xmlLastModDate select').val();
 
                             if(prevXmlNameID === ''){
                                 $('#myTable tr:first-child').after(appendValue);
@@ -195,7 +199,8 @@
                             $('#land select').val(fLand);
                             $('#inRegistry select').val(fInRegistry);
                             $('#xmlName select').val(fxmlName);
-                            $('#xmlNameQA select').val(fInQA);
+                            $('#xmlLink select').val(fxmlLink);
+                            $('#xmlLastModDate select').val(flastModDate);
 
                             $('.form-control').change();
 
@@ -203,7 +208,9 @@
                                 filterTable();
                             }
                         }
-                        $('#'+xmlNameID).html(val);
+                        $('#'+xmlNameID).html(xmlName);
+                        $('#linkID'+xmlNameID).html(xmlLink);
+                        $('#lastModID'+xmlNameID).html(lastModDate);
                         $('#'+registryID).html(inRegistry);
                         $('#'+registryID).removeClass('trueCol falseCol').addClass(inRegOrNot);
                     } else {

@@ -207,6 +207,7 @@
             // masterData = cleanedAndSorted;
 
             $.each(cleanedAndSorted, function(id, val){
+                try{
                 var storeUrl = countryShorts[val.brand]+'.'+val.locale;
                 if(countryShorts[val.brand] === 'xxxlutz' && val.locale === 'si'){
                     storeUrl = 'xxxlesnina'+'.'+val.locale;
@@ -252,13 +253,28 @@
                     }
                     kkbmDate += '<b style="color: '+dateColor+';">' + dVal.date + '</b>:<br><ul>' + auslaufVarianten + '</ul>';
                 })
-                var online = '<td class="trueCol">Ja</td>';
-                if(!fullProdList[id].online){online = '<td class="falseCol">Nein</td>'}
-                if(fullProdList[id].online===''){online = '<td></td>'}
+                // var online = '<td class="trueCol">Ja</td>';
+                // if(!fullProdList[id].online){online = '<td class="falseCol">Nein</td>'}
+                // if(fullProdList[id].online===''){online = '<td></td>'}
 
-                var konfig = '<td class="trueCol">Ja</td>';
-                if(!fullProdList[id].konfig){konfig = '<td class="falseCol">Nein</td>'}
-                if(fullProdList[id].konfig===''){konfig = '<td></td>'}
+                // var konfig = '<td class="trueCol">Ja</td>';
+                // if(!fullProdList[id].konfig){konfig = '<td class="falseCol">Nein</td>'}
+                // if(fullProdList[id].konfig===''){konfig = '<td></td>'}
+
+                var prod = fullProdList[id];
+                var online = '<td></td>';
+                var konfig = '<td></td>';
+
+                if(prod){
+                    online = '<td class="trueCol">Ja</td>';
+                    if(!prod.online){online = '<td class="falseCol">Nein</td>'}
+                    if(prod.online===''){online = '<td></td>'}
+
+
+                    konfig = '<td class="trueCol">Ja</td>';
+                    if(!prod.konfig){konfig = '<td class="falseCol">Nein</td>'}
+                    if(prod.konfig===''){konfig = '<td></td>'}
+                }
 
                 var entry = {
                     domain: id,
@@ -275,6 +291,9 @@
                     latestUpdate: latestKkBmDate
                 }
                 masterData.push(entry);
+                } catch (e) {
+                    console.log('Fehler bei:', id, e, val);
+                }
             })
             var sortedMasterData = $.map(masterData, function (entry) {
                 return entry;
