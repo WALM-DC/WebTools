@@ -1,0 +1,262 @@
+<html>
+<head>
+    <title>XML-Liste</title>
+    <link rel="stylesheet" href="data/mattStyle.css">
+    <link href="https://cdn.datatables.net/v/dt/dt-3.1.5/datatables.min.css" rel="stylesheet" integrity="sha384-BkNxRC2lC7n6qjye+0bUktQgUv09620OrLKUlm2qxg4akzsxLvARc0NK/xM72p4n" crossorigin="anonymous">
+
+    <script src="https://walm-dc.github.io/WebTools/public/jquery-3.7.1.min.js"></script>
+    <script src="https://walm-dc.github.io/WebTools/public/ddtf.js"></script>
+    <script src="data/mattQuery.js"></script>
+    <script src="https://cdn.datatables.net/v/dt/dt-3.1.5/datatables.min.js" integrity="sha384-D6ERqqf17HbKwUAF+hg2/NdL1b4WEE5JwfOwjoqMr4B0Z53P9xTZ1BiC0hQX4TiL" crossorigin="anonymous"></script>
+
+    <!-- <script src="mattQuery.js"></script> -->
+    <style>
+        #refreshTimer{
+            position: absolute;
+            left: 10px;
+            color: white;
+        }
+        #refreshNow{
+            cursor: pointer;
+            background-color: darkorange;
+            padding: 5px 5px;
+            border-radius: 5px;
+            margin-left: 10px;
+            margin-top: 10px;
+            line-height: 50px;
+            color: black;
+        }
+        #refreshNow .refresherIcon{
+            filter: none;
+            width: 16px;
+            height: 16px;
+            margin-top: -15px;
+            vertical-align: middle;
+        }
+        #refresherInfo{
+            display: none;
+            color: lightgreen;
+            line-height: 55px;
+            position: absolute;
+            left: 40%;
+            font-size: 25px;
+        }
+        a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="topDiv"></div>
+    <div class="masterDiv">
+        <!-- <div class="topDiv">
+            <h2>XML-Liste</h2>
+        </div> -->
+        <div>
+            <div class="resultDiv">
+                <div id="refreshTimer">Daten aktualisieren sich automatisch alle 20 Sekunden.<br><span id="refreshNow">Jetzt aktualisieren <img src="refresh-button.png" class="emptySearch refresherIcon"></span></div>
+                <h3 id="refresherInfo">Daten aktualisiert :)</h3>
+                <h3>Anzahl in der aktuellen Auflistung: <span id="myCounter"></span></h3>
+                <img src="refresh-button.png" class="emptySearch" title="Suche leeren" alt="Suche leeren"><input type="text" id="myInput" placeholder="Allgemeine Suche auf alle Felder...">
+                <div class="div_before_table igServer">
+                    <table id="myTable" class="display" cellspacing="0" cellpadding="0">
+                        <thead>
+                            <tr>
+                                <th id="xmlName" class="skip-filter">XML-Name Prod</th>
+                                <th id="xmlLink" class="skip-filter"></th>
+                                <th id="xmlLastModDate">Aktualisiert</th>
+                                <th id="land">Land</th>
+                                <th id="hersteller">Hersteller</th>
+                                <th id="lieferant">Lieferant</th>
+                                <th id="modellname" class="skip-filter">Modellname</th>
+                                <th id="inRegistry">In Registry</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody id="myTableBody">
+                    </table>
+                </div>
+            </div>    
+        </div>
+    </div>
+</body>
+<script>
+    $(window).on("blur", function() {
+        console.log("Browser window lost focus");
+    });
+    $(window).on("focus", function() {
+        console.log("Browser window gained focus - refreshing data...");
+        readAndShowJSON(true);
+    });
+
+    injectTabs();
+
+    var langCheck = ['AT', 'DE', 'CH', 'CZ', 'SK', 'FR', 'SE', 'HU', 'SI', 'PL', 'RO'];
+    var combinedRegistry = [], indexQA = [], nameQA = [];
+    // function countColumns(){
+    //     $('#myCounter').html(($('table tr').length-1)-($('table tr[style="display: none;"]').length));
+    // }
+    // $('#myInput').on('keydown', function(e) {
+    //     if (e.which === 13) { // Check if the Enter key is pressed (key code 13)
+    //         if($(this).val() === ""){
+    //             removeHighlights();
+    //             $('#myTable tr').show();
+    //         } else {
+    //             filterTable();
+    //         }
+    //     }
+    // });
+    // $('.emptySearch').on('click', function(){
+    //     $('#myInput').val('');
+    //     removeHighlights();
+    //     $('#myTable tr').show();
+    //     jQuery('#myTable').ddTableFilter();
+    //     readAndShowJSON(true);
+    // });
+    function formatNameAndCheckDupes(addressName){
+        var entry = addressName.replace('https://ig-creator.xxxlgroup.com/idm/', '').split('*')[0];
+        $.inArray(entry, combinedRegistry) === -1 ? combinedRegistry.push(entry) : null;
+    }
+    function combineRegistries(curRegistry, fileName){
+        $.each(curRegistry.Domains, function( key, value ) {
+            if(value.ComService === undefined) return; //skip entries without address
+            if(value.ComService.Setups === undefined){
+                formatNameAndCheckDupes(value.ComService.Address);
+            } else {
+                $.each(value.ComService.Setups, function( setupKey, setupValue ) {
+                    formatNameAndCheckDupes(setupValue.Address);
+                });
+            }
+        });
+    }
+    function removeAfterLastUnderscore(inputString) {
+        const lastUnderscoreIndex = inputString.lastIndexOf('_');
+        return lastUnderscoreIndex !== -1 ? inputString.substring(0, lastUnderscoreIndex + 1) : inputString;
+    }
+    function readAndShowJSON(refresher){
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moebelix.json?v="+Math.floor((Math.random() * 10000) + 1), function( data ) {
+            combineRegistries(data, 'moebelix');
+        });
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-moemax.json?v="+Math.floor((Math.random() * 10000) + 1), function( data ) {
+            combineRegistries(data, 'moemax');
+        });
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry-xxxl.json?v="+Math.floor((Math.random() * 10000) + 1), function( data ) {
+            combineRegistries(data, 'xxxl');
+        });
+        $.getJSON( "https://ig-creator.xxxlgroup.com/icom/ICOM/_registry.json?v="+Math.floor((Math.random() * 10000) + 1), function( data ) {
+            combineRegistries(data, 'registry');
+        });
+        setTimeout(function(){
+            $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index.json?v="+Math.floor((Math.random() * 10000) + 1), function( data ) {
+                $.each(data, function(id, val){
+                    indexQA.push(val);
+                    nameQA.push(val.substring(0, val.lastIndexOf('_')));
+                })
+            });
+            $.getJSON( "https://ig-creator.xxxlgroup.com/idm/index-prod-lastmoddate.json?v="+Math.floor((Math.random() * 10000) + 1), function( data ) {
+                var prevXmlNameID = '', prefLieferand = '';
+                $.each(data, function(id, val){
+                    var land = '', inRegistry = 'Nein', inRegOrNot = 'falseCol';
+                    var splitVal = val.split('_');
+                    var shortXmlName = removeAfterLastUnderscore(val);
+
+                    var xmlNameID = val.substring(0, val.lastIndexOf('_'));
+                    var xmlName = val.split(' ')[0];
+                    var xmlLink = '<a target="_blank" href="https://ig-creator.xxxlgroup.com/idm/'+val.split(' ')[0]+'.xml">></a>';
+                    var lastModDate = val.split(' ')[1];
+                    var registryID = 'registryID'+val.substring(0, val.lastIndexOf('_'));
+
+                    if(langCheck.indexOf(splitVal[splitVal.length - 2]) > -1){
+                        land = splitVal[splitVal.length - 2];
+                    }
+                    if($.inArray(shortXmlName, combinedRegistry) > -1){
+                        inRegistry = 'Ja';
+                        inRegOrNot = 'trueCol';
+                    }
+                    var appendValue = '<tr><td id="'+xmlNameID+'">'+xmlName+'</td>'+
+                        '<td id="linkID'+xmlNameID+'">'+xmlLink+'</td>'+
+                        '<td id="lastModID'+xmlNameID+'">'+lastModDate+'</td>'+
+                        '<td>'+land+'</td>'+
+                        '<td>'+splitVal[0]+'</td>'+
+                        '<td>'+splitVal[1]+'</td>'+
+                        '<td>'+splitVal[2]+'</td>'+
+                        '<td class="'+inRegOrNot+'" id="'+registryID+'">'+inRegistry+'</td></tr>'
+                    if(refresher){
+                        if($('#'+xmlNameID).length===0){
+                            var fHersteller = $('#hersteller select').val();
+                            var fLieferant = $('#lieferant select').val();
+                            var fModellname = $('#modellname select').val();
+                            var fLand = $('#land select').val();
+                            var fInRegistry = $('#inRegistry select').val();
+                            var fxmlName = $('#xmlName select').val();
+                            var fxmlLink = $('#xmlLink select').val();
+                            var flastModDate = $('#xmlLastModDate select').val();
+
+                            if(prevXmlNameID === ''){
+                                $('#myTable tr:first-child').after(appendValue);
+                            } else {
+                                $('#'+prevXmlNameID).parent().after(appendValue);
+                            }
+                            $('#myTable').removeClass('ddtf-processed');
+                            $('select').remove();
+                            // jQuery('#myTable').ddTableFilter();
+                            // const table = new DataTable('#myTable', {
+                            //     // Options
+                            // });
+
+                            $('#hersteller select').val(fHersteller);
+                            $('#lieferant select').val(fLieferant);
+                            $('#modellname select').val(fModellname);
+                            $('#land select').val(fLand);
+                            $('#inRegistry select').val(fInRegistry);
+                            $('#xmlName select').val(fxmlName);
+                            $('#xmlLink select').val(fxmlLink);
+                            $('#xmlLastModDate select').val(flastModDate);
+
+                            $('.form-control').change();
+
+                            // if($('#myInput').val() !== ""){
+                            //     // filterTable();
+                            //     const table = new DataTable('#myTable', {
+                            //         // Options
+                            //     });
+                            // }
+                        }
+                        $('#'+xmlNameID).html(xmlName);
+                        $('#linkID'+xmlNameID).html(xmlLink);
+                        $('#lastModID'+xmlNameID).html(lastModDate);
+                        $('#'+registryID).html(inRegistry);
+                        $('#'+registryID).removeClass('trueCol falseCol').addClass(inRegOrNot);
+                    } else {
+                        $('#myTableBody').append(appendValue);
+                    }
+                    prevXmlNameID = xmlNameID;
+                    prefLieferand = splitVal[0];
+                })  
+                // const table = new DataTable('#myTable', {paging: false});
+                // if(!refresher){
+                //     // filterTable();
+                //     // jQuery('#myTable').ddTableFilter();
+
+                //     const table = new DataTable('#myTable', {
+                //         // Options
+                //     });
+                // }
+                // const table = new DataTable('#myTable', {paging: false});
+            }, 20000);
+        });
+    }
+    readAndShowJSON(false);
+    function quickRefresh(){
+        readAndShowJSON(true);
+        $('#refresherInfo').fadeIn(500).delay(1000).fadeOut(500);
+    }
+    setInterval(function(){
+        quickRefresh();
+    }, 20000);
+    $('#refreshNow').on('click', function(){
+        quickRefresh();
+    });
+</script>
+</html>
